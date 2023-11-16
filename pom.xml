@@ -12,7 +12,7 @@
   <url>https://github.ibm.com/wdp-gov/data-product-java-sdk</url>
 
   <groupId>com.ibm.cloud</groupId>
-  <version>0.1.0</version>
+  <version>1.0.0</version>
   <packaging>pom</packaging>
 
   <properties>
