@@ -28,6 +28,7 @@ stages:
     if: tag IS present
 
 before_install:
+  - '[ "${TRAVIS_PULL_REQUEST}" == "false" ] && openssl aes-256-cbc -K $encrypted_20975dc0843e_key -iv $encrypted_20975dc0843e_iv -in data_product_exchange_api_service_v1.env.enc -out ~\/Downloads/data_product_exchange_api_service_v1.env -d
   - sudo apt-get update
   - env | grep TRAVIS
   - python -V
