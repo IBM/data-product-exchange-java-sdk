@@ -11,8 +11,8 @@ if [[ -n "${TRAVIS_TAG}" ]]; then
 
     printf "\n>>>>> Cloning repository's gh-pages branch into directory 'gh-pages'\n"
     rm -fr ./gh-pages
-    git clone --branch=gh-pages https://${GH_TOKEN}@github.com:IBM/data-product-exchange-java-sdk.git gh-pages
-                                        
+    git clone --branch=gh-pages https://${GH_TOKEN}@github.com/IBM/data-product-exchange-java-sdk.git gh-pages
+                           
     printf "\n>>>>> Finished cloning...\n"
 
     pushd gh-pages
