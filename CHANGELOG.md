@@ -1,3 +1,10 @@
+## [0.0.4](https://github.com/IBM/data-product-exchange-java-sdk/compare/0.0.3...0.0.4) (2023-11-21)
+
+
+### Bug Fixes
+
+* changing javadoc property ([#10](https://github.com/IBM/data-product-exchange-java-sdk/issues/10)) ([4533a1c](https://github.com/IBM/data-product-exchange-java-sdk/commit/4533a1cfec21bb601527ecc288d5c9948061094b))
+
 ## [0.0.3](https://github.com/IBM/data-product-exchange-java-sdk/compare/0.0.2...0.0.3) (2023-11-21)
 
 
