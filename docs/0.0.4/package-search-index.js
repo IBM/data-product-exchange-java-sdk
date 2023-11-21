@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"com.ibm.cloud.dph_services.common"},{"l":"com.ibm.cloud.dph_services.data_product_exchange_api_service.v1"},{"l":"com.ibm.cloud.dph_services.data_product_exchange_api_service.v1.model"}]
