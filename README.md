@@ -1,4 +1,4 @@
-# Data Product Hub Services Java SDK Version 0.0.3
+# Data Product Hub Services Java SDK Version 0.0.4
 Java client library to interact with various [Data Product Hub Services]().
 
 Disclaimer: this SDK is being released initially as a **pre-release** version.
@@ -38,7 +38,7 @@ The Data Product Hub Services Java SDK allows developers to programmatically int
 
 Service Name | Artifact Coordinates
 --- | ---
-[Data Product Hub Service](https://github.ibm.com/wdp-gov/data-product-api) | com.ibm.cloud:data-product-services:0.0.3
+[Data Product Hub Service](https://github.ibm.com/wdp-gov/data-product-api) | com.ibm.cloud:data-product-services:0.0.4
 
 ## Prerequisites
 
@@ -49,7 +49,7 @@ Service Name | Artifact Coordinates
 * Java 8 or above.
 
 ## Installation
-The current version of this SDK is: 0.0.3
+The current version of this SDK is: 0.0.4
 
 The project artifacts are published on the public [Maven Central](https://repo1.maven.org/maven2/)
 artifact repository.  This is the default public repository used by maven when searching for dependencies.
@@ -66,13 +66,13 @@ Here are examples for maven and gradle:
 <dependency>
     <groupId>com.ibm.cloud</groupId>
     <artifactId>data-product-services</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.4</version>
 </dependency>
 ```
 
 ### Gradle
 ```gradle
-compile 'com.ibm.cloud:data-product-services:0.0.3'
+compile 'com.ibm.cloud:data-product-services:0.0.4'
 ```
 
 ## Using the SDK
