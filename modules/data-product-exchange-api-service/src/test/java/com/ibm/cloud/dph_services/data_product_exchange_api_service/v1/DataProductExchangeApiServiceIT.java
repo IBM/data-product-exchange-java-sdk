@@ -190,16 +190,10 @@ public class DataProductExchangeApiServiceIT extends SdkIntegrationTestBase {
 
       CreateDataProductVersionOptions createDataProductVersionOptions = new CreateDataProductVersionOptions.Builder()
         .container(containerReferenceModel)
-//        .version("testString")
-//        .state("draft")
-//        .dataProduct(dataProductIdentityModel)
         .name("My New Data Product")
         .description("testString")
         .tags(java.util.Arrays.asList("testString"))
-//        .useCases(java.util.Arrays.asList(useCaseModel))
-//        .domain(domainModel)
         .type(java.util.Arrays.asList("data"))
-//        .partsOut(java.util.Arrays.asList(dataProductPartModel))
         .build();
 
       // Invoke operation
@@ -271,7 +265,6 @@ public class DataProductExchangeApiServiceIT extends SdkIntegrationTestBase {
     try {
       ListDataProductsOptions listDataProductsOptions = new ListDataProductsOptions.Builder()
         .limit(Long.valueOf("10"))
-//        .start("testString")
         .build();
 
       // Invoke operation
@@ -325,11 +318,7 @@ public class DataProductExchangeApiServiceIT extends SdkIntegrationTestBase {
     try {
       ListDataProductVersionsOptions listDataProductVersionsOptions = new ListDataProductVersionsOptions.Builder()
         .assetContainerId(getListOfDataProductByCatalogIdLink)
-//        .dataProduct("testString")
-//        .state("draft")
-//        .version("testString")
         .limit(Long.valueOf("10"))
-//        .start("testString")
         .build();
 
       // Invoke operation
@@ -352,10 +341,6 @@ public class DataProductExchangeApiServiceIT extends SdkIntegrationTestBase {
     try {
       ListDataProductVersionsOptions options = new ListDataProductVersionsOptions.Builder()
         .assetContainerId(getListOfDataProductByCatalogIdLink)
-//        .dataProduct("testString")
-//        .state("draft")
-//        .version("testString")
-//        .limit(Long.valueOf("10"))
         .build();
 
       // Test getNext().
@@ -410,7 +395,6 @@ public class DataProductExchangeApiServiceIT extends SdkIntegrationTestBase {
       JsonPatchOperation jsonPatchOperationModel = new JsonPatchOperation.Builder()
         .op("replace")
         .path("/state")
-//        .from("testString")
         .value("draft")
         .build();
 
