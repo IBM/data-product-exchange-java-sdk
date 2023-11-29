@@ -1,5 +1,5 @@
-# Data Product Hub Services Java SDK Version 0.0.4
-Java client library to interact with various [Data Product Hub Services]().
+# Data Product Exchange Java SDK Version 0.0.4
+Java client library to interact with various [Data Product Exchange Services]().
 
 Disclaimer: this SDK is being released initially as a **pre-release** version.
 Changes might occur which impact applications that use this SDK.
@@ -34,11 +34,11 @@ Changes might occur which impact applications that use this SDK.
 
 ## Overview
 
-The Data Product Hub Services Java SDK allows developers to programmatically interact with the following DPH services:
+The Data Product Exchange Services Java SDK allows developers to programmatically interact with the following DPH services:
 
 Service Name | Artifact Coordinates
 --- | ---
-[Data Product Hub Service](https://test.cloud.ibm.com/apidocs/watson-data-api) | com.ibm.cloud:dpx:0.0.4
+[Data Product Exchange Services](https://test.cloud.ibm.com/apidocs/watson-data-api) | com.ibm.cloud:dpx:0.0.4
 
 ## Prerequisites
 
