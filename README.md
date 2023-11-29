@@ -38,7 +38,7 @@ The Data Product Hub Services Java SDK allows developers to programmatically int
 
 Service Name | Artifact Coordinates
 --- | ---
-[Data Product Hub Service](https://github.ibm.com/wdp-gov/data-product-api) | com.ibm.cloud:data-product-services:0.0.4
+[Data Product Hub Service](https://test.cloud.ibm.com/apidocs/watson-data-api) | com.ibm.cloud:dpx:0.0.4
 
 ## Prerequisites
 
@@ -65,14 +65,14 @@ Here are examples for maven and gradle:
 ```xml
 <dependency>
     <groupId>com.ibm.cloud</groupId>
-    <artifactId>data-product-services</artifactId>
+    <artifactId>dpx</artifactId>
     <version>0.0.4</version>
 </dependency>
 ```
 
 ### Gradle
 ```gradle
-compile 'com.ibm.cloud:data-product-services:0.0.4'
+compile 'com.ibm.cloud:dpx:0.0.4'
 ```
 
 ## Using the SDK
