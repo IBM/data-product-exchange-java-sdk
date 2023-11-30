@@ -1,5 +1,5 @@
 # Data Product Exchange Java SDK Version 0.0.4
-Java client library to interact with various [Data Product Exchange Services]().
+Java client library to interact with various Data Product Exchange Service APIs.
 
 Disclaimer: this SDK is being released initially as a **pre-release** version.
 Changes might occur which impact applications that use this SDK.
@@ -34,11 +34,11 @@ Changes might occur which impact applications that use this SDK.
 
 ## Overview
 
-The Data Product Exchange Services Java SDK allows developers to programmatically interact with the following DPH services:
+The IBM Cloud Data Product Exchange Java SDK allows developers to programmatically interact with the following services:
 
 Service Name | Artifact Coordinates
 --- | ---
-[Data Product Exchange Services](https://test.cloud.ibm.com/apidocs/dataproducts) | com.ibm.cloud:dpx:0.0.4
+[Data Product Exchange](https://cloud.ibm.com/apidocs/dataproducts) | com.ibm.cloud:dpx:0.0.4
 
 ## Prerequisites
 
