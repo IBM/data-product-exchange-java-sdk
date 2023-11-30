@@ -119,7 +119,6 @@ public class DataProductExchangeApiServiceIT extends SdkIntegrationTestBase {
   public void testInitialize() throws Exception {
     try {
 //      ContainerReference containerReferenceModel = new ContainerReference.Builder()
-//        .id("d29c42eb-7100-4b7a-8257-c196dbcca1cd")
 //        .type("catalog")
 //        .build();
 
