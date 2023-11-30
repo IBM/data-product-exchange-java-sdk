@@ -9,7 +9,7 @@
         <relativePath>../..</relativePath>
     </parent>
 
-    <artifactId>data-product-services</artifactId>
+    <artifactId>dpx</artifactId>
 
     <name>Data Product Services</name>
     <packaging>jar</packaging>
