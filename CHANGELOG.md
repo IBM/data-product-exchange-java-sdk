@@ -1,3 +1,10 @@
+## [0.0.5](https://github.com/IBM/data-product-exchange-java-sdk/compare/0.0.4...0.0.5) (2023-11-30)
+
+
+### Bug Fixes
+
+* build fix ([#12](https://github.com/IBM/data-product-exchange-java-sdk/issues/12)) ([3b757f2](https://github.com/IBM/data-product-exchange-java-sdk/commit/3b757f2ffb8cb9fa866e9625e7f02c71ac61a0a0))
+
 ## [0.0.4](https://github.com/IBM/data-product-exchange-java-sdk/compare/0.0.3...0.0.4) (2023-11-21)
 
 
