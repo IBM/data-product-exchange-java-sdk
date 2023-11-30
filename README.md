@@ -1,4 +1,4 @@
-# Data Product Exchange Java SDK Version 0.0.4
+# Data Product Exchange Java SDK Version 0.0.5
 Java client library to interact with various Data Product Exchange Service APIs.
 
 Disclaimer: this SDK is being released initially as a **pre-release** version.
@@ -38,7 +38,7 @@ The IBM Cloud Data Product Exchange Java SDK allows developers to programmatical
 
 Service Name | Artifact Coordinates
 --- | ---
-[Data Product Exchange](https://cloud.ibm.com/apidocs/dataproducts) | com.ibm.cloud:dpx:0.0.4
+[Data Product Exchange](https://cloud.ibm.com/apidocs/dataproducts) | com.ibm.cloud:dpx:0.0.5
 
 ## Prerequisites
 
@@ -49,7 +49,7 @@ Service Name | Artifact Coordinates
 * Java 8 or above.
 
 ## Installation
-The current version of this SDK is: 0.0.4
+The current version of this SDK is: 0.0.5
 
 The project artifacts are published on the public [Maven Central](https://repo1.maven.org/maven2/)
 artifact repository.  This is the default public repository used by maven when searching for dependencies.
@@ -66,13 +66,13 @@ Here are examples for maven and gradle:
 <dependency>
     <groupId>com.ibm.cloud</groupId>
     <artifactId>dpx</artifactId>
-    <version>0.0.4</version>
+    <version>0.0.5</version>
 </dependency>
 ```
 
 ### Gradle
 ```gradle
-compile 'com.ibm.cloud:dpx:0.0.4'
+compile 'com.ibm.cloud:dpx:0.0.5'
 ```
 
 ## Using the SDK
