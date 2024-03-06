@@ -54,7 +54,7 @@ public class DataProductVersionTest {
     assertNull(dataProductVersionModel.getTags());
     assertNull(dataProductVersionModel.getUseCases());
     assertNull(dataProductVersionModel.getDomain());
-    assertNull(dataProductVersionModel.getType());
+    assertNull(dataProductVersionModel.getTypes());
     assertNull(dataProductVersionModel.getPartsOut());
     assertNull(dataProductVersionModel.getPublishedBy());
     assertNull(dataProductVersionModel.getPublishedAt());

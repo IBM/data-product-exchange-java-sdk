@@ -18,17 +18,17 @@ import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
- * A collection of data products.
+ * A collection of data product summaries.
  */
-public class DataProductCollection extends GenericModel {
+public class DataProductSummaryCollection extends GenericModel {
 
   protected Long limit;
   protected FirstPage first;
   protected NextPage next;
   @SerializedName("data_products")
-  protected List<DataProduct> dataProducts;
+  protected List<DataProductSummary> dataProducts;
 
-  protected DataProductCollection() { }
+  protected DataProductSummaryCollection() { }
 
   /**
    * Gets the limit.
@@ -66,11 +66,11 @@ public class DataProductCollection extends GenericModel {
   /**
    * Gets the dataProducts.
    *
-   * Collection of data products.
+   * Collection of data product summaries.
    *
    * @return the dataProducts
    */
-  public List<DataProduct> getDataProducts() {
+  public List<DataProductSummary> getDataProducts() {
     return dataProducts;
   }
 }

@@ -51,11 +51,9 @@ public class AssetPartReference extends GenericModel {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param id the id
      * @param container the container
      */
-    public Builder(String id, ContainerReference container) {
-      this.id = id;
+    public Builder(ContainerReference container) {
       this.container = container;
     }
 
@@ -105,8 +103,6 @@ public class AssetPartReference extends GenericModel {
   protected AssetPartReference() { }
 
   protected AssetPartReference(Builder builder) {
-    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.id,
-      "id cannot be null");
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.container,
       "container cannot be null");
     id = builder.id;

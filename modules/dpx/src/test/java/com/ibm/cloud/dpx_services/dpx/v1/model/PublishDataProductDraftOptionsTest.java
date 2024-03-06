@@ -32,13 +32,11 @@ public class PublishDataProductDraftOptionsTest {
   @Test
   public void testPublishDataProductDraftOptions() throws Throwable {
     PublishDataProductDraftOptions publishDataProductDraftOptionsModel = new PublishDataProductDraftOptions.Builder()
-      .dataProductId("testString")
-      .draftId("testString")
-      .async(true)
+      .dataProductId("b38df608-d34b-4d58-8136-ed25e6c6684e")
+      .draftId("2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd")
       .build();
-    assertEquals(publishDataProductDraftOptionsModel.dataProductId(), "testString");
-    assertEquals(publishDataProductDraftOptionsModel.draftId(), "testString");
-    assertEquals(publishDataProductDraftOptionsModel.async(), Boolean.valueOf(true));
+    assertEquals(publishDataProductDraftOptionsModel.dataProductId(), "b38df608-d34b-4d58-8136-ed25e6c6684e");
+    assertEquals(publishDataProductDraftOptionsModel.draftId(), "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd");
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

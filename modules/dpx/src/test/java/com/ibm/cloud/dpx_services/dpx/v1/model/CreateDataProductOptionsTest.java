@@ -56,6 +56,13 @@ public class CreateDataProductOptionsTest {
     assertEquals(containerReferenceModel.id(), "d29c42eb-7100-4b7a-8257-c196dbcca1cd");
     assertEquals(containerReferenceModel.type(), "catalog");
 
+    AssetReference assetReferenceModel = new AssetReference.Builder()
+      .id("2b0bf220-079c-11ee-be56-0242ac120002")
+      .container(containerReferenceModel)
+      .build();
+    assertEquals(assetReferenceModel.id(), "2b0bf220-079c-11ee-be56-0242ac120002");
+    assertEquals(assetReferenceModel.container(), containerReferenceModel);
+
     UseCase useCaseModel = new UseCase.Builder()
       .id("testString")
       .name("testString")
@@ -101,13 +108,6 @@ public class CreateDataProductOptionsTest {
     assertEquals(dataProductPartModel.updatedAt(), DateUtils.parseAsDateTime("2023-07-01T22:22:34.876Z"));
     assertEquals(dataProductPartModel.deliveryMethods(), java.util.Arrays.asList(deliveryMethodModel));
 
-    AssetReference assetReferenceModel = new AssetReference.Builder()
-      .id("2b0bf220-079c-11ee-be56-0242ac120002")
-      .container(containerReferenceModel)
-      .build();
-    assertEquals(assetReferenceModel.id(), "2b0bf220-079c-11ee-be56-0242ac120002");
-    assertEquals(assetReferenceModel.container(), containerReferenceModel);
-
     ContractTermsDocumentAttachment contractTermsDocumentAttachmentModel = new ContractTermsDocumentAttachment.Builder()
       .id("testString")
       .build();
@@ -119,12 +119,14 @@ public class CreateDataProductOptionsTest {
       .name("testString")
       .id("2b0bf220-079c-11ee-be56-0242ac120002")
       .attachment(contractTermsDocumentAttachmentModel)
+      .uploadUrl("testString")
       .build();
     assertEquals(contractTermsDocumentModel.url(), "testString");
     assertEquals(contractTermsDocumentModel.type(), "terms_and_conditions");
     assertEquals(contractTermsDocumentModel.name(), "testString");
     assertEquals(contractTermsDocumentModel.id(), "2b0bf220-079c-11ee-be56-0242ac120002");
     assertEquals(contractTermsDocumentModel.attachment(), contractTermsDocumentAttachmentModel);
+    assertEquals(contractTermsDocumentModel.uploadUrl(), "testString");
 
     DataProductContractTerms dataProductContractTermsModel = new DataProductContractTerms.Builder()
       .asset(assetReferenceModel)
@@ -141,11 +143,11 @@ public class CreateDataProductOptionsTest {
       .dataProduct(dataProductIdentityModel)
       .name("My Data Product")
       .description("This is a description of My Data Product.")
-      .container(containerReferenceModel)
+      .asset(assetReferenceModel)
       .tags(java.util.Arrays.asList("testString"))
       .useCases(java.util.Arrays.asList(useCaseModel))
       .domain(domainModel)
-      .type(java.util.Arrays.asList("data"))
+      .types(java.util.Arrays.asList("data"))
       .partsOut(java.util.Arrays.asList(dataProductPartModel))
       .contractTerms(java.util.Arrays.asList(dataProductContractTermsModel))
       .isRestricted(true)
@@ -155,11 +157,11 @@ public class CreateDataProductOptionsTest {
     assertEquals(dataProductVersionPrototypeModel.dataProduct(), dataProductIdentityModel);
     assertEquals(dataProductVersionPrototypeModel.name(), "My Data Product");
     assertEquals(dataProductVersionPrototypeModel.description(), "This is a description of My Data Product.");
-    assertEquals(dataProductVersionPrototypeModel.container(), containerReferenceModel);
+    assertEquals(dataProductVersionPrototypeModel.asset(), assetReferenceModel);
     assertEquals(dataProductVersionPrototypeModel.tags(), java.util.Arrays.asList("testString"));
     assertEquals(dataProductVersionPrototypeModel.useCases(), java.util.Arrays.asList(useCaseModel));
     assertEquals(dataProductVersionPrototypeModel.domain(), domainModel);
-    assertEquals(dataProductVersionPrototypeModel.type(), java.util.Arrays.asList("data"));
+    assertEquals(dataProductVersionPrototypeModel.types(), java.util.Arrays.asList("data"));
     assertEquals(dataProductVersionPrototypeModel.partsOut(), java.util.Arrays.asList(dataProductPartModel));
     assertEquals(dataProductVersionPrototypeModel.contractTerms(), java.util.Arrays.asList(dataProductContractTermsModel));
     assertEquals(dataProductVersionPrototypeModel.isRestricted(), Boolean.valueOf(true));

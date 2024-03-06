@@ -13,14 +13,8 @@
 
 package com.ibm.cloud.dpx_services.dpx.v1.model;
 
-import com.ibm.cloud.dpx_services.dpx.v1.model.AssetReference;
 import com.ibm.cloud.dpx_services.dpx.v1.model.ContainerReference;
-import com.ibm.cloud.dpx_services.dpx.v1.model.DataProduct;
-import com.ibm.cloud.dpx_services.dpx.v1.model.DataProductCollection;
-import com.ibm.cloud.dpx_services.dpx.v1.model.DataProductIdentity;
-import com.ibm.cloud.dpx_services.dpx.v1.model.DataProductVersionSummary;
-import com.ibm.cloud.dpx_services.dpx.v1.model.FirstPage;
-import com.ibm.cloud.dpx_services.dpx.v1.model.NextPage;
+import com.ibm.cloud.dpx_services.dpx.v1.model.DataProductSummary;
 import com.ibm.cloud.dpx_services.dpx.v1.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
@@ -30,18 +24,16 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 /**
- * Unit test class for the DataProductCollection model.
+ * Unit test class for the DataProductSummary model.
  */
-public class DataProductCollectionTest {
+public class DataProductSummaryTest {
   final HashMap<String, InputStream> mockStreamMap = TestUtilities.createMockStreamMap();
   final List<FileWithMetadata> mockListFileWithMetadata = TestUtilities.creatMockListFileWithMetadata();
 
   @Test
-  public void testDataProductCollection() throws Throwable {
-    DataProductCollection dataProductCollectionModel = new DataProductCollection();
-    assertNull(dataProductCollectionModel.getLimit());
-    assertNull(dataProductCollectionModel.getFirst());
-    assertNull(dataProductCollectionModel.getNext());
-    assertNull(dataProductCollectionModel.getDataProducts());
+  public void testDataProductSummary() throws Throwable {
+    DataProductSummary dataProductSummaryModel = new DataProductSummary();
+    assertNull(dataProductSummaryModel.getId());
+    assertNull(dataProductSummaryModel.getContainer());
   }
 }

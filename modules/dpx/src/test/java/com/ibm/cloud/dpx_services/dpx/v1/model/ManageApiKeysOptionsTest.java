@@ -31,15 +31,7 @@ public class ManageApiKeysOptionsTest {
 
   @Test
   public void testManageApiKeysOptions() throws Throwable {
-    ManageApiKeysOptions manageApiKeysOptionsModel = new ManageApiKeysOptions.Builder()
-      .rotate(java.util.Arrays.asList("data_product_admin_service_id"))
-      .build();
-    assertEquals(manageApiKeysOptionsModel.rotate(), java.util.Arrays.asList("data_product_admin_service_id"));
+    ManageApiKeysOptions manageApiKeysOptionsModel = new ManageApiKeysOptions();
+    assertNotNull(manageApiKeysOptionsModel);
   }
-
-  @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testManageApiKeysOptionsError() throws Throwable {
-    new ManageApiKeysOptions.Builder().build();
-  }
-
 }

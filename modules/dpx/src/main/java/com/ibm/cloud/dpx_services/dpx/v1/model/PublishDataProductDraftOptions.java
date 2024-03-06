@@ -21,7 +21,6 @@ public class PublishDataProductDraftOptions extends GenericModel {
 
   protected String dataProductId;
   protected String draftId;
-  protected Boolean async;
 
   /**
    * Builder.
@@ -29,7 +28,6 @@ public class PublishDataProductDraftOptions extends GenericModel {
   public static class Builder {
     private String dataProductId;
     private String draftId;
-    private Boolean async;
 
     /**
      * Instantiates a new Builder from an existing PublishDataProductDraftOptions instance.
@@ -39,7 +37,6 @@ public class PublishDataProductDraftOptions extends GenericModel {
     private Builder(PublishDataProductDraftOptions publishDataProductDraftOptions) {
       this.dataProductId = publishDataProductDraftOptions.dataProductId;
       this.draftId = publishDataProductDraftOptions.draftId;
-      this.async = publishDataProductDraftOptions.async;
     }
 
     /**
@@ -89,17 +86,6 @@ public class PublishDataProductDraftOptions extends GenericModel {
       this.draftId = draftId;
       return this;
     }
-
-    /**
-     * Set the async.
-     *
-     * @param async the async
-     * @return the PublishDataProductDraftOptions builder
-     */
-    public Builder async(Boolean async) {
-      this.async = async;
-      return this;
-    }
   }
 
   protected PublishDataProductDraftOptions() { }
@@ -111,7 +97,6 @@ public class PublishDataProductDraftOptions extends GenericModel {
       "draftId cannot be empty");
     dataProductId = builder.dataProductId;
     draftId = builder.draftId;
-    async = builder.async;
   }
 
   /**
@@ -143,17 +128,6 @@ public class PublishDataProductDraftOptions extends GenericModel {
    */
   public String draftId() {
     return draftId;
-  }
-
-  /**
-   * Gets the async.
-   *
-   * Whether to perform the publish operation in the background after validating the request.
-   *
-   * @return the async
-   */
-  public Boolean async() {
-    return async;
   }
 }
 

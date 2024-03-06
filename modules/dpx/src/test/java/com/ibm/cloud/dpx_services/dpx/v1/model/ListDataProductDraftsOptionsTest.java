@@ -32,13 +32,13 @@ public class ListDataProductDraftsOptionsTest {
   @Test
   public void testListDataProductDraftsOptions() throws Throwable {
     ListDataProductDraftsOptions listDataProductDraftsOptionsModel = new ListDataProductDraftsOptions.Builder()
-      .dataProductId("testString")
+      .dataProductId("b38df608-d34b-4d58-8136-ed25e6c6684e")
       .assetContainerId("testString")
       .version("testString")
       .limit(Long.valueOf("200"))
       .start("testString")
       .build();
-    assertEquals(listDataProductDraftsOptionsModel.dataProductId(), "testString");
+    assertEquals(listDataProductDraftsOptionsModel.dataProductId(), "b38df608-d34b-4d58-8136-ed25e6c6684e");
     assertEquals(listDataProductDraftsOptionsModel.assetContainerId(), "testString");
     assertEquals(listDataProductDraftsOptionsModel.version(), "testString");
     assertEquals(listDataProductDraftsOptionsModel.limit(), Long.valueOf("200"));

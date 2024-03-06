@@ -32,9 +32,9 @@ public class GetDataProductOptionsTest {
   @Test
   public void testGetDataProductOptions() throws Throwable {
     GetDataProductOptions getDataProductOptionsModel = new GetDataProductOptions.Builder()
-      .dataProductId("testString")
+      .dataProductId("b38df608-d34b-4d58-8136-ed25e6c6684e")
       .build();
-    assertEquals(getDataProductOptionsModel.dataProductId(), "testString");
+    assertEquals(getDataProductOptionsModel.dataProductId(), "b38df608-d34b-4d58-8136-ed25e6c6684e");
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

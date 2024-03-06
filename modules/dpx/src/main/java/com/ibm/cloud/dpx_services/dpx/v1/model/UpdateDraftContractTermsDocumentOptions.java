@@ -84,9 +84,9 @@ public class UpdateDraftContractTermsDocumentOptions extends GenericModel {
     }
 
     /**
-     * Adds an jsonPatchInstructions to jsonPatchInstructions.
+     * Adds a new element to jsonPatchInstructions.
      *
-     * @param jsonPatchInstructions the new jsonPatchInstructions
+     * @param jsonPatchInstructions the new element to be added
      * @return the UpdateDraftContractTermsDocumentOptions builder
      */
     public Builder addJsonPatchInstructions(JsonPatchOperation jsonPatchInstructions) {

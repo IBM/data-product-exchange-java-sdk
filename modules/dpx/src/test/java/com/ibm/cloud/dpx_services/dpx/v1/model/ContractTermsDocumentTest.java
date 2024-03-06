@@ -43,12 +43,14 @@ public class ContractTermsDocumentTest {
       .name("testString")
       .id("2b0bf220-079c-11ee-be56-0242ac120002")
       .attachment(contractTermsDocumentAttachmentModel)
+      .uploadUrl("testString")
       .build();
     assertEquals(contractTermsDocumentModel.url(), "testString");
     assertEquals(contractTermsDocumentModel.type(), "terms_and_conditions");
     assertEquals(contractTermsDocumentModel.name(), "testString");
     assertEquals(contractTermsDocumentModel.id(), "2b0bf220-079c-11ee-be56-0242ac120002");
     assertEquals(contractTermsDocumentModel.attachment(), contractTermsDocumentAttachmentModel);
+    assertEquals(contractTermsDocumentModel.uploadUrl(), "testString");
 
     String json = TestUtilities.serialize(contractTermsDocumentModel);
 
@@ -59,6 +61,7 @@ public class ContractTermsDocumentTest {
     assertEquals(contractTermsDocumentModelNew.name(), "testString");
     assertEquals(contractTermsDocumentModelNew.id(), "2b0bf220-079c-11ee-be56-0242ac120002");
     assertEquals(contractTermsDocumentModelNew.attachment().toString(), contractTermsDocumentAttachmentModel.toString());
+    assertEquals(contractTermsDocumentModelNew.uploadUrl(), "testString");
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

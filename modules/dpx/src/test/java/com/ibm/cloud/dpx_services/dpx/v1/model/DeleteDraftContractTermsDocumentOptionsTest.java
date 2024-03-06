@@ -32,14 +32,14 @@ public class DeleteDraftContractTermsDocumentOptionsTest {
   @Test
   public void testDeleteDraftContractTermsDocumentOptions() throws Throwable {
     DeleteDraftContractTermsDocumentOptions deleteDraftContractTermsDocumentOptionsModel = new DeleteDraftContractTermsDocumentOptions.Builder()
-      .dataProductId("testString")
-      .draftId("testString")
-      .contractTermsId("testString")
+      .dataProductId("b38df608-d34b-4d58-8136-ed25e6c6684e")
+      .draftId("2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd")
+      .contractTermsId("598183cd-b910-4e8d-9a97-97097afda3c1@e4fe2f87-0e56-46dd-b3b8-e9af32309e82")
       .documentId("testString")
       .build();
-    assertEquals(deleteDraftContractTermsDocumentOptionsModel.dataProductId(), "testString");
-    assertEquals(deleteDraftContractTermsDocumentOptionsModel.draftId(), "testString");
-    assertEquals(deleteDraftContractTermsDocumentOptionsModel.contractTermsId(), "testString");
+    assertEquals(deleteDraftContractTermsDocumentOptionsModel.dataProductId(), "b38df608-d34b-4d58-8136-ed25e6c6684e");
+    assertEquals(deleteDraftContractTermsDocumentOptionsModel.draftId(), "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd");
+    assertEquals(deleteDraftContractTermsDocumentOptionsModel.contractTermsId(), "598183cd-b910-4e8d-9a97-97097afda3c1@e4fe2f87-0e56-46dd-b3b8-e9af32309e82");
     assertEquals(deleteDraftContractTermsDocumentOptionsModel.documentId(), "testString");
   }
 

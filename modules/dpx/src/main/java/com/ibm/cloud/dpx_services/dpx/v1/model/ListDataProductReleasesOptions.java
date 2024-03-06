@@ -86,9 +86,9 @@ public class ListDataProductReleasesOptions extends GenericModel {
     }
 
     /**
-     * Adds an state to state.
+     * Adds a new element to state.
      *
-     * @param state the new state
+     * @param state the new element to be added
      * @return the ListDataProductReleasesOptions builder
      */
     public Builder addState(String state) {

@@ -37,6 +37,7 @@ public class CreateDraftContractTermsDocumentOptions extends GenericModel {
   protected String id;
   protected String url;
   protected ContractTermsDocumentAttachment attachment;
+  protected String uploadUrl;
 
   /**
    * Builder.
@@ -50,6 +51,7 @@ public class CreateDraftContractTermsDocumentOptions extends GenericModel {
     private String id;
     private String url;
     private ContractTermsDocumentAttachment attachment;
+    private String uploadUrl;
 
     /**
      * Instantiates a new Builder from an existing CreateDraftContractTermsDocumentOptions instance.
@@ -65,6 +67,7 @@ public class CreateDraftContractTermsDocumentOptions extends GenericModel {
       this.id = createDraftContractTermsDocumentOptions.id;
       this.url = createDraftContractTermsDocumentOptions.url;
       this.attachment = createDraftContractTermsDocumentOptions.attachment;
+      this.uploadUrl = createDraftContractTermsDocumentOptions.uploadUrl;
     }
 
     /**
@@ -190,6 +193,17 @@ public class CreateDraftContractTermsDocumentOptions extends GenericModel {
     }
 
     /**
+     * Set the uploadUrl.
+     *
+     * @param uploadUrl the uploadUrl
+     * @return the CreateDraftContractTermsDocumentOptions builder
+     */
+    public Builder uploadUrl(String uploadUrl) {
+      this.uploadUrl = uploadUrl;
+      return this;
+    }
+
+    /**
      * Set the contractTermsDocument.
      *
      * @param contractTermsDocument the contractTermsDocument
@@ -201,6 +215,7 @@ public class CreateDraftContractTermsDocumentOptions extends GenericModel {
       this.id = contractTermsDocument.id();
       this.url = contractTermsDocument.url();
       this.attachment = contractTermsDocument.attachment();
+      this.uploadUrl = contractTermsDocument.uploadUrl();
       return this;
     }
   }
@@ -228,6 +243,7 @@ public class CreateDraftContractTermsDocumentOptions extends GenericModel {
     id = builder.id;
     url = builder.url;
     attachment = builder.attachment;
+    uploadUrl = builder.uploadUrl;
   }
 
   /**
@@ -325,6 +341,17 @@ public class CreateDraftContractTermsDocumentOptions extends GenericModel {
    */
   public ContractTermsDocumentAttachment attachment() {
     return attachment;
+  }
+
+  /**
+   * Gets the uploadUrl.
+   *
+   * URL which can be used to upload document file.
+   *
+   * @return the uploadUrl
+   */
+  public String uploadUrl() {
+    return uploadUrl;
   }
 }
 

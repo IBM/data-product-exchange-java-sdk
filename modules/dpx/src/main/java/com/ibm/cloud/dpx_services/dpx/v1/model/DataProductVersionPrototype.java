@@ -35,7 +35,7 @@ public class DataProductVersionPrototype extends GenericModel {
     String RETIRED = "retired";
   }
 
-  public interface Type {
+  public interface Types {
     /** data. */
     String DATA = "data";
     /** code. */
@@ -48,12 +48,12 @@ public class DataProductVersionPrototype extends GenericModel {
   protected DataProductIdentity dataProduct;
   protected String name;
   protected String description;
-  protected ContainerReference container;
+  protected AssetReference asset;
   protected List<String> tags;
   @SerializedName("use_cases")
   protected List<UseCase> useCases;
   protected Domain domain;
-  protected List<String> type;
+  protected List<String> types;
   @SerializedName("parts_out")
   protected List<DataProductPart> partsOut;
   @SerializedName("contract_terms")
@@ -70,11 +70,11 @@ public class DataProductVersionPrototype extends GenericModel {
     private DataProductIdentity dataProduct;
     private String name;
     private String description;
-    private ContainerReference container;
+    private AssetReference asset;
     private List<String> tags;
     private List<UseCase> useCases;
     private Domain domain;
-    private List<String> type;
+    private List<String> types;
     private List<DataProductPart> partsOut;
     private List<DataProductContractTerms> contractTerms;
     private Boolean isRestricted;
@@ -90,11 +90,11 @@ public class DataProductVersionPrototype extends GenericModel {
       this.dataProduct = dataProductVersionPrototype.dataProduct;
       this.name = dataProductVersionPrototype.name;
       this.description = dataProductVersionPrototype.description;
-      this.container = dataProductVersionPrototype.container;
+      this.asset = dataProductVersionPrototype.asset;
       this.tags = dataProductVersionPrototype.tags;
       this.useCases = dataProductVersionPrototype.useCases;
       this.domain = dataProductVersionPrototype.domain;
-      this.type = dataProductVersionPrototype.type;
+      this.types = dataProductVersionPrototype.types;
       this.partsOut = dataProductVersionPrototype.partsOut;
       this.contractTerms = dataProductVersionPrototype.contractTerms;
       this.isRestricted = dataProductVersionPrototype.isRestricted;
@@ -109,10 +109,10 @@ public class DataProductVersionPrototype extends GenericModel {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param container the container
+     * @param asset the asset
      */
-    public Builder(ContainerReference container) {
-      this.container = container;
+    public Builder(AssetReference asset) {
+      this.asset = asset;
     }
 
     /**
@@ -125,9 +125,9 @@ public class DataProductVersionPrototype extends GenericModel {
     }
 
     /**
-     * Adds an tags to tags.
+     * Adds a new element to tags.
      *
-     * @param tags the new tags
+     * @param tags the new element to be added
      * @return the DataProductVersionPrototype builder
      */
     public Builder addTags(String tags) {
@@ -141,9 +141,9 @@ public class DataProductVersionPrototype extends GenericModel {
     }
 
     /**
-     * Adds an useCases to useCases.
+     * Adds a new element to useCases.
      *
-     * @param useCases the new useCases
+     * @param useCases the new element to be added
      * @return the DataProductVersionPrototype builder
      */
     public Builder addUseCases(UseCase useCases) {
@@ -157,25 +157,25 @@ public class DataProductVersionPrototype extends GenericModel {
     }
 
     /**
-     * Adds an type to type.
+     * Adds a new element to types.
      *
-     * @param type the new type
+     * @param types the new element to be added
      * @return the DataProductVersionPrototype builder
      */
-    public Builder addType(String type) {
-      com.ibm.cloud.sdk.core.util.Validator.notNull(type,
-        "type cannot be null");
-      if (this.type == null) {
-        this.type = new ArrayList<String>();
+    public Builder addTypes(String types) {
+      com.ibm.cloud.sdk.core.util.Validator.notNull(types,
+        "types cannot be null");
+      if (this.types == null) {
+        this.types = new ArrayList<String>();
       }
-      this.type.add(type);
+      this.types.add(types);
       return this;
     }
 
     /**
-     * Adds an partsOut to partsOut.
+     * Adds a new element to partsOut.
      *
-     * @param partsOut the new partsOut
+     * @param partsOut the new element to be added
      * @return the DataProductVersionPrototype builder
      */
     public Builder addPartsOut(DataProductPart partsOut) {
@@ -189,9 +189,9 @@ public class DataProductVersionPrototype extends GenericModel {
     }
 
     /**
-     * Adds an contractTerms to contractTerms.
+     * Adds a new element to contractTerms.
      *
-     * @param contractTerms the new contractTerms
+     * @param contractTerms the new element to be added
      * @return the DataProductVersionPrototype builder
      */
     public Builder addContractTerms(DataProductContractTerms contractTerms) {
@@ -260,13 +260,13 @@ public class DataProductVersionPrototype extends GenericModel {
     }
 
     /**
-     * Set the container.
+     * Set the asset.
      *
-     * @param container the container
+     * @param asset the asset
      * @return the DataProductVersionPrototype builder
      */
-    public Builder container(ContainerReference container) {
-      this.container = container;
+    public Builder asset(AssetReference asset) {
+      this.asset = asset;
       return this;
     }
 
@@ -306,14 +306,14 @@ public class DataProductVersionPrototype extends GenericModel {
     }
 
     /**
-     * Set the type.
-     * Existing type will be replaced.
+     * Set the types.
+     * Existing types will be replaced.
      *
-     * @param type the type
+     * @param types the types
      * @return the DataProductVersionPrototype builder
      */
-    public Builder type(List<String> type) {
-      this.type = type;
+    public Builder types(List<String> types) {
+      this.types = types;
       return this;
     }
 
@@ -356,18 +356,18 @@ public class DataProductVersionPrototype extends GenericModel {
   protected DataProductVersionPrototype() { }
 
   protected DataProductVersionPrototype(Builder builder) {
-    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.container,
-      "container cannot be null");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.asset,
+      "asset cannot be null");
     version = builder.version;
     state = builder.state;
     dataProduct = builder.dataProduct;
     name = builder.name;
     description = builder.description;
-    container = builder.container;
+    asset = builder.asset;
     tags = builder.tags;
     useCases = builder.useCases;
     domain = builder.domain;
-    type = builder.type;
+    types = builder.types;
     partsOut = builder.partsOut;
     contractTerms = builder.contractTerms;
     isRestricted = builder.isRestricted;
@@ -442,14 +442,14 @@ public class DataProductVersionPrototype extends GenericModel {
   }
 
   /**
-   * Gets the container.
+   * Gets the asset.
    *
-   * Data product exchange container.
+   * The asset referenced by the data product version.
    *
-   * @return the container
+   * @return the asset
    */
-  public ContainerReference container() {
-    return container;
+  public AssetReference asset() {
+    return asset;
   }
 
   /**
@@ -492,16 +492,16 @@ public class DataProductVersionPrototype extends GenericModel {
   }
 
   /**
-   * Gets the type.
+   * Gets the types.
    *
    * The types of the parts included in this data product version. If this is the first version of a data product, this
    * field defaults to an empty list. If this is a new version of an existing data product, the types will default to
    * the types of the previous version of the data product.
    *
-   * @return the type
+   * @return the types
    */
-  public List<String> type() {
-    return type;
+  public List<String> types() {
+    return types;
   }
 
   /**

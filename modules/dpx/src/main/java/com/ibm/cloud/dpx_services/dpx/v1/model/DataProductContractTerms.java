@@ -61,9 +61,9 @@ public class DataProductContractTerms extends GenericModel {
     }
 
     /**
-     * Adds an documents to documents.
+     * Adds a new element to documents.
      *
-     * @param documents the new documents
+     * @param documents the new element to be added
      * @return the DataProductContractTerms builder
      */
     public Builder addDocuments(ContractTermsDocument documents) {

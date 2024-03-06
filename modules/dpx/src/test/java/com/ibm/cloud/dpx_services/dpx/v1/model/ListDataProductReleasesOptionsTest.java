@@ -32,14 +32,14 @@ public class ListDataProductReleasesOptionsTest {
   @Test
   public void testListDataProductReleasesOptions() throws Throwable {
     ListDataProductReleasesOptions listDataProductReleasesOptionsModel = new ListDataProductReleasesOptions.Builder()
-      .dataProductId("testString")
+      .dataProductId("b38df608-d34b-4d58-8136-ed25e6c6684e")
       .assetContainerId("testString")
       .state(java.util.Arrays.asList("available"))
       .version("testString")
       .limit(Long.valueOf("200"))
       .start("testString")
       .build();
-    assertEquals(listDataProductReleasesOptionsModel.dataProductId(), "testString");
+    assertEquals(listDataProductReleasesOptionsModel.dataProductId(), "b38df608-d34b-4d58-8136-ed25e6c6684e");
     assertEquals(listDataProductReleasesOptionsModel.assetContainerId(), "testString");
     assertEquals(listDataProductReleasesOptionsModel.state(), java.util.Arrays.asList("available"));
     assertEquals(listDataProductReleasesOptionsModel.version(), "testString");

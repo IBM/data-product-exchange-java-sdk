@@ -32,11 +32,11 @@ public class GetDataProductDraftOptionsTest {
   @Test
   public void testGetDataProductDraftOptions() throws Throwable {
     GetDataProductDraftOptions getDataProductDraftOptionsModel = new GetDataProductDraftOptions.Builder()
-      .dataProductId("testString")
-      .draftId("testString")
+      .dataProductId("b38df608-d34b-4d58-8136-ed25e6c6684e")
+      .draftId("2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd")
       .build();
-    assertEquals(getDataProductDraftOptionsModel.dataProductId(), "testString");
-    assertEquals(getDataProductDraftOptionsModel.draftId(), "testString");
+    assertEquals(getDataProductDraftOptionsModel.dataProductId(), "b38df608-d34b-4d58-8136-ed25e6c6684e");
+    assertEquals(getDataProductDraftOptionsModel.draftId(), "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd");
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

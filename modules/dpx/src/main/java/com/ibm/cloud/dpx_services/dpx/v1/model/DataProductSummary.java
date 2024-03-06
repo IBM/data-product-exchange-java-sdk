@@ -15,14 +15,35 @@ package com.ibm.cloud.dpx_services.dpx.v1.model;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
- * The manageApiKeys options.
+ * Data Product Summary.
  */
-public class ManageApiKeysOptions extends GenericModel {
+public class DataProductSummary extends GenericModel {
+
+  protected String id;
+  protected ContainerReference container;
+
+  protected DataProductSummary() { }
 
   /**
-   * Construct a new instance of ManageApiKeysOptions.
+   * Gets the id.
+   *
+   * Data product identifier.
+   *
+   * @return the id
    */
-  public ManageApiKeysOptions() {
+  public String getId() {
+    return id;
+  }
+
+  /**
+   * Gets the container.
+   *
+   * Data product exchange container.
+   *
+   * @return the container
+   */
+  public ContainerReference getContainer() {
+    return container;
   }
 }
 

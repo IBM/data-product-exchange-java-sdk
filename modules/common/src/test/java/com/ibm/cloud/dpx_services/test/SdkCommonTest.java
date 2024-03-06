@@ -12,7 +12,7 @@
  */
 
 // >>> Replace "my_services" with the correct value for your project (e.g. "platform_services")
-package src.test.java.com.ibm.cloud.dpx_services.test;
+package com.ibm.cloud.dpx_services.test;
 
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;

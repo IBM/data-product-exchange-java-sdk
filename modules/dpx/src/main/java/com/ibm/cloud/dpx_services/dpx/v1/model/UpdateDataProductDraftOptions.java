@@ -74,9 +74,9 @@ public class UpdateDataProductDraftOptions extends GenericModel {
     }
 
     /**
-     * Adds an jsonPatchInstructions to jsonPatchInstructions.
+     * Adds a new element to jsonPatchInstructions.
      *
-     * @param jsonPatchInstructions the new jsonPatchInstructions
+     * @param jsonPatchInstructions the new element to be added
      * @return the UpdateDataProductDraftOptions builder
      */
     public Builder addJsonPatchInstructions(JsonPatchOperation jsonPatchInstructions) {

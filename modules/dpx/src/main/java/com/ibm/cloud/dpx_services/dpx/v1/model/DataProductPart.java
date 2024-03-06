@@ -77,9 +77,9 @@ public class DataProductPart extends GenericModel {
     }
 
     /**
-     * Adds an deliveryMethods to deliveryMethods.
+     * Adds a new element to deliveryMethods.
      *
-     * @param deliveryMethods the new deliveryMethods
+     * @param deliveryMethods the new element to be added
      * @return the DataProductPart builder
      */
     public Builder addDeliveryMethods(DeliveryMethod deliveryMethods) {

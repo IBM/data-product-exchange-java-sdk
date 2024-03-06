@@ -12,24 +12,22 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.83.0-adaf0721-20231212-210453
+ * IBM OpenAPI SDK Code Generator Version: 3.86.0-bc6f14b3-20240221-193958
  */
 
 package com.ibm.cloud.dpx_services.dpx.v1;
 
 import com.google.gson.JsonObject;
 import com.ibm.cloud.dpx_services.common.SdkCommon;
-import com.ibm.cloud.dpx_services.dpx.v1.model.ApiKeysResponse;
 import com.ibm.cloud.dpx_services.dpx.v1.model.CompleteDraftContractTermsDocumentOptions;
 import com.ibm.cloud.dpx_services.dpx.v1.model.ContractTermsDocument;
-import com.ibm.cloud.dpx_services.dpx.v1.model.ContractTermsDocumentUpload;
 import com.ibm.cloud.dpx_services.dpx.v1.model.CreateDataProductDraftOptions;
 import com.ibm.cloud.dpx_services.dpx.v1.model.CreateDataProductOptions;
 import com.ibm.cloud.dpx_services.dpx.v1.model.CreateDraftContractTermsDocumentOptions;
 import com.ibm.cloud.dpx_services.dpx.v1.model.DataProduct;
-import com.ibm.cloud.dpx_services.dpx.v1.model.DataProductCollection;
 import com.ibm.cloud.dpx_services.dpx.v1.model.DataProductDraftCollection;
 import com.ibm.cloud.dpx_services.dpx.v1.model.DataProductReleaseCollection;
+import com.ibm.cloud.dpx_services.dpx.v1.model.DataProductSummaryCollection;
 import com.ibm.cloud.dpx_services.dpx.v1.model.DataProductVersion;
 import com.ibm.cloud.dpx_services.dpx.v1.model.DeleteDataProductDraftOptions;
 import com.ibm.cloud.dpx_services.dpx.v1.model.DeleteDraftContractTermsDocumentOptions;
@@ -224,30 +222,32 @@ public class Dpx extends BaseService {
   }
 
   /**
-   * Manage API keys for a data product exchange.
+   * Rotate credentials for a Data Product Exchange instance.
    *
-   * Use this API to manage API keys for a Data Product Exchange.&lt;br/&gt;&lt;br/&gt;You can do:
-   * &lt;br/&gt;&lt;ul&gt;&lt;li&gt;`rotate` - rotate API keys for a Data Product
-   * Exchange&lt;/li&gt;&lt;/ul&gt;&lt;br/&gt;&lt;br/&gt;.
+   * Use this API to rotate credentials for a Data Product Exchange instance.
    *
    * @param manageApiKeysOptions the {@link ManageApiKeysOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a result of type {@link ApiKeysResponse}
+   * @return a {@link ServiceCall} with a void result
    */
-  public ServiceCall<ApiKeysResponse> manageApiKeys(ManageApiKeysOptions manageApiKeysOptions) {
-    com.ibm.cloud.sdk.core.util.Validator.notNull(manageApiKeysOptions,
-      "manageApiKeysOptions cannot be null");
-    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/configuration/api_keys"));
+  public ServiceCall<Void> manageApiKeys(ManageApiKeysOptions manageApiKeysOptions) {
+    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/configuration/rotate_credentials"));
     Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dpx", "v1", "manageApiKeys");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
-    builder.header("Accept", "application/json");
-    final JsonObject contentJson = new JsonObject();
-    contentJson.add("rotate", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(manageApiKeysOptions.rotate()));
-    builder.bodyJson(contentJson);
-    ResponseConverter<ApiKeysResponse> responseConverter =
-      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ApiKeysResponse>() { }.getType());
+    ResponseConverter<Void> responseConverter = ResponseConverterUtils.getVoid();
     return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Rotate credentials for a Data Product Exchange instance.
+   *
+   * Use this API to rotate credentials for a Data Product Exchange instance.
+   *
+   * @return a {@link ServiceCall} with a void result
+   */
+  public ServiceCall<Void> manageApiKeys() {
+    return manageApiKeys(null);
   }
 
   /**
@@ -256,9 +256,9 @@ public class Dpx extends BaseService {
    * Retrieve a list of data products.
    *
    * @param listDataProductsOptions the {@link ListDataProductsOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a result of type {@link DataProductCollection}
+   * @return a {@link ServiceCall} with a result of type {@link DataProductSummaryCollection}
    */
-  public ServiceCall<DataProductCollection> listDataProducts(ListDataProductsOptions listDataProductsOptions) {
+  public ServiceCall<DataProductSummaryCollection> listDataProducts(ListDataProductsOptions listDataProductsOptions) {
     if (listDataProductsOptions == null) {
       listDataProductsOptions = new ListDataProductsOptions.Builder().build();
     }
@@ -274,8 +274,8 @@ public class Dpx extends BaseService {
     if (listDataProductsOptions.start() != null) {
       builder.query("start", String.valueOf(listDataProductsOptions.start()));
     }
-    ResponseConverter<DataProductCollection> responseConverter =
-      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<DataProductCollection>() { }.getType());
+    ResponseConverter<DataProductSummaryCollection> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<DataProductSummaryCollection>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
 
@@ -284,9 +284,9 @@ public class Dpx extends BaseService {
    *
    * Retrieve a list of data products.
    *
-   * @return a {@link ServiceCall} with a result of type {@link DataProductCollection}
+   * @return a {@link ServiceCall} with a result of type {@link DataProductSummaryCollection}
    */
-  public ServiceCall<DataProductCollection> listDataProducts() {
+  public ServiceCall<DataProductSummaryCollection> listDataProducts() {
     return listDataProducts(null);
   }
 
@@ -430,7 +430,7 @@ public class Dpx extends BaseService {
     }
     builder.header("Accept", "application/json");
     final JsonObject contentJson = new JsonObject();
-    contentJson.add("container", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductDraftOptions.container()));
+    contentJson.add("asset", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductDraftOptions.asset()));
     if (createDataProductDraftOptions.version() != null) {
       contentJson.addProperty("version", createDataProductDraftOptions.version());
     }
@@ -455,8 +455,8 @@ public class Dpx extends BaseService {
     if (createDataProductDraftOptions.domain() != null) {
       contentJson.add("domain", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductDraftOptions.domain()));
     }
-    if (createDataProductDraftOptions.type() != null) {
-      contentJson.add("type", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductDraftOptions.type()));
+    if (createDataProductDraftOptions.types() != null) {
+      contentJson.add("types", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductDraftOptions.types()));
     }
     if (createDataProductDraftOptions.partsOut() != null) {
       contentJson.add("parts_out", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductDraftOptions.partsOut()));
@@ -486,9 +486,9 @@ public class Dpx extends BaseService {
    * given document returns a signed "url" parameter that can be used to download the attachment document.
    *
    * @param createDraftContractTermsDocumentOptions the {@link CreateDraftContractTermsDocumentOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a result of type {@link ContractTermsDocumentUpload}
+   * @return a {@link ServiceCall} with a result of type {@link ContractTermsDocument}
    */
-  public ServiceCall<ContractTermsDocumentUpload> createDraftContractTermsDocument(CreateDraftContractTermsDocumentOptions createDraftContractTermsDocumentOptions) {
+  public ServiceCall<ContractTermsDocument> createDraftContractTermsDocument(CreateDraftContractTermsDocumentOptions createDraftContractTermsDocumentOptions) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(createDraftContractTermsDocumentOptions,
       "createDraftContractTermsDocumentOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
@@ -511,9 +511,12 @@ public class Dpx extends BaseService {
     if (createDraftContractTermsDocumentOptions.attachment() != null) {
       contentJson.add("attachment", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDraftContractTermsDocumentOptions.attachment()));
     }
+    if (createDraftContractTermsDocumentOptions.uploadUrl() != null) {
+      contentJson.addProperty("upload_url", createDraftContractTermsDocumentOptions.uploadUrl());
+    }
     builder.bodyJson(contentJson);
-    ResponseConverter<ContractTermsDocumentUpload> responseConverter =
-      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ContractTermsDocumentUpload>() { }.getType());
+    ResponseConverter<ContractTermsDocument> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ContractTermsDocument>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
 
@@ -605,9 +608,9 @@ public class Dpx extends BaseService {
    * to upload the document file and complete it.
    *
    * @param getDraftContractTermsDocumentOptions the {@link GetDraftContractTermsDocumentOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a result of type {@link ContractTermsDocumentUpload}
+   * @return a {@link ServiceCall} with a result of type {@link ContractTermsDocument}
    */
-  public ServiceCall<ContractTermsDocumentUpload> getDraftContractTermsDocument(GetDraftContractTermsDocumentOptions getDraftContractTermsDocumentOptions) {
+  public ServiceCall<ContractTermsDocument> getDraftContractTermsDocument(GetDraftContractTermsDocumentOptions getDraftContractTermsDocumentOptions) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(getDraftContractTermsDocumentOptions,
       "getDraftContractTermsDocumentOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
@@ -621,8 +624,8 @@ public class Dpx extends BaseService {
       builder.header(header.getKey(), header.getValue());
     }
     builder.header("Accept", "application/json");
-    ResponseConverter<ContractTermsDocumentUpload> responseConverter =
-      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ContractTermsDocumentUpload>() { }.getType());
+    ResponseConverter<ContractTermsDocument> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ContractTermsDocument>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
 
@@ -667,9 +670,9 @@ public class Dpx extends BaseService {
    * DRAFT state.
    *
    * @param updateDraftContractTermsDocumentOptions the {@link UpdateDraftContractTermsDocumentOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a result of type {@link ContractTermsDocumentUpload}
+   * @return a {@link ServiceCall} with a result of type {@link ContractTermsDocument}
    */
-  public ServiceCall<ContractTermsDocumentUpload> updateDraftContractTermsDocument(UpdateDraftContractTermsDocumentOptions updateDraftContractTermsDocumentOptions) {
+  public ServiceCall<ContractTermsDocument> updateDraftContractTermsDocument(UpdateDraftContractTermsDocumentOptions updateDraftContractTermsDocumentOptions) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(updateDraftContractTermsDocumentOptions,
       "updateDraftContractTermsDocumentOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
@@ -684,8 +687,8 @@ public class Dpx extends BaseService {
     }
     builder.header("Accept", "application/json");
     builder.bodyContent(com.ibm.cloud.sdk.core.util.GsonSingleton.getGsonWithoutPrettyPrinting().toJson(updateDraftContractTermsDocumentOptions.jsonPatchInstructions()), "application/json-patch+json");
-    ResponseConverter<ContractTermsDocumentUpload> responseConverter =
-      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ContractTermsDocumentUpload>() { }.getType());
+    ResponseConverter<ContractTermsDocument> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ContractTermsDocument>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
 
@@ -709,9 +712,6 @@ public class Dpx extends BaseService {
       builder.header(header.getKey(), header.getValue());
     }
     builder.header("Accept", "application/json");
-    if (publishDataProductDraftOptions.async() != null) {
-      builder.query("async", String.valueOf(publishDataProductDraftOptions.async()));
-    }
     ResponseConverter<DataProductVersion> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<DataProductVersion>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
@@ -781,9 +781,9 @@ public class Dpx extends BaseService {
    * error is returned to prompt the user to upload the document file to complete the attachment.
    *
    * @param getReleaseContractTermsDocumentOptions the {@link GetReleaseContractTermsDocumentOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a result of type {@link ContractTermsDocumentUpload}
+   * @return a {@link ServiceCall} with a result of type {@link ContractTermsDocument}
    */
-  public ServiceCall<ContractTermsDocumentUpload> getReleaseContractTermsDocument(GetReleaseContractTermsDocumentOptions getReleaseContractTermsDocumentOptions) {
+  public ServiceCall<ContractTermsDocument> getReleaseContractTermsDocument(GetReleaseContractTermsDocumentOptions getReleaseContractTermsDocumentOptions) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(getReleaseContractTermsDocumentOptions,
       "getReleaseContractTermsDocumentOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
@@ -797,8 +797,8 @@ public class Dpx extends BaseService {
       builder.header(header.getKey(), header.getValue());
     }
     builder.header("Accept", "application/json");
-    ResponseConverter<ContractTermsDocumentUpload> responseConverter =
-      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ContractTermsDocumentUpload>() { }.getType());
+    ResponseConverter<ContractTermsDocument> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ContractTermsDocument>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
 

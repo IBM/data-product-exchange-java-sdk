@@ -34,7 +34,7 @@ public class CreateDataProductDraftOptions extends GenericModel {
     String RETIRED = "retired";
   }
 
-  public interface Type {
+  public interface Types {
     /** data. */
     String DATA = "data";
     /** code. */
@@ -42,7 +42,7 @@ public class CreateDataProductDraftOptions extends GenericModel {
   }
 
   protected String dataProductId;
-  protected ContainerReference container;
+  protected AssetReference asset;
   protected String version;
   protected String state;
   protected DataProductIdentity dataProduct;
@@ -51,7 +51,7 @@ public class CreateDataProductDraftOptions extends GenericModel {
   protected List<String> tags;
   protected List<UseCase> useCases;
   protected Domain domain;
-  protected List<String> type;
+  protected List<String> types;
   protected List<DataProductPart> partsOut;
   protected List<DataProductContractTerms> contractTerms;
   protected Boolean isRestricted;
@@ -61,7 +61,7 @@ public class CreateDataProductDraftOptions extends GenericModel {
    */
   public static class Builder {
     private String dataProductId;
-    private ContainerReference container;
+    private AssetReference asset;
     private String version;
     private String state;
     private DataProductIdentity dataProduct;
@@ -70,7 +70,7 @@ public class CreateDataProductDraftOptions extends GenericModel {
     private List<String> tags;
     private List<UseCase> useCases;
     private Domain domain;
-    private List<String> type;
+    private List<String> types;
     private List<DataProductPart> partsOut;
     private List<DataProductContractTerms> contractTerms;
     private Boolean isRestricted;
@@ -82,7 +82,7 @@ public class CreateDataProductDraftOptions extends GenericModel {
      */
     private Builder(CreateDataProductDraftOptions createDataProductDraftOptions) {
       this.dataProductId = createDataProductDraftOptions.dataProductId;
-      this.container = createDataProductDraftOptions.container;
+      this.asset = createDataProductDraftOptions.asset;
       this.version = createDataProductDraftOptions.version;
       this.state = createDataProductDraftOptions.state;
       this.dataProduct = createDataProductDraftOptions.dataProduct;
@@ -91,7 +91,7 @@ public class CreateDataProductDraftOptions extends GenericModel {
       this.tags = createDataProductDraftOptions.tags;
       this.useCases = createDataProductDraftOptions.useCases;
       this.domain = createDataProductDraftOptions.domain;
-      this.type = createDataProductDraftOptions.type;
+      this.types = createDataProductDraftOptions.types;
       this.partsOut = createDataProductDraftOptions.partsOut;
       this.contractTerms = createDataProductDraftOptions.contractTerms;
       this.isRestricted = createDataProductDraftOptions.isRestricted;
@@ -107,11 +107,11 @@ public class CreateDataProductDraftOptions extends GenericModel {
      * Instantiates a new builder with required properties.
      *
      * @param dataProductId the dataProductId
-     * @param container the container
+     * @param asset the asset
      */
-    public Builder(String dataProductId, ContainerReference container) {
+    public Builder(String dataProductId, AssetReference asset) {
       this.dataProductId = dataProductId;
-      this.container = container;
+      this.asset = asset;
     }
 
     /**
@@ -124,9 +124,9 @@ public class CreateDataProductDraftOptions extends GenericModel {
     }
 
     /**
-     * Adds an tags to tags.
+     * Adds a new element to tags.
      *
-     * @param tags the new tags
+     * @param tags the new element to be added
      * @return the CreateDataProductDraftOptions builder
      */
     public Builder addTags(String tags) {
@@ -140,9 +140,9 @@ public class CreateDataProductDraftOptions extends GenericModel {
     }
 
     /**
-     * Adds an useCases to useCases.
+     * Adds a new element to useCases.
      *
-     * @param useCases the new useCases
+     * @param useCases the new element to be added
      * @return the CreateDataProductDraftOptions builder
      */
     public Builder addUseCases(UseCase useCases) {
@@ -156,25 +156,25 @@ public class CreateDataProductDraftOptions extends GenericModel {
     }
 
     /**
-     * Adds an type to type.
+     * Adds a new element to types.
      *
-     * @param type the new type
+     * @param types the new element to be added
      * @return the CreateDataProductDraftOptions builder
      */
-    public Builder addType(String type) {
-      com.ibm.cloud.sdk.core.util.Validator.notNull(type,
-        "type cannot be null");
-      if (this.type == null) {
-        this.type = new ArrayList<String>();
+    public Builder addTypes(String types) {
+      com.ibm.cloud.sdk.core.util.Validator.notNull(types,
+        "types cannot be null");
+      if (this.types == null) {
+        this.types = new ArrayList<String>();
       }
-      this.type.add(type);
+      this.types.add(types);
       return this;
     }
 
     /**
-     * Adds an partsOut to partsOut.
+     * Adds a new element to partsOut.
      *
-     * @param partsOut the new partsOut
+     * @param partsOut the new element to be added
      * @return the CreateDataProductDraftOptions builder
      */
     public Builder addPartsOut(DataProductPart partsOut) {
@@ -188,9 +188,9 @@ public class CreateDataProductDraftOptions extends GenericModel {
     }
 
     /**
-     * Adds an contractTerms to contractTerms.
+     * Adds a new element to contractTerms.
      *
-     * @param contractTerms the new contractTerms
+     * @param contractTerms the new element to be added
      * @return the CreateDataProductDraftOptions builder
      */
     public Builder addContractTerms(DataProductContractTerms contractTerms) {
@@ -215,13 +215,13 @@ public class CreateDataProductDraftOptions extends GenericModel {
     }
 
     /**
-     * Set the container.
+     * Set the asset.
      *
-     * @param container the container
+     * @param asset the asset
      * @return the CreateDataProductDraftOptions builder
      */
-    public Builder container(ContainerReference container) {
-      this.container = container;
+    public Builder asset(AssetReference asset) {
+      this.asset = asset;
       return this;
     }
 
@@ -316,14 +316,14 @@ public class CreateDataProductDraftOptions extends GenericModel {
     }
 
     /**
-     * Set the type.
-     * Existing type will be replaced.
+     * Set the types.
+     * Existing types will be replaced.
      *
-     * @param type the type
+     * @param types the types
      * @return the CreateDataProductDraftOptions builder
      */
-    public Builder type(List<String> type) {
-      this.type = type;
+    public Builder types(List<String> types) {
+      this.types = types;
       return this;
     }
 
@@ -368,10 +368,10 @@ public class CreateDataProductDraftOptions extends GenericModel {
   protected CreateDataProductDraftOptions(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notEmpty(builder.dataProductId,
       "dataProductId cannot be empty");
-    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.container,
-      "container cannot be null");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.asset,
+      "asset cannot be null");
     dataProductId = builder.dataProductId;
-    container = builder.container;
+    asset = builder.asset;
     version = builder.version;
     state = builder.state;
     dataProduct = builder.dataProduct;
@@ -380,7 +380,7 @@ public class CreateDataProductDraftOptions extends GenericModel {
     tags = builder.tags;
     useCases = builder.useCases;
     domain = builder.domain;
-    type = builder.type;
+    types = builder.types;
     partsOut = builder.partsOut;
     contractTerms = builder.contractTerms;
     isRestricted = builder.isRestricted;
@@ -407,14 +407,14 @@ public class CreateDataProductDraftOptions extends GenericModel {
   }
 
   /**
-   * Gets the container.
+   * Gets the asset.
    *
-   * Data product exchange container.
+   * The asset referenced by the data product version.
    *
-   * @return the container
+   * @return the asset
    */
-  public ContainerReference container() {
-    return container;
+  public AssetReference asset() {
+    return asset;
   }
 
   /**
@@ -516,16 +516,16 @@ public class CreateDataProductDraftOptions extends GenericModel {
   }
 
   /**
-   * Gets the type.
+   * Gets the types.
    *
    * The types of the parts included in this data product version. If this is the first version of a data product, this
    * field defaults to an empty list. If this is a new version of an existing data product, the types will default to
    * the types of the previous version of the data product.
    *
-   * @return the type
+   * @return the types
    */
-  public List<String> type() {
-    return type;
+  public List<String> types() {
+    return types;
   }
 
   /**

@@ -69,9 +69,9 @@ public class InitializeOptions extends GenericModel {
     }
 
     /**
-     * Adds an include to include.
+     * Adds a new element to include.
      *
-     * @param include the new include
+     * @param include the new element to be added
      * @return the InitializeOptions builder
      */
     public Builder addInclude(String include) {

@@ -60,12 +60,14 @@ public class DataProductContractTermsTest {
       .name("testString")
       .id("2b0bf220-079c-11ee-be56-0242ac120002")
       .attachment(contractTermsDocumentAttachmentModel)
+      .uploadUrl("testString")
       .build();
     assertEquals(contractTermsDocumentModel.url(), "testString");
     assertEquals(contractTermsDocumentModel.type(), "terms_and_conditions");
     assertEquals(contractTermsDocumentModel.name(), "testString");
     assertEquals(contractTermsDocumentModel.id(), "2b0bf220-079c-11ee-be56-0242ac120002");
     assertEquals(contractTermsDocumentModel.attachment(), contractTermsDocumentAttachmentModel);
+    assertEquals(contractTermsDocumentModel.uploadUrl(), "testString");
 
     DataProductContractTerms dataProductContractTermsModel = new DataProductContractTerms.Builder()
       .asset(assetReferenceModel)

@@ -35,7 +35,7 @@ public class DataProductVersion extends GenericModel {
     String RETIRED = "retired";
   }
 
-  public interface Type {
+  public interface Types {
     /** data. */
     String DATA = "data";
     /** code. */
@@ -54,7 +54,7 @@ public class DataProductVersion extends GenericModel {
   @SerializedName("use_cases")
   protected List<UseCase> useCases;
   protected Domain domain;
-  protected List<String> type;
+  protected List<String> types;
   @SerializedName("parts_out")
   protected List<DataProductPart> partsOut;
   @SerializedName("published_by")
@@ -186,14 +186,14 @@ public class DataProductVersion extends GenericModel {
   }
 
   /**
-   * Gets the type.
+   * Gets the types.
    *
-   * Type of parts on the data product.
+   * Types of parts on the data product.
    *
-   * @return the type
+   * @return the types
    */
-  public List<String> getType() {
-    return type;
+  public List<String> getTypes() {
+    return types;
   }
 
   /**

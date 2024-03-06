@@ -32,14 +32,14 @@ public class GetReleaseContractTermsDocumentOptionsTest {
   @Test
   public void testGetReleaseContractTermsDocumentOptions() throws Throwable {
     GetReleaseContractTermsDocumentOptions getReleaseContractTermsDocumentOptionsModel = new GetReleaseContractTermsDocumentOptions.Builder()
-      .dataProductId("testString")
-      .releaseId("testString")
-      .contractTermsId("testString")
+      .dataProductId("b38df608-d34b-4d58-8136-ed25e6c6684e")
+      .releaseId("2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd")
+      .contractTermsId("598183cd-b910-4e8d-9a97-97097afda3c1@e4fe2f87-0e56-46dd-b3b8-e9af32309e82")
       .documentId("testString")
       .build();
-    assertEquals(getReleaseContractTermsDocumentOptionsModel.dataProductId(), "testString");
-    assertEquals(getReleaseContractTermsDocumentOptionsModel.releaseId(), "testString");
-    assertEquals(getReleaseContractTermsDocumentOptionsModel.contractTermsId(), "testString");
+    assertEquals(getReleaseContractTermsDocumentOptionsModel.dataProductId(), "b38df608-d34b-4d58-8136-ed25e6c6684e");
+    assertEquals(getReleaseContractTermsDocumentOptionsModel.releaseId(), "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd");
+    assertEquals(getReleaseContractTermsDocumentOptionsModel.contractTermsId(), "598183cd-b910-4e8d-9a97-97097afda3c1@e4fe2f87-0e56-46dd-b3b8-e9af32309e82");
     assertEquals(getReleaseContractTermsDocumentOptionsModel.documentId(), "testString");
   }
 

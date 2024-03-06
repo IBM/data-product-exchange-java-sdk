@@ -44,15 +44,15 @@ public class UpdateDraftContractTermsDocumentOptionsTest {
     assertEquals(jsonPatchOperationModel.value(), "testString");
 
     UpdateDraftContractTermsDocumentOptions updateDraftContractTermsDocumentOptionsModel = new UpdateDraftContractTermsDocumentOptions.Builder()
-      .dataProductId("testString")
-      .draftId("testString")
-      .contractTermsId("testString")
+      .dataProductId("b38df608-d34b-4d58-8136-ed25e6c6684e")
+      .draftId("2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd")
+      .contractTermsId("598183cd-b910-4e8d-9a97-97097afda3c1@e4fe2f87-0e56-46dd-b3b8-e9af32309e82")
       .documentId("testString")
       .jsonPatchInstructions(java.util.Arrays.asList(jsonPatchOperationModel))
       .build();
-    assertEquals(updateDraftContractTermsDocumentOptionsModel.dataProductId(), "testString");
-    assertEquals(updateDraftContractTermsDocumentOptionsModel.draftId(), "testString");
-    assertEquals(updateDraftContractTermsDocumentOptionsModel.contractTermsId(), "testString");
+    assertEquals(updateDraftContractTermsDocumentOptionsModel.dataProductId(), "b38df608-d34b-4d58-8136-ed25e6c6684e");
+    assertEquals(updateDraftContractTermsDocumentOptionsModel.draftId(), "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd");
+    assertEquals(updateDraftContractTermsDocumentOptionsModel.contractTermsId(), "598183cd-b910-4e8d-9a97-97097afda3c1@e4fe2f87-0e56-46dd-b3b8-e9af32309e82");
     assertEquals(updateDraftContractTermsDocumentOptionsModel.documentId(), "testString");
     assertEquals(updateDraftContractTermsDocumentOptionsModel.jsonPatchInstructions(), java.util.Arrays.asList(jsonPatchOperationModel));
   }

@@ -13,8 +13,11 @@
 
 package com.ibm.cloud.dpx_services.dpx.v1.model;
 
-import com.ibm.cloud.dpx_services.dpx.v1.model.ContractTermsDocumentAttachment;
-import com.ibm.cloud.dpx_services.dpx.v1.model.ContractTermsDocumentUpload;
+import com.ibm.cloud.dpx_services.dpx.v1.model.ContainerReference;
+import com.ibm.cloud.dpx_services.dpx.v1.model.DataProductSummary;
+import com.ibm.cloud.dpx_services.dpx.v1.model.DataProductSummaryCollection;
+import com.ibm.cloud.dpx_services.dpx.v1.model.FirstPage;
+import com.ibm.cloud.dpx_services.dpx.v1.model.NextPage;
 import com.ibm.cloud.dpx_services.dpx.v1.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
@@ -24,20 +27,18 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 /**
- * Unit test class for the ContractTermsDocumentUpload model.
+ * Unit test class for the DataProductSummaryCollection model.
  */
-public class ContractTermsDocumentUploadTest {
+public class DataProductSummaryCollectionTest {
   final HashMap<String, InputStream> mockStreamMap = TestUtilities.createMockStreamMap();
   final List<FileWithMetadata> mockListFileWithMetadata = TestUtilities.creatMockListFileWithMetadata();
 
   @Test
-  public void testContractTermsDocumentUpload() throws Throwable {
-    ContractTermsDocumentUpload contractTermsDocumentUploadModel = new ContractTermsDocumentUpload();
-    assertNull(contractTermsDocumentUploadModel.getUrl());
-    assertNull(contractTermsDocumentUploadModel.getType());
-    assertNull(contractTermsDocumentUploadModel.getName());
-    assertNull(contractTermsDocumentUploadModel.getId());
-    assertNull(contractTermsDocumentUploadModel.getAttachment());
-    assertNull(contractTermsDocumentUploadModel.getUploadUrl());
+  public void testDataProductSummaryCollection() throws Throwable {
+    DataProductSummaryCollection dataProductSummaryCollectionModel = new DataProductSummaryCollection();
+    assertNull(dataProductSummaryCollectionModel.getLimit());
+    assertNull(dataProductSummaryCollectionModel.getFirst());
+    assertNull(dataProductSummaryCollectionModel.getNext());
+    assertNull(dataProductSummaryCollectionModel.getDataProducts());
   }
 }

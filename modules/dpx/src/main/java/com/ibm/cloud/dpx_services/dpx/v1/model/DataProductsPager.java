@@ -65,9 +65,9 @@ public class DataProductsPager {
 
   /**
    * Returns the next page of results.
-   * @return a List&lt;DataProduct&gt; that contains the next page of results
+   * @return a List&lt;DataProductSummary&gt; that contains the next page of results
    */
-  public List<DataProduct> getNext() {
+  public List<DataProductSummary> getNext() {
     if (!hasNext()) {
       throw new NoSuchElementException("No more results available");
     }
@@ -78,7 +78,7 @@ public class DataProductsPager {
     }
     this.options = builder.build();
 
-    DataProductCollection result = client.listDataProducts(options).execute().getResult();
+    DataProductSummaryCollection result = client.listDataProducts(options).execute().getResult();
 
     String next = null;
     if (result.getNext() != null) {
@@ -94,12 +94,12 @@ public class DataProductsPager {
 
   /**
    * Returns all results by invoking getNext() repeatedly until all pages of results have been retrieved.
-   * @return a List&lt;DataProduct&gt; containing all results returned by the "listDataProducts" method
+   * @return a List&lt;DataProductSummary&gt; containing all results returned by the "listDataProducts" method
    */
-  public List<DataProduct> getAll() {
-    List<DataProduct> results = new ArrayList<>();
+  public List<DataProductSummary> getAll() {
+    List<DataProductSummary> results = new ArrayList<>();
     while (hasNext()) {
-      List<DataProduct> nextPage = getNext();
+      List<DataProductSummary> nextPage = getNext();
       results.addAll(nextPage);
     }
     return results;

@@ -44,12 +44,12 @@ public class UpdateDataProductDraftOptionsTest {
     assertEquals(jsonPatchOperationModel.value(), "testString");
 
     UpdateDataProductDraftOptions updateDataProductDraftOptionsModel = new UpdateDataProductDraftOptions.Builder()
-      .dataProductId("testString")
-      .draftId("testString")
+      .dataProductId("b38df608-d34b-4d58-8136-ed25e6c6684e")
+      .draftId("2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd")
       .jsonPatchInstructions(java.util.Arrays.asList(jsonPatchOperationModel))
       .build();
-    assertEquals(updateDataProductDraftOptionsModel.dataProductId(), "testString");
-    assertEquals(updateDataProductDraftOptionsModel.draftId(), "testString");
+    assertEquals(updateDataProductDraftOptionsModel.dataProductId(), "b38df608-d34b-4d58-8136-ed25e6c6684e");
+    assertEquals(updateDataProductDraftOptionsModel.draftId(), "2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd");
     assertEquals(updateDataProductDraftOptionsModel.jsonPatchInstructions(), java.util.Arrays.asList(jsonPatchOperationModel));
   }
 

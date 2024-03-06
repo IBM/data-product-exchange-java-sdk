@@ -64,9 +64,9 @@ public class CreateDataProductOptions extends GenericModel {
     }
 
     /**
-     * Adds an drafts to drafts.
+     * Adds a new element to drafts.
      *
-     * @param drafts the new drafts
+     * @param drafts the new element to be added
      * @return the CreateDataProductOptions builder
      */
     public Builder addDrafts(DataProductVersionPrototype drafts) {

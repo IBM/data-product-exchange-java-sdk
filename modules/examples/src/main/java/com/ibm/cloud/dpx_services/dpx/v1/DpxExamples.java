@@ -15,11 +15,10 @@ package com.ibm.cloud.dpx_services.dpx.v1;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-// import com.ibm.cloud.dpx_services.dpx.v1.model.ApiKeysResponse;
-// import com.ibm.cloud.dpx_services.dpx.v1.model.CompleteDraftContractTermsDocumentOptions;
+import com.ibm.cloud.dpx_services.dpx.v1.model.AssetReference;
+import com.ibm.cloud.dpx_services.dpx.v1.model.CompleteDraftContractTermsDocumentOptions;
 import com.ibm.cloud.dpx_services.dpx.v1.model.ContainerReference;
-// import com.ibm.cloud.dpx_services.dpx.v1.model.ContractTermsDocument;
-import com.ibm.cloud.dpx_services.dpx.v1.model.ContractTermsDocumentUpload;
+import com.ibm.cloud.dpx_services.dpx.v1.model.ContractTermsDocument;
 import com.ibm.cloud.dpx_services.dpx.v1.model.CreateDataProductDraftOptions;
 import com.ibm.cloud.dpx_services.dpx.v1.model.CreateDataProductOptions;
 import com.ibm.cloud.dpx_services.dpx.v1.model.CreateDraftContractTermsDocumentOptions;
@@ -27,6 +26,7 @@ import com.ibm.cloud.dpx_services.dpx.v1.model.DataProduct;
 import com.ibm.cloud.dpx_services.dpx.v1.model.DataProductDraftsPager;
 import com.ibm.cloud.dpx_services.dpx.v1.model.DataProductIdentity;
 import com.ibm.cloud.dpx_services.dpx.v1.model.DataProductReleasesPager;
+import com.ibm.cloud.dpx_services.dpx.v1.model.DataProductSummary;
 import com.ibm.cloud.dpx_services.dpx.v1.model.DataProductVersion;
 import com.ibm.cloud.dpx_services.dpx.v1.model.DataProductVersionPrototype;
 import com.ibm.cloud.dpx_services.dpx.v1.model.DataProductVersionSummary;
@@ -46,7 +46,7 @@ import com.ibm.cloud.dpx_services.dpx.v1.model.JsonPatchOperation;
 import com.ibm.cloud.dpx_services.dpx.v1.model.ListDataProductDraftsOptions;
 import com.ibm.cloud.dpx_services.dpx.v1.model.ListDataProductReleasesOptions;
 import com.ibm.cloud.dpx_services.dpx.v1.model.ListDataProductsOptions;
-// import com.ibm.cloud.dpx_services.dpx.v1.model.ManageApiKeysOptions;
+import com.ibm.cloud.dpx_services.dpx.v1.model.ManageApiKeysOptions;
 import com.ibm.cloud.dpx_services.dpx.v1.model.PublishDataProductDraftOptions;
 import com.ibm.cloud.dpx_services.dpx.v1.model.RetireDataProductReleaseOptions;
 import com.ibm.cloud.dpx_services.dpx.v1.model.UpdateDataProductDraftOptions;
@@ -97,50 +97,13 @@ public class DpxExamples {
     Map<String, String> testConfigProperties = CredentialUtils.getServiceProperties(Dpx.DEFAULT_SERVICE_NAME);
 
     // Variables to hold link values
-    String completeADraftByContractTermsIdLink = null;
-    String completeADraftByDraftIdLink = null;
-    String completeContractTermsDocumentByDocumentIdLink = null;
-    String completeDraftContractTermsByDataProductIdLink = null;
-    String createAContractTermsDocByContractTermsIdLink = null;
-    String createAContractTermsDocByDraftIdLink = null;
-    String createDataProductByCatalogIdLink = null;
-    String createDraftByContainerIdLink = null;
-    String createNewDraftByDataProductIdLink = null;
-    String deleteAContractDocumentByDraftIdLink = null;
-    String deleteADraftByContractTermsIdLink = null;
-    String deleteADraftByDraftIdLink = null;
-    String deleteContractDocumentByDataProductIdLink = null;
-    String deleteContractTermsDocumentByDocumentIdLink = null;
-    String deleteDraftOfDataProductByDataProductIdLink = null;
-    String getADraftByContractTermsIdLink = null;
-    String getADraftContractDocumentByDraftIdLink = null;
-    String getADraftOfDataProductByDataProductIdLink = null;
-    String getAReleaseByReleaseIdLink = null;
-    String getAReleaseContractTermsByContractTermsIdLink = null;
-    String getAReleaseContractTermsByReleaseIdLink = null;
-    String getAReleaseOfDataProductByDataProductIdLink = null;
-    String getContractDocumentByDataProductIdLink = null;
-    String getContractTermsDocumentByIdDocumentIdLink = null;
-    String getDataProductByDataProductIdLink = null;
-    String getDraftByDraftIdLink = null;
-    String getListOfDataProductDraftsByDataProductIdLink = null;
-    String getListOfReleasesOfDataProductByDataProductIdLink = null;
-    String getReleaseContractDocumentByDataProductIdLink = null;
-    String getReleaseContractDocumentByDocumentIdLink = null;
-    String getStatusByCatalogIdLink = null;
-    String publishADraftByDraftIdLink = null;
-    String publishADraftOfDataProductByDataProductIdLink = null;
-    String retireAReleaseContractTermsByReleaseIdLink = null;
-    String retireAReleasesOfDataProductByDataProductIdLink = null;
-    String updateADraftByContractTermsIdLink = null;
-    String updateADraftByDraftIdLink = null;
-    String updateAReleaseByReleaseIdLink = null;
-    String updateContractDocumentByDataProductIdLink = null;
-    String updateContractDocumentByDraftIdLink = null;
-    String updateContractTermsDocumentByDocumentIdLink = null;
-    String updateDraftOfDataProductByDataProductIdLink = null;
-    String updateReleaseOfDataProductByDataProductIdLink = null;
-    String uploadContractTermsDocByDataProductIdLink = null;
+    String containerIdLink = null;
+    String contractTermsIdLink = null;
+    String dataProductIdLink = null;
+    String documentIdLink = null;
+    String draftIdLink = null;
+    String optionalDataProductIdLink = null;
+    String releaseIdLink = null;
 
     try {
       System.out.println("initialize() result:");
@@ -155,9 +118,7 @@ public class DpxExamples {
       System.out.println(initializeResource);
       // end-initialize
 
-      createDraftByContainerIdLink = initializeResource.getContainer().id();
-      createDataProductByCatalogIdLink = initializeResource.getContainer().id();
-      getStatusByCatalogIdLink = initializeResource.getContainer().id();
+      containerIdLink = initializeResource.getContainer().id();
     } catch (ServiceResponseException e) {
         logger.error(String.format("Service returned status code %s: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
@@ -167,11 +128,14 @@ public class DpxExamples {
       System.out.println("createDataProduct() result:");
       // begin-create_data_product
       ContainerReference containerReferenceModel = new ContainerReference.Builder()
-        .id(createDataProductByCatalogIdLink)
+        .id(containerIdLink)
+        .build();
+      AssetReference assetReferenceModel = new AssetReference.Builder()
+        .container(containerReferenceModel)
         .build();
       DataProductVersionPrototype dataProductVersionPrototypeModel = new DataProductVersionPrototype.Builder()
         .name("My New Data Product")
-        .container(containerReferenceModel)
+        .asset(assetReferenceModel)
         .build();
       CreateDataProductOptions createDataProductOptions = new CreateDataProductOptions.Builder()
         .drafts(java.util.Arrays.asList(dataProductVersionPrototypeModel))
@@ -183,23 +147,8 @@ public class DpxExamples {
       System.out.println(dataProduct);
       // end-create_data_product
 
-      createNewDraftByDataProductIdLink = dataProduct.getId();
-      getContractDocumentByDataProductIdLink = dataProduct.getId();
-      retireAReleasesOfDataProductByDataProductIdLink = dataProduct.getId();
-      getDataProductByDataProductIdLink = dataProduct.getId();
-      updateDraftOfDataProductByDataProductIdLink = dataProduct.getId();
-      updateContractDocumentByDataProductIdLink = dataProduct.getId();
-      deleteDraftOfDataProductByDataProductIdLink = dataProduct.getId();
-      getAReleaseOfDataProductByDataProductIdLink = dataProduct.getId();
-      completeDraftContractTermsByDataProductIdLink = dataProduct.getId();
-      deleteContractDocumentByDataProductIdLink = dataProduct.getId();
-      getListOfDataProductDraftsByDataProductIdLink = dataProduct.getId();
-      getADraftOfDataProductByDataProductIdLink = dataProduct.getId();
-      getReleaseContractDocumentByDataProductIdLink = dataProduct.getId();
-      publishADraftOfDataProductByDataProductIdLink = dataProduct.getId();
-      getListOfReleasesOfDataProductByDataProductIdLink = dataProduct.getId();
-      updateReleaseOfDataProductByDataProductIdLink = dataProduct.getId();
-      uploadContractTermsDocByDataProductIdLink = dataProduct.getId();
+      optionalDataProductIdLink = dataProduct.getId();
+      dataProductIdLink = dataProduct.getId();
     } catch (ServiceResponseException e) {
         logger.error(String.format("Service returned status code %s: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
@@ -209,19 +158,22 @@ public class DpxExamples {
       System.out.println("createDataProductDraft() result:");
       // begin-create_data_product_draft
       ContainerReference containerReferenceModel = new ContainerReference.Builder()
-        .id(createDraftByContainerIdLink)
+        .id(containerIdLink)
+        .build();
+      AssetReference assetReferenceModel = new AssetReference.Builder()
+        .container(containerReferenceModel)
         .build();
       DataProductIdentity dataProductIdentityModel = new DataProductIdentity.Builder()
-        .id(createNewDraftByDataProductIdLink)
+        .id(dataProductIdLink)
         .build();
-      Domain domainModel = new Domain.Builder()
+        Domain domainModel = new Domain.Builder()
         .id("918c0bfd-6943-4468-b74f-bc111018e0d1")  // Domain ID
         .name("Customer Service") // Domain Name
-        .container(containerReferenceModel)  // Assign the container reference
+        .container(containerReferenceModel) // Assign the container reference
         .build();
       CreateDataProductDraftOptions createDataProductDraftOptions = new CreateDataProductDraftOptions.Builder()
-        .dataProductId(createNewDraftByDataProductIdLink)
-        .container(containerReferenceModel)
+        .dataProductId(dataProductIdLink)
+        .asset(assetReferenceModel)
         .version("1.2.0")
         .dataProduct(dataProductIdentityModel)
         .domain(domainModel)
@@ -233,21 +185,8 @@ public class DpxExamples {
       System.out.println(dataProductVersion);
       // end-create_data_product_draft
 
-      getADraftContractDocumentByDraftIdLink = dataProductVersion.getId();
-      updateADraftByContractTermsIdLink = dataProductVersion.getContractTerms().get(0).id();
-      createAContractTermsDocByContractTermsIdLink = dataProductVersion.getContractTerms().get(0).id();
-      updateContractDocumentByDraftIdLink = dataProductVersion.getId();
-      getAReleaseContractTermsByContractTermsIdLink = dataProductVersion.getContractTerms().get(0).id();
-      completeADraftByContractTermsIdLink = dataProductVersion.getContractTerms().get(0).id();
-      getDraftByDraftIdLink = dataProductVersion.getId();
-      publishADraftByDraftIdLink = dataProductVersion.getId();
-      updateADraftByDraftIdLink = dataProductVersion.getId();
-      createAContractTermsDocByDraftIdLink = dataProductVersion.getId();
-      deleteAContractDocumentByDraftIdLink = dataProductVersion.getId();
-      deleteADraftByContractTermsIdLink = dataProductVersion.getContractTerms().get(0).id();
-      deleteADraftByDraftIdLink = dataProductVersion.getId();
-      completeADraftByDraftIdLink = dataProductVersion.getId();
-      getADraftByContractTermsIdLink = dataProductVersion.getContractTerms().get(0).id();
+      draftIdLink = dataProductVersion.getId();
+      contractTermsIdLink = dataProductVersion.getContractTerms().get(0).id();
     } catch (ServiceResponseException e) {
         logger.error(String.format("Service returned status code %s: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
@@ -256,8 +195,8 @@ public class DpxExamples {
     try {
       // begin-delete_data_product_draft
       DeleteDataProductDraftOptions deleteDataProductDraftOptions = new DeleteDataProductDraftOptions.Builder()
-        .dataProductId(deleteDraftOfDataProductByDataProductIdLink)
-        .draftId(deleteADraftByDraftIdLink)
+        .dataProductId(optionalDataProductIdLink)
+        .draftId(draftIdLink)
         .build();
 
       Response<Void> response = dpxService.deleteDataProductDraft(deleteDataProductDraftOptions).execute();
@@ -272,19 +211,22 @@ public class DpxExamples {
       System.out.println("createDataProductDraft() result:");
       // begin-create_data_product_draft
       ContainerReference containerReferenceModel = new ContainerReference.Builder()
-        .id(createDraftByContainerIdLink)
+        .id(containerIdLink)
+        .build();
+      AssetReference assetReferenceModel = new AssetReference.Builder()
+        .container(containerReferenceModel)
         .build();
       DataProductIdentity dataProductIdentityModel = new DataProductIdentity.Builder()
-        .id(createNewDraftByDataProductIdLink)
+        .id(dataProductIdLink)
         .build();
-      Domain domainModel = new Domain.Builder()
+        Domain domainModel = new Domain.Builder()
         .id("918c0bfd-6943-4468-b74f-bc111018e0d1")  // Domain ID
-        .name("Customer Service")  // Domain Name
-        .container(containerReferenceModel)  // Assign the container reference
+        .name("Customer Service") // Domain Name
+        .container(containerReferenceModel) // Assign the container reference
         .build();
       CreateDataProductDraftOptions createDataProductDraftOptions = new CreateDataProductDraftOptions.Builder()
-        .dataProductId(createNewDraftByDataProductIdLink)
-        .container(containerReferenceModel)
+        .dataProductId(dataProductIdLink)
+        .asset(assetReferenceModel)
         .version("1.2.0")
         .dataProduct(dataProductIdentityModel)
         .domain(domainModel)
@@ -296,21 +238,8 @@ public class DpxExamples {
       System.out.println(dataProductVersion);
       // end-create_data_product_draft
 
-      getADraftContractDocumentByDraftIdLink = dataProductVersion.getId();
-      updateADraftByContractTermsIdLink = dataProductVersion.getContractTerms().get(0).id();
-      createAContractTermsDocByContractTermsIdLink = dataProductVersion.getContractTerms().get(0).id();
-      updateContractDocumentByDraftIdLink = dataProductVersion.getId();
-      getAReleaseContractTermsByContractTermsIdLink = dataProductVersion.getContractTerms().get(0).id();
-      completeADraftByContractTermsIdLink = dataProductVersion.getContractTerms().get(0).id();
-      getDraftByDraftIdLink = dataProductVersion.getId();
-      publishADraftByDraftIdLink = dataProductVersion.getId();
-      updateADraftByDraftIdLink = dataProductVersion.getId();
-      createAContractTermsDocByDraftIdLink = dataProductVersion.getId();
-      deleteAContractDocumentByDraftIdLink = dataProductVersion.getId();
-      deleteADraftByContractTermsIdLink = dataProductVersion.getContractTerms().get(0).id();
-      deleteADraftByDraftIdLink = dataProductVersion.getId();
-      completeADraftByDraftIdLink = dataProductVersion.getId();
-      getADraftByContractTermsIdLink = dataProductVersion.getContractTerms().get(0).id();
+      draftIdLink = dataProductVersion.getId();
+      contractTermsIdLink = dataProductVersion.getContractTerms().get(0).id();
     } catch (ServiceResponseException e) {
         logger.error(String.format("Service returned status code %s: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
@@ -336,26 +265,22 @@ public class DpxExamples {
       System.out.println("createDraftContractTermsDocument() result:");
       // begin-create_draft_contract_terms_document
       CreateDraftContractTermsDocumentOptions createDraftContractTermsDocumentOptions = new CreateDraftContractTermsDocumentOptions.Builder()
-        .dataProductId(uploadContractTermsDocByDataProductIdLink)
-        .draftId(createAContractTermsDocByDraftIdLink)
-        .contractTermsId(createAContractTermsDocByContractTermsIdLink)
+        .dataProductId(optionalDataProductIdLink)
+        .draftId(draftIdLink)
+        .contractTermsId(contractTermsIdLink)
         .type("terms_and_conditions")
         .name("Terms and conditions document")
         .id("b38df608-d34b-4d58-8136-ed25e6c6684e")
         .url("https://www.google.com")
         .build();
 
-      Response<ContractTermsDocumentUpload> response = dpxService.createDraftContractTermsDocument(createDraftContractTermsDocumentOptions).execute();
-      ContractTermsDocumentUpload contractTermsDocumentUpload = response.getResult();
+      Response<ContractTermsDocument> response = dpxService.createDraftContractTermsDocument(createDraftContractTermsDocumentOptions).execute();
+      ContractTermsDocument contractTermsDocument = response.getResult();
 
-      System.out.println(contractTermsDocumentUpload);
+      System.out.println(contractTermsDocument);
       // end-create_draft_contract_terms_document
 
-      getReleaseContractDocumentByDocumentIdLink = contractTermsDocumentUpload.getId();
-      deleteContractTermsDocumentByDocumentIdLink = contractTermsDocumentUpload.getId();
-      getContractTermsDocumentByIdDocumentIdLink = contractTermsDocumentUpload.getId();
-      updateContractTermsDocumentByDocumentIdLink = contractTermsDocumentUpload.getId();
-      completeContractTermsDocumentByDocumentIdLink = contractTermsDocumentUpload.getId();
+      documentIdLink = contractTermsDocument.id();
     } catch (ServiceResponseException e) {
         logger.error(String.format("Service returned status code %s: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
@@ -365,8 +290,8 @@ public class DpxExamples {
       System.out.println("getDataProductDraft() result:");
       // begin-get_data_product_draft
       GetDataProductDraftOptions getDataProductDraftOptions = new GetDataProductDraftOptions.Builder()
-        .dataProductId(getADraftOfDataProductByDataProductIdLink)
-        .draftId(getDraftByDraftIdLink)
+        .dataProductId(optionalDataProductIdLink)
+        .draftId(draftIdLink)
         .build();
 
       Response<DataProductVersion> response = dpxService.getDataProductDraft(getDataProductDraftOptions).execute();
@@ -379,14 +304,13 @@ public class DpxExamples {
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
     }
 
-
     try {
       // begin-delete_draft_contract_terms_document
       DeleteDraftContractTermsDocumentOptions deleteDraftContractTermsDocumentOptions = new DeleteDraftContractTermsDocumentOptions.Builder()
-        .dataProductId(deleteContractDocumentByDataProductIdLink)
-        .draftId(deleteAContractDocumentByDraftIdLink)
-        .contractTermsId(deleteADraftByContractTermsIdLink)
-        .documentId(deleteContractTermsDocumentByDocumentIdLink)
+        .dataProductId(optionalDataProductIdLink)
+        .draftId(draftIdLink)
+        .contractTermsId(contractTermsIdLink)
+        .documentId(documentIdLink)
         .build();
 
       Response<Void> response = dpxService.deleteDraftContractTermsDocument(deleteDraftContractTermsDocumentOptions).execute();
@@ -401,34 +325,31 @@ public class DpxExamples {
       System.out.println("createDraftContractTermsDocument() result:");
       // begin-create_draft_contract_terms_document
       CreateDraftContractTermsDocumentOptions createDraftContractTermsDocumentOptions = new CreateDraftContractTermsDocumentOptions.Builder()
-              .dataProductId(uploadContractTermsDocByDataProductIdLink)
-              .draftId(createAContractTermsDocByDraftIdLink)
-              .contractTermsId(createAContractTermsDocByContractTermsIdLink)
-              .type("terms_and_conditions")
-              .name("Terms and conditions document")
-              .id("b38df608-d34b-4d58-8136-ed25e6c6684e")
-              .url("https://www.google.com")
-              .build();
+        .dataProductId(optionalDataProductIdLink)
+        .draftId(draftIdLink)
+        .contractTermsId(contractTermsIdLink)
+        .type("terms_and_conditions")
+        .name("Terms and conditions document")
+        .id("b38df608-d34b-4d58-8136-ed25e6c6684e")
+        .url("https://www.google.com")
+        .build();
 
-      Response<ContractTermsDocumentUpload> response = dpxService.createDraftContractTermsDocument(createDraftContractTermsDocumentOptions).execute();
-      ContractTermsDocumentUpload contractTermsDocumentUpload = response.getResult();
+      Response<ContractTermsDocument> response = dpxService.createDraftContractTermsDocument(createDraftContractTermsDocumentOptions).execute();
+      ContractTermsDocument contractTermsDocument = response.getResult();
+
+      System.out.println(contractTermsDocument);
       // end-create_draft_contract_terms_document
 
-      getReleaseContractDocumentByDocumentIdLink = contractTermsDocumentUpload.getId();
-      deleteContractTermsDocumentByDocumentIdLink = contractTermsDocumentUpload.getId();
-      getContractTermsDocumentByIdDocumentIdLink = contractTermsDocumentUpload.getId();
-      updateContractTermsDocumentByDocumentIdLink = contractTermsDocumentUpload.getId();
-      completeContractTermsDocumentByDocumentIdLink = contractTermsDocumentUpload.getId();
-  } catch (ServiceResponseException e) {
-      logger.error(String.format("Service returned status code %s: %s%nError details: %s",
-              e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
-  }
+      documentIdLink = contractTermsDocument.id();
+    } catch (ServiceResponseException e) {
+        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
+          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
+    }
 
-  try {
-    System.out.println("updateDataProductDraft() result:");
-    // begin-update_data_product_draft
-
-    // Construct the asset object
+    try {
+      System.out.println("updateDataProductDraft() result:");
+      // begin-update_data_product_draft
+      // Construct the asset object
     String assetString = "{\"id\":\"669a570b-31f7-4c84-bfd1-851282ab5b86\",\"container\":{\"id\":\"b6eb50b4-ace4-4dab-b2c4-318bb4c032a6\",\"type\":\"catalog\"}}";
 
     // Parse the JSON string to a Map using Gson
@@ -446,81 +367,79 @@ public class DpxExamples {
     for (Map<String, Object> part : partsOutList) {
         System.out.println(part);
     }
-    JsonPatchOperation jsonPatchOperationModel = new JsonPatchOperation.Builder()
-      .op("add")
-      .path("/parts_out")
-      .value(partsOutList)
-      .build();
-    UpdateDataProductDraftOptions updateDataProductDraftOptions = new UpdateDataProductDraftOptions.Builder()
-      .dataProductId(updateDraftOfDataProductByDataProductIdLink)
-      .draftId(updateADraftByDraftIdLink)
-      .jsonPatchInstructions(java.util.Arrays.asList(jsonPatchOperationModel))
-      .build();
+      JsonPatchOperation jsonPatchOperationModel = new JsonPatchOperation.Builder()
+        .op("add")
+        .path("/parts_out")
+        .value(partsOutList)
+        .build();
+      UpdateDataProductDraftOptions updateDataProductDraftOptions = new UpdateDataProductDraftOptions.Builder()
+        .dataProductId(optionalDataProductIdLink)
+        .draftId(draftIdLink)
+        .jsonPatchInstructions(java.util.Arrays.asList(jsonPatchOperationModel))
+        .build();
 
-    Response<DataProductVersion> response = dpxService.updateDataProductDraft(updateDataProductDraftOptions).execute();
-    DataProductVersion dataProductVersion = response.getResult();
+      Response<DataProductVersion> response = dpxService.updateDataProductDraft(updateDataProductDraftOptions).execute();
+      DataProductVersion dataProductVersion = response.getResult();
 
-    System.out.println(dataProductVersion);
-    // end-update_data_product_draft
-  } catch (ServiceResponseException e) {
-      logger.error(String.format("Service returned status code %s: %s%nError details: %s",
-        e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
-  }
+      System.out.println(dataProductVersion);
+      // end-update_data_product_draft
+    } catch (ServiceResponseException e) {
+        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
+          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
+    }
 
-  try {
-    System.out.println("getDraftContractTermsDocument() result:");
-    // begin-get_draft_contract_terms_document
-    GetDraftContractTermsDocumentOptions getDraftContractTermsDocumentOptions = new GetDraftContractTermsDocumentOptions.Builder()
-      .dataProductId(getContractDocumentByDataProductIdLink)
-      .draftId(getADraftContractDocumentByDraftIdLink)
-      .contractTermsId(getADraftByContractTermsIdLink)
-      .documentId(getContractTermsDocumentByIdDocumentIdLink)
-      .build();
+    try {
+      System.out.println("getDraftContractTermsDocument() result:");
+      // begin-get_draft_contract_terms_document
+      GetDraftContractTermsDocumentOptions getDraftContractTermsDocumentOptions = new GetDraftContractTermsDocumentOptions.Builder()
+        .dataProductId(optionalDataProductIdLink)
+        .draftId(draftIdLink)
+        .contractTermsId(contractTermsIdLink)
+        .documentId(documentIdLink)
+        .build();
 
-    Response<ContractTermsDocumentUpload> response = dpxService.getDraftContractTermsDocument(getDraftContractTermsDocumentOptions).execute();
-    ContractTermsDocumentUpload contractTermsDocumentUpload = response.getResult();
+      Response<ContractTermsDocument> response = dpxService.getDraftContractTermsDocument(getDraftContractTermsDocumentOptions).execute();
+      ContractTermsDocument contractTermsDocument = response.getResult();
 
-    System.out.println(contractTermsDocumentUpload);
-    // end-get_draft_contract_terms_document
-  } catch (ServiceResponseException e) {
-      logger.error(String.format("Service returned status code %s: %s%nError details: %s",
-        e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
-  }
+      System.out.println(contractTermsDocument);
+      // end-get_draft_contract_terms_document
+    } catch (ServiceResponseException e) {
+        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
+          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
+    }
 
+    try {
+      System.out.println("updateDraftContractTermsDocument() result:");
+      // begin-update_draft_contract_terms_document
+      JsonPatchOperation jsonPatchOperationModel = new JsonPatchOperation.Builder()
+        .op("replace")
+        .path("/url")
+        .value("https://google.com")
+        .build();
+      UpdateDraftContractTermsDocumentOptions updateDraftContractTermsDocumentOptions = new UpdateDraftContractTermsDocumentOptions.Builder()
+        .dataProductId(optionalDataProductIdLink)
+        .draftId(draftIdLink)
+        .contractTermsId(contractTermsIdLink)
+        .documentId(documentIdLink)
+        .jsonPatchInstructions(java.util.Arrays.asList(jsonPatchOperationModel))
+        .build();
 
-  try {
-    System.out.println("updateDraftContractTermsDocument() result:");
-    // begin-update_draft_contract_terms_document
-    JsonPatchOperation jsonPatchOperationModel = new JsonPatchOperation.Builder()
-      .op("replace")
-      .path("/url")
-      .value("https://google.com")
-      .build();
-    UpdateDraftContractTermsDocumentOptions updateDraftContractTermsDocumentOptions = new UpdateDraftContractTermsDocumentOptions.Builder()
-      .dataProductId(updateContractDocumentByDataProductIdLink)
-      .draftId(updateContractDocumentByDraftIdLink)
-      .contractTermsId(updateADraftByContractTermsIdLink)
-      .documentId(updateContractTermsDocumentByDocumentIdLink)
-      .jsonPatchInstructions(java.util.Arrays.asList(jsonPatchOperationModel))
-      .build();
+      Response<ContractTermsDocument> response = dpxService.updateDraftContractTermsDocument(updateDraftContractTermsDocumentOptions).execute();
+      ContractTermsDocument contractTermsDocument = response.getResult();
 
-    Response<ContractTermsDocumentUpload> response = dpxService.updateDraftContractTermsDocument(updateDraftContractTermsDocumentOptions).execute();
-    ContractTermsDocumentUpload contractTermsDocumentUpload = response.getResult();
-
-    System.out.println(contractTermsDocumentUpload);
-    // end-update_draft_contract_terms_document
-  } catch (ServiceResponseException e) {
-      logger.error(String.format("Service returned status code %s: %s%nError details: %s",
-        e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
-  }
-
+      System.out.println(contractTermsDocument);
+      // end-update_draft_contract_terms_document
+    } catch (ServiceResponseException e) {
+        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
+          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
+    }
 
     try {
       System.out.println("publishDataProductDraft() result:");
       // begin-publish_data_product_draft
       PublishDataProductDraftOptions publishDataProductDraftOptions = new PublishDataProductDraftOptions.Builder()
-        .dataProductId(publishADraftOfDataProductByDataProductIdLink)
-        .draftId(publishADraftByDraftIdLink)
+        .dataProductId(optionalDataProductIdLink)
+        .draftId(draftIdLink)
         .build();
 
       Response<DataProductVersion> response = dpxService.publishDataProductDraft(publishDataProductDraftOptions).execute();
@@ -529,32 +448,23 @@ public class DpxExamples {
       System.out.println(dataProductVersion);
       // end-publish_data_product_draft
 
-      updateAReleaseByReleaseIdLink = dataProductVersion.getId();
-      getAReleaseContractTermsByReleaseIdLink = dataProductVersion.getId();
-      retireAReleaseContractTermsByReleaseIdLink = dataProductVersion.getId();
-      getAReleaseByReleaseIdLink = dataProductVersion.getId();
+      releaseIdLink = dataProductVersion.getId();
     } catch (ServiceResponseException e) {
         logger.error(String.format("Service returned status code %s: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
     }
 
+    try {
+      // begin-manage_api_keys
+      ManageApiKeysOptions manageApiKeysOptions = new ManageApiKeysOptions();
 
-    // try {
-    //   System.out.println("manageApiKeys() result:");
-    //   // begin-manage_api_keys
-    //   ManageApiKeysOptions manageApiKeysOptions = new ManageApiKeysOptions.Builder()
-    //     .rotate(java.util.Arrays.asList("data_product_admin_service_id"))
-    //     .build();
-
-    //   Response<ApiKeysResponse> response = dpxService.manageApiKeys(manageApiKeysOptions).execute();
-    //   ApiKeysResponse apiKeysResponse = response.getResult();
-
-    //   System.out.println(apiKeysResponse);
-    //   // end-manage_api_keys
-    // } catch (ServiceResponseException e) {
-    //     logger.error(String.format("Service returned status code %s: %s%nError details: %s",
-    //       e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
-    // }
+      Response<Void> response = dpxService.manageApiKeys(manageApiKeysOptions).execute();
+      // end-manage_api_keys
+      System.out.printf("manageApiKeys() response status code: %d%n", response.getStatusCode());
+    } catch (ServiceResponseException e) {
+        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
+          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
+    }
 
     try {
       System.out.println("listDataProducts() result:");
@@ -564,9 +474,9 @@ public class DpxExamples {
         .build();
 
       DataProductsPager pager = new DataProductsPager(dpxService, listDataProductsOptions);
-      List<DataProduct> allResults = new ArrayList<>();
+      List<DataProductSummary> allResults = new ArrayList<>();
       while (pager.hasNext()) {
-        List<DataProduct> nextPage = pager.getNext();
+        List<DataProductSummary> nextPage = pager.getNext();
         allResults.addAll(nextPage);
       }
 
@@ -581,7 +491,7 @@ public class DpxExamples {
       System.out.println("getDataProduct() result:");
       // begin-get_data_product
       GetDataProductOptions getDataProductOptions = new GetDataProductOptions.Builder()
-        .dataProductId(getDataProductByDataProductIdLink)
+        .dataProductId(dataProductIdLink)
         .build();
 
       Response<DataProduct> response = dpxService.getDataProduct(getDataProductOptions).execute();
@@ -594,31 +504,31 @@ public class DpxExamples {
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
     }
 
-    // try {
-    //   System.out.println("completeDraftContractTermsDocument() result:");
-    //   // begin-complete_draft_contract_terms_document
-    //   CompleteDraftContractTermsDocumentOptions completeDraftContractTermsDocumentOptions = new CompleteDraftContractTermsDocumentOptions.Builder()
-    //     .dataProductId(completeDraftContractTermsByDataProductIdLink)
-    //     .draftId(completeADraftByDraftIdLink)
-    //     .contractTermsId(completeADraftByContractTermsIdLink)
-    //     .documentId(completeContractTermsDocumentByDocumentIdLink)
-    //     .build();
+    try {
+      System.out.println("completeDraftContractTermsDocument() result:");
+      // begin-complete_draft_contract_terms_document
+      CompleteDraftContractTermsDocumentOptions completeDraftContractTermsDocumentOptions = new CompleteDraftContractTermsDocumentOptions.Builder()
+        .dataProductId(optionalDataProductIdLink)
+        .draftId(draftIdLink)
+        .contractTermsId(contractTermsIdLink)
+        .documentId(documentIdLink)
+        .build();
 
-    //   Response<ContractTermsDocument> response = dpxService.completeDraftContractTermsDocument(completeDraftContractTermsDocumentOptions).execute();
-    //   ContractTermsDocument contractTermsDocument = response.getResult();
+      Response<ContractTermsDocument> response = dpxService.completeDraftContractTermsDocument(completeDraftContractTermsDocumentOptions).execute();
+      ContractTermsDocument contractTermsDocument = response.getResult();
 
-    //   System.out.println(contractTermsDocument);
-    //   // end-complete_draft_contract_terms_document
-    // } catch (ServiceResponseException e) {
-    //     logger.error(String.format("Service returned status code %s: %s%nError details: %s",
-    //       e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
-    // }
+      System.out.println(contractTermsDocument);
+      // end-complete_draft_contract_terms_document
+    } catch (ServiceResponseException e) {
+        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
+          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
+    }
 
     try {
       System.out.println("listDataProductDrafts() result:");
       // begin-list_data_product_drafts
       ListDataProductDraftsOptions listDataProductDraftsOptions = new ListDataProductDraftsOptions.Builder()
-        .dataProductId(getListOfDataProductDraftsByDataProductIdLink)
+        .dataProductId(optionalDataProductIdLink)
         // .assetContainerId("testString")
         // .version("testString")
         .limit(Long.valueOf("10"))
@@ -638,14 +548,12 @@ public class DpxExamples {
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
     }
 
-
-
     try {
       System.out.println("getDataProductRelease() result:");
       // begin-get_data_product_release
       GetDataProductReleaseOptions getDataProductReleaseOptions = new GetDataProductReleaseOptions.Builder()
-        .dataProductId(getAReleaseOfDataProductByDataProductIdLink)
-        .releaseId(getAReleaseByReleaseIdLink)
+        .dataProductId(optionalDataProductIdLink)
+        .releaseId(releaseIdLink)
         .build();
 
       Response<DataProductVersion> response = dpxService.getDataProductRelease(getDataProductReleaseOptions).execute();
@@ -664,11 +572,10 @@ public class DpxExamples {
       JsonPatchOperation jsonPatchOperationModel = new JsonPatchOperation.Builder()
         .op("replace")
         .path("/description")
-        .value("New Description")
         .build();
       UpdateDataProductReleaseOptions updateDataProductReleaseOptions = new UpdateDataProductReleaseOptions.Builder()
-        .dataProductId(updateReleaseOfDataProductByDataProductIdLink)
-        .releaseId(updateAReleaseByReleaseIdLink)
+        .dataProductId(optionalDataProductIdLink)
+        .releaseId(releaseIdLink)
         .jsonPatchInstructions(java.util.Arrays.asList(jsonPatchOperationModel))
         .build();
 
@@ -686,16 +593,16 @@ public class DpxExamples {
       System.out.println("getReleaseContractTermsDocument() result:");
       // begin-get_release_contract_terms_document
       GetReleaseContractTermsDocumentOptions getReleaseContractTermsDocumentOptions = new GetReleaseContractTermsDocumentOptions.Builder()
-        .dataProductId(getReleaseContractDocumentByDataProductIdLink)
-        .releaseId(getAReleaseContractTermsByReleaseIdLink)
-        .contractTermsId(getAReleaseContractTermsByContractTermsIdLink)
-        .documentId(getReleaseContractDocumentByDocumentIdLink)
+        .dataProductId(optionalDataProductIdLink)
+        .releaseId(releaseIdLink)
+        .contractTermsId(contractTermsIdLink)
+        .documentId(documentIdLink)
         .build();
 
-      Response<ContractTermsDocumentUpload> response = dpxService.getReleaseContractTermsDocument(getReleaseContractTermsDocumentOptions).execute();
-      ContractTermsDocumentUpload contractTermsDocumentUpload = response.getResult();
+      Response<ContractTermsDocument> response = dpxService.getReleaseContractTermsDocument(getReleaseContractTermsDocumentOptions).execute();
+      ContractTermsDocument contractTermsDocument = response.getResult();
 
-      System.out.println(contractTermsDocumentUpload);
+      System.out.println(contractTermsDocument);
       // end-get_release_contract_terms_document
     } catch (ServiceResponseException e) {
         logger.error(String.format("Service returned status code %s: %s%nError details: %s",
@@ -706,7 +613,7 @@ public class DpxExamples {
       System.out.println("listDataProductReleases() result:");
       // begin-list_data_product_releases
       ListDataProductReleasesOptions listDataProductReleasesOptions = new ListDataProductReleasesOptions.Builder()
-        .dataProductId(getListOfReleasesOfDataProductByDataProductIdLink)
+        .dataProductId(optionalDataProductIdLink)
         // .assetContainerId("testString")
         // .state(java.util.Arrays.asList("available"))
         // .version("testString")
@@ -731,8 +638,8 @@ public class DpxExamples {
       System.out.println("retireDataProductRelease() result:");
       // begin-retire_data_product_release
       RetireDataProductReleaseOptions retireDataProductReleaseOptions = new RetireDataProductReleaseOptions.Builder()
-        .dataProductId(retireAReleasesOfDataProductByDataProductIdLink)
-        .releaseId(retireAReleaseContractTermsByReleaseIdLink)
+        .dataProductId(optionalDataProductIdLink)
+        .releaseId(releaseIdLink)
         .build();
 
       Response<DataProductVersion> response = dpxService.retireDataProductRelease(retireDataProductReleaseOptions).execute();
@@ -744,6 +651,5 @@ public class DpxExamples {
         logger.error(String.format("Service returned status code %s: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
     }
-
   }
 }

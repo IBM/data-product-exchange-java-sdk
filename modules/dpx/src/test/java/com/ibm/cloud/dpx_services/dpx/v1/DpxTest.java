@@ -13,19 +13,16 @@
 package com.ibm.cloud.dpx_services.dpx.v1;
 
 import com.ibm.cloud.dpx_services.dpx.v1.Dpx;
-import com.ibm.cloud.dpx_services.dpx.v1.model.ApiKeysResponse;
 import com.ibm.cloud.dpx_services.dpx.v1.model.AssetPartReference;
 import com.ibm.cloud.dpx_services.dpx.v1.model.AssetReference;
 import com.ibm.cloud.dpx_services.dpx.v1.model.CompleteDraftContractTermsDocumentOptions;
 import com.ibm.cloud.dpx_services.dpx.v1.model.ContainerReference;
 import com.ibm.cloud.dpx_services.dpx.v1.model.ContractTermsDocument;
 import com.ibm.cloud.dpx_services.dpx.v1.model.ContractTermsDocumentAttachment;
-import com.ibm.cloud.dpx_services.dpx.v1.model.ContractTermsDocumentUpload;
 import com.ibm.cloud.dpx_services.dpx.v1.model.CreateDataProductDraftOptions;
 import com.ibm.cloud.dpx_services.dpx.v1.model.CreateDataProductOptions;
 import com.ibm.cloud.dpx_services.dpx.v1.model.CreateDraftContractTermsDocumentOptions;
 import com.ibm.cloud.dpx_services.dpx.v1.model.DataProduct;
-import com.ibm.cloud.dpx_services.dpx.v1.model.DataProductCollection;
 import com.ibm.cloud.dpx_services.dpx.v1.model.DataProductContractTerms;
 import com.ibm.cloud.dpx_services.dpx.v1.model.DataProductDraftCollection;
 import com.ibm.cloud.dpx_services.dpx.v1.model.DataProductDraftsPager;
@@ -33,6 +30,8 @@ import com.ibm.cloud.dpx_services.dpx.v1.model.DataProductIdentity;
 import com.ibm.cloud.dpx_services.dpx.v1.model.DataProductPart;
 import com.ibm.cloud.dpx_services.dpx.v1.model.DataProductReleaseCollection;
 import com.ibm.cloud.dpx_services.dpx.v1.model.DataProductReleasesPager;
+import com.ibm.cloud.dpx_services.dpx.v1.model.DataProductSummary;
+import com.ibm.cloud.dpx_services.dpx.v1.model.DataProductSummaryCollection;
 import com.ibm.cloud.dpx_services.dpx.v1.model.DataProductVersion;
 import com.ibm.cloud.dpx_services.dpx.v1.model.DataProductVersionPrototype;
 import com.ibm.cloud.dpx_services.dpx.v1.model.DataProductVersionSummary;
@@ -203,23 +202,20 @@ public class DpxTest {
   @Test
   public void testManageApiKeysWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}";
-    String manageApiKeysPath = "/data_product_exchange/v1/configuration/api_keys";
+    String mockResponseBody = "";
+    String manageApiKeysPath = "/data_product_exchange/v1/configuration/rotate_credentials";
     server.enqueue(new MockResponse()
-      .setHeader("Content-type", "application/json")
       .setResponseCode(200)
       .setBody(mockResponseBody));
 
     // Construct an instance of the ManageApiKeysOptions model
-    ManageApiKeysOptions manageApiKeysOptionsModel = new ManageApiKeysOptions.Builder()
-      .rotate(java.util.Arrays.asList("data_product_admin_service_id"))
-      .build();
+    ManageApiKeysOptions manageApiKeysOptionsModel = new ManageApiKeysOptions();
 
     // Invoke manageApiKeys() with a valid options model and verify the result
-    Response<ApiKeysResponse> response = dpxService.manageApiKeys(manageApiKeysOptionsModel).execute();
+    Response<Void> response = dpxService.manageApiKeys(manageApiKeysOptionsModel).execute();
     assertNotNull(response);
-    ApiKeysResponse responseObj = response.getResult();
-    assertNotNull(responseObj);
+    Void responseObj = response.getResult();
+    assertNull(responseObj);
 
     // Verify the contents of the request sent to the mock server
     RecordedRequest request = server.takeRequest();
@@ -243,18 +239,11 @@ public class DpxTest {
     testManageApiKeysWOptions();
   }
 
-  // Test the manageApiKeys operation with a null options model (negative test)
-  @Test(expectedExceptions = IllegalArgumentException.class)
-  public void testManageApiKeysNoOptions() throws Throwable {
-    server.enqueue(new MockResponse());
-    dpxService.manageApiKeys(null).execute();
-  }
-
   // Test the listDataProducts operation with a valid options model parameter
   @Test
   public void testListDataProductsWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"limit\": 200, \"first\": {\"href\": \"https://api.example.com/collection\"}, \"next\": {\"href\": \"https://api.example.com/collection?start=eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9\", \"start\": \"eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9\"}, \"data_products\": [{\"id\": \"b38df608-d34b-4d58-8136-ed25e6c6684e\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}, \"latest_release\": {\"version\": \"1.0.0\", \"state\": \"draft\", \"data_product\": {\"id\": \"b38df608-d34b-4d58-8136-ed25e6c6684e\"}, \"name\": \"My Data Product\", \"description\": \"This is a description of My Data Product.\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}}, \"drafts\": [{\"version\": \"1.0.0\", \"state\": \"draft\", \"data_product\": {\"id\": \"b38df608-d34b-4d58-8136-ed25e6c6684e\"}, \"name\": \"My Data Product\", \"description\": \"This is a description of My Data Product.\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}}]}]}";
+    String mockResponseBody = "{\"limit\": 200, \"first\": {\"href\": \"https://api.example.com/collection\"}, \"next\": {\"href\": \"https://api.example.com/collection?start=eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9\", \"start\": \"eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9\"}, \"data_products\": [{\"id\": \"b38df608-d34b-4d58-8136-ed25e6c6684e\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}]}";
     String listDataProductsPath = "/data_product_exchange/v1/data_products";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
@@ -268,9 +257,9 @@ public class DpxTest {
       .build();
 
     // Invoke listDataProducts() with a valid options model and verify the result
-    Response<DataProductCollection> response = dpxService.listDataProducts(listDataProductsOptionsModel).execute();
+    Response<DataProductSummaryCollection> response = dpxService.listDataProducts(listDataProductsOptionsModel).execute();
     assertNotNull(response);
-    DataProductCollection responseObj = response.getResult();
+    DataProductSummaryCollection responseObj = response.getResult();
     assertNotNull(responseObj);
 
     // Verify the contents of the request sent to the mock server
@@ -301,8 +290,8 @@ public class DpxTest {
   @Test
   public void testListDataProductsWithPagerGetNext() throws Throwable {
     // Set up the two-page mock response.
-    String mockResponsePage1 = "{\"next\":{\"start\":\"1\"},\"total_count\":2,\"limit\":1,\"data_products\":[{\"id\":\"b38df608-d34b-4d58-8136-ed25e6c6684e\",\"container\":{\"id\":\"d29c42eb-7100-4b7a-8257-c196dbcca1cd\",\"type\":\"catalog\"},\"latest_release\":{\"version\":\"1.0.0\",\"state\":\"draft\",\"data_product\":{\"id\":\"b38df608-d34b-4d58-8136-ed25e6c6684e\"},\"name\":\"My Data Product\",\"description\":\"This is a description of My Data Product.\",\"id\":\"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd\",\"asset\":{\"id\":\"2b0bf220-079c-11ee-be56-0242ac120002\",\"container\":{\"id\":\"d29c42eb-7100-4b7a-8257-c196dbcca1cd\",\"type\":\"catalog\"}}},\"drafts\":[{\"version\":\"1.0.0\",\"state\":\"draft\",\"data_product\":{\"id\":\"b38df608-d34b-4d58-8136-ed25e6c6684e\"},\"name\":\"My Data Product\",\"description\":\"This is a description of My Data Product.\",\"id\":\"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd\",\"asset\":{\"id\":\"2b0bf220-079c-11ee-be56-0242ac120002\",\"container\":{\"id\":\"d29c42eb-7100-4b7a-8257-c196dbcca1cd\",\"type\":\"catalog\"}}}]}]}";
-    String mockResponsePage2 = "{\"total_count\":2,\"limit\":1,\"data_products\":[{\"id\":\"b38df608-d34b-4d58-8136-ed25e6c6684e\",\"container\":{\"id\":\"d29c42eb-7100-4b7a-8257-c196dbcca1cd\",\"type\":\"catalog\"},\"latest_release\":{\"version\":\"1.0.0\",\"state\":\"draft\",\"data_product\":{\"id\":\"b38df608-d34b-4d58-8136-ed25e6c6684e\"},\"name\":\"My Data Product\",\"description\":\"This is a description of My Data Product.\",\"id\":\"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd\",\"asset\":{\"id\":\"2b0bf220-079c-11ee-be56-0242ac120002\",\"container\":{\"id\":\"d29c42eb-7100-4b7a-8257-c196dbcca1cd\",\"type\":\"catalog\"}}},\"drafts\":[{\"version\":\"1.0.0\",\"state\":\"draft\",\"data_product\":{\"id\":\"b38df608-d34b-4d58-8136-ed25e6c6684e\"},\"name\":\"My Data Product\",\"description\":\"This is a description of My Data Product.\",\"id\":\"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd\",\"asset\":{\"id\":\"2b0bf220-079c-11ee-be56-0242ac120002\",\"container\":{\"id\":\"d29c42eb-7100-4b7a-8257-c196dbcca1cd\",\"type\":\"catalog\"}}}]}]}";
+    String mockResponsePage1 = "{\"next\":{\"start\":\"1\"},\"total_count\":2,\"limit\":1,\"data_products\":[{\"id\":\"b38df608-d34b-4d58-8136-ed25e6c6684e\",\"container\":{\"id\":\"d29c42eb-7100-4b7a-8257-c196dbcca1cd\",\"type\":\"catalog\"}}]}";
+    String mockResponsePage2 = "{\"total_count\":2,\"limit\":1,\"data_products\":[{\"id\":\"b38df608-d34b-4d58-8136-ed25e6c6684e\",\"container\":{\"id\":\"d29c42eb-7100-4b7a-8257-c196dbcca1cd\",\"type\":\"catalog\"}}]}";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
       .setResponseCode(200)
@@ -320,10 +309,10 @@ public class DpxTest {
       .limit(Long.valueOf("10"))
       .build();
 
-    List<DataProduct> allResults = new ArrayList<>();
+    List<DataProductSummary> allResults = new ArrayList<>();
     DataProductsPager pager = new DataProductsPager(dpxService, listDataProductsOptions);
     while (pager.hasNext()) {
-      List<DataProduct> nextPage = pager.getNext();
+      List<DataProductSummary> nextPage = pager.getNext();
       assertNotNull(nextPage);
       allResults.addAll(nextPage);
     }
@@ -334,8 +323,8 @@ public class DpxTest {
   @Test
   public void testListDataProductsWithPagerGetAll() throws Throwable {
     // Set up the two-page mock response.
-    String mockResponsePage1 = "{\"next\":{\"start\":\"1\"},\"total_count\":2,\"limit\":1,\"data_products\":[{\"id\":\"b38df608-d34b-4d58-8136-ed25e6c6684e\",\"container\":{\"id\":\"d29c42eb-7100-4b7a-8257-c196dbcca1cd\",\"type\":\"catalog\"},\"latest_release\":{\"version\":\"1.0.0\",\"state\":\"draft\",\"data_product\":{\"id\":\"b38df608-d34b-4d58-8136-ed25e6c6684e\"},\"name\":\"My Data Product\",\"description\":\"This is a description of My Data Product.\",\"id\":\"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd\",\"asset\":{\"id\":\"2b0bf220-079c-11ee-be56-0242ac120002\",\"container\":{\"id\":\"d29c42eb-7100-4b7a-8257-c196dbcca1cd\",\"type\":\"catalog\"}}},\"drafts\":[{\"version\":\"1.0.0\",\"state\":\"draft\",\"data_product\":{\"id\":\"b38df608-d34b-4d58-8136-ed25e6c6684e\"},\"name\":\"My Data Product\",\"description\":\"This is a description of My Data Product.\",\"id\":\"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd\",\"asset\":{\"id\":\"2b0bf220-079c-11ee-be56-0242ac120002\",\"container\":{\"id\":\"d29c42eb-7100-4b7a-8257-c196dbcca1cd\",\"type\":\"catalog\"}}}]}]}";
-    String mockResponsePage2 = "{\"total_count\":2,\"limit\":1,\"data_products\":[{\"id\":\"b38df608-d34b-4d58-8136-ed25e6c6684e\",\"container\":{\"id\":\"d29c42eb-7100-4b7a-8257-c196dbcca1cd\",\"type\":\"catalog\"},\"latest_release\":{\"version\":\"1.0.0\",\"state\":\"draft\",\"data_product\":{\"id\":\"b38df608-d34b-4d58-8136-ed25e6c6684e\"},\"name\":\"My Data Product\",\"description\":\"This is a description of My Data Product.\",\"id\":\"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd\",\"asset\":{\"id\":\"2b0bf220-079c-11ee-be56-0242ac120002\",\"container\":{\"id\":\"d29c42eb-7100-4b7a-8257-c196dbcca1cd\",\"type\":\"catalog\"}}},\"drafts\":[{\"version\":\"1.0.0\",\"state\":\"draft\",\"data_product\":{\"id\":\"b38df608-d34b-4d58-8136-ed25e6c6684e\"},\"name\":\"My Data Product\",\"description\":\"This is a description of My Data Product.\",\"id\":\"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd\",\"asset\":{\"id\":\"2b0bf220-079c-11ee-be56-0242ac120002\",\"container\":{\"id\":\"d29c42eb-7100-4b7a-8257-c196dbcca1cd\",\"type\":\"catalog\"}}}]}]}";
+    String mockResponsePage1 = "{\"next\":{\"start\":\"1\"},\"total_count\":2,\"limit\":1,\"data_products\":[{\"id\":\"b38df608-d34b-4d58-8136-ed25e6c6684e\",\"container\":{\"id\":\"d29c42eb-7100-4b7a-8257-c196dbcca1cd\",\"type\":\"catalog\"}}]}";
+    String mockResponsePage2 = "{\"total_count\":2,\"limit\":1,\"data_products\":[{\"id\":\"b38df608-d34b-4d58-8136-ed25e6c6684e\",\"container\":{\"id\":\"d29c42eb-7100-4b7a-8257-c196dbcca1cd\",\"type\":\"catalog\"}}]}";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
       .setResponseCode(200)
@@ -354,7 +343,7 @@ public class DpxTest {
       .build();
 
     DataProductsPager pager = new DataProductsPager(dpxService, listDataProductsOptions);
-    List<DataProduct> allResults = pager.getAll();
+    List<DataProductSummary> allResults = pager.getAll();
     assertNotNull(allResults);
     assertEquals(allResults.size(), 2);
   }
@@ -379,6 +368,12 @@ public class DpxTest {
     ContainerReference containerReferenceModel = new ContainerReference.Builder()
       .id("d29c42eb-7100-4b7a-8257-c196dbcca1cd")
       .type("catalog")
+      .build();
+
+    // Construct an instance of the AssetReference model
+    AssetReference assetReferenceModel = new AssetReference.Builder()
+      .id("2b0bf220-079c-11ee-be56-0242ac120002")
+      .container(containerReferenceModel)
       .build();
 
     // Construct an instance of the UseCase model
@@ -416,12 +411,6 @@ public class DpxTest {
       .deliveryMethods(java.util.Arrays.asList(deliveryMethodModel))
       .build();
 
-    // Construct an instance of the AssetReference model
-    AssetReference assetReferenceModel = new AssetReference.Builder()
-      .id("2b0bf220-079c-11ee-be56-0242ac120002")
-      .container(containerReferenceModel)
-      .build();
-
     // Construct an instance of the ContractTermsDocumentAttachment model
     ContractTermsDocumentAttachment contractTermsDocumentAttachmentModel = new ContractTermsDocumentAttachment.Builder()
       .id("testString")
@@ -434,6 +423,7 @@ public class DpxTest {
       .name("testString")
       .id("2b0bf220-079c-11ee-be56-0242ac120002")
       .attachment(contractTermsDocumentAttachmentModel)
+      .uploadUrl("testString")
       .build();
 
     // Construct an instance of the DataProductContractTerms model
@@ -450,11 +440,11 @@ public class DpxTest {
       .dataProduct(dataProductIdentityModel)
       .name("My New Data Product")
       .description("This is a description of My Data Product.")
-      .container(containerReferenceModel)
+      .asset(assetReferenceModel)
       .tags(java.util.Arrays.asList("testString"))
       .useCases(java.util.Arrays.asList(useCaseModel))
       .domain(domainModel)
-      .type(java.util.Arrays.asList("data"))
+      .types(java.util.Arrays.asList("data"))
       .partsOut(java.util.Arrays.asList(dataProductPartModel))
       .contractTerms(java.util.Arrays.asList(dataProductContractTermsModel))
       .isRestricted(true)
@@ -505,7 +495,7 @@ public class DpxTest {
   public void testGetDataProductWOptions() throws Throwable {
     // Register a mock response
     String mockResponseBody = "{\"id\": \"b38df608-d34b-4d58-8136-ed25e6c6684e\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}, \"latest_release\": {\"version\": \"1.0.0\", \"state\": \"draft\", \"data_product\": {\"id\": \"b38df608-d34b-4d58-8136-ed25e6c6684e\"}, \"name\": \"My Data Product\", \"description\": \"This is a description of My Data Product.\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}}, \"drafts\": [{\"version\": \"1.0.0\", \"state\": \"draft\", \"data_product\": {\"id\": \"b38df608-d34b-4d58-8136-ed25e6c6684e\"}, \"name\": \"My Data Product\", \"description\": \"This is a description of My Data Product.\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}}]}";
-    String getDataProductPath = "/data_product_exchange/v1/data_products/testString";
+    String getDataProductPath = "/data_product_exchange/v1/data_products/b38df608-d34b-4d58-8136-ed25e6c6684e";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
       .setResponseCode(200)
@@ -513,7 +503,7 @@ public class DpxTest {
 
     // Construct an instance of the GetDataProductOptions model
     GetDataProductOptions getDataProductOptionsModel = new GetDataProductOptions.Builder()
-      .dataProductId("testString")
+      .dataProductId("b38df608-d34b-4d58-8136-ed25e6c6684e")
       .build();
 
     // Invoke getDataProduct() with a valid options model and verify the result
@@ -555,8 +545,8 @@ public class DpxTest {
   @Test
   public void testCompleteDraftContractTermsDocumentWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"url\": \"url\", \"type\": \"terms_and_conditions\", \"name\": \"name\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"attachment\": {\"id\": \"id\"}}";
-    String completeDraftContractTermsDocumentPath = "/data_product_exchange/v1/data_products/testString/drafts/testString/contract_terms/testString/documents/testString/complete";
+    String mockResponseBody = "{\"url\": \"url\", \"type\": \"terms_and_conditions\", \"name\": \"name\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"attachment\": {\"id\": \"id\"}, \"upload_url\": \"uploadUrl\"}";
+    String completeDraftContractTermsDocumentPath = "/data_product_exchange/v1/data_products/b38df608-d34b-4d58-8136-ed25e6c6684e/drafts/2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd/contract_terms/598183cd-b910-4e8d-9a97-97097afda3c1@e4fe2f87-0e56-46dd-b3b8-e9af32309e82/documents/testString/complete";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
       .setResponseCode(200)
@@ -564,9 +554,9 @@ public class DpxTest {
 
     // Construct an instance of the CompleteDraftContractTermsDocumentOptions model
     CompleteDraftContractTermsDocumentOptions completeDraftContractTermsDocumentOptionsModel = new CompleteDraftContractTermsDocumentOptions.Builder()
-      .dataProductId("testString")
-      .draftId("testString")
-      .contractTermsId("testString")
+      .dataProductId("b38df608-d34b-4d58-8136-ed25e6c6684e")
+      .draftId("2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd")
+      .contractTermsId("598183cd-b910-4e8d-9a97-97097afda3c1@e4fe2f87-0e56-46dd-b3b8-e9af32309e82")
       .documentId("testString")
       .build();
 
@@ -610,7 +600,7 @@ public class DpxTest {
   public void testListDataProductDraftsWOptions() throws Throwable {
     // Register a mock response
     String mockResponseBody = "{\"limit\": 200, \"first\": {\"href\": \"https://api.example.com/collection\"}, \"next\": {\"href\": \"https://api.example.com/collection?start=eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9\", \"start\": \"eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9\"}, \"drafts\": [{\"version\": \"1.0.0\", \"state\": \"draft\", \"data_product\": {\"id\": \"b38df608-d34b-4d58-8136-ed25e6c6684e\"}, \"name\": \"My Data Product\", \"description\": \"This is a description of My Data Product.\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}}]}";
-    String listDataProductDraftsPath = "/data_product_exchange/v1/data_products/testString/drafts";
+    String listDataProductDraftsPath = "/data_product_exchange/v1/data_products/b38df608-d34b-4d58-8136-ed25e6c6684e/drafts";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
       .setResponseCode(200)
@@ -618,7 +608,7 @@ public class DpxTest {
 
     // Construct an instance of the ListDataProductDraftsOptions model
     ListDataProductDraftsOptions listDataProductDraftsOptionsModel = new ListDataProductDraftsOptions.Builder()
-      .dataProductId("testString")
+      .dataProductId("b38df608-d34b-4d58-8136-ed25e6c6684e")
       .assetContainerId("testString")
       .version("testString")
       .limit(Long.valueOf("10"))
@@ -684,7 +674,7 @@ public class DpxTest {
       .setBody("{\"message\": \"No more results available!\"}"));
 
     ListDataProductDraftsOptions listDataProductDraftsOptions = new ListDataProductDraftsOptions.Builder()
-      .dataProductId("testString")
+      .dataProductId("b38df608-d34b-4d58-8136-ed25e6c6684e")
       .assetContainerId("testString")
       .version("testString")
       .limit(Long.valueOf("10"))
@@ -720,7 +710,7 @@ public class DpxTest {
       .setBody("{\"message\": \"No more results available!\"}"));
 
     ListDataProductDraftsOptions listDataProductDraftsOptions = new ListDataProductDraftsOptions.Builder()
-      .dataProductId("testString")
+      .dataProductId("b38df608-d34b-4d58-8136-ed25e6c6684e")
       .assetContainerId("testString")
       .version("testString")
       .limit(Long.valueOf("10"))
@@ -736,8 +726,8 @@ public class DpxTest {
   @Test
   public void testCreateDataProductDraftWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"version\": \"1.0.0\", \"state\": \"draft\", \"data_product\": {\"id\": \"b38df608-d34b-4d58-8136-ed25e6c6684e\"}, \"name\": \"My Data Product\", \"description\": \"This is a description of My Data Product.\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"tags\": [\"tags\"], \"use_cases\": [{\"id\": \"id\", \"name\": \"name\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}], \"domain\": {\"id\": \"id\", \"name\": \"name\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"type\": [\"data\"], \"parts_out\": [{\"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}, \"type\": \"data_asset\"}, \"revision\": 1, \"updated_at\": \"2023-07-01T22:22:34.876Z\", \"delivery_methods\": [{\"id\": \"09cf5fcc-cb9d-4995-a8e4-16517b25229f\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}]}], \"published_by\": \"publishedBy\", \"published_at\": \"2019-01-01T12:00:00.000Z\", \"contract_terms\": [{\"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"id\": \"id\", \"documents\": [{\"url\": \"url\", \"type\": \"terms_and_conditions\", \"name\": \"name\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"attachment\": {\"id\": \"id\"}}]}], \"created_by\": \"createdBy\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"is_restricted\": true}";
-    String createDataProductDraftPath = "/data_product_exchange/v1/data_products/testString/drafts";
+    String mockResponseBody = "{\"version\": \"1.0.0\", \"state\": \"draft\", \"data_product\": {\"id\": \"b38df608-d34b-4d58-8136-ed25e6c6684e\"}, \"name\": \"My Data Product\", \"description\": \"This is a description of My Data Product.\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"tags\": [\"tags\"], \"use_cases\": [{\"id\": \"id\", \"name\": \"name\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}], \"domain\": {\"id\": \"id\", \"name\": \"name\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"types\": [\"data\"], \"parts_out\": [{\"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}, \"type\": \"data_asset\"}, \"revision\": 1, \"updated_at\": \"2023-07-01T22:22:34.876Z\", \"delivery_methods\": [{\"id\": \"09cf5fcc-cb9d-4995-a8e4-16517b25229f\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}]}], \"published_by\": \"publishedBy\", \"published_at\": \"2019-01-01T12:00:00.000Z\", \"contract_terms\": [{\"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"id\": \"id\", \"documents\": [{\"url\": \"url\", \"type\": \"terms_and_conditions\", \"name\": \"name\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"attachment\": {\"id\": \"id\"}, \"upload_url\": \"uploadUrl\"}]}], \"created_by\": \"createdBy\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"is_restricted\": true}";
+    String createDataProductDraftPath = "/data_product_exchange/v1/data_products/b38df608-d34b-4d58-8136-ed25e6c6684e/drafts";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
       .setResponseCode(201)
@@ -747,6 +737,12 @@ public class DpxTest {
     ContainerReference containerReferenceModel = new ContainerReference.Builder()
       .id("d29c42eb-7100-4b7a-8257-c196dbcca1cd")
       .type("catalog")
+      .build();
+
+    // Construct an instance of the AssetReference model
+    AssetReference assetReferenceModel = new AssetReference.Builder()
+      .id("2b0bf220-079c-11ee-be56-0242ac120002")
+      .container(containerReferenceModel)
       .build();
 
     // Construct an instance of the DataProductIdentity model
@@ -789,12 +785,6 @@ public class DpxTest {
       .deliveryMethods(java.util.Arrays.asList(deliveryMethodModel))
       .build();
 
-    // Construct an instance of the AssetReference model
-    AssetReference assetReferenceModel = new AssetReference.Builder()
-      .id("2b0bf220-079c-11ee-be56-0242ac120002")
-      .container(containerReferenceModel)
-      .build();
-
     // Construct an instance of the ContractTermsDocumentAttachment model
     ContractTermsDocumentAttachment contractTermsDocumentAttachmentModel = new ContractTermsDocumentAttachment.Builder()
       .id("testString")
@@ -807,6 +797,7 @@ public class DpxTest {
       .name("testString")
       .id("2b0bf220-079c-11ee-be56-0242ac120002")
       .attachment(contractTermsDocumentAttachmentModel)
+      .uploadUrl("testString")
       .build();
 
     // Construct an instance of the DataProductContractTerms model
@@ -818,8 +809,8 @@ public class DpxTest {
 
     // Construct an instance of the CreateDataProductDraftOptions model
     CreateDataProductDraftOptions createDataProductDraftOptionsModel = new CreateDataProductDraftOptions.Builder()
-      .dataProductId("testString")
-      .container(containerReferenceModel)
+      .dataProductId("b38df608-d34b-4d58-8136-ed25e6c6684e")
+      .asset(assetReferenceModel)
       .version("1.2.0")
       .state("draft")
       .dataProduct(dataProductIdentityModel)
@@ -828,7 +819,7 @@ public class DpxTest {
       .tags(java.util.Arrays.asList("testString"))
       .useCases(java.util.Arrays.asList(useCaseModel))
       .domain(domainModel)
-      .type(java.util.Arrays.asList("data"))
+      .types(java.util.Arrays.asList("data"))
       .partsOut(java.util.Arrays.asList(dataProductPartModel))
       .contractTerms(java.util.Arrays.asList(dataProductContractTermsModel))
       .isRestricted(true)
@@ -874,7 +865,7 @@ public class DpxTest {
   public void testCreateDraftContractTermsDocumentWOptions() throws Throwable {
     // Register a mock response
     String mockResponseBody = "{\"url\": \"url\", \"type\": \"terms_and_conditions\", \"name\": \"name\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"attachment\": {\"id\": \"id\"}, \"upload_url\": \"uploadUrl\"}";
-    String createDraftContractTermsDocumentPath = "/data_product_exchange/v1/data_products/testString/drafts/testString/contract_terms/testString/documents";
+    String createDraftContractTermsDocumentPath = "/data_product_exchange/v1/data_products/b38df608-d34b-4d58-8136-ed25e6c6684e/drafts/2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd/contract_terms/598183cd-b910-4e8d-9a97-97097afda3c1@e4fe2f87-0e56-46dd-b3b8-e9af32309e82/documents";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
       .setResponseCode(201)
@@ -887,20 +878,21 @@ public class DpxTest {
 
     // Construct an instance of the CreateDraftContractTermsDocumentOptions model
     CreateDraftContractTermsDocumentOptions createDraftContractTermsDocumentOptionsModel = new CreateDraftContractTermsDocumentOptions.Builder()
-      .dataProductId("testString")
-      .draftId("testString")
-      .contractTermsId("testString")
+      .dataProductId("b38df608-d34b-4d58-8136-ed25e6c6684e")
+      .draftId("2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd")
+      .contractTermsId("598183cd-b910-4e8d-9a97-97097afda3c1@e4fe2f87-0e56-46dd-b3b8-e9af32309e82")
       .type("terms_and_conditions")
       .name("Terms and conditions document")
       .id("b38df608-d34b-4d58-8136-ed25e6c6684e")
       .url("testString")
       .attachment(contractTermsDocumentAttachmentModel)
+      .uploadUrl("testString")
       .build();
 
     // Invoke createDraftContractTermsDocument() with a valid options model and verify the result
-    Response<ContractTermsDocumentUpload> response = dpxService.createDraftContractTermsDocument(createDraftContractTermsDocumentOptionsModel).execute();
+    Response<ContractTermsDocument> response = dpxService.createDraftContractTermsDocument(createDraftContractTermsDocumentOptionsModel).execute();
     assertNotNull(response);
-    ContractTermsDocumentUpload responseObj = response.getResult();
+    ContractTermsDocument responseObj = response.getResult();
     assertNotNull(responseObj);
 
     // Verify the contents of the request sent to the mock server
@@ -936,8 +928,8 @@ public class DpxTest {
   @Test
   public void testGetDataProductDraftWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"version\": \"1.0.0\", \"state\": \"draft\", \"data_product\": {\"id\": \"b38df608-d34b-4d58-8136-ed25e6c6684e\"}, \"name\": \"My Data Product\", \"description\": \"This is a description of My Data Product.\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"tags\": [\"tags\"], \"use_cases\": [{\"id\": \"id\", \"name\": \"name\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}], \"domain\": {\"id\": \"id\", \"name\": \"name\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"type\": [\"data\"], \"parts_out\": [{\"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}, \"type\": \"data_asset\"}, \"revision\": 1, \"updated_at\": \"2023-07-01T22:22:34.876Z\", \"delivery_methods\": [{\"id\": \"09cf5fcc-cb9d-4995-a8e4-16517b25229f\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}]}], \"published_by\": \"publishedBy\", \"published_at\": \"2019-01-01T12:00:00.000Z\", \"contract_terms\": [{\"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"id\": \"id\", \"documents\": [{\"url\": \"url\", \"type\": \"terms_and_conditions\", \"name\": \"name\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"attachment\": {\"id\": \"id\"}}]}], \"created_by\": \"createdBy\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"is_restricted\": true}";
-    String getDataProductDraftPath = "/data_product_exchange/v1/data_products/testString/drafts/testString";
+    String mockResponseBody = "{\"version\": \"1.0.0\", \"state\": \"draft\", \"data_product\": {\"id\": \"b38df608-d34b-4d58-8136-ed25e6c6684e\"}, \"name\": \"My Data Product\", \"description\": \"This is a description of My Data Product.\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"tags\": [\"tags\"], \"use_cases\": [{\"id\": \"id\", \"name\": \"name\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}], \"domain\": {\"id\": \"id\", \"name\": \"name\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"types\": [\"data\"], \"parts_out\": [{\"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}, \"type\": \"data_asset\"}, \"revision\": 1, \"updated_at\": \"2023-07-01T22:22:34.876Z\", \"delivery_methods\": [{\"id\": \"09cf5fcc-cb9d-4995-a8e4-16517b25229f\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}]}], \"published_by\": \"publishedBy\", \"published_at\": \"2019-01-01T12:00:00.000Z\", \"contract_terms\": [{\"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"id\": \"id\", \"documents\": [{\"url\": \"url\", \"type\": \"terms_and_conditions\", \"name\": \"name\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"attachment\": {\"id\": \"id\"}, \"upload_url\": \"uploadUrl\"}]}], \"created_by\": \"createdBy\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"is_restricted\": true}";
+    String getDataProductDraftPath = "/data_product_exchange/v1/data_products/b38df608-d34b-4d58-8136-ed25e6c6684e/drafts/2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
       .setResponseCode(200)
@@ -945,8 +937,8 @@ public class DpxTest {
 
     // Construct an instance of the GetDataProductDraftOptions model
     GetDataProductDraftOptions getDataProductDraftOptionsModel = new GetDataProductDraftOptions.Builder()
-      .dataProductId("testString")
-      .draftId("testString")
+      .dataProductId("b38df608-d34b-4d58-8136-ed25e6c6684e")
+      .draftId("2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd")
       .build();
 
     // Invoke getDataProductDraft() with a valid options model and verify the result
@@ -989,15 +981,15 @@ public class DpxTest {
   public void testDeleteDataProductDraftWOptions() throws Throwable {
     // Register a mock response
     String mockResponseBody = "";
-    String deleteDataProductDraftPath = "/data_product_exchange/v1/data_products/testString/drafts/testString";
+    String deleteDataProductDraftPath = "/data_product_exchange/v1/data_products/b38df608-d34b-4d58-8136-ed25e6c6684e/drafts/2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd";
     server.enqueue(new MockResponse()
       .setResponseCode(204)
       .setBody(mockResponseBody));
 
     // Construct an instance of the DeleteDataProductDraftOptions model
     DeleteDataProductDraftOptions deleteDataProductDraftOptionsModel = new DeleteDataProductDraftOptions.Builder()
-      .dataProductId("testString")
-      .draftId("testString")
+      .dataProductId("b38df608-d34b-4d58-8136-ed25e6c6684e")
+      .draftId("2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd")
       .build();
 
     // Invoke deleteDataProductDraft() with a valid options model and verify the result
@@ -1039,8 +1031,8 @@ public class DpxTest {
   @Test
   public void testUpdateDataProductDraftWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"version\": \"1.0.0\", \"state\": \"draft\", \"data_product\": {\"id\": \"b38df608-d34b-4d58-8136-ed25e6c6684e\"}, \"name\": \"My Data Product\", \"description\": \"This is a description of My Data Product.\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"tags\": [\"tags\"], \"use_cases\": [{\"id\": \"id\", \"name\": \"name\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}], \"domain\": {\"id\": \"id\", \"name\": \"name\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"type\": [\"data\"], \"parts_out\": [{\"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}, \"type\": \"data_asset\"}, \"revision\": 1, \"updated_at\": \"2023-07-01T22:22:34.876Z\", \"delivery_methods\": [{\"id\": \"09cf5fcc-cb9d-4995-a8e4-16517b25229f\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}]}], \"published_by\": \"publishedBy\", \"published_at\": \"2019-01-01T12:00:00.000Z\", \"contract_terms\": [{\"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"id\": \"id\", \"documents\": [{\"url\": \"url\", \"type\": \"terms_and_conditions\", \"name\": \"name\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"attachment\": {\"id\": \"id\"}}]}], \"created_by\": \"createdBy\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"is_restricted\": true}";
-    String updateDataProductDraftPath = "/data_product_exchange/v1/data_products/testString/drafts/testString";
+    String mockResponseBody = "{\"version\": \"1.0.0\", \"state\": \"draft\", \"data_product\": {\"id\": \"b38df608-d34b-4d58-8136-ed25e6c6684e\"}, \"name\": \"My Data Product\", \"description\": \"This is a description of My Data Product.\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"tags\": [\"tags\"], \"use_cases\": [{\"id\": \"id\", \"name\": \"name\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}], \"domain\": {\"id\": \"id\", \"name\": \"name\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"types\": [\"data\"], \"parts_out\": [{\"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}, \"type\": \"data_asset\"}, \"revision\": 1, \"updated_at\": \"2023-07-01T22:22:34.876Z\", \"delivery_methods\": [{\"id\": \"09cf5fcc-cb9d-4995-a8e4-16517b25229f\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}]}], \"published_by\": \"publishedBy\", \"published_at\": \"2019-01-01T12:00:00.000Z\", \"contract_terms\": [{\"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"id\": \"id\", \"documents\": [{\"url\": \"url\", \"type\": \"terms_and_conditions\", \"name\": \"name\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"attachment\": {\"id\": \"id\"}, \"upload_url\": \"uploadUrl\"}]}], \"created_by\": \"createdBy\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"is_restricted\": true}";
+    String updateDataProductDraftPath = "/data_product_exchange/v1/data_products/b38df608-d34b-4d58-8136-ed25e6c6684e/drafts/2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
       .setResponseCode(200)
@@ -1056,8 +1048,8 @@ public class DpxTest {
 
     // Construct an instance of the UpdateDataProductDraftOptions model
     UpdateDataProductDraftOptions updateDataProductDraftOptionsModel = new UpdateDataProductDraftOptions.Builder()
-      .dataProductId("testString")
-      .draftId("testString")
+      .dataProductId("b38df608-d34b-4d58-8136-ed25e6c6684e")
+      .draftId("2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd")
       .jsonPatchInstructions(java.util.Arrays.asList(jsonPatchOperationModel))
       .build();
 
@@ -1101,7 +1093,7 @@ public class DpxTest {
   public void testGetDraftContractTermsDocumentWOptions() throws Throwable {
     // Register a mock response
     String mockResponseBody = "{\"url\": \"url\", \"type\": \"terms_and_conditions\", \"name\": \"name\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"attachment\": {\"id\": \"id\"}, \"upload_url\": \"uploadUrl\"}";
-    String getDraftContractTermsDocumentPath = "/data_product_exchange/v1/data_products/testString/drafts/testString/contract_terms/testString/documents/testString";
+    String getDraftContractTermsDocumentPath = "/data_product_exchange/v1/data_products/b38df608-d34b-4d58-8136-ed25e6c6684e/drafts/2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd/contract_terms/598183cd-b910-4e8d-9a97-97097afda3c1@e4fe2f87-0e56-46dd-b3b8-e9af32309e82/documents/testString";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
       .setResponseCode(200)
@@ -1109,16 +1101,16 @@ public class DpxTest {
 
     // Construct an instance of the GetDraftContractTermsDocumentOptions model
     GetDraftContractTermsDocumentOptions getDraftContractTermsDocumentOptionsModel = new GetDraftContractTermsDocumentOptions.Builder()
-      .dataProductId("testString")
-      .draftId("testString")
-      .contractTermsId("testString")
+      .dataProductId("b38df608-d34b-4d58-8136-ed25e6c6684e")
+      .draftId("2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd")
+      .contractTermsId("598183cd-b910-4e8d-9a97-97097afda3c1@e4fe2f87-0e56-46dd-b3b8-e9af32309e82")
       .documentId("testString")
       .build();
 
     // Invoke getDraftContractTermsDocument() with a valid options model and verify the result
-    Response<ContractTermsDocumentUpload> response = dpxService.getDraftContractTermsDocument(getDraftContractTermsDocumentOptionsModel).execute();
+    Response<ContractTermsDocument> response = dpxService.getDraftContractTermsDocument(getDraftContractTermsDocumentOptionsModel).execute();
     assertNotNull(response);
-    ContractTermsDocumentUpload responseObj = response.getResult();
+    ContractTermsDocument responseObj = response.getResult();
     assertNotNull(responseObj);
 
     // Verify the contents of the request sent to the mock server
@@ -1155,16 +1147,16 @@ public class DpxTest {
   public void testDeleteDraftContractTermsDocumentWOptions() throws Throwable {
     // Register a mock response
     String mockResponseBody = "";
-    String deleteDraftContractTermsDocumentPath = "/data_product_exchange/v1/data_products/testString/drafts/testString/contract_terms/testString/documents/testString";
+    String deleteDraftContractTermsDocumentPath = "/data_product_exchange/v1/data_products/b38df608-d34b-4d58-8136-ed25e6c6684e/drafts/2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd/contract_terms/598183cd-b910-4e8d-9a97-97097afda3c1@e4fe2f87-0e56-46dd-b3b8-e9af32309e82/documents/testString";
     server.enqueue(new MockResponse()
       .setResponseCode(204)
       .setBody(mockResponseBody));
 
     // Construct an instance of the DeleteDraftContractTermsDocumentOptions model
     DeleteDraftContractTermsDocumentOptions deleteDraftContractTermsDocumentOptionsModel = new DeleteDraftContractTermsDocumentOptions.Builder()
-      .dataProductId("testString")
-      .draftId("testString")
-      .contractTermsId("testString")
+      .dataProductId("b38df608-d34b-4d58-8136-ed25e6c6684e")
+      .draftId("2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd")
+      .contractTermsId("598183cd-b910-4e8d-9a97-97097afda3c1@e4fe2f87-0e56-46dd-b3b8-e9af32309e82")
       .documentId("testString")
       .build();
 
@@ -1208,7 +1200,7 @@ public class DpxTest {
   public void testUpdateDraftContractTermsDocumentWOptions() throws Throwable {
     // Register a mock response
     String mockResponseBody = "{\"url\": \"url\", \"type\": \"terms_and_conditions\", \"name\": \"name\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"attachment\": {\"id\": \"id\"}, \"upload_url\": \"uploadUrl\"}";
-    String updateDraftContractTermsDocumentPath = "/data_product_exchange/v1/data_products/testString/drafts/testString/contract_terms/testString/documents/testString";
+    String updateDraftContractTermsDocumentPath = "/data_product_exchange/v1/data_products/b38df608-d34b-4d58-8136-ed25e6c6684e/drafts/2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd/contract_terms/598183cd-b910-4e8d-9a97-97097afda3c1@e4fe2f87-0e56-46dd-b3b8-e9af32309e82/documents/testString";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
       .setResponseCode(200)
@@ -1224,17 +1216,17 @@ public class DpxTest {
 
     // Construct an instance of the UpdateDraftContractTermsDocumentOptions model
     UpdateDraftContractTermsDocumentOptions updateDraftContractTermsDocumentOptionsModel = new UpdateDraftContractTermsDocumentOptions.Builder()
-      .dataProductId("testString")
-      .draftId("testString")
-      .contractTermsId("testString")
+      .dataProductId("b38df608-d34b-4d58-8136-ed25e6c6684e")
+      .draftId("2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd")
+      .contractTermsId("598183cd-b910-4e8d-9a97-97097afda3c1@e4fe2f87-0e56-46dd-b3b8-e9af32309e82")
       .documentId("testString")
       .jsonPatchInstructions(java.util.Arrays.asList(jsonPatchOperationModel))
       .build();
 
     // Invoke updateDraftContractTermsDocument() with a valid options model and verify the result
-    Response<ContractTermsDocumentUpload> response = dpxService.updateDraftContractTermsDocument(updateDraftContractTermsDocumentOptionsModel).execute();
+    Response<ContractTermsDocument> response = dpxService.updateDraftContractTermsDocument(updateDraftContractTermsDocumentOptionsModel).execute();
     assertNotNull(response);
-    ContractTermsDocumentUpload responseObj = response.getResult();
+    ContractTermsDocument responseObj = response.getResult();
     assertNotNull(responseObj);
 
     // Verify the contents of the request sent to the mock server
@@ -1270,8 +1262,8 @@ public class DpxTest {
   @Test
   public void testPublishDataProductDraftWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"version\": \"1.0.0\", \"state\": \"draft\", \"data_product\": {\"id\": \"b38df608-d34b-4d58-8136-ed25e6c6684e\"}, \"name\": \"My Data Product\", \"description\": \"This is a description of My Data Product.\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"tags\": [\"tags\"], \"use_cases\": [{\"id\": \"id\", \"name\": \"name\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}], \"domain\": {\"id\": \"id\", \"name\": \"name\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"type\": [\"data\"], \"parts_out\": [{\"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}, \"type\": \"data_asset\"}, \"revision\": 1, \"updated_at\": \"2023-07-01T22:22:34.876Z\", \"delivery_methods\": [{\"id\": \"09cf5fcc-cb9d-4995-a8e4-16517b25229f\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}]}], \"published_by\": \"publishedBy\", \"published_at\": \"2019-01-01T12:00:00.000Z\", \"contract_terms\": [{\"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"id\": \"id\", \"documents\": [{\"url\": \"url\", \"type\": \"terms_and_conditions\", \"name\": \"name\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"attachment\": {\"id\": \"id\"}}]}], \"created_by\": \"createdBy\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"is_restricted\": true}";
-    String publishDataProductDraftPath = "/data_product_exchange/v1/data_products/testString/drafts/testString/publish";
+    String mockResponseBody = "{\"version\": \"1.0.0\", \"state\": \"draft\", \"data_product\": {\"id\": \"b38df608-d34b-4d58-8136-ed25e6c6684e\"}, \"name\": \"My Data Product\", \"description\": \"This is a description of My Data Product.\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"tags\": [\"tags\"], \"use_cases\": [{\"id\": \"id\", \"name\": \"name\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}], \"domain\": {\"id\": \"id\", \"name\": \"name\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"types\": [\"data\"], \"parts_out\": [{\"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}, \"type\": \"data_asset\"}, \"revision\": 1, \"updated_at\": \"2023-07-01T22:22:34.876Z\", \"delivery_methods\": [{\"id\": \"09cf5fcc-cb9d-4995-a8e4-16517b25229f\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}]}], \"published_by\": \"publishedBy\", \"published_at\": \"2019-01-01T12:00:00.000Z\", \"contract_terms\": [{\"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"id\": \"id\", \"documents\": [{\"url\": \"url\", \"type\": \"terms_and_conditions\", \"name\": \"name\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"attachment\": {\"id\": \"id\"}, \"upload_url\": \"uploadUrl\"}]}], \"created_by\": \"createdBy\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"is_restricted\": true}";
+    String publishDataProductDraftPath = "/data_product_exchange/v1/data_products/b38df608-d34b-4d58-8136-ed25e6c6684e/drafts/2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd/publish";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
       .setResponseCode(200)
@@ -1279,9 +1271,8 @@ public class DpxTest {
 
     // Construct an instance of the PublishDataProductDraftOptions model
     PublishDataProductDraftOptions publishDataProductDraftOptionsModel = new PublishDataProductDraftOptions.Builder()
-      .dataProductId("testString")
-      .draftId("testString")
-      .async(true)
+      .dataProductId("b38df608-d34b-4d58-8136-ed25e6c6684e")
+      .draftId("2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd")
       .build();
 
     // Invoke publishDataProductDraft() with a valid options model and verify the result
@@ -1297,10 +1288,9 @@ public class DpxTest {
     // Verify request path
     String parsedPath = TestUtilities.parseReqPath(request);
     assertEquals(parsedPath, publishDataProductDraftPath);
-    // Verify query params
+    // Verify that there is no query string
     Map<String, String> query = TestUtilities.parseQueryString(request);
-    assertNotNull(query);
-    assertEquals(Boolean.valueOf(query.get("async")), Boolean.valueOf(true));
+    assertNull(query);
   }
 
   // Test the publishDataProductDraft operation with and without retries enabled
@@ -1324,8 +1314,8 @@ public class DpxTest {
   @Test
   public void testGetDataProductReleaseWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"version\": \"1.0.0\", \"state\": \"draft\", \"data_product\": {\"id\": \"b38df608-d34b-4d58-8136-ed25e6c6684e\"}, \"name\": \"My Data Product\", \"description\": \"This is a description of My Data Product.\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"tags\": [\"tags\"], \"use_cases\": [{\"id\": \"id\", \"name\": \"name\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}], \"domain\": {\"id\": \"id\", \"name\": \"name\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"type\": [\"data\"], \"parts_out\": [{\"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}, \"type\": \"data_asset\"}, \"revision\": 1, \"updated_at\": \"2023-07-01T22:22:34.876Z\", \"delivery_methods\": [{\"id\": \"09cf5fcc-cb9d-4995-a8e4-16517b25229f\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}]}], \"published_by\": \"publishedBy\", \"published_at\": \"2019-01-01T12:00:00.000Z\", \"contract_terms\": [{\"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"id\": \"id\", \"documents\": [{\"url\": \"url\", \"type\": \"terms_and_conditions\", \"name\": \"name\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"attachment\": {\"id\": \"id\"}}]}], \"created_by\": \"createdBy\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"is_restricted\": true}";
-    String getDataProductReleasePath = "/data_product_exchange/v1/data_products/testString/releases/testString";
+    String mockResponseBody = "{\"version\": \"1.0.0\", \"state\": \"draft\", \"data_product\": {\"id\": \"b38df608-d34b-4d58-8136-ed25e6c6684e\"}, \"name\": \"My Data Product\", \"description\": \"This is a description of My Data Product.\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"tags\": [\"tags\"], \"use_cases\": [{\"id\": \"id\", \"name\": \"name\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}], \"domain\": {\"id\": \"id\", \"name\": \"name\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"types\": [\"data\"], \"parts_out\": [{\"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}, \"type\": \"data_asset\"}, \"revision\": 1, \"updated_at\": \"2023-07-01T22:22:34.876Z\", \"delivery_methods\": [{\"id\": \"09cf5fcc-cb9d-4995-a8e4-16517b25229f\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}]}], \"published_by\": \"publishedBy\", \"published_at\": \"2019-01-01T12:00:00.000Z\", \"contract_terms\": [{\"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"id\": \"id\", \"documents\": [{\"url\": \"url\", \"type\": \"terms_and_conditions\", \"name\": \"name\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"attachment\": {\"id\": \"id\"}, \"upload_url\": \"uploadUrl\"}]}], \"created_by\": \"createdBy\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"is_restricted\": true}";
+    String getDataProductReleasePath = "/data_product_exchange/v1/data_products/b38df608-d34b-4d58-8136-ed25e6c6684e/releases/2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
       .setResponseCode(200)
@@ -1333,8 +1323,8 @@ public class DpxTest {
 
     // Construct an instance of the GetDataProductReleaseOptions model
     GetDataProductReleaseOptions getDataProductReleaseOptionsModel = new GetDataProductReleaseOptions.Builder()
-      .dataProductId("testString")
-      .releaseId("testString")
+      .dataProductId("b38df608-d34b-4d58-8136-ed25e6c6684e")
+      .releaseId("2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd")
       .build();
 
     // Invoke getDataProductRelease() with a valid options model and verify the result
@@ -1376,8 +1366,8 @@ public class DpxTest {
   @Test
   public void testUpdateDataProductReleaseWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"version\": \"1.0.0\", \"state\": \"draft\", \"data_product\": {\"id\": \"b38df608-d34b-4d58-8136-ed25e6c6684e\"}, \"name\": \"My Data Product\", \"description\": \"This is a description of My Data Product.\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"tags\": [\"tags\"], \"use_cases\": [{\"id\": \"id\", \"name\": \"name\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}], \"domain\": {\"id\": \"id\", \"name\": \"name\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"type\": [\"data\"], \"parts_out\": [{\"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}, \"type\": \"data_asset\"}, \"revision\": 1, \"updated_at\": \"2023-07-01T22:22:34.876Z\", \"delivery_methods\": [{\"id\": \"09cf5fcc-cb9d-4995-a8e4-16517b25229f\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}]}], \"published_by\": \"publishedBy\", \"published_at\": \"2019-01-01T12:00:00.000Z\", \"contract_terms\": [{\"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"id\": \"id\", \"documents\": [{\"url\": \"url\", \"type\": \"terms_and_conditions\", \"name\": \"name\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"attachment\": {\"id\": \"id\"}}]}], \"created_by\": \"createdBy\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"is_restricted\": true}";
-    String updateDataProductReleasePath = "/data_product_exchange/v1/data_products/testString/releases/testString";
+    String mockResponseBody = "{\"version\": \"1.0.0\", \"state\": \"draft\", \"data_product\": {\"id\": \"b38df608-d34b-4d58-8136-ed25e6c6684e\"}, \"name\": \"My Data Product\", \"description\": \"This is a description of My Data Product.\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"tags\": [\"tags\"], \"use_cases\": [{\"id\": \"id\", \"name\": \"name\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}], \"domain\": {\"id\": \"id\", \"name\": \"name\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"types\": [\"data\"], \"parts_out\": [{\"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}, \"type\": \"data_asset\"}, \"revision\": 1, \"updated_at\": \"2023-07-01T22:22:34.876Z\", \"delivery_methods\": [{\"id\": \"09cf5fcc-cb9d-4995-a8e4-16517b25229f\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}]}], \"published_by\": \"publishedBy\", \"published_at\": \"2019-01-01T12:00:00.000Z\", \"contract_terms\": [{\"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"id\": \"id\", \"documents\": [{\"url\": \"url\", \"type\": \"terms_and_conditions\", \"name\": \"name\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"attachment\": {\"id\": \"id\"}, \"upload_url\": \"uploadUrl\"}]}], \"created_by\": \"createdBy\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"is_restricted\": true}";
+    String updateDataProductReleasePath = "/data_product_exchange/v1/data_products/b38df608-d34b-4d58-8136-ed25e6c6684e/releases/2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
       .setResponseCode(200)
@@ -1393,8 +1383,8 @@ public class DpxTest {
 
     // Construct an instance of the UpdateDataProductReleaseOptions model
     UpdateDataProductReleaseOptions updateDataProductReleaseOptionsModel = new UpdateDataProductReleaseOptions.Builder()
-      .dataProductId("testString")
-      .releaseId("testString")
+      .dataProductId("b38df608-d34b-4d58-8136-ed25e6c6684e")
+      .releaseId("2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd")
       .jsonPatchInstructions(java.util.Arrays.asList(jsonPatchOperationModel))
       .build();
 
@@ -1438,7 +1428,7 @@ public class DpxTest {
   public void testGetReleaseContractTermsDocumentWOptions() throws Throwable {
     // Register a mock response
     String mockResponseBody = "{\"url\": \"url\", \"type\": \"terms_and_conditions\", \"name\": \"name\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"attachment\": {\"id\": \"id\"}, \"upload_url\": \"uploadUrl\"}";
-    String getReleaseContractTermsDocumentPath = "/data_product_exchange/v1/data_products/testString/releases/testString/contract_terms/testString/documents/testString";
+    String getReleaseContractTermsDocumentPath = "/data_product_exchange/v1/data_products/b38df608-d34b-4d58-8136-ed25e6c6684e/releases/2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd/contract_terms/598183cd-b910-4e8d-9a97-97097afda3c1@e4fe2f87-0e56-46dd-b3b8-e9af32309e82/documents/testString";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
       .setResponseCode(200)
@@ -1446,16 +1436,16 @@ public class DpxTest {
 
     // Construct an instance of the GetReleaseContractTermsDocumentOptions model
     GetReleaseContractTermsDocumentOptions getReleaseContractTermsDocumentOptionsModel = new GetReleaseContractTermsDocumentOptions.Builder()
-      .dataProductId("testString")
-      .releaseId("testString")
-      .contractTermsId("testString")
+      .dataProductId("b38df608-d34b-4d58-8136-ed25e6c6684e")
+      .releaseId("2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd")
+      .contractTermsId("598183cd-b910-4e8d-9a97-97097afda3c1@e4fe2f87-0e56-46dd-b3b8-e9af32309e82")
       .documentId("testString")
       .build();
 
     // Invoke getReleaseContractTermsDocument() with a valid options model and verify the result
-    Response<ContractTermsDocumentUpload> response = dpxService.getReleaseContractTermsDocument(getReleaseContractTermsDocumentOptionsModel).execute();
+    Response<ContractTermsDocument> response = dpxService.getReleaseContractTermsDocument(getReleaseContractTermsDocumentOptionsModel).execute();
     assertNotNull(response);
-    ContractTermsDocumentUpload responseObj = response.getResult();
+    ContractTermsDocument responseObj = response.getResult();
     assertNotNull(responseObj);
 
     // Verify the contents of the request sent to the mock server
@@ -1492,7 +1482,7 @@ public class DpxTest {
   public void testListDataProductReleasesWOptions() throws Throwable {
     // Register a mock response
     String mockResponseBody = "{\"limit\": 200, \"first\": {\"href\": \"https://api.example.com/collection\"}, \"next\": {\"href\": \"https://api.example.com/collection?start=eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9\", \"start\": \"eyJvZmZzZXQiOjAsImRvbmUiOnRydWV9\"}, \"releases\": [{\"version\": \"1.0.0\", \"state\": \"draft\", \"data_product\": {\"id\": \"b38df608-d34b-4d58-8136-ed25e6c6684e\"}, \"name\": \"My Data Product\", \"description\": \"This is a description of My Data Product.\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}}]}";
-    String listDataProductReleasesPath = "/data_product_exchange/v1/data_products/testString/releases";
+    String listDataProductReleasesPath = "/data_product_exchange/v1/data_products/b38df608-d34b-4d58-8136-ed25e6c6684e/releases";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
       .setResponseCode(200)
@@ -1500,7 +1490,7 @@ public class DpxTest {
 
     // Construct an instance of the ListDataProductReleasesOptions model
     ListDataProductReleasesOptions listDataProductReleasesOptionsModel = new ListDataProductReleasesOptions.Builder()
-      .dataProductId("testString")
+      .dataProductId("b38df608-d34b-4d58-8136-ed25e6c6684e")
       .assetContainerId("testString")
       .state(java.util.Arrays.asList("available"))
       .version("testString")
@@ -1568,7 +1558,7 @@ public class DpxTest {
       .setBody("{\"message\": \"No more results available!\"}"));
 
     ListDataProductReleasesOptions listDataProductReleasesOptions = new ListDataProductReleasesOptions.Builder()
-      .dataProductId("testString")
+      .dataProductId("b38df608-d34b-4d58-8136-ed25e6c6684e")
       .assetContainerId("testString")
       .state(java.util.Arrays.asList("available"))
       .version("testString")
@@ -1605,7 +1595,7 @@ public class DpxTest {
       .setBody("{\"message\": \"No more results available!\"}"));
 
     ListDataProductReleasesOptions listDataProductReleasesOptions = new ListDataProductReleasesOptions.Builder()
-      .dataProductId("testString")
+      .dataProductId("b38df608-d34b-4d58-8136-ed25e6c6684e")
       .assetContainerId("testString")
       .state(java.util.Arrays.asList("available"))
       .version("testString")
@@ -1622,8 +1612,8 @@ public class DpxTest {
   @Test
   public void testRetireDataProductReleaseWOptions() throws Throwable {
     // Register a mock response
-    String mockResponseBody = "{\"version\": \"1.0.0\", \"state\": \"draft\", \"data_product\": {\"id\": \"b38df608-d34b-4d58-8136-ed25e6c6684e\"}, \"name\": \"My Data Product\", \"description\": \"This is a description of My Data Product.\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"tags\": [\"tags\"], \"use_cases\": [{\"id\": \"id\", \"name\": \"name\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}], \"domain\": {\"id\": \"id\", \"name\": \"name\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"type\": [\"data\"], \"parts_out\": [{\"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}, \"type\": \"data_asset\"}, \"revision\": 1, \"updated_at\": \"2023-07-01T22:22:34.876Z\", \"delivery_methods\": [{\"id\": \"09cf5fcc-cb9d-4995-a8e4-16517b25229f\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}]}], \"published_by\": \"publishedBy\", \"published_at\": \"2019-01-01T12:00:00.000Z\", \"contract_terms\": [{\"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"id\": \"id\", \"documents\": [{\"url\": \"url\", \"type\": \"terms_and_conditions\", \"name\": \"name\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"attachment\": {\"id\": \"id\"}}]}], \"created_by\": \"createdBy\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"is_restricted\": true}";
-    String retireDataProductReleasePath = "/data_product_exchange/v1/data_products/testString/releases/testString/retire";
+    String mockResponseBody = "{\"version\": \"1.0.0\", \"state\": \"draft\", \"data_product\": {\"id\": \"b38df608-d34b-4d58-8136-ed25e6c6684e\"}, \"name\": \"My Data Product\", \"description\": \"This is a description of My Data Product.\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"tags\": [\"tags\"], \"use_cases\": [{\"id\": \"id\", \"name\": \"name\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}], \"domain\": {\"id\": \"id\", \"name\": \"name\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"types\": [\"data\"], \"parts_out\": [{\"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}, \"type\": \"data_asset\"}, \"revision\": 1, \"updated_at\": \"2023-07-01T22:22:34.876Z\", \"delivery_methods\": [{\"id\": \"09cf5fcc-cb9d-4995-a8e4-16517b25229f\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}]}], \"published_by\": \"publishedBy\", \"published_at\": \"2019-01-01T12:00:00.000Z\", \"contract_terms\": [{\"asset\": {\"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"container\": {\"id\": \"d29c42eb-7100-4b7a-8257-c196dbcca1cd\", \"type\": \"catalog\"}}, \"id\": \"id\", \"documents\": [{\"url\": \"url\", \"type\": \"terms_and_conditions\", \"name\": \"name\", \"id\": \"2b0bf220-079c-11ee-be56-0242ac120002\", \"attachment\": {\"id\": \"id\"}, \"upload_url\": \"uploadUrl\"}]}], \"created_by\": \"createdBy\", \"created_at\": \"2019-01-01T12:00:00.000Z\", \"is_restricted\": true}";
+    String retireDataProductReleasePath = "/data_product_exchange/v1/data_products/b38df608-d34b-4d58-8136-ed25e6c6684e/releases/2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd/retire";
     server.enqueue(new MockResponse()
       .setHeader("Content-type", "application/json")
       .setResponseCode(200)
@@ -1631,8 +1621,8 @@ public class DpxTest {
 
     // Construct an instance of the RetireDataProductReleaseOptions model
     RetireDataProductReleaseOptions retireDataProductReleaseOptionsModel = new RetireDataProductReleaseOptions.Builder()
-      .dataProductId("testString")
-      .releaseId("testString")
+      .dataProductId("b38df608-d34b-4d58-8136-ed25e6c6684e")
+      .releaseId("2b0bf220-079c-11ee-be56-0242ac120002@d29c42eb-7100-4b7a-8257-c196dbcca1cd")
       .build();
 
     // Invoke retireDataProductRelease() with a valid options model and verify the result

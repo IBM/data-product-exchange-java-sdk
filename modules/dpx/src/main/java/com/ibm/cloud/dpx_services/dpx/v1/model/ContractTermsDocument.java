@@ -12,6 +12,7 @@
  */
 package com.ibm.cloud.dpx_services.dpx.v1.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
@@ -34,6 +35,8 @@ public class ContractTermsDocument extends GenericModel {
   protected String name;
   protected String id;
   protected ContractTermsDocumentAttachment attachment;
+  @SerializedName("upload_url")
+  protected String uploadUrl;
 
   /**
    * Builder.
@@ -44,6 +47,7 @@ public class ContractTermsDocument extends GenericModel {
     private String name;
     private String id;
     private ContractTermsDocumentAttachment attachment;
+    private String uploadUrl;
 
     /**
      * Instantiates a new Builder from an existing ContractTermsDocument instance.
@@ -56,6 +60,7 @@ public class ContractTermsDocument extends GenericModel {
       this.name = contractTermsDocument.name;
       this.id = contractTermsDocument.id;
       this.attachment = contractTermsDocument.attachment;
+      this.uploadUrl = contractTermsDocument.uploadUrl;
     }
 
     /**
@@ -140,6 +145,17 @@ public class ContractTermsDocument extends GenericModel {
       this.attachment = attachment;
       return this;
     }
+
+    /**
+     * Set the uploadUrl.
+     *
+     * @param uploadUrl the uploadUrl
+     * @return the ContractTermsDocument builder
+     */
+    public Builder uploadUrl(String uploadUrl) {
+      this.uploadUrl = uploadUrl;
+      return this;
+    }
   }
 
   protected ContractTermsDocument() { }
@@ -156,6 +172,7 @@ public class ContractTermsDocument extends GenericModel {
     name = builder.name;
     id = builder.id;
     attachment = builder.attachment;
+    uploadUrl = builder.uploadUrl;
   }
 
   /**
@@ -221,5 +238,17 @@ public class ContractTermsDocument extends GenericModel {
   public ContractTermsDocumentAttachment attachment() {
     return attachment;
   }
+
+  /**
+   * Gets the uploadUrl.
+   *
+   * URL which can be used to upload document file.
+   *
+   * @return the uploadUrl
+   */
+  public String uploadUrl() {
+    return uploadUrl;
+  }
+
 }
 
