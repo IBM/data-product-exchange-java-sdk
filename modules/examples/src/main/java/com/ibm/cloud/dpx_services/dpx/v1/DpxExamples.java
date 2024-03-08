@@ -16,7 +16,7 @@ package com.ibm.cloud.dpx_services.dpx.v1;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.ibm.cloud.dpx_services.dpx.v1.model.AssetReference;
-// import com.ibm.cloud.dpx_services.dpx.v1.model.CompleteDraftContractTermsDocumentOptions;
+import com.ibm.cloud.dpx_services.dpx.v1.model.CompleteDraftContractTermsDocumentOptions;
 import com.ibm.cloud.dpx_services.dpx.v1.model.ContainerReference;
 import com.ibm.cloud.dpx_services.dpx.v1.model.ContractTermsDocument;
 import com.ibm.cloud.dpx_services.dpx.v1.model.CreateDataProductDraftOptions;
