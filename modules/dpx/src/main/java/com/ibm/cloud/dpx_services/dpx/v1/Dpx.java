@@ -70,7 +70,7 @@ public class Dpx extends BaseService {
   /**
    * Default service name used when configuring the `Dpx` client.
    */
-  public static final String DEFAULT_SERVICE_NAME = "data_product_exchange_api_service";
+  public static final String DEFAULT_SERVICE_NAME = "dpx";
 
  /**
    * Class method which constructs an instance of the `Dpx` client.

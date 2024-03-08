@@ -16,7 +16,7 @@ package com.ibm.cloud.dpx_services.dpx.v1;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.ibm.cloud.dpx_services.dpx.v1.model.AssetReference;
-import com.ibm.cloud.dpx_services.dpx.v1.model.CompleteDraftContractTermsDocumentOptions;
+// import com.ibm.cloud.dpx_services.dpx.v1.model.CompleteDraftContractTermsDocumentOptions;
 import com.ibm.cloud.dpx_services.dpx.v1.model.ContainerReference;
 import com.ibm.cloud.dpx_services.dpx.v1.model.ContractTermsDocument;
 import com.ibm.cloud.dpx_services.dpx.v1.model.CreateDataProductDraftOptions;
@@ -81,7 +81,7 @@ public class DpxExamples {
   protected DpxExamples() { }
 
   static {
-    System.setProperty("IBM_CREDENTIALS_FILE", "../../data_product_exchange_api_service_v1.env");
+    System.setProperty("IBM_CREDENTIALS_FILE", "../../dpx_v1.env");
   }
 
   /**
@@ -504,25 +504,25 @@ public class DpxExamples {
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
     }
 
-    try {
-      System.out.println("completeDraftContractTermsDocument() result:");
-      // begin-complete_draft_contract_terms_document
-      CompleteDraftContractTermsDocumentOptions completeDraftContractTermsDocumentOptions = new CompleteDraftContractTermsDocumentOptions.Builder()
-        .dataProductId(optionalDataProductIdLink)
-        .draftId(draftIdLink)
-        .contractTermsId(contractTermsIdLink)
-        .documentId(documentIdLink)
-        .build();
+    // try {
+    //   System.out.println("completeDraftContractTermsDocument() result:");
+    //   // begin-complete_draft_contract_terms_document
+    //   CompleteDraftContractTermsDocumentOptions completeDraftContractTermsDocumentOptions = new CompleteDraftContractTermsDocumentOptions.Builder()
+    //     .dataProductId(optionalDataProductIdLink)
+    //     .draftId(draftIdLink)
+    //     .contractTermsId(contractTermsIdLink)
+    //     .documentId(documentIdLink)
+    //     .build();
 
-      Response<ContractTermsDocument> response = dpxService.completeDraftContractTermsDocument(completeDraftContractTermsDocumentOptions).execute();
-      ContractTermsDocument contractTermsDocument = response.getResult();
+    //   Response<ContractTermsDocument> response = dpxService.completeDraftContractTermsDocument(completeDraftContractTermsDocumentOptions).execute();
+    //   ContractTermsDocument contractTermsDocument = response.getResult();
 
-      System.out.println(contractTermsDocument);
-      // end-complete_draft_contract_terms_document
-    } catch (ServiceResponseException e) {
-        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
-          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
-    }
+    //   System.out.println(contractTermsDocument);
+    //   // end-complete_draft_contract_terms_document
+    // } catch (ServiceResponseException e) {
+    //     logger.error(String.format("Service returned status code %s: %s%nError details: %s",
+    //       e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
+    // }
 
     try {
       System.out.println("listDataProductDrafts() result:");
