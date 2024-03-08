@@ -504,25 +504,25 @@ public class DpxExamples {
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
     }
 
-    // try {
-    //   System.out.println("completeDraftContractTermsDocument() result:");
-    //   // begin-complete_draft_contract_terms_document
-    //   CompleteDraftContractTermsDocumentOptions completeDraftContractTermsDocumentOptions = new CompleteDraftContractTermsDocumentOptions.Builder()
-    //     .dataProductId(optionalDataProductIdLink)
-    //     .draftId(draftIdLink)
-    //     .contractTermsId(contractTermsIdLink)
-    //     .documentId(documentIdLink)
-    //     .build();
+    try {
+      System.out.println("completeDraftContractTermsDocument() result:");
+      // begin-complete_draft_contract_terms_document
+      CompleteDraftContractTermsDocumentOptions completeDraftContractTermsDocumentOptions = new CompleteDraftContractTermsDocumentOptions.Builder()
+        .dataProductId(optionalDataProductIdLink)
+        .draftId(draftIdLink)
+        .contractTermsId(contractTermsIdLink)
+        .documentId(documentIdLink)
+        .build();
 
-    //   Response<ContractTermsDocument> response = dpxService.completeDraftContractTermsDocument(completeDraftContractTermsDocumentOptions).execute();
-    //   ContractTermsDocument contractTermsDocument = response.getResult();
+      Response<ContractTermsDocument> response = dpxService.completeDraftContractTermsDocument(completeDraftContractTermsDocumentOptions).execute();
+      ContractTermsDocument contractTermsDocument = response.getResult();
 
-    //   System.out.println(contractTermsDocument);
-    //   // end-complete_draft_contract_terms_document
-    // } catch (ServiceResponseException e) {
-    //     logger.error(String.format("Service returned status code %s: %s%nError details: %s",
-    //       e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
-    // }
+      System.out.println(contractTermsDocument);
+      // end-complete_draft_contract_terms_document
+    } catch (ServiceResponseException e) {
+        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
+          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
+    }
 
     try {
       System.out.println("listDataProductDrafts() result:");

@@ -789,30 +789,30 @@ public class DpxIT extends SdkIntegrationTestBase {
     }
   }
 
-  // @Test(dependsOnMethods = { "testGetDataProduct" })
-  // public void testCompleteDraftContractTermsDocument() throws Exception {
-  //   try {
-  //     CompleteDraftContractTermsDocumentOptions completeDraftContractTermsDocumentOptions = new CompleteDraftContractTermsDocumentOptions.Builder()
-  //       .dataProductId(optionalDataProductIdLink)
-  //       .draftId(draftIdLink)
-  //       .contractTermsId(contractTermsIdLink)
-  //       .documentId(documentIdLink)
-  //       .build();
+  @Test(dependsOnMethods = { "testGetDataProduct" })
+  public void testCompleteDraftContractTermsDocument() throws Exception {
+    try {
+      CompleteDraftContractTermsDocumentOptions completeDraftContractTermsDocumentOptions = new CompleteDraftContractTermsDocumentOptions.Builder()
+        .dataProductId(optionalDataProductIdLink)
+        .draftId(draftIdLink)
+        .contractTermsId(contractTermsIdLink)
+        .documentId(documentIdLink)
+        .build();
 
-  //     // Invoke operation
-  //     Response<ContractTermsDocument> response = service.completeDraftContractTermsDocument(completeDraftContractTermsDocumentOptions).execute();
-  //     // Validate response
-  //     assertNotNull(response);
-  //     assertEquals(response.getStatusCode(), 200);
+      // Invoke operation
+      Response<ContractTermsDocument> response = service.completeDraftContractTermsDocument(completeDraftContractTermsDocumentOptions).execute();
+      // Validate response
+      assertNotNull(response);
+      assertEquals(response.getStatusCode(), 200);
 
-  //     ContractTermsDocument contractTermsDocumentResult = response.getResult();
+      ContractTermsDocument contractTermsDocumentResult = response.getResult();
 
-  //     assertNotNull(contractTermsDocumentResult);
-  //   } catch (ServiceResponseException e) {
-  //       fail(String.format("Service returned status code %d: %s%nError details: %s",
-  //         e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
-  //   }
-  // }
+      assertNotNull(contractTermsDocumentResult);
+    } catch (ServiceResponseException e) {
+        fail(String.format("Service returned status code %d: %s%nError details: %s",
+          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+    }
+  }
 
   @Test(dependsOnMethods = { "testGetDataProduct" })
   public void testListDataProductDrafts() throws Exception {
