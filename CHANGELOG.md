@@ -1,3 +1,10 @@
+## [0.0.6](https://github.com/IBM/data-product-exchange-java-sdk/compare/0.0.5...0.0.6) (2024-03-13)
+
+
+### Bug Fixes
+
+* new apis added ([#13](https://github.com/IBM/data-product-exchange-java-sdk/issues/13)) ([cd42227](https://github.com/IBM/data-product-exchange-java-sdk/commit/cd422276993260ec60b78fde47f74c23a9707a83))
+
 ## [0.0.5](https://github.com/IBM/data-product-exchange-java-sdk/compare/0.0.4...0.0.5) (2023-11-30)
 
 
