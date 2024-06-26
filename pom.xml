@@ -3,16 +3,16 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>dpx-services</artifactId>
+  <artifactId>dph-services</artifactId>
 
-  <name>Data Product Exchange Services Java SDK</name>
+  <name>Data Product Hub Services Java SDK</name>
 
-  <description>Java Client Library to access the Data Product Exchange Services</description>
+  <description>Java Client Library to access the Data Product Hub Services</description>
 
   <url>https://github.ibm.com/wdp-gov/data-product-java-sdk</url>
 
   <groupId>com.ibm.cloud</groupId>
-  <version>99-SNAPSHOT</version>
+  <version>1.0.1</version>
   <packaging>pom</packaging>
 
   <properties>
@@ -59,7 +59,7 @@
     <module>modules/common</module>
 
     <!-- >>> List each service's module here -->
-    <module>modules/dpx</module>
+    <module>modules/dph</module>
 
     <!-- This module should be listed after all the service-related modules above -->
     <module>modules/coverage-reports</module>
@@ -118,13 +118,13 @@
       <!-- Each module (except "common") should depend on this artifact -->
       <dependency>
         <!-- >>> Replace this with the common module's artifactId -->
-        <artifactId>dpx-services-common</artifactId>
+        <artifactId>dph-services-common</artifactId>
         <groupId>${project.groupId}</groupId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
         <!-- >>> Replace this with the common module's artifactId -->
-        <artifactId>dpx-services-common</artifactId>
+        <artifactId>dph-services-common</artifactId>
         <groupId>${project.groupId}</groupId>
         <version>${project.version}</version>
         <type>test-jar</type>

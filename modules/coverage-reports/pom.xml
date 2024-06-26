@@ -1,16 +1,16 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
-        <artifactId>dpx-services</artifactId>
+        <artifactId>dph-services</artifactId>
         <groupId>com.ibm.cloud</groupId>
-        <version>99-SNAPSHOT</version>
+        <version>1.0.1</version>
         <relativePath>../..</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>dpx-services-coverage-reports</artifactId>
+    <artifactId>dph-services-coverage-reports</artifactId>
 
-    <name>DPX Services Coverage Reports</name>
+    <name>DPH Services Coverage Reports</name>
 
     <properties>
 	<!-- There is no need to publish this module's artifacts on maven central -->
@@ -27,7 +27,7 @@
             pom.xml file (i.e. not the module's directory name).
         -->
         <dependency>
-            <artifactId>dpx-services-common</artifactId>
+            <artifactId>dph-services-common</artifactId>
             <groupId>${project.groupId}</groupId>
             <version>${project.version}</version>
         </dependency>
@@ -35,7 +35,7 @@
         <!-- Copy and update this section for each service added to the project. -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>dpx</artifactId>
+            <artifactId>dph</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
