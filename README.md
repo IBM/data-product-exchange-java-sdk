@@ -1,4 +1,4 @@
-# Data Product Hub Java SDK Version 0.0.6
+# Data Product Hub Java SDK Version 1.0.1
 Java client library to interact with various Data Product Hub Service APIs.
 
 Disclaimer: this SDK is being released initially as a **pre-release** version.
@@ -49,7 +49,7 @@ Service Name | Artifact Coordinates
 * Java 8 or above.
 
 ## Installation
-The current version of this SDK is: 0.0.6
+The current version of this SDK is: 1.0.1
 
 The project artifacts are published on the public [Maven Central](https://repo1.maven.org/maven2/)
 artifact repository.  This is the default public repository used by maven when searching for dependencies.
