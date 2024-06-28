@@ -67,7 +67,7 @@ import java.util.Map.Entry;
 /**
  * Data Product Hub API Service.
  *
- * API Version: 1.0.0
+ * API Version: 0.1.0
  */
 public class Dph extends BaseService {
 
