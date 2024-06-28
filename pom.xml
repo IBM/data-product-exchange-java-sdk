@@ -10,8 +10,9 @@
   <description>Java Client Library to access the Data Product Hub Services</description>
 
   <url>https://github.ibm.com/wdp-gov/data-product-java-sdk</url>
+
   <groupId>com.ibm.cloud</groupId>
-  <version>1.0.1</version>
+  <version>1.0.0</version>
   <packaging>pom</packaging>
 
   <properties>
