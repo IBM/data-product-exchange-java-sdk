@@ -17,6 +17,9 @@ import com.ibm.cloud.dph_services.dph.v1.model.ContainerReference;
 import com.ibm.cloud.dph_services.dph.v1.model.ErrorModelResource;
 import com.ibm.cloud.dph_services.dph.v1.model.InitializeResource;
 import com.ibm.cloud.dph_services.dph.v1.model.InitializedOption;
+import com.ibm.cloud.dph_services.dph.v1.model.ProvidedCatalogWorkflows;
+import com.ibm.cloud.dph_services.dph.v1.model.ProvidedWorkflowResource;
+import com.ibm.cloud.dph_services.dph.v1.model.WorkflowDefinitionReference;
 import com.ibm.cloud.dph_services.dph.v1.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
@@ -43,5 +46,6 @@ public class InitializeResourceTest {
     assertNull(initializeResourceModel.getLastStartedAt());
     assertNull(initializeResourceModel.getLastFinishedAt());
     assertNull(initializeResourceModel.getInitializedOptions());
+    assertNull(initializeResourceModel.getWorkflows());
   }
 }

@@ -13,50 +13,41 @@
 
 package com.ibm.cloud.dph_services.dph.v1.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
- * Data product reference.
+ * Resource defining provided workflow definitions.
  */
-public class DataProductVersionDataProduct extends GenericModel {
+public class ProvidedCatalogWorkflows extends GenericModel {
 
-  protected String id;
-  protected DataProductDraftVersionRelease release;
-  protected ContainerReference container;
+  @SerializedName("data_access")
+  protected ProvidedWorkflowResource dataAccess;
+  @SerializedName("request_new_product")
+  protected ProvidedWorkflowResource requestNewProduct;
 
-  protected DataProductVersionDataProduct() { }
+  protected ProvidedCatalogWorkflows() { }
 
   /**
-   * Gets the id.
+   * Gets the dataAccess.
    *
-   * Data product identifier.
+   * A reference to a workflow definition.
    *
-   * @return the id
+   * @return the dataAccess
    */
-  public String getId() {
-    return id;
+  public ProvidedWorkflowResource getDataAccess() {
+    return dataAccess;
   }
 
   /**
-   * Gets the release.
+   * Gets the requestNewProduct.
    *
-   * A data product draft version object.
+   * A reference to a workflow definition.
    *
-   * @return the release
+   * @return the requestNewProduct
    */
-  public DataProductDraftVersionRelease getRelease() {
-    return release;
-  }
-
-  /**
-   * Gets the container.
-   *
-   * Container reference.
-   *
-   * @return the container
-   */
-  public ContainerReference getContainer() {
-    return container;
+  public ProvidedWorkflowResource getRequestNewProduct() {
+    return requestNewProduct;
   }
 }
 

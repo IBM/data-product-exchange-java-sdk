@@ -21,6 +21,8 @@ import com.ibm.cloud.dph_services.dph.v1.model.ContainerReference;
 import com.ibm.cloud.dph_services.dph.v1.model.ContractTermsDocument;
 import com.ibm.cloud.dph_services.dph.v1.model.ContractTermsDocumentAttachment;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductContractTerms;
+import com.ibm.cloud.dph_services.dph.v1.model.DataProductCustomWorkflowDefinition;
+import com.ibm.cloud.dph_services.dph.v1.model.DataProductDraftVersionRelease;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductIdentity;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductOrderAccessRequest;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductPart;
@@ -46,10 +48,17 @@ public class DataProductVersionPrototypeTest {
 
   @Test
   public void testDataProductVersionPrototype() throws Throwable {
+    DataProductDraftVersionRelease dataProductDraftVersionReleaseModel = new DataProductDraftVersionRelease.Builder()
+      .id("18bdbde1-918e-4ecf-aa23-6727bf319e14")
+      .build();
+    assertEquals(dataProductDraftVersionReleaseModel.id(), "18bdbde1-918e-4ecf-aa23-6727bf319e14");
+
     DataProductIdentity dataProductIdentityModel = new DataProductIdentity.Builder()
       .id("b38df608-d34b-4d58-8136-ed25e6c6684e")
+      .release(dataProductDraftVersionReleaseModel)
       .build();
     assertEquals(dataProductIdentityModel.id(), "b38df608-d34b-4d58-8136-ed25e6c6684e");
+    assertEquals(dataProductIdentityModel.release(), dataProductDraftVersionReleaseModel);
 
     ContainerReference containerReferenceModel = new ContainerReference.Builder()
       .id("d29c42eb-7100-4b7a-8257-c196dbcca1cd")
@@ -90,7 +99,7 @@ public class DataProductVersionPrototypeTest {
     assertEquals(contractTermsDocumentModel.url(), "testString");
     assertEquals(contractTermsDocumentModel.type(), "terms_and_conditions");
     assertEquals(contractTermsDocumentModel.name(), "testString");
-    assertEquals(contractTermsDocumentModel.id(), "2b0bf220-079c-11ee-be56-0242ac120002");
+    assertEquals(contractTermsDocumentModel.getId(), "2b0bf220-079c-11ee-be56-0242ac120002");
     assertEquals(contractTermsDocumentModel.attachment(), contractTermsDocumentAttachmentModel);
     assertEquals(contractTermsDocumentModel.uploadUrl(), "testString");
 
@@ -98,10 +107,12 @@ public class DataProductVersionPrototypeTest {
       .asset(assetReferenceModel)
       .id("testString")
       .documents(java.util.Arrays.asList(contractTermsDocumentModel))
+      .errorMsg("testString")
       .build();
     assertEquals(dataProductContractTermsModel.asset(), assetReferenceModel);
     assertEquals(dataProductContractTermsModel.id(), "testString");
     assertEquals(dataProductContractTermsModel.documents(), java.util.Arrays.asList(contractTermsDocumentModel));
+    assertEquals(dataProductContractTermsModel.errorMsg(), "testString");
 
     ContainerIdentity containerIdentityModel = new ContainerIdentity.Builder()
       .id("d29c42eb-7100-4b7a-8257-c196dbcca1cd")
@@ -147,10 +158,19 @@ public class DataProductVersionPrototypeTest {
     assertEquals(dataProductPartModel.asset(), assetPartReferenceModel);
     assertEquals(dataProductPartModel.deliveryMethods(), java.util.Arrays.asList(deliveryMethodModel));
 
+    DataProductCustomWorkflowDefinition dataProductCustomWorkflowDefinitionModel = new DataProductCustomWorkflowDefinition.Builder()
+      .id("18bdbde1-918e-4ecf-aa23-6727bf319e14")
+      .build();
+    assertEquals(dataProductCustomWorkflowDefinitionModel.id(), "18bdbde1-918e-4ecf-aa23-6727bf319e14");
+
     DataProductOrderAccessRequest dataProductOrderAccessRequestModel = new DataProductOrderAccessRequest.Builder()
       .taskAssigneeUsers(java.util.Arrays.asList("testString"))
+      .preApprovedUsers(java.util.Arrays.asList("testString"))
+      .customWorkflowDefinition(dataProductCustomWorkflowDefinitionModel)
       .build();
     assertEquals(dataProductOrderAccessRequestModel.taskAssigneeUsers(), java.util.Arrays.asList("testString"));
+    assertEquals(dataProductOrderAccessRequestModel.preApprovedUsers(), java.util.Arrays.asList("testString"));
+    assertEquals(dataProductOrderAccessRequestModel.customWorkflowDefinition(), dataProductCustomWorkflowDefinitionModel);
 
     DataProductWorkflows dataProductWorkflowsModel = new DataProductWorkflows.Builder()
       .orderAccessRequest(dataProductOrderAccessRequestModel)

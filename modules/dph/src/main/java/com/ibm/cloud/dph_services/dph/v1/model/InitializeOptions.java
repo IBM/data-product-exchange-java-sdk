@@ -34,6 +34,12 @@ public class InitializeOptions extends GenericModel {
     String WORKFLOWS = "workflows";
     /** project. */
     String PROJECT = "project";
+    /** catalog_configurations. */
+    String CATALOG_CONFIGURATIONS = "catalog_configurations";
+    /** functional_admin_user_group. */
+    String FUNCTIONAL_ADMIN_USER_GROUP = "functional_admin_user_group";
+    /** account_owner_into_catalog_members. */
+    String ACCOUNT_OWNER_INTO_CATALOG_MEMBERS = "account_owner_into_catalog_members";
   }
 
   protected ContainerReference container;

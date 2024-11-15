@@ -24,6 +24,7 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class DataProduct extends GenericModel {
 
   protected String id;
+  protected DataProductDraftVersionRelease release;
   protected ContainerReference container;
   @SerializedName("latest_release")
   protected DataProductVersionSummary latestRelease;
@@ -40,6 +41,17 @@ public class DataProduct extends GenericModel {
    */
   public String getId() {
     return id;
+  }
+
+  /**
+   * Gets the release.
+   *
+   * A data product draft version object.
+   *
+   * @return the release
+   */
+  public DataProductDraftVersionRelease getRelease() {
+    return release;
   }
 
   /**

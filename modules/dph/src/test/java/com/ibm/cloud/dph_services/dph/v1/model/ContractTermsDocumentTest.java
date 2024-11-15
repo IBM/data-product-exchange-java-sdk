@@ -48,7 +48,7 @@ public class ContractTermsDocumentTest {
     assertEquals(contractTermsDocumentModel.url(), "testString");
     assertEquals(contractTermsDocumentModel.type(), "terms_and_conditions");
     assertEquals(contractTermsDocumentModel.name(), "testString");
-    assertEquals(contractTermsDocumentModel.id(), "2b0bf220-079c-11ee-be56-0242ac120002");
+    assertEquals(contractTermsDocumentModel.getId(), "2b0bf220-079c-11ee-be56-0242ac120002");
     assertEquals(contractTermsDocumentModel.attachment(), contractTermsDocumentAttachmentModel);
     assertEquals(contractTermsDocumentModel.uploadUrl(), "testString");
 
@@ -59,7 +59,7 @@ public class ContractTermsDocumentTest {
     assertEquals(contractTermsDocumentModelNew.url(), "testString");
     assertEquals(contractTermsDocumentModelNew.type(), "terms_and_conditions");
     assertEquals(contractTermsDocumentModelNew.name(), "testString");
-    assertEquals(contractTermsDocumentModelNew.id(), "2b0bf220-079c-11ee-be56-0242ac120002");
+    assertEquals(contractTermsDocumentModelNew.getId(), "2b0bf220-079c-11ee-be56-0242ac120002");
     assertEquals(contractTermsDocumentModelNew.attachment().toString(), contractTermsDocumentAttachmentModel.toString());
     assertEquals(contractTermsDocumentModelNew.uploadUrl(), "testString");
   }

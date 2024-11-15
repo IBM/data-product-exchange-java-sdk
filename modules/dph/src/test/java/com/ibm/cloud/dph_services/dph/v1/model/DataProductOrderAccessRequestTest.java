@@ -13,6 +13,7 @@
 
 package com.ibm.cloud.dph_services.dph.v1.model;
 
+import com.ibm.cloud.dph_services.dph.v1.model.DataProductCustomWorkflowDefinition;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductOrderAccessRequest;
 import com.ibm.cloud.dph_services.dph.v1.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
@@ -31,14 +32,24 @@ public class DataProductOrderAccessRequestTest {
 
   @Test
   public void testDataProductOrderAccessRequest() throws Throwable {
+    DataProductCustomWorkflowDefinition dataProductCustomWorkflowDefinitionModel = new DataProductCustomWorkflowDefinition.Builder()
+      .id("18bdbde1-918e-4ecf-aa23-6727bf319e14")
+      .build();
+    assertEquals(dataProductCustomWorkflowDefinitionModel.id(), "18bdbde1-918e-4ecf-aa23-6727bf319e14");
+
     DataProductOrderAccessRequest dataProductOrderAccessRequestModel = new DataProductOrderAccessRequest.Builder()
       .taskAssigneeUsers(java.util.Arrays.asList("testString"))
+      .preApprovedUsers(java.util.Arrays.asList("testString"))
+      .customWorkflowDefinition(dataProductCustomWorkflowDefinitionModel)
       .build();
     assertEquals(dataProductOrderAccessRequestModel.taskAssigneeUsers(), java.util.Arrays.asList("testString"));
+    assertEquals(dataProductOrderAccessRequestModel.preApprovedUsers(), java.util.Arrays.asList("testString"));
+    assertEquals(dataProductOrderAccessRequestModel.customWorkflowDefinition(), dataProductCustomWorkflowDefinitionModel);
 
     String json = TestUtilities.serialize(dataProductOrderAccessRequestModel);
 
     DataProductOrderAccessRequest dataProductOrderAccessRequestModelNew = TestUtilities.deserialize(json, DataProductOrderAccessRequest.class);
     assertTrue(dataProductOrderAccessRequestModelNew instanceof DataProductOrderAccessRequest);
+    assertEquals(dataProductOrderAccessRequestModelNew.customWorkflowDefinition().toString(), dataProductCustomWorkflowDefinitionModel.toString());
   }
 }

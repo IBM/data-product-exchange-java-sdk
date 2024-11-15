@@ -49,6 +49,7 @@ public class InitializeResource extends GenericModel {
   protected Date lastFinishedAt;
   @SerializedName("initialized_options")
   protected List<InitializedOption> initializedOptions;
+  protected ProvidedCatalogWorkflows workflows;
 
   protected InitializeResource() { }
 
@@ -138,6 +139,17 @@ public class InitializeResource extends GenericModel {
    */
   public List<InitializedOption> getInitializedOptions() {
     return initializedOptions;
+  }
+
+  /**
+   * Gets the workflows.
+   *
+   * Resource defining provided workflow definitions.
+   *
+   * @return the workflows
+   */
+  public ProvidedCatalogWorkflows getWorkflows() {
+    return workflows;
   }
 }
 

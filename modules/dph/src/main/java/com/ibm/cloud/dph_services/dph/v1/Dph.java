@@ -12,7 +12,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.92.0-af5c89a5-20240617-153232
+ * IBM OpenAPI SDK Code Generator Version: 3.96.0-d6dec9d7-20241008-212902
  */
 
 package com.ibm.cloud.dph_services.dph.v1;
@@ -67,7 +67,7 @@ import java.util.Map.Entry;
 /**
  * Data Product Hub API Service.
  *
- * API Version: 0.1.0
+ * API Version: 1.1.0
  */
 public class Dph extends BaseService {
 
@@ -198,7 +198,8 @@ public class Dph extends BaseService {
    * applicable to multiple industries&lt;/li&gt;&lt;li&gt;`data_product_samples` - Sample data products used to
    * illustrate capabilities of the data product hub&lt;/li&gt;&lt;li&gt;`workflows` - Workflows to enable restricted
    * data products&lt;/li&gt;&lt;li&gt;`project` - A default project for exporting data assets to
-   * files&lt;/li&gt;&lt;/ul&gt;&lt;br/&gt;&lt;br/&gt;If a resource depends on resources that are not specified in the
+   * files&lt;/li&gt;&lt;li&gt;`catalog_configurations` - Catalog configurations for the default data product
+   * catalog&lt;/li&gt;&lt;/ul&gt;&lt;br/&gt;&lt;br/&gt;If a resource depends on resources that are not specified in the
    * request, these dependent resources will be automatically initialized. E.g., initializing `data_product_samples`
    * will also initialize `domains_multi_industry` and `delivery_methods` even if they are not specified in the request
    * because it depends on them.&lt;br/&gt;&lt;br/&gt;If initializing the data product hub for the first time, do not
@@ -242,14 +243,15 @@ public class Dph extends BaseService {
    * applicable to multiple industries&lt;/li&gt;&lt;li&gt;`data_product_samples` - Sample data products used to
    * illustrate capabilities of the data product hub&lt;/li&gt;&lt;li&gt;`workflows` - Workflows to enable restricted
    * data products&lt;/li&gt;&lt;li&gt;`project` - A default project for exporting data assets to
-   * files&lt;/li&gt;&lt;/ul&gt;&lt;br/&gt;&lt;br/&gt;If a resource depends on resources that are not specified in the
+   * files&lt;/li&gt;&lt;li&gt;`catalog_configurations` - Catalog configurations for the default data product
+   * catalog&lt;/li&gt;&lt;/ul&gt;&lt;br/&gt;&lt;br/&gt;If a resource depends on resources that are not specified in the
    * request, these dependent resources will be automatically initialized. E.g., initializing `data_product_samples`
    * will also initialize `domains_multi_industry` and `delivery_methods` even if they are not specified in the request
    * because it depends on them.&lt;br/&gt;&lt;br/&gt;If initializing the data product hub for the first time, do not
    * specify a container. The default data product catalog will be created.&lt;br/&gt;For first time initialization, it
    * is recommended that at least `delivery_methods` and `domains_multi_industry` is included in the initialize
    * operation.&lt;br/&gt;&lt;br/&gt;If the data product hub has already been initialized, you may call this API again
-   * to initialize new resources, such as new delivery methods.In this case, specify the default data product catalog
+   * to initialize new resources, such as new delivery methods. In this case, specify the default data product catalog
    * container information.
    *
    * @return a {@link ServiceCall} with a result of type {@link InitializeResource}
@@ -315,8 +317,6 @@ public class Dph extends BaseService {
   }
 
   /**
-   * Retrieve a list of data products.
-   *
    * Retrieve a list of data products.
    *
    * @return a {@link ServiceCall} with a result of type {@link DataProductSummaryCollection}
@@ -444,8 +444,6 @@ public class Dph extends BaseService {
   /**
    * Create a new draft of an existing data product.
    *
-   * Create a new draft of an existing data product.
-   *
    * @param createDataProductDraftOptions the {@link CreateDataProductDraftOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link DataProductVersion}
    */
@@ -510,6 +508,7 @@ public class Dph extends BaseService {
   /**
    * Upload a contract document to the data product draft contract terms.
    *
+   *
    * - If the request object contains a "url" parameter, a referential document is created to store the provided url.
    * - If the request object does not contain a "url" parameter, an attachment document is created, and a signed url
    * will be returned in an "upload_url" parameter. The data product producer can upload the document using the provided
@@ -536,15 +535,8 @@ public class Dph extends BaseService {
     final JsonObject contentJson = new JsonObject();
     contentJson.addProperty(CommonConstants.TYPE, createDraftContractTermsDocumentOptions.type());
     contentJson.addProperty(CommonConstants.NAME, createDraftContractTermsDocumentOptions.name());
-    contentJson.addProperty(CommonConstants.ID, createDraftContractTermsDocumentOptions.id());
     if (createDraftContractTermsDocumentOptions.url() != null) {
       contentJson.addProperty(CommonConstants.URL, createDraftContractTermsDocumentOptions.url());
-    }
-    if (createDraftContractTermsDocumentOptions.attachment() != null) {
-      contentJson.add(CommonConstants.ATTACHMENT, com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDraftContractTermsDocumentOptions.attachment()));
-    }
-    if (createDraftContractTermsDocumentOptions.uploadUrl() != null) {
-      contentJson.addProperty(CommonConstants.UPLOAD_URL, createDraftContractTermsDocumentOptions.uploadUrl());
     }
     builder.bodyJson(contentJson);
     ResponseConverter<ContractTermsDocument> responseConverter =
@@ -553,6 +545,7 @@ public class Dph extends BaseService {
   }
 
   /**
+   *
    * Get a draft of an existing data product.
    *
    * @param getDataProductDraftOptions the {@link GetDataProductDraftOptions} containing the options for the call
@@ -577,6 +570,8 @@ public class Dph extends BaseService {
 
   /**
    * Delete a data product draft identified by ID.
+   *
+   * Delete a data product draft identified by a valid ID.
    *
    * @param deleteDataProductDraftOptions the {@link DeleteDataProductDraftOptions} containing the options for the call
    * @return a {@link ServiceCall} with a void result
@@ -659,6 +654,8 @@ public class Dph extends BaseService {
 
   /**
    * Delete a contract document.
+   *
+   * Delete an existing contract document.
    *
    * Contract documents can only be deleted for data product versions that are in DRAFT state.
    *
@@ -759,6 +756,9 @@ public class Dph extends BaseService {
       builder.header(header.getKey(), header.getValue());
     }
     builder.header(HttpHeaders.ACCEPT, CommonConstants.CONTENT_TYPE_JSON);
+    if (getDataProductReleaseOptions.checkCallerApproval() != null) {
+      builder.query(CommonConstants.CHECK_CALLER_APPROVER, String.valueOf(getDataProductReleaseOptions.checkCallerApproval()));
+    }
     ResponseConverter<DataProductVersion> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<DataProductVersion>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);

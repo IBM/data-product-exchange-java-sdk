@@ -21,12 +21,14 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class DataProductIdentity extends GenericModel {
 
   protected String id;
+  protected DataProductDraftVersionRelease release;
 
   /**
    * Builder.
    */
   public static class Builder {
     private String id;
+    private DataProductDraftVersionRelease release;
 
     /**
      * Instantiates a new Builder from an existing DataProductIdentity instance.
@@ -35,6 +37,7 @@ public class DataProductIdentity extends GenericModel {
      */
     private Builder(DataProductIdentity dataProductIdentity) {
       this.id = dataProductIdentity.id;
+      this.release = dataProductIdentity.release;
     }
 
     /**
@@ -71,6 +74,17 @@ public class DataProductIdentity extends GenericModel {
       this.id = id;
       return this;
     }
+
+    /**
+     * Set the release.
+     *
+     * @param release the release
+     * @return the DataProductIdentity builder
+     */
+    public Builder release(DataProductDraftVersionRelease release) {
+      this.release = release;
+      return this;
+    }
   }
 
   protected DataProductIdentity() { }
@@ -79,6 +93,7 @@ public class DataProductIdentity extends GenericModel {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.id,
       "id cannot be null");
     id = builder.id;
+    release = builder.release;
   }
 
   /**
@@ -99,6 +114,17 @@ public class DataProductIdentity extends GenericModel {
    */
   public String id() {
     return id;
+  }
+
+  /**
+   * Gets the release.
+   *
+   * A data product draft version object.
+   *
+   * @return the release
+   */
+  public DataProductDraftVersionRelease release() {
+    return release;
   }
 }
 

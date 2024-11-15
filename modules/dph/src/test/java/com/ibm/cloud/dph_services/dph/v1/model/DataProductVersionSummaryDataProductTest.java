@@ -14,6 +14,7 @@
 package com.ibm.cloud.dph_services.dph.v1.model;
 
 import com.ibm.cloud.dph_services.dph.v1.model.ContainerReference;
+import com.ibm.cloud.dph_services.dph.v1.model.DataProductDraftVersionRelease;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductVersionSummaryDataProduct;
 import com.ibm.cloud.dph_services.dph.v1.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
@@ -34,6 +35,7 @@ public class DataProductVersionSummaryDataProductTest {
   public void testDataProductVersionSummaryDataProduct() throws Throwable {
     DataProductVersionSummaryDataProduct dataProductVersionSummaryDataProductModel = new DataProductVersionSummaryDataProduct();
     assertNull(dataProductVersionSummaryDataProductModel.getId());
+    assertNull(dataProductVersionSummaryDataProductModel.getRelease());
     assertNull(dataProductVersionSummaryDataProductModel.getContainer());
   }
 }

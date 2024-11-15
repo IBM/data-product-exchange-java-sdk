@@ -26,12 +26,18 @@ public class DataProductOrderAccessRequest extends GenericModel {
 
   @SerializedName("task_assignee_users")
   protected List<String> taskAssigneeUsers;
+  @SerializedName("pre_approved_users")
+  protected List<String> preApprovedUsers;
+  @SerializedName("custom_workflow_definition")
+  protected DataProductCustomWorkflowDefinition customWorkflowDefinition;
 
   /**
    * Builder.
    */
   public static class Builder {
     private List<String> taskAssigneeUsers;
+    private List<String> preApprovedUsers;
+    private DataProductCustomWorkflowDefinition customWorkflowDefinition;
 
     /**
      * Instantiates a new Builder from an existing DataProductOrderAccessRequest instance.
@@ -40,6 +46,8 @@ public class DataProductOrderAccessRequest extends GenericModel {
      */
     private Builder(DataProductOrderAccessRequest dataProductOrderAccessRequest) {
       this.taskAssigneeUsers = dataProductOrderAccessRequest.taskAssigneeUsers;
+      this.preApprovedUsers = dataProductOrderAccessRequest.preApprovedUsers;
+      this.customWorkflowDefinition = dataProductOrderAccessRequest.customWorkflowDefinition;
     }
 
     /**
@@ -74,6 +82,22 @@ public class DataProductOrderAccessRequest extends GenericModel {
     }
 
     /**
+     * Adds a new element to preApprovedUsers.
+     *
+     * @param preApprovedUsers the new element to be added
+     * @return the DataProductOrderAccessRequest builder
+     */
+    public Builder addPreApprovedUsers(String preApprovedUsers) {
+      com.ibm.cloud.sdk.core.util.Validator.notNull(preApprovedUsers,
+        "preApprovedUsers cannot be null");
+      if (this.preApprovedUsers == null) {
+        this.preApprovedUsers = new ArrayList<String>();
+      }
+      this.preApprovedUsers.add(preApprovedUsers);
+      return this;
+    }
+
+    /**
      * Set the taskAssigneeUsers.
      * Existing taskAssigneeUsers will be replaced.
      *
@@ -84,12 +108,37 @@ public class DataProductOrderAccessRequest extends GenericModel {
       this.taskAssigneeUsers = taskAssigneeUsers;
       return this;
     }
+
+    /**
+     * Set the preApprovedUsers.
+     * Existing preApprovedUsers will be replaced.
+     *
+     * @param preApprovedUsers the preApprovedUsers
+     * @return the DataProductOrderAccessRequest builder
+     */
+    public Builder preApprovedUsers(List<String> preApprovedUsers) {
+      this.preApprovedUsers = preApprovedUsers;
+      return this;
+    }
+
+    /**
+     * Set the customWorkflowDefinition.
+     *
+     * @param customWorkflowDefinition the customWorkflowDefinition
+     * @return the DataProductOrderAccessRequest builder
+     */
+    public Builder customWorkflowDefinition(DataProductCustomWorkflowDefinition customWorkflowDefinition) {
+      this.customWorkflowDefinition = customWorkflowDefinition;
+      return this;
+    }
   }
 
   protected DataProductOrderAccessRequest() { }
 
   protected DataProductOrderAccessRequest(Builder builder) {
     taskAssigneeUsers = builder.taskAssigneeUsers;
+    preApprovedUsers = builder.preApprovedUsers;
+    customWorkflowDefinition = builder.customWorkflowDefinition;
   }
 
   /**
@@ -110,6 +159,28 @@ public class DataProductOrderAccessRequest extends GenericModel {
    */
   public List<String> taskAssigneeUsers() {
     return taskAssigneeUsers;
+  }
+
+  /**
+   * Gets the preApprovedUsers.
+   *
+   * The list of users or groups whose request will get pre-approved associated with the data product version.
+   *
+   * @return the preApprovedUsers
+   */
+  public List<String> preApprovedUsers() {
+    return preApprovedUsers;
+  }
+
+  /**
+   * Gets the customWorkflowDefinition.
+   *
+   * A custom workflow definition to be used to create a workflow to approve a data product subscription.
+   *
+   * @return the customWorkflowDefinition
+   */
+  public DataProductCustomWorkflowDefinition customWorkflowDefinition() {
+    return customWorkflowDefinition;
   }
 }
 

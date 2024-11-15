@@ -19,6 +19,8 @@ import com.ibm.cloud.dph_services.dph.v1.model.ContainerReference;
 import com.ibm.cloud.dph_services.dph.v1.model.ContractTermsDocument;
 import com.ibm.cloud.dph_services.dph.v1.model.ContractTermsDocumentAttachment;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductContractTerms;
+import com.ibm.cloud.dph_services.dph.v1.model.DataProductCustomWorkflowDefinition;
+import com.ibm.cloud.dph_services.dph.v1.model.DataProductDraftVersionRelease;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductOrderAccessRequest;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductPart;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductVersion;
@@ -64,5 +66,6 @@ public class DataProductVersionTest {
     assertNull(dataProductVersionModel.getCreatedBy());
     assertNull(dataProductVersionModel.getCreatedAt());
     assertNull(dataProductVersionModel.getWorkflows());
+    assertNull(dataProductVersionModel.getXProperties());
   }
 }
