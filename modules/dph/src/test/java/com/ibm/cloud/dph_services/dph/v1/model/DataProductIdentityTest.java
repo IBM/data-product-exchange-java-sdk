@@ -13,6 +13,7 @@
 
 package com.ibm.cloud.dph_services.dph.v1.model;
 
+import com.ibm.cloud.dph_services.dph.v1.model.DataProductDraftVersionRelease;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductIdentity;
 import com.ibm.cloud.dph_services.dph.v1.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
@@ -31,16 +32,24 @@ public class DataProductIdentityTest {
 
   @Test
   public void testDataProductIdentity() throws Throwable {
+    DataProductDraftVersionRelease dataProductDraftVersionReleaseModel = new DataProductDraftVersionRelease.Builder()
+      .id("18bdbde1-918e-4ecf-aa23-6727bf319e14")
+      .build();
+    assertEquals(dataProductDraftVersionReleaseModel.id(), "18bdbde1-918e-4ecf-aa23-6727bf319e14");
+
     DataProductIdentity dataProductIdentityModel = new DataProductIdentity.Builder()
       .id("b38df608-d34b-4d58-8136-ed25e6c6684e")
+      .release(dataProductDraftVersionReleaseModel)
       .build();
     assertEquals(dataProductIdentityModel.id(), "b38df608-d34b-4d58-8136-ed25e6c6684e");
+    assertEquals(dataProductIdentityModel.release(), dataProductDraftVersionReleaseModel);
 
     String json = TestUtilities.serialize(dataProductIdentityModel);
 
     DataProductIdentity dataProductIdentityModelNew = TestUtilities.deserialize(json, DataProductIdentity.class);
     assertTrue(dataProductIdentityModelNew instanceof DataProductIdentity);
     assertEquals(dataProductIdentityModelNew.id(), "b38df608-d34b-4d58-8136-ed25e6c6684e");
+    assertEquals(dataProductIdentityModelNew.release().toString(), dataProductDraftVersionReleaseModel.toString());
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

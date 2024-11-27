@@ -18,6 +18,7 @@ import com.ibm.cloud.dph_services.dph.v1.model.ContainerReference;
 import com.ibm.cloud.dph_services.dph.v1.model.ContractTermsDocument;
 import com.ibm.cloud.dph_services.dph.v1.model.ContractTermsDocumentAttachment;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductContractTerms;
+import com.ibm.cloud.dph_services.dph.v1.model.DataProductDraftVersionRelease;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductReleaseCollection;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductVersionSummary;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductVersionSummaryDataProduct;

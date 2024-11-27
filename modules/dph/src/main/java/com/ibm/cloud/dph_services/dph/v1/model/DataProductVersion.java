@@ -15,6 +15,7 @@ package com.ibm.cloud.dph_services.dph.v1.model;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
@@ -71,6 +72,8 @@ public class DataProductVersion extends GenericModel {
   @SerializedName("created_at")
   protected Date createdAt;
   protected DataProductWorkflows workflows;
+  @SerializedName("properties")
+  protected Map<String, Object> xProperties;
 
   protected DataProductVersion() { }
 
@@ -283,6 +286,17 @@ public class DataProductVersion extends GenericModel {
    */
   public DataProductWorkflows getWorkflows() {
     return workflows;
+  }
+
+  /**
+   * Gets the xProperties.
+   *
+   * Metadata properties on data products.
+   *
+   * @return the xProperties
+   */
+  public Map<String, Object> getXProperties() {
+    return xProperties;
   }
 }
 

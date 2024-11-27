@@ -13,16 +13,7 @@
 
 package com.ibm.cloud.dph_services.dph.v1.model;
 
-import com.ibm.cloud.dph_services.dph.v1.model.AssetReference;
-import com.ibm.cloud.dph_services.dph.v1.model.ContainerReference;
-import com.ibm.cloud.dph_services.dph.v1.model.ContractTermsDocument;
-import com.ibm.cloud.dph_services.dph.v1.model.ContractTermsDocumentAttachment;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProduct;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductContractTerms;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductDraftVersionRelease;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductVersionSummary;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductVersionSummaryDataProduct;
-import com.ibm.cloud.dph_services.dph.v1.model.UseCase;
+import com.ibm.cloud.dph_services.dph.v1.model.DataProductCustomWorkflowDefinition;
 import com.ibm.cloud.dph_services.dph.v1.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import java.io.InputStream;
@@ -32,19 +23,23 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 /**
- * Unit test class for the DataProduct model.
+ * Unit test class for the DataProductCustomWorkflowDefinition model.
  */
-public class DataProductTest {
+public class DataProductCustomWorkflowDefinitionTest {
   final HashMap<String, InputStream> mockStreamMap = TestUtilities.createMockStreamMap();
   final List<FileWithMetadata> mockListFileWithMetadata = TestUtilities.creatMockListFileWithMetadata();
 
   @Test
-  public void testDataProduct() throws Throwable {
-    DataProduct dataProductModel = new DataProduct();
-    assertNull(dataProductModel.getId());
-    assertNull(dataProductModel.getRelease());
-    assertNull(dataProductModel.getContainer());
-    assertNull(dataProductModel.getLatestRelease());
-    assertNull(dataProductModel.getDrafts());
+  public void testDataProductCustomWorkflowDefinition() throws Throwable {
+    DataProductCustomWorkflowDefinition dataProductCustomWorkflowDefinitionModel = new DataProductCustomWorkflowDefinition.Builder()
+      .id("18bdbde1-918e-4ecf-aa23-6727bf319e14")
+      .build();
+    assertEquals(dataProductCustomWorkflowDefinitionModel.id(), "18bdbde1-918e-4ecf-aa23-6727bf319e14");
+
+    String json = TestUtilities.serialize(dataProductCustomWorkflowDefinitionModel);
+
+    DataProductCustomWorkflowDefinition dataProductCustomWorkflowDefinitionModelNew = TestUtilities.deserialize(json, DataProductCustomWorkflowDefinition.class);
+    assertTrue(dataProductCustomWorkflowDefinitionModelNew instanceof DataProductCustomWorkflowDefinition);
+    assertEquals(dataProductCustomWorkflowDefinitionModelNew.id(), "18bdbde1-918e-4ecf-aa23-6727bf319e14");
   }
 }

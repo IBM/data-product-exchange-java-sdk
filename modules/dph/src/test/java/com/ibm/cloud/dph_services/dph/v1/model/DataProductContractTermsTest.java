@@ -65,7 +65,7 @@ public class DataProductContractTermsTest {
     assertEquals(contractTermsDocumentModel.url(), "testString");
     assertEquals(contractTermsDocumentModel.type(), "terms_and_conditions");
     assertEquals(contractTermsDocumentModel.name(), "testString");
-    assertEquals(contractTermsDocumentModel.id(), "2b0bf220-079c-11ee-be56-0242ac120002");
+    assertEquals(contractTermsDocumentModel.getId(), "2b0bf220-079c-11ee-be56-0242ac120002");
     assertEquals(contractTermsDocumentModel.attachment(), contractTermsDocumentAttachmentModel);
     assertEquals(contractTermsDocumentModel.uploadUrl(), "testString");
 
@@ -73,10 +73,12 @@ public class DataProductContractTermsTest {
       .asset(assetReferenceModel)
       .id("testString")
       .documents(java.util.Arrays.asList(contractTermsDocumentModel))
+      .errorMsg("testString")
       .build();
     assertEquals(dataProductContractTermsModel.asset(), assetReferenceModel);
     assertEquals(dataProductContractTermsModel.id(), "testString");
     assertEquals(dataProductContractTermsModel.documents(), java.util.Arrays.asList(contractTermsDocumentModel));
+    assertEquals(dataProductContractTermsModel.errorMsg(), "testString");
 
     String json = TestUtilities.serialize(dataProductContractTermsModel);
 
@@ -84,5 +86,6 @@ public class DataProductContractTermsTest {
     assertTrue(dataProductContractTermsModelNew instanceof DataProductContractTerms);
     assertEquals(dataProductContractTermsModelNew.asset().toString(), assetReferenceModel.toString());
     assertEquals(dataProductContractTermsModelNew.id(), "testString");
+    assertEquals(dataProductContractTermsModelNew.errorMsg(), "testString");
   }
 }

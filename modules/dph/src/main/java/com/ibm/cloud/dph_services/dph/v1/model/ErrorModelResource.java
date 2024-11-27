@@ -53,6 +53,8 @@ public class ErrorModelResource extends GenericModel {
     String UPDATE_ERROR = "update_error";
     /** delete_error. */
     String DELETE_ERROR = "delete_error";
+    /** patch_error. */
+    String PATCH_ERROR = "patch_error";
     /** data_error. */
     String DATA_ERROR = "data_error";
     /** database_error. */

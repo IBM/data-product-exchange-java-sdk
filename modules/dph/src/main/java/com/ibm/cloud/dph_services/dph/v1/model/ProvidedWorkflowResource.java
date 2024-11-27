@@ -16,47 +16,23 @@ package com.ibm.cloud.dph_services.dph.v1.model;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
- * Data product reference.
+ * A reference to a workflow definition.
  */
-public class DataProductVersionDataProduct extends GenericModel {
+public class ProvidedWorkflowResource extends GenericModel {
 
-  protected String id;
-  protected DataProductDraftVersionRelease release;
-  protected ContainerReference container;
+  protected WorkflowDefinitionReference definition;
 
-  protected DataProductVersionDataProduct() { }
+  protected ProvidedWorkflowResource() { }
 
   /**
-   * Gets the id.
+   * Gets the definition.
    *
-   * Data product identifier.
+   * Reference to a workflow definition.
    *
-   * @return the id
+   * @return the definition
    */
-  public String getId() {
-    return id;
-  }
-
-  /**
-   * Gets the release.
-   *
-   * A data product draft version object.
-   *
-   * @return the release
-   */
-  public DataProductDraftVersionRelease getRelease() {
-    return release;
-  }
-
-  /**
-   * Gets the container.
-   *
-   * Container reference.
-   *
-   * @return the container
-   */
-  public ContainerReference getContainer() {
-    return container;
+  public WorkflowDefinitionReference getDefinition() {
+    return definition;
   }
 }
 

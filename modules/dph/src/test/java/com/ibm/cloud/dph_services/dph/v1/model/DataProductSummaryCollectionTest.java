@@ -14,6 +14,7 @@
 package com.ibm.cloud.dph_services.dph.v1.model;
 
 import com.ibm.cloud.dph_services.dph.v1.model.ContainerReference;
+import com.ibm.cloud.dph_services.dph.v1.model.DataProductDraftVersionRelease;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductSummary;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductSummaryCollection;
 import com.ibm.cloud.dph_services.dph.v1.model.FirstPage;

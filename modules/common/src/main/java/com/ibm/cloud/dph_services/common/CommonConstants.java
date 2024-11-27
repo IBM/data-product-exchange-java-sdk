@@ -103,4 +103,5 @@ public class CommonConstants {
     public static final String ATTACHMENT = "attachment";
     public static final String UPLOAD_URL = "upload_url";
     public static final String RELEASE_ID = "release_id";
+    public static final String CHECK_CALLER_APPROVER = "check_caller_approval";
 }

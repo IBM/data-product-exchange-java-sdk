@@ -34,9 +34,11 @@ public class GetDataProductReleaseOptionsTest {
     GetDataProductReleaseOptions getDataProductReleaseOptionsModel = new GetDataProductReleaseOptions.Builder()
       .dataProductId("testString")
       .releaseId("testString")
+      .checkCallerApproval(false)
       .build();
     assertEquals(getDataProductReleaseOptionsModel.dataProductId(), "testString");
     assertEquals(getDataProductReleaseOptionsModel.releaseId(), "testString");
+    assertEquals(getDataProductReleaseOptionsModel.checkCallerApproval(), Boolean.valueOf(false));
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

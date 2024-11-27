@@ -21,6 +21,7 @@ import com.ibm.cloud.dph_services.dph.v1.model.CreateDataProductDraftOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.CreateDataProductOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.CreateDraftContractTermsDocumentOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProduct;
+import com.ibm.cloud.dph_services.dph.v1.model.DataProductDraftVersionRelease;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductDraftsPager;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductIdentity;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductReleasesPager;
@@ -144,7 +145,7 @@ public class DphExamples {
       System.out.println("initialize() result:");
       // begin-initialize
       InitializeOptions initializeOptions = new InitializeOptions.Builder()
-        .include(java.util.Arrays.asList("delivery_methods", "domains_multi_industry", "data_product_samples", "workflows", "project"))
+        .include(java.util.Arrays.asList("delivery_methods", "domains_multi_industry", "data_product_samples", "workflows", "project", "catalog_configurations"))
         .build();
 
       Response<InitializeResource> response = dphService.initialize(initializeOptions).execute();
@@ -215,8 +216,12 @@ public class DphExamples {
       AssetPrototype assetPrototypeModel = new AssetPrototype.Builder()
         .container(containerIdentityModel)
         .build();
+      DataProductDraftVersionRelease dataProductDraftVersionReleaseModel = new DataProductDraftVersionRelease.Builder()
+        .id("8bf83660-11fe-4427-a72a-8d8359af24e3")
+        .build();
       DataProductIdentity dataProductIdentityModel = new DataProductIdentity.Builder()
         .id("b38df608-d34b-4d58-8136-ed25e6c6684e")
+        .release(dataProductDraftVersionReleaseModel)
         .build();
       CreateDataProductDraftOptions createDataProductDraftOptions = new CreateDataProductDraftOptions.Builder()
         .dataProductId(createNewDraftByDataProductIdLink)
@@ -260,7 +265,6 @@ public class DphExamples {
         .contractTermsId(createAContractTermsDocByContractTermsIdLink)
         .type("terms_and_conditions")
         .name("Terms and conditions document")
-        .id("b38df608-d34b-4d58-8136-ed25e6c6684e")
         .build();
 
       Response<ContractTermsDocument> response = dphService.createDraftContractTermsDocument(createDraftContractTermsDocumentOptions).execute();
@@ -269,11 +273,11 @@ public class DphExamples {
       System.out.println(contractTermsDocument);
       // end-create_draft_contract_terms_document
 
-      getReleaseContractDocumentByDocumentIdLink = contractTermsDocument.id();
-      deleteContractTermsDocumentByDocumentIdLink = contractTermsDocument.id();
-      getContractTermsDocumentByIdDocumentIdLink = contractTermsDocument.id();
-      updateContractTermsDocumentByDocumentIdLink = contractTermsDocument.id();
-      completeContractTermsDocumentByDocumentIdLink = contractTermsDocument.id();
+      getReleaseContractDocumentByDocumentIdLink = contractTermsDocument.getId();
+      deleteContractTermsDocumentByDocumentIdLink = contractTermsDocument.getId();
+      getContractTermsDocumentByIdDocumentIdLink = contractTermsDocument.getId();
+      updateContractTermsDocumentByDocumentIdLink = contractTermsDocument.getId();
+      completeContractTermsDocumentByDocumentIdLink = contractTermsDocument.getId();
     } catch (ServiceResponseException e) {
         logger.error(String.format("Service returned status code %s: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);

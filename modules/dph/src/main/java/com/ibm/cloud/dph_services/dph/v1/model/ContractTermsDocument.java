@@ -225,7 +225,7 @@ public class ContractTermsDocument extends GenericModel {
    *
    * @return the id
    */
-  public String id() {
+  public String getId() {
     return id;
   }
 

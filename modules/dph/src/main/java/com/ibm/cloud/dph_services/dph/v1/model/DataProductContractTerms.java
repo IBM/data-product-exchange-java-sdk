@@ -16,6 +16,7 @@ package com.ibm.cloud.dph_services.dph.v1.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
@@ -26,6 +27,8 @@ public class DataProductContractTerms extends GenericModel {
   protected AssetReference asset;
   protected String id;
   protected List<ContractTermsDocument> documents;
+  @SerializedName("error_msg")
+  protected String errorMsg;
 
   /**
    * Builder.
@@ -34,6 +37,7 @@ public class DataProductContractTerms extends GenericModel {
     private AssetReference asset;
     private String id;
     private List<ContractTermsDocument> documents;
+    private String errorMsg;
 
     /**
      * Instantiates a new Builder from an existing DataProductContractTerms instance.
@@ -44,6 +48,7 @@ public class DataProductContractTerms extends GenericModel {
       this.asset = dataProductContractTerms.asset;
       this.id = dataProductContractTerms.id;
       this.documents = dataProductContractTerms.documents;
+      this.errorMsg = dataProductContractTerms.errorMsg;
     }
 
     /**
@@ -110,6 +115,17 @@ public class DataProductContractTerms extends GenericModel {
       this.documents = documents;
       return this;
     }
+
+    /**
+     * Set the errorMsg.
+     *
+     * @param errorMsg the errorMsg
+     * @return the DataProductContractTerms builder
+     */
+    public Builder errorMsg(String errorMsg) {
+      this.errorMsg = errorMsg;
+      return this;
+    }
   }
 
   protected DataProductContractTerms() { }
@@ -118,6 +134,7 @@ public class DataProductContractTerms extends GenericModel {
     asset = builder.asset;
     id = builder.id;
     documents = builder.documents;
+    errorMsg = builder.errorMsg;
   }
 
   /**
@@ -158,6 +175,15 @@ public class DataProductContractTerms extends GenericModel {
    */
   public List<ContractTermsDocument> documents() {
     return documents;
+  }
+
+  /**
+   * Gets the errorMsg.
+   *
+   * @return the errorMsg
+   */
+  public String errorMsg() {
+    return errorMsg;
   }
 }
 

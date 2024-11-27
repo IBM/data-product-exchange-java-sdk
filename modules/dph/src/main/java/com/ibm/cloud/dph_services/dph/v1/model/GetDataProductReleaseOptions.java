@@ -22,6 +22,7 @@ public class GetDataProductReleaseOptions extends GenericModel {
 
   protected String dataProductId;
   protected String releaseId;
+  protected Boolean checkCallerApproval;
 
   /**
    * Builder.
@@ -29,6 +30,7 @@ public class GetDataProductReleaseOptions extends GenericModel {
   public static class Builder {
     private String dataProductId;
     private String releaseId;
+    private Boolean checkCallerApproval;
 
     /**
      * Instantiates a new Builder from an existing GetDataProductReleaseOptions instance.
@@ -38,6 +40,7 @@ public class GetDataProductReleaseOptions extends GenericModel {
     private Builder(GetDataProductReleaseOptions getDataProductReleaseOptions) {
       this.dataProductId = getDataProductReleaseOptions.dataProductId;
       this.releaseId = getDataProductReleaseOptions.releaseId;
+      this.checkCallerApproval = getDataProductReleaseOptions.checkCallerApproval;
     }
 
     /**
@@ -87,6 +90,17 @@ public class GetDataProductReleaseOptions extends GenericModel {
       this.releaseId = releaseId;
       return this;
     }
+
+    /**
+     * Set the checkCallerApproval.
+     *
+     * @param checkCallerApproval the checkCallerApproval
+     * @return the GetDataProductReleaseOptions builder
+     */
+    public Builder checkCallerApproval(Boolean checkCallerApproval) {
+      this.checkCallerApproval = checkCallerApproval;
+      return this;
+    }
   }
 
   protected GetDataProductReleaseOptions() { }
@@ -98,6 +112,7 @@ public class GetDataProductReleaseOptions extends GenericModel {
       "releaseId cannot be empty");
     dataProductId = builder.dataProductId;
     releaseId = builder.releaseId;
+    checkCallerApproval = builder.checkCallerApproval;
   }
 
   /**
@@ -129,6 +144,18 @@ public class GetDataProductReleaseOptions extends GenericModel {
    */
   public String releaseId() {
     return releaseId;
+  }
+
+  /**
+   * Gets the checkCallerApproval.
+   *
+   * If the value is true, then it will be verfied whether the caller is present in the data access request pre-approved
+   * user list.
+   *
+   * @return the checkCallerApproval
+   */
+  public Boolean checkCallerApproval() {
+    return checkCallerApproval;
   }
 }
 
