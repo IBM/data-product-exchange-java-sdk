@@ -13,14 +13,26 @@
 
 package com.ibm.cloud.dph_services.dph.v1;
 
-import com.google.gson.JsonObject;
-import com.ibm.cloud.dph_services.dph.v1.model.AssetListAccessControl;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.fail;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Ignore;
+import org.testng.annotations.Test;
+
 import com.ibm.cloud.dph_services.dph.v1.model.AssetPartReference;
 import com.ibm.cloud.dph_services.dph.v1.model.AssetPrototype;
 import com.ibm.cloud.dph_services.dph.v1.model.AssetReference;
 import com.ibm.cloud.dph_services.dph.v1.model.BucketResponse;
 import com.ibm.cloud.dph_services.dph.v1.model.BucketValidationResponse;
-import com.ibm.cloud.dph_services.dph.v1.model.CompleteDraftContractTermsDocumentOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.ContainerIdentity;
 import com.ibm.cloud.dph_services.dph.v1.model.ContainerReference;
 import com.ibm.cloud.dph_services.dph.v1.model.ContractSchema;
@@ -39,7 +51,6 @@ import com.ibm.cloud.dph_services.dph.v1.model.ContractTest;
 import com.ibm.cloud.dph_services.dph.v1.model.CreateContractTemplateOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.CreateDataAssetVisualizationOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.CreateDataProductDomainOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.CreateDataProductDraftOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.CreateDataProductOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.CreateDataProductSubdomainOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.CreateDraftContractTermsDocumentOptions;
@@ -50,45 +61,27 @@ import com.ibm.cloud.dph_services.dph.v1.model.DataProduct;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductCollection;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductContractTemplate;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductContractTemplateCollection;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductCustomWorkflowDefinition;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductDomain;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductDomainCollection;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductDraft;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductDraftCollection;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductDraftDataProduct;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductDraftPrototype;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductDraftSummary;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductDraftSummaryDataProduct;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductDraftVersionRelease;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductDraftsPager;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductIdentity;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductOrderAccessRequest;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductPart;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductRelease;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductReleaseCollection;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductReleaseDataProduct;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductReleaseSummary;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductReleaseSummaryDataProduct;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductReleasesPager;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductSummary;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductVersionCollection;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductVersionSummary;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductVersionSummaryDataProduct;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductWorkflows;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductsPager;
 import com.ibm.cloud.dph_services.dph.v1.model.DeleteDataProductContractTemplateOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.DeleteDataProductDraftOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.DeleteDomainOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.DeleteDraftContractTermsDocumentOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.DeliveryMethod;
-import com.ibm.cloud.dph_services.dph.v1.model.DeliveryMethodPropertiesModel;
 import com.ibm.cloud.dph_services.dph.v1.model.Description;
 import com.ibm.cloud.dph_services.dph.v1.model.Domain;
-import com.ibm.cloud.dph_services.dph.v1.model.EngineDetailsModel;
-import com.ibm.cloud.dph_services.dph.v1.model.ErrorExtraResource;
 import com.ibm.cloud.dph_services.dph.v1.model.ErrorMessage;
-import com.ibm.cloud.dph_services.dph.v1.model.ErrorModelResource;
-import com.ibm.cloud.dph_services.dph.v1.model.FirstPage;
 import com.ibm.cloud.dph_services.dph.v1.model.GetContractTemplateOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.GetDataProductByDomainOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.GetDataProductDraftContractTermsOptions;
@@ -104,7 +97,6 @@ import com.ibm.cloud.dph_services.dph.v1.model.GetServiceIdCredentialsOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.InitializeOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.InitializeResource;
 import com.ibm.cloud.dph_services.dph.v1.model.InitializeSubDomain;
-import com.ibm.cloud.dph_services.dph.v1.model.InitializedOption;
 import com.ibm.cloud.dph_services.dph.v1.model.JsonPatchOperation;
 import com.ibm.cloud.dph_services.dph.v1.model.ListDataProductContractTemplateOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.ListDataProductDomainsOptions;
@@ -112,14 +104,8 @@ import com.ibm.cloud.dph_services.dph.v1.model.ListDataProductDraftsOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.ListDataProductReleasesOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.ListDataProductsOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.ManageApiKeysOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.MemberRolesSchema;
-import com.ibm.cloud.dph_services.dph.v1.model.NextPage;
 import com.ibm.cloud.dph_services.dph.v1.model.Overview;
 import com.ibm.cloud.dph_services.dph.v1.model.Pricing;
-import com.ibm.cloud.dph_services.dph.v1.model.ProducerInputModel;
-import com.ibm.cloud.dph_services.dph.v1.model.PropertiesSchema;
-import com.ibm.cloud.dph_services.dph.v1.model.ProvidedCatalogWorkflows;
-import com.ibm.cloud.dph_services.dph.v1.model.ProvidedWorkflowResource;
 import com.ibm.cloud.dph_services.dph.v1.model.PublishDataProductDraftOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.ReinitiateDataAssetVisualizationOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.ReplaceDataProductDraftContractTermsOptions;
@@ -132,26 +118,13 @@ import com.ibm.cloud.dph_services.dph.v1.model.UpdateDataProductDraftContractTer
 import com.ibm.cloud.dph_services.dph.v1.model.UpdateDataProductDraftOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.UpdateDataProductReleaseOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.UpdateDraftContractTermsDocumentOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.UseCase;
 import com.ibm.cloud.dph_services.dph.v1.model.Visualization;
-import com.ibm.cloud.dph_services.dph.v1.model.WorkflowDefinitionReference;
 import com.ibm.cloud.dph_services.dph.v1.utils.TestUtilities;
 import com.ibm.cloud.dph_services.test.SdkIntegrationTestBase;
 import com.ibm.cloud.sdk.core.http.Response;
 import com.ibm.cloud.sdk.core.service.exception.ServiceResponseException;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
 import com.ibm.cloud.sdk.core.util.CredentialUtils;
-import com.ibm.cloud.sdk.core.util.DateUtils;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Ignore;
-import org.testng.annotations.Test;
-import static org.testng.Assert.*;
 
 /**
  * Integration test class for the Dph service.
@@ -714,7 +687,7 @@ public class DphIT extends SdkIntegrationTestBase {
   }
 
   @Test(dependsOnMethods = { "testGetDataProductRelease" })
-  public void testUpdateDataProductRelease() throws Exception g{
+  public void testUpdateDataProductRelease() throws Exception {
     try {
       JsonPatchOperation jsonPatchOperationModel = new JsonPatchOperation.Builder()
               .op("replace")
