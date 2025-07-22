@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -79,7 +79,7 @@ public class DataProductsPager {
     }
     this.options = builder.build();
 
-    DataProductSummaryCollection result = client.listDataProducts(options).execute().getResult();
+    DataProductCollection result = client.listDataProducts(options).execute().getResult();
 
     String next = null;
     if (result.getNext() != null) {

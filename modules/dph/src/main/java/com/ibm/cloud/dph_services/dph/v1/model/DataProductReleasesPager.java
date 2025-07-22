@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -66,9 +66,9 @@ public class DataProductReleasesPager {
 
   /**
    * Returns the next page of results.
-   * @return a List&lt;DataProductVersionSummary&gt; that contains the next page of results
+   * @return a List&lt;DataProductReleaseSummary&gt; that contains the next page of results
    */
-  public List<DataProductVersionSummary> getNext() {
+  public List<DataProductReleaseSummary> getNext() {
     if (!hasNext()) {
       throw new NoSuchElementException("No more results available");
     }
@@ -95,12 +95,12 @@ public class DataProductReleasesPager {
 
   /**
    * Returns all results by invoking getNext() repeatedly until all pages of results have been retrieved.
-   * @return a List&lt;DataProductVersionSummary&gt; containing all results returned by the "listDataProductReleases" method
+   * @return a List&lt;DataProductReleaseSummary&gt; containing all results returned by the "listDataProductReleases" method
    */
-  public List<DataProductVersionSummary> getAll() {
-    List<DataProductVersionSummary> results = new ArrayList<>();
+  public List<DataProductReleaseSummary> getAll() {
+    List<DataProductReleaseSummary> results = new ArrayList<>();
     while (hasNext()) {
-      List<DataProductVersionSummary> nextPage = getNext();
+      List<DataProductReleaseSummary> nextPage = getNext();
       results.addAll(nextPage);
     }
     return results;

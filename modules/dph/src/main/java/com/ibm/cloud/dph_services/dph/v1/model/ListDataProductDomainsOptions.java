@@ -1,0 +1,94 @@
+/*
+ * (C) Copyright IBM Corp. 2025.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+ * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+ * specific language governing permissions and limitations under the License.
+ */
+
+package com.ibm.cloud.dph_services.dph.v1.model;
+
+import com.ibm.cloud.sdk.core.service.model.GenericModel;
+
+/**
+ * The listDataProductDomains options.
+ */
+public class ListDataProductDomainsOptions extends GenericModel {
+
+  protected String containerId;
+
+  /**
+   * Builder.
+   */
+  public static class Builder {
+    private String containerId;
+
+    /**
+     * Instantiates a new Builder from an existing ListDataProductDomainsOptions instance.
+     *
+     * @param listDataProductDomainsOptions the instance to initialize the Builder with
+     */
+    private Builder(ListDataProductDomainsOptions listDataProductDomainsOptions) {
+      this.containerId = listDataProductDomainsOptions.containerId;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public Builder() {
+    }
+
+    /**
+     * Builds a ListDataProductDomainsOptions.
+     *
+     * @return the new ListDataProductDomainsOptions instance
+     */
+    public ListDataProductDomainsOptions build() {
+      return new ListDataProductDomainsOptions(this);
+    }
+
+    /**
+     * Set the containerId.
+     *
+     * @param containerId the containerId
+     * @return the ListDataProductDomainsOptions builder
+     */
+    public Builder containerId(String containerId) {
+      this.containerId = containerId;
+      return this;
+    }
+  }
+
+  protected ListDataProductDomainsOptions() { }
+
+  protected ListDataProductDomainsOptions(Builder builder) {
+    containerId = builder.containerId;
+  }
+
+  /**
+   * New builder.
+   *
+   * @return a ListDataProductDomainsOptions builder
+   */
+  public Builder newBuilder() {
+    return new Builder(this);
+  }
+
+  /**
+   * Gets the containerId.
+   *
+   * Container ID of the data product catalog. If not supplied, the data product catalog is looked up by using the uid
+   * of the default data product catalog.
+   *
+   * @return the containerId
+   */
+  public String containerId() {
+    return containerId;
+  }
+}
+

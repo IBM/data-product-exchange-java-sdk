@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -23,6 +23,7 @@ public class DataProductSummary extends GenericModel {
   protected String id;
   protected DataProductDraftVersionRelease release;
   protected ContainerReference container;
+  protected String name;
 
   protected DataProductSummary() { }
 
@@ -57,6 +58,17 @@ public class DataProductSummary extends GenericModel {
    */
   public ContainerReference getContainer() {
     return container;
+  }
+
+  /**
+   * Gets the name.
+   *
+   * Data product name.
+   *
+   * @return the name
+   */
+  public String getName() {
+    return name;
   }
 }
 

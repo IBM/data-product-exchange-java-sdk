@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -13,6 +13,7 @@
 
 package com.ibm.cloud.dph_services.dph.v1.model;
 
+import java.util.Date;
 import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
@@ -53,7 +54,18 @@ public class DataProductVersionSummary extends GenericModel {
   protected List<UseCase> useCases;
   protected List<String> types;
   @SerializedName("contract_terms")
-  protected List<DataProductContractTerms> contractTerms;
+  protected List<ContractTerms> contractTerms;
+  protected Domain domain;
+  @SerializedName("parts_out")
+  protected List<DataProductPart> partsOut;
+  protected DataProductWorkflows workflows;
+  @SerializedName("dataview_enabled")
+  protected Boolean dataviewEnabled;
+  protected String comments;
+  @SerializedName("access_control")
+  protected AssetListAccessControl accessControl;
+  @SerializedName("last_updated_at")
+  protected Date lastUpdatedAt;
   @SerializedName("is_restricted")
   protected Boolean isRestricted;
   protected String id;
@@ -157,8 +169,89 @@ public class DataProductVersionSummary extends GenericModel {
    *
    * @return the contractTerms
    */
-  public List<DataProductContractTerms> getContractTerms() {
+  public List<ContractTerms> getContractTerms() {
     return contractTerms;
+  }
+
+  /**
+   * Gets the domain.
+   *
+   * Domain that the data product version belongs to. If this is the first version of a data product, this field is
+   * required. If this is a new version of an existing data product, the domain will default to the domain of the
+   * previous version of the data product.
+   *
+   * @return the domain
+   */
+  public Domain getDomain() {
+    return domain;
+  }
+
+  /**
+   * Gets the partsOut.
+   *
+   * The outgoing parts of this data product version to be delivered to consumers. If this is the first version of a
+   * data product, this field defaults to an empty list. If this is a new version of an existing data product, the data
+   * product parts will default to the parts list from the previous version of the data product.
+   *
+   * @return the partsOut
+   */
+  public List<DataProductPart> getPartsOut() {
+    return partsOut;
+  }
+
+  /**
+   * Gets the workflows.
+   *
+   * The workflows associated with the data product version.
+   *
+   * @return the workflows
+   */
+  public DataProductWorkflows getWorkflows() {
+    return workflows;
+  }
+
+  /**
+   * Gets the dataviewEnabled.
+   *
+   * Indicates whether the dataView has enabled for data product.
+   *
+   * @return the dataviewEnabled
+   */
+  public Boolean isDataviewEnabled() {
+    return dataviewEnabled;
+  }
+
+  /**
+   * Gets the comments.
+   *
+   * Comments by a producer that are provided either at the time of data product version creation or retiring.
+   *
+   * @return the comments
+   */
+  public String getComments() {
+    return comments;
+  }
+
+  /**
+   * Gets the accessControl.
+   *
+   * Access control object.
+   *
+   * @return the accessControl
+   */
+  public AssetListAccessControl getAccessControl() {
+    return accessControl;
+  }
+
+  /**
+   * Gets the lastUpdatedAt.
+   *
+   * Timestamp of last asset update.
+   *
+   * @return the lastUpdatedAt
+   */
+  public Date getLastUpdatedAt() {
+    return lastUpdatedAt;
   }
 
   /**
@@ -186,6 +279,8 @@ public class DataProductVersionSummary extends GenericModel {
 
   /**
    * Gets the asset.
+   *
+   * The reference schema for a asset in a container.
    *
    * @return the asset
    */
