@@ -87,9 +87,9 @@ public class CommonConstants {
     public static final String GET_DRAFT_CONTRACT_TERMS_DOCUMENT = "getDraftContractTermsDocument";
     public static final String DELETE_DRAFT_CONTRACT_TERMS_DOCUMENT = "deleteDraftContractTermsDocument";
     public static final String UPDATE_DRAFT_CONTRACT_TERMS_DOCUMENT = "updateDraftContractTermsDocument";
-    public static final String REPLACE_DRAFT_CONTRACT_TERMS ="replaceDataProductDraftContractTerms";
-    public static final String UPDATE_DRAFT_CONTRACT_TERMS ="updateDataProductDraftContractTerms";
-    public static final String GET_DRAFT_CONTRACT_TERMS ="getDataProductDraftContractTerms";
+    public static final String REPLACE_DRAFT_CONTRACT_TERMS = "replaceDataProductDraftContractTerms";
+    public static final String UPDATE_DRAFT_CONTRACT_TERMS = "updateDataProductDraftContractTerms";
+    public static final String GET_DRAFT_CONTRACT_TERMS = "getDataProductDraftContractTerms";
     public static final String PUBLISH_DATA_PRODUCT_DRAFT = "publishDataProductDraft";
     public static final String GET_DATA_PRODUCT_RELEASE = "getDataProductRelease";
     public static final String UPDATE_DATA_PRODUCT_RELEASE = "updateDataProductRelease";
@@ -140,7 +140,7 @@ public class CommonConstants {
     public static final String ROLES = "roles";
     public static final String PRICE = "price";
     public static final String SLA = "sla";
-    public static final String SUPPORT_AND_COMMUNICATION ="support_and_communication";
+    public static final String SUPPORT_AND_COMMUNICATION = "support_and_communication";
     public static final String CUSTOM_PROPERTIES = "custom_properties";
     public static final String CONTRACT_TEST = "contract_test";
     public static final String SCHEMA = "schema";
