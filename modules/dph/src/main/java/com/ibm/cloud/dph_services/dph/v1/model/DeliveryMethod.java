@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -22,6 +22,7 @@ public class DeliveryMethod extends GenericModel {
 
   protected String id;
   protected ContainerReference container;
+  protected DeliveryMethodPropertiesModel getproperties;
 
   /**
    * Builder.
@@ -29,6 +30,7 @@ public class DeliveryMethod extends GenericModel {
   public static class Builder {
     private String id;
     private ContainerReference container;
+    private DeliveryMethodPropertiesModel getproperties;
 
     /**
      * Instantiates a new Builder from an existing DeliveryMethod instance.
@@ -38,6 +40,7 @@ public class DeliveryMethod extends GenericModel {
     private Builder(DeliveryMethod deliveryMethod) {
       this.id = deliveryMethod.id;
       this.container = deliveryMethod.container;
+      this.getproperties = deliveryMethod.getproperties;
     }
 
     /**
@@ -87,6 +90,17 @@ public class DeliveryMethod extends GenericModel {
       this.container = container;
       return this;
     }
+
+    /**
+     * Set the getproperties.
+     *
+     * @param getproperties the getproperties
+     * @return the DeliveryMethod builder
+     */
+    public Builder getproperties(DeliveryMethodPropertiesModel getproperties) {
+      this.getproperties = getproperties;
+      return this;
+    }
   }
 
   protected DeliveryMethod() { }
@@ -98,6 +112,7 @@ public class DeliveryMethod extends GenericModel {
       "container cannot be null");
     id = builder.id;
     container = builder.container;
+    getproperties = builder.getproperties;
   }
 
   /**
@@ -129,6 +144,17 @@ public class DeliveryMethod extends GenericModel {
    */
   public ContainerReference container() {
     return container;
+  }
+
+  /**
+   * Gets the getproperties.
+   *
+   * The propertiess of the delivery method.
+   *
+   * @return the getproperties
+   */
+  public DeliveryMethodPropertiesModel getproperties() {
+    return getproperties;
   }
 }
 

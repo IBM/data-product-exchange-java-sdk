@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -15,6 +15,7 @@ package com.ibm.cloud.dph_services.dph.v1.model;
 
 import java.util.List;
 
+import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
@@ -25,7 +26,9 @@ public class DataProductReleaseCollection extends GenericModel {
   protected Long limit;
   protected FirstPage first;
   protected NextPage next;
-  protected List<DataProductVersionSummary> releases;
+  @SerializedName("total_results")
+  protected Long totalResults;
+  protected List<DataProductReleaseSummary> releases;
 
   protected DataProductReleaseCollection() { }
 
@@ -63,13 +66,24 @@ public class DataProductReleaseCollection extends GenericModel {
   }
 
   /**
+   * Gets the totalResults.
+   *
+   * Indicates the total number of results returned.
+   *
+   * @return the totalResults
+   */
+  public Long getTotalResults() {
+    return totalResults;
+  }
+
+  /**
    * Gets the releases.
    *
    * Collection of data product releases.
    *
    * @return the releases
    */
-  public List<DataProductVersionSummary> getReleases() {
+  public List<DataProductReleaseSummary> getReleases() {
     return releases;
   }
 }

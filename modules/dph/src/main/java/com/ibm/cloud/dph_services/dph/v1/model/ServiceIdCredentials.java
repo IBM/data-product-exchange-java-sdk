@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -13,6 +13,8 @@
 
 package com.ibm.cloud.dph_services.dph.v1.model;
 
+import java.util.Date;
+
 import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
@@ -23,7 +25,7 @@ public class ServiceIdCredentials extends GenericModel {
 
   protected String name;
   @SerializedName("created_at")
-  protected String createdAt;
+  protected Date createdAt;
 
   protected ServiceIdCredentials() { }
 
@@ -45,7 +47,7 @@ public class ServiceIdCredentials extends GenericModel {
    *
    * @return the createdAt
    */
-  public String getCreatedAt() {
+  public Date getCreatedAt() {
     return createdAt;
   }
 }

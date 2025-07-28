@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -22,6 +22,7 @@ public class RetireDataProductReleaseOptions extends GenericModel {
 
   protected String dataProductId;
   protected String releaseId;
+  protected Boolean revokeAccess;
 
   /**
    * Builder.
@@ -29,6 +30,7 @@ public class RetireDataProductReleaseOptions extends GenericModel {
   public static class Builder {
     private String dataProductId;
     private String releaseId;
+    private Boolean revokeAccess;
 
     /**
      * Instantiates a new Builder from an existing RetireDataProductReleaseOptions instance.
@@ -38,6 +40,7 @@ public class RetireDataProductReleaseOptions extends GenericModel {
     private Builder(RetireDataProductReleaseOptions retireDataProductReleaseOptions) {
       this.dataProductId = retireDataProductReleaseOptions.dataProductId;
       this.releaseId = retireDataProductReleaseOptions.releaseId;
+      this.revokeAccess = retireDataProductReleaseOptions.revokeAccess;
     }
 
     /**
@@ -87,6 +90,17 @@ public class RetireDataProductReleaseOptions extends GenericModel {
       this.releaseId = releaseId;
       return this;
     }
+
+    /**
+     * Set the revokeAccess.
+     *
+     * @param revokeAccess the revokeAccess
+     * @return the RetireDataProductReleaseOptions builder
+     */
+    public Builder revokeAccess(Boolean revokeAccess) {
+      this.revokeAccess = revokeAccess;
+      return this;
+    }
   }
 
   protected RetireDataProductReleaseOptions() { }
@@ -98,6 +112,7 @@ public class RetireDataProductReleaseOptions extends GenericModel {
       "releaseId cannot be empty");
     dataProductId = builder.dataProductId;
     releaseId = builder.releaseId;
+    revokeAccess = builder.revokeAccess;
   }
 
   /**
@@ -129,6 +144,18 @@ public class RetireDataProductReleaseOptions extends GenericModel {
    */
   public String releaseId() {
     return releaseId;
+  }
+
+  /**
+   * Gets the revokeAccess.
+   *
+   * Revoke's Access from all the Subscriptions of the Data Product. No user's can able to see the subscribed assets
+   * anymore.
+   *
+   * @return the revokeAccess
+   */
+  public Boolean revokeAccess() {
+    return revokeAccess;
   }
 }
 

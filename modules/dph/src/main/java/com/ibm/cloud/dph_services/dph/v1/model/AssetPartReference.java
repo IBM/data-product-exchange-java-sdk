@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -21,6 +21,7 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class AssetPartReference extends GenericModel {
 
   protected String id;
+  protected String name;
   protected ContainerReference container;
   protected String type;
 
@@ -29,6 +30,7 @@ public class AssetPartReference extends GenericModel {
    */
   public static class Builder {
     private String id;
+    private String name;
     private ContainerReference container;
     private String type;
 
@@ -39,6 +41,7 @@ public class AssetPartReference extends GenericModel {
      */
     private Builder(AssetPartReference assetPartReference) {
       this.id = assetPartReference.id;
+      this.name = assetPartReference.name;
       this.container = assetPartReference.container;
       this.type = assetPartReference.type;
     }
@@ -79,6 +82,17 @@ public class AssetPartReference extends GenericModel {
     }
 
     /**
+     * Set the name.
+     *
+     * @param name the name
+     * @return the AssetPartReference builder
+     */
+    public Builder name(String name) {
+      this.name = name;
+      return this;
+    }
+
+    /**
      * Set the container.
      *
      * @param container the container
@@ -107,6 +121,7 @@ public class AssetPartReference extends GenericModel {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.container,
       "container cannot be null");
     id = builder.id;
+    name = builder.name;
     container = builder.container;
     type = builder.type;
   }
@@ -129,6 +144,17 @@ public class AssetPartReference extends GenericModel {
    */
   public String id() {
     return id;
+  }
+
+  /**
+   * Gets the name.
+   *
+   * Asset name.
+   *
+   * @return the name
+   */
+  public String name() {
+    return name;
   }
 
   /**
