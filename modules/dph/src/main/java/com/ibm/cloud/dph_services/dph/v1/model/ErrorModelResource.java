@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -12,8 +12,6 @@
  */
 
 package com.ibm.cloud.dph_services.dph.v1.model;
-
-import java.util.Map;
 
 import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
@@ -87,15 +85,125 @@ public class ErrorModelResource extends GenericModel {
     String NOT_IMPLEMENTED = "not_implemented";
     /** feature_not_enabled. */
     String FEATURE_NOT_ENABLED = "feature_not_enabled";
+    /** missing_asset_details. */
+    String MISSING_ASSET_DETAILS = "missing_asset_details";
   }
 
   protected String code;
   protected String message;
-  protected Map<String, Object> extra;
+  protected ErrorExtraResource extra;
   @SerializedName("more_info")
   protected String moreInfo;
 
+  /**
+   * Builder.
+   */
+  public static class Builder {
+    private String code;
+    private String message;
+    private ErrorExtraResource extra;
+    private String moreInfo;
+
+    /**
+     * Instantiates a new Builder from an existing ErrorModelResource instance.
+     *
+     * @param errorModelResource the instance to initialize the Builder with
+     */
+    private Builder(ErrorModelResource errorModelResource) {
+      this.code = errorModelResource.code;
+      this.message = errorModelResource.message;
+      this.extra = errorModelResource.extra;
+      this.moreInfo = errorModelResource.moreInfo;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public Builder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param code the code
+     */
+    public Builder(String code) {
+      this.code = code;
+    }
+
+    /**
+     * Builds a ErrorModelResource.
+     *
+     * @return the new ErrorModelResource instance
+     */
+    public ErrorModelResource build() {
+      return new ErrorModelResource(this);
+    }
+
+    /**
+     * Set the code.
+     *
+     * @param code the code
+     * @return the ErrorModelResource builder
+     */
+    public Builder code(String code) {
+      this.code = code;
+      return this;
+    }
+
+    /**
+     * Set the message.
+     *
+     * @param message the message
+     * @return the ErrorModelResource builder
+     */
+    public Builder message(String message) {
+      this.message = message;
+      return this;
+    }
+
+    /**
+     * Set the extra.
+     *
+     * @param extra the extra
+     * @return the ErrorModelResource builder
+     */
+    public Builder extra(ErrorExtraResource extra) {
+      this.extra = extra;
+      return this;
+    }
+
+    /**
+     * Set the moreInfo.
+     *
+     * @param moreInfo the moreInfo
+     * @return the ErrorModelResource builder
+     */
+    public Builder moreInfo(String moreInfo) {
+      this.moreInfo = moreInfo;
+      return this;
+    }
+  }
+
   protected ErrorModelResource() { }
+
+  protected ErrorModelResource(Builder builder) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.code,
+      "code cannot be null");
+    code = builder.code;
+    message = builder.message;
+    extra = builder.extra;
+    moreInfo = builder.moreInfo;
+  }
+
+  /**
+   * New builder.
+   *
+   * @return a ErrorModelResource builder
+   */
+  public Builder newBuilder() {
+    return new Builder(this);
+  }
 
   /**
    * Gets the code.
@@ -104,7 +212,7 @@ public class ErrorModelResource extends GenericModel {
    *
    * @return the code
    */
-  public String getCode() {
+  public String code() {
     return code;
   }
 
@@ -115,18 +223,18 @@ public class ErrorModelResource extends GenericModel {
    *
    * @return the message
    */
-  public String getMessage() {
+  public String message() {
     return message;
   }
 
   /**
    * Gets the extra.
    *
-   * Extra information about the error.
+   * Detailed error information.
    *
    * @return the extra
    */
-  public Map<String, Object> getExtra() {
+  public ErrorExtraResource extra() {
     return extra;
   }
 
@@ -137,7 +245,7 @@ public class ErrorModelResource extends GenericModel {
    *
    * @return the moreInfo
    */
-  public String getMoreInfo() {
+  public String moreInfo() {
     return moreInfo;
   }
 }

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -41,10 +41,12 @@ public class AssetPartReferenceTest {
 
     AssetPartReference assetPartReferenceModel = new AssetPartReference.Builder()
       .id("2b0bf220-079c-11ee-be56-0242ac120002")
+      .name("testString")
       .container(containerReferenceModel)
       .type("data_asset")
       .build();
     assertEquals(assetPartReferenceModel.id(), "2b0bf220-079c-11ee-be56-0242ac120002");
+    assertEquals(assetPartReferenceModel.name(), "testString");
     assertEquals(assetPartReferenceModel.container(), containerReferenceModel);
     assertEquals(assetPartReferenceModel.type(), "data_asset");
 
@@ -53,6 +55,7 @@ public class AssetPartReferenceTest {
     AssetPartReference assetPartReferenceModelNew = TestUtilities.deserialize(json, AssetPartReference.class);
     assertTrue(assetPartReferenceModelNew instanceof AssetPartReference);
     assertEquals(assetPartReferenceModelNew.id(), "2b0bf220-079c-11ee-be56-0242ac120002");
+    assertEquals(assetPartReferenceModelNew.name(), "testString");
     assertEquals(assetPartReferenceModelNew.container().toString(), containerReferenceModel.toString());
     assertEquals(assetPartReferenceModelNew.type(), "data_asset");
   }

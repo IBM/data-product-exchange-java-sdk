@@ -23,6 +23,8 @@ public class CommonConstants {
     public static final String URL_GET_SERVICEID_CREDENTIALS = "/data_product_exchange/v1/configuration/credentials";
     public static final String URL_INITIALIZE = "/data_product_exchange/v1/configuration/initialize";
     public static final String URL_MANAGE_APIKEYS = "/data_product_exchange/v1/configuration/rotate_credentials";
+    public static final String URL_VISUALIZATION = "/data_product_exchange/v1/data_asset/visualization";
+    public static final String URL_VISUALIZATION_REINITIATE = "/data_product_exchange/v1/data_asset/visualization/reinitiate";
     public static final String URL_LIST_DATA_PRODUCTS = "/data_product_exchange/v1/data_products";
     public static final String URL_CREATE_DATA_PRODUCT = "/data_product_exchange/v1/data_products";
     public static final String URL_GET_DATA_PRODUCT = "/data_product_exchange/v1/data_products/{data_product_id}";
@@ -36,12 +38,30 @@ public class CommonConstants {
     public static final String URL_GET_DRAFT_CONTRACT_TERMS_DOCUMENT = "/data_product_exchange/v1/data_products/{data_product_id}/drafts/{draft_id}/contract_terms/{contract_terms_id}/documents/{document_id}";
     public static final String URL_DELETE_DRAFT_CONTRACT_TERMS_DOCUMENT = "/data_product_exchange/v1/data_products/{data_product_id}/drafts/{draft_id}/contract_terms/{contract_terms_id}/documents/{document_id}";
     public static final String URL_UPDATE_DRAFT_CONTRACT_TERMS_DOCUMENT = "/data_product_exchange/v1/data_products/{data_product_id}/drafts/{draft_id}/contract_terms/{contract_terms_id}/documents/{document_id}";
+    public static final String URL_GET_DRAFT_CONTRACT_TERMS = "/data_product_exchange/v1/data_products/{data_product_id}/drafts/{draft_id}/contract_terms/{contract_terms_id}";
+    public static final String URL_REPLACE_DRAFT_CONTRACT_TERMS = "/data_product_exchange/v1/data_products/{data_product_id}/drafts/{draft_id}/contract_terms/{contract_terms_id}";
+    public static final String URL_UPDATE_DRAFT_CONTRACT_TERMS = "/data_product_exchange/v1/data_products/{data_product_id}/drafts/{draft_id}/contract_terms/{contract_terms_id}";
     public static final String URL_PUBLISH_DATA_PRODUCT_DRAFT = "/data_product_exchange/v1/data_products/{data_product_id}/drafts/{draft_id}/publish";
     public static final String URL_GET_DATA_PRODUCT_RELEASE = "/data_product_exchange/v1/data_products/{data_product_id}/releases/{release_id}";
     public static final String URL_UPDATE_DATA_PRODUCT_RELEASE = "/data_product_exchange/v1/data_products/{data_product_id}/releases/{release_id}";
     public static final String URL_GET_RELEASE_CONTRACT_TERMS_DOCUMENT = "/data_product_exchange/v1/data_products/{data_product_id}/releases/{release_id}/contract_terms/{contract_terms_id}/documents/{document_id}";
     public static final String URL_LIST_DATA_PRODUCT_RELEASES = "/data_product_exchange/v1/data_products/{data_product_id}/releases";
     public static final String URL_RETIRE_DATA_PRODUCT_RELEASE = "/data_product_exchange/v1/data_products/{data_product_id}/releases/{release_id}/retire";
+    public static final String URL_LIST_CONTRACT_TEMPLATE = "/data_product_exchange/v1/contract_templates";
+    public static final String URL_CREATE_CONTRACT_TEMPLATE = "/data_product_exchange/v1/contract_templates";
+    public static final String URL_GET_CONTRACT_TEMPLATE = "/data_product_exchange/v1/contract_templates/{contract_template_id}";
+    public static final String URL_DELETE_CONTRACT_TEMPLATE = "/data_product_exchange/v1/contract_templates/{contract_template_id}";
+    public static final String URL_UPDATE_CONTRACT_TEMPLATE = "/data_product_exchange/v1/contract_templates/{contract_template_id}";
+    public static final String URL_LIST_DOMAINS = "/data_product_exchange/v1/domains";
+    public static final String URL_CREATE_DOMAINS = "/data_product_exchange/v1/domains";
+    public static final String URL_GET_DOMAINS = "/data_product_exchange/v1/domains/{domain_id}";
+    public static final String URL_UPDATE_DOMAINS = "/data_product_exchange/v1/domains/{domain_id}";
+    public static final String URL_DELETE_DOMAINS = "/data_product_exchange/v1/domains/{domain_id}";
+    public static final String URL_GET_DATA_PRODUCT_BY_DOMAIN = "/data_product_exchange/v1/domains/{domain_id}/data_products";
+    public static final String URL_CREATE_SUBDOMAINS = "/data_product_exchange/v1/domains/{domain_id}/subdomains";
+    public static final String URL_CREATE_S3_BUCKET = "/data_product_exchange/v1/bucket";
+    public static final String URL_VALIDATE_BUCKET = "/data_product_exchange/v1/bucket/validate/{bucket_name}";
+
     //Dph Api Headers
     public static final String CONTENT_TYPE_JSON = "application/json";
     public static final String CONTENT_TYPE_PATCH_JSON = "application/json-patch+json";
@@ -52,6 +72,8 @@ public class CommonConstants {
     public static final String GET_SERVICEID_CREDENTIALS = "getServiceIdCredentials";
     public static final String INITIALIZE = "initialize";
     public static final String MANAGE_APIKEYS = "manageApiKeys";
+    public static final String CREATE_DATA_ASSETS_VISUALIZATION = "createDataAssetVisualization";
+    public static final String REINITIATE_VISUALIZATION = "reinitiateDataAssetVisualization";
     public static final String LIST_DATA_PRODUCTS = "listDataProducts";
     public static final String CREATE_DATA_PRODUCT = "createDataProduct";
     public static final String GET_DATA_PRODUCT = "getDataProduct";
@@ -65,6 +87,9 @@ public class CommonConstants {
     public static final String GET_DRAFT_CONTRACT_TERMS_DOCUMENT = "getDraftContractTermsDocument";
     public static final String DELETE_DRAFT_CONTRACT_TERMS_DOCUMENT = "deleteDraftContractTermsDocument";
     public static final String UPDATE_DRAFT_CONTRACT_TERMS_DOCUMENT = "updateDraftContractTermsDocument";
+    public static final String REPLACE_DRAFT_CONTRACT_TERMS = "replaceDataProductDraftContractTerms";
+    public static final String UPDATE_DRAFT_CONTRACT_TERMS = "updateDataProductDraftContractTerms";
+    public static final String GET_DRAFT_CONTRACT_TERMS = "getDataProductDraftContractTerms";
     public static final String PUBLISH_DATA_PRODUCT_DRAFT = "publishDataProductDraft";
     public static final String GET_DATA_PRODUCT_RELEASE = "getDataProductRelease";
     public static final String UPDATE_DATA_PRODUCT_RELEASE = "updateDataProductRelease";
@@ -97,6 +122,10 @@ public class CommonConstants {
     public static final String DOMAIN = "domain";
     public static final String PARTS_OUT = "parts_out";
     public static final String WORKFLOWS = "workflows";
+    public static final String DATAVIEW_ENABLED = "dataview_enabled";
+    public static final String COMMENTS = "comments";
+    public static final String ACCESS_CONTROL = "access_control";
+    public static final String LAST_UPDATED_AT = "last_updated_at";
     public static final String TYPE = "type";
     public static final String ID = "id";
     public static final String URL = "url";
@@ -104,4 +133,15 @@ public class CommonConstants {
     public static final String UPLOAD_URL = "upload_url";
     public static final String RELEASE_ID = "release_id";
     public static final String CHECK_CALLER_APPROVER = "check_caller_approval";
+    public static final String DOCUMENTS = "documents";
+    public static final String ERROR_MSG = "error_msg";
+    public static final String OVERVIEW = "overview";
+    public static final String ORGANIZATION = "organization";
+    public static final String ROLES = "roles";
+    public static final String PRICE = "price";
+    public static final String SLA = "sla";
+    public static final String SUPPORT_AND_COMMUNICATION = "support_and_communication";
+    public static final String CUSTOM_PROPERTIES = "custom_properties";
+    public static final String CONTRACT_TEST = "contract_test";
+    public static final String SCHEMA = "schema";
 }

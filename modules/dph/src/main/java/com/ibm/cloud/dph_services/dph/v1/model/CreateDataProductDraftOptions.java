@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -14,6 +14,7 @@
 package com.ibm.cloud.dph_services.dph.v1.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
@@ -52,11 +53,15 @@ public class CreateDataProductDraftOptions extends GenericModel {
   protected List<String> tags;
   protected List<UseCase> useCases;
   protected List<String> types;
-  protected List<DataProductContractTerms> contractTerms;
-  protected Boolean isRestricted;
+  protected List<ContractTerms> contractTerms;
   protected Domain domain;
   protected List<DataProductPart> partsOut;
   protected DataProductWorkflows workflows;
+  protected Boolean dataviewEnabled;
+  protected String comments;
+  protected AssetListAccessControl accessControl;
+  protected Date lastUpdatedAt;
+  protected Boolean isRestricted;
 
   /**
    * Builder.
@@ -72,11 +77,15 @@ public class CreateDataProductDraftOptions extends GenericModel {
     private List<String> tags;
     private List<UseCase> useCases;
     private List<String> types;
-    private List<DataProductContractTerms> contractTerms;
-    private Boolean isRestricted;
+    private List<ContractTerms> contractTerms;
     private Domain domain;
     private List<DataProductPart> partsOut;
     private DataProductWorkflows workflows;
+    private Boolean dataviewEnabled;
+    private String comments;
+    private AssetListAccessControl accessControl;
+    private Date lastUpdatedAt;
+    private Boolean isRestricted;
 
     /**
      * Instantiates a new Builder from an existing CreateDataProductDraftOptions instance.
@@ -95,10 +104,14 @@ public class CreateDataProductDraftOptions extends GenericModel {
       this.useCases = createDataProductDraftOptions.useCases;
       this.types = createDataProductDraftOptions.types;
       this.contractTerms = createDataProductDraftOptions.contractTerms;
-      this.isRestricted = createDataProductDraftOptions.isRestricted;
       this.domain = createDataProductDraftOptions.domain;
       this.partsOut = createDataProductDraftOptions.partsOut;
       this.workflows = createDataProductDraftOptions.workflows;
+      this.dataviewEnabled = createDataProductDraftOptions.dataviewEnabled;
+      this.comments = createDataProductDraftOptions.comments;
+      this.accessControl = createDataProductDraftOptions.accessControl;
+      this.lastUpdatedAt = createDataProductDraftOptions.lastUpdatedAt;
+      this.isRestricted = createDataProductDraftOptions.isRestricted;
     }
 
     /**
@@ -181,11 +194,11 @@ public class CreateDataProductDraftOptions extends GenericModel {
      * @param contractTerms the new element to be added
      * @return the CreateDataProductDraftOptions builder
      */
-    public Builder addContractTerms(DataProductContractTerms contractTerms) {
+    public Builder addContractTerms(ContractTerms contractTerms) {
       com.ibm.cloud.sdk.core.util.Validator.notNull(contractTerms,
         "contractTerms cannot be null");
       if (this.contractTerms == null) {
-        this.contractTerms = new ArrayList<DataProductContractTerms>();
+        this.contractTerms = new ArrayList<ContractTerms>();
       }
       this.contractTerms.add(contractTerms);
       return this;
@@ -327,19 +340,8 @@ public class CreateDataProductDraftOptions extends GenericModel {
      * @param contractTerms the contractTerms
      * @return the CreateDataProductDraftOptions builder
      */
-    public Builder contractTerms(List<DataProductContractTerms> contractTerms) {
+    public Builder contractTerms(List<ContractTerms> contractTerms) {
       this.contractTerms = contractTerms;
-      return this;
-    }
-
-    /**
-     * Set the isRestricted.
-     *
-     * @param isRestricted the isRestricted
-     * @return the CreateDataProductDraftOptions builder
-     */
-    public Builder isRestricted(Boolean isRestricted) {
-      this.isRestricted = isRestricted;
       return this;
     }
 
@@ -376,6 +378,61 @@ public class CreateDataProductDraftOptions extends GenericModel {
       this.workflows = workflows;
       return this;
     }
+
+    /**
+     * Set the dataviewEnabled.
+     *
+     * @param dataviewEnabled the dataviewEnabled
+     * @return the CreateDataProductDraftOptions builder
+     */
+    public Builder dataviewEnabled(Boolean dataviewEnabled) {
+      this.dataviewEnabled = dataviewEnabled;
+      return this;
+    }
+
+    /**
+     * Set the comments.
+     *
+     * @param comments the comments
+     * @return the CreateDataProductDraftOptions builder
+     */
+    public Builder comments(String comments) {
+      this.comments = comments;
+      return this;
+    }
+
+    /**
+     * Set the accessControl.
+     *
+     * @param accessControl the accessControl
+     * @return the CreateDataProductDraftOptions builder
+     */
+    public Builder accessControl(AssetListAccessControl accessControl) {
+      this.accessControl = accessControl;
+      return this;
+    }
+
+    /**
+     * Set the lastUpdatedAt.
+     *
+     * @param lastUpdatedAt the lastUpdatedAt
+     * @return the CreateDataProductDraftOptions builder
+     */
+    public Builder lastUpdatedAt(Date lastUpdatedAt) {
+      this.lastUpdatedAt = lastUpdatedAt;
+      return this;
+    }
+
+    /**
+     * Set the isRestricted.
+     *
+     * @param isRestricted the isRestricted
+     * @return the CreateDataProductDraftOptions builder
+     */
+    public Builder isRestricted(Boolean isRestricted) {
+      this.isRestricted = isRestricted;
+      return this;
+    }
   }
 
   protected CreateDataProductDraftOptions() { }
@@ -396,10 +453,14 @@ public class CreateDataProductDraftOptions extends GenericModel {
     useCases = builder.useCases;
     types = builder.types;
     contractTerms = builder.contractTerms;
-    isRestricted = builder.isRestricted;
     domain = builder.domain;
     partsOut = builder.partsOut;
     workflows = builder.workflows;
+    dataviewEnabled = builder.dataviewEnabled;
+    comments = builder.comments;
+    accessControl = builder.accessControl;
+    lastUpdatedAt = builder.lastUpdatedAt;
+    isRestricted = builder.isRestricted;
   }
 
   /**
@@ -532,20 +593,8 @@ public class CreateDataProductDraftOptions extends GenericModel {
    *
    * @return the contractTerms
    */
-  public List<DataProductContractTerms> contractTerms() {
+  public List<ContractTerms> contractTerms() {
     return contractTerms;
-  }
-
-  /**
-   * Gets the isRestricted.
-   *
-   * Indicates whether the data product is restricted or not. A restricted data product indicates that orders of the
-   * data product requires explicit approval before data is delivered.
-   *
-   * @return the isRestricted
-   */
-  public Boolean isRestricted() {
-    return isRestricted;
   }
 
   /**
@@ -583,6 +632,62 @@ public class CreateDataProductDraftOptions extends GenericModel {
    */
   public DataProductWorkflows workflows() {
     return workflows;
+  }
+
+  /**
+   * Gets the dataviewEnabled.
+   *
+   * Indicates whether the dataView has enabled for data product.
+   *
+   * @return the dataviewEnabled
+   */
+  public Boolean dataviewEnabled() {
+    return dataviewEnabled;
+  }
+
+  /**
+   * Gets the comments.
+   *
+   * Comments by a producer that are provided either at the time of data product version creation or retiring.
+   *
+   * @return the comments
+   */
+  public String comments() {
+    return comments;
+  }
+
+  /**
+   * Gets the accessControl.
+   *
+   * Access control object.
+   *
+   * @return the accessControl
+   */
+  public AssetListAccessControl accessControl() {
+    return accessControl;
+  }
+
+  /**
+   * Gets the lastUpdatedAt.
+   *
+   * Timestamp of last asset update.
+   *
+   * @return the lastUpdatedAt
+   */
+  public Date lastUpdatedAt() {
+    return lastUpdatedAt;
+  }
+
+  /**
+   * Gets the isRestricted.
+   *
+   * Indicates whether the data product is restricted or not. A restricted data product indicates that orders of the
+   * data product requires explicit approval before data is delivered.
+   *
+   * @return the isRestricted
+   */
+  public Boolean isRestricted() {
+    return isRestricted;
   }
 }
 

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -38,8 +38,6 @@ public class InitializeOptions extends GenericModel {
     String CATALOG_CONFIGURATIONS = "catalog_configurations";
     /** functional_admin_user_group. */
     String FUNCTIONAL_ADMIN_USER_GROUP = "functional_admin_user_group";
-    /** account_owner_into_catalog_members. */
-    String ACCOUNT_OWNER_INTO_CATALOG_MEMBERS = "account_owner_into_catalog_members";
   }
 
   protected ContainerReference container;

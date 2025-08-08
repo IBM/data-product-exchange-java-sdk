@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -23,13 +23,17 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class CreateDataProductOptions extends GenericModel {
 
-  protected List<DataProductVersionPrototype> drafts;
+  protected List<DataProductDraftPrototype> drafts;
+  protected Long limit;
+  protected String start;
 
   /**
    * Builder.
    */
   public static class Builder {
-    private List<DataProductVersionPrototype> drafts;
+    private List<DataProductDraftPrototype> drafts;
+    private Long limit;
+    private String start;
 
     /**
      * Instantiates a new Builder from an existing CreateDataProductOptions instance.
@@ -38,6 +42,8 @@ public class CreateDataProductOptions extends GenericModel {
      */
     private Builder(CreateDataProductOptions createDataProductOptions) {
       this.drafts = createDataProductOptions.drafts;
+      this.limit = createDataProductOptions.limit;
+      this.start = createDataProductOptions.start;
     }
 
     /**
@@ -51,7 +57,7 @@ public class CreateDataProductOptions extends GenericModel {
      *
      * @param drafts the drafts
      */
-    public Builder(List<DataProductVersionPrototype> drafts) {
+    public Builder(List<DataProductDraftPrototype> drafts) {
       this.drafts = drafts;
     }
 
@@ -70,11 +76,11 @@ public class CreateDataProductOptions extends GenericModel {
      * @param drafts the new element to be added
      * @return the CreateDataProductOptions builder
      */
-    public Builder addDrafts(DataProductVersionPrototype drafts) {
+    public Builder addDrafts(DataProductDraftPrototype drafts) {
       com.ibm.cloud.sdk.core.util.Validator.notNull(drafts,
         "drafts cannot be null");
       if (this.drafts == null) {
-        this.drafts = new ArrayList<DataProductVersionPrototype>();
+        this.drafts = new ArrayList<DataProductDraftPrototype>();
       }
       this.drafts.add(drafts);
       return this;
@@ -87,8 +93,30 @@ public class CreateDataProductOptions extends GenericModel {
      * @param drafts the drafts
      * @return the CreateDataProductOptions builder
      */
-    public Builder drafts(List<DataProductVersionPrototype> drafts) {
+    public Builder drafts(List<DataProductDraftPrototype> drafts) {
       this.drafts = drafts;
+      return this;
+    }
+
+    /**
+     * Set the limit.
+     *
+     * @param limit the limit
+     * @return the CreateDataProductOptions builder
+     */
+    public Builder limit(long limit) {
+      this.limit = limit;
+      return this;
+    }
+
+    /**
+     * Set the start.
+     *
+     * @param start the start
+     * @return the CreateDataProductOptions builder
+     */
+    public Builder start(String start) {
+      this.start = start;
       return this;
     }
   }
@@ -99,6 +127,8 @@ public class CreateDataProductOptions extends GenericModel {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.drafts,
       "drafts cannot be null");
     drafts = builder.drafts;
+    limit = builder.limit;
+    start = builder.start;
   }
 
   /**
@@ -117,8 +147,30 @@ public class CreateDataProductOptions extends GenericModel {
    *
    * @return the drafts
    */
-  public List<DataProductVersionPrototype> drafts() {
+  public List<DataProductDraftPrototype> drafts() {
     return drafts;
+  }
+
+  /**
+   * Gets the limit.
+   *
+   * Limit the number of data products in the results. The maximum limit is 200.
+   *
+   * @return the limit
+   */
+  public Long limit() {
+    return limit;
+  }
+
+  /**
+   * Gets the start.
+   *
+   * Start token for pagination.
+   *
+   * @return the start
+   */
+  public String start() {
+    return start;
   }
 }
 

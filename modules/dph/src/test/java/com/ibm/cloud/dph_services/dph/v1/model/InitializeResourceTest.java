@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -14,6 +14,7 @@
 package com.ibm.cloud.dph_services.dph.v1.model;
 
 import com.ibm.cloud.dph_services.dph.v1.model.ContainerReference;
+import com.ibm.cloud.dph_services.dph.v1.model.ErrorExtraResource;
 import com.ibm.cloud.dph_services.dph.v1.model.ErrorModelResource;
 import com.ibm.cloud.dph_services.dph.v1.model.InitializeResource;
 import com.ibm.cloud.dph_services.dph.v1.model.InitializedOption;
@@ -22,6 +23,7 @@ import com.ibm.cloud.dph_services.dph.v1.model.ProvidedWorkflowResource;
 import com.ibm.cloud.dph_services.dph.v1.model.WorkflowDefinitionReference;
 import com.ibm.cloud.dph_services.dph.v1.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
+import com.ibm.cloud.sdk.core.util.DateUtils;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;

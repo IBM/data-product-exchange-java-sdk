@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -48,7 +48,7 @@ public class ContractTermsDocumentTest {
     assertEquals(contractTermsDocumentModel.url(), "testString");
     assertEquals(contractTermsDocumentModel.type(), "terms_and_conditions");
     assertEquals(contractTermsDocumentModel.name(), "testString");
-    assertEquals(contractTermsDocumentModel.getId(), "2b0bf220-079c-11ee-be56-0242ac120002");
+    assertEquals(contractTermsDocumentModel.id(), "2b0bf220-079c-11ee-be56-0242ac120002");
     assertEquals(contractTermsDocumentModel.attachment(), contractTermsDocumentAttachmentModel);
     assertEquals(contractTermsDocumentModel.uploadUrl(), "testString");
 
@@ -59,7 +59,7 @@ public class ContractTermsDocumentTest {
     assertEquals(contractTermsDocumentModelNew.url(), "testString");
     assertEquals(contractTermsDocumentModelNew.type(), "terms_and_conditions");
     assertEquals(contractTermsDocumentModelNew.name(), "testString");
-    assertEquals(contractTermsDocumentModelNew.getId(), "2b0bf220-079c-11ee-be56-0242ac120002");
+    assertEquals(contractTermsDocumentModelNew.id(), "2b0bf220-079c-11ee-be56-0242ac120002");
     assertEquals(contractTermsDocumentModelNew.attachment().toString(), contractTermsDocumentAttachmentModel.toString());
     assertEquals(contractTermsDocumentModelNew.uploadUrl(), "testString");
   }
