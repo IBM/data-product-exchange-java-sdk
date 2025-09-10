@@ -1,3 +1,16 @@
+# [1.0.0](https://github.com/IBM/data-product-exchange-java-sdk/compare/0.3.0...1.0.0) (2025-09-10)
+
+
+### Features
+
+* Update sdk-core ver to patch sec vuln \n\n feat: sdk-core net ver 9.18.7 to 9.24.2 ([#27](https://github.com/IBM/data-product-exchange-java-sdk/issues/27)) ([8752543](https://github.com/IBM/data-product-exchange-java-sdk/commit/87525439839fa4ad7b1c57f6441f2e2e5d35d1b5))
+
+
+### BREAKING CHANGES
+
+* Update sdk-core ver to patch sec vuln \n\n feat: sdk-core net ver 9.18.7 to 9.24.2
+* Update sdk-core ver to patch sec vuln \n\n feat: sdk-core net ver 9.18.7 to 9.24.3
+
 # [0.3.0](https://github.com/IBM/data-product-exchange-java-sdk/compare/0.2.0...0.3.0) (2025-07-28)
 
 
