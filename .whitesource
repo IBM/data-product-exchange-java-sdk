@@ -1,5 +1,5 @@
 {
-  "settingsInheritedFrom": "whitesource-config/whitesource-config@mind",
+  "settingsInheritedFrom": "whitesource-config/whitesource-config@main",
   "issueSettings": {
     "minSeverityLevel": "LOW",
     "issueRepoName": "data-product-tracker",
