@@ -1,13 +1,3 @@
-## [1.1.1](https://github.com/IBM/data-product-exchange-java-sdk/compare/1.1.0...1.1.1) (2025-10-31)
-
-
-### Bug Fixes
-
-* **build:** migrate to central publishing plugin ([#32](https://github.com/IBM/data-product-exchange-java-sdk/issues/32)) ([2159070](https://github.com/IBM/data-product-exchange-java-sdk/commit/21590709e72a63359c990ea3d0dd2ba0fbb329df))
-
-# [1.1.0](https://github.com/IBM/data-product-exchange-java-sdk/compare/1.0.0...1.1.0) (2025-10-31)
-
-
 ### Features
 
 * drop dpx 1.0.0 support \n\n BREAKING CHANGE: DPH Service updated ([#30](https://github.com/IBM/data-product-exchange-java-sdk/issues/30)) ([1baf38e](https://github.com/IBM/data-product-exchange-java-sdk/commit/1baf38ee8ac9a3c45449e82bb554d8a489d023e5))
