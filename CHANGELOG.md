@@ -1,3 +1,10 @@
+## [1.1.7](https://github.com/IBM/data-product-exchange-java-sdk/compare/1.1.6...1.1.7) (2026-04-02)
+
+
+### Bug Fixes
+
+* gh publish workflow and pom ([#44](https://github.com/IBM/data-product-exchange-java-sdk/issues/44)) ([143c4db](https://github.com/IBM/data-product-exchange-java-sdk/commit/143c4db6492986e1961eef75aee8fc47617586a2))
+
 ## [1.1.6](https://github.com/IBM/data-product-exchange-java-sdk/compare/1.1.5...1.1.6) (2026-04-02)
 
 
