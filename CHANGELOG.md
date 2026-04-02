@@ -1,3 +1,10 @@
+## [1.1.5](https://github.com/IBM/data-product-exchange-java-sdk/compare/1.1.4...1.1.5) (2026-04-02)
+
+
+### Bug Fixes
+
+* update pom for maven publish ([#42](https://github.com/IBM/data-product-exchange-java-sdk/issues/42)) ([3c0bd1e](https://github.com/IBM/data-product-exchange-java-sdk/commit/3c0bd1ee9cf09b79bcb6fbc402208150c0831326))
+
 ## [1.1.4](https://github.com/IBM/data-product-exchange-java-sdk/compare/1.1.3...1.1.4) (2026-04-02)
 
 
