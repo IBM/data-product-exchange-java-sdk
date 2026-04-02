@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/IBM/data-product-exchange-java-sdk/compare/1.1.1...1.1.2) (2026-04-02)
+
+
+### Bug Fixes
+
+* publish workflow ([#39](https://github.com/IBM/data-product-exchange-java-sdk/issues/39)) ([be1fd36](https://github.com/IBM/data-product-exchange-java-sdk/commit/be1fd36af2a6ce7f7cdafbd0e0a08167bd6c6f06))
+
 ## [1.1.1](https://github.com/IBM/data-product-exchange-java-sdk/compare/1.1.0...1.1.1) (2026-04-02)
 
 
