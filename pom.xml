@@ -9,7 +9,7 @@
 
     <description>Java Client Library to access the Data Product Hub Services</description>
 
-    <url>https://github.ibm.com/wdp-gov/data-product-java-sdk</url>
+    <url>https://github.com/IBM/data-product-exchange-java-sdk</url>
     <groupId>com.ibm.cloud</groupId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
@@ -80,15 +80,15 @@
 
     <!-- >>> Update these values to reflect your project -->
     <scm>
-        <connection>scm:git:https://github.ibm.com/wdp-gov/data-product-java-sdk</connection>
-        <developerConnection>scm:git:https://github.ibm.com/wdp-gov/data-product-java-sdk</developerConnection>
-        <url>https://github.ibm.com/wdp-gov/data-product-java-sdk/tree/main</url>
+        <connection>scm:git:https://github.com/IBM/data-product-exchange-java-sdk</connection>
+        <developerConnection>scm:git:https://github.com/IBM/data-product-exchange-java-sdk</developerConnection>
+        <url>https://github.com/IBM/data-product-exchange-java-sdk/tree/main</url>
     </scm>
 
     <!-- >>> Update these values to reflect your project -->
     <issueManagement>
         <system>Github</system>
-        <url>https://github.ibm.com/wdp-gov/data-product-java-sdk/issues</url>
+        <url>https://github.com/IBM/data-product-exchange-java-sdk/issues</url>
     </issueManagement>
 
     <!-- >>> Update these values to reflect your project -->
