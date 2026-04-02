@@ -10,6 +10,7 @@ on:
 jobs:
   detect-secrets:
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    name: detect-secrets
     runs-on: ubuntu-latest
 
     steps:
@@ -29,14 +30,13 @@ jobs:
           detect-secrets -v audit --report --fail-on-unaudited --fail-on-live --fail-on-audited-real .secrets.baseline
 
   build-test:
+    name: build-test (java ${{ matrix.java }})
     needs: detect-secrets
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
         java: [11, 17]
-
-    name: build-test (java ${{ matrix.java }})
 
     steps:
       - uses: actions/checkout@v4
@@ -55,20 +55,25 @@ jobs:
         run: mvn -B verify -fae -DskipITs --settings build/.travis.settings.xml
 
   semantic-release:
-    if: github.ref_name == 'main' && github.event_name == 'push'
+    name: semantic-release
     needs: build-test
+    if: github.ref_name == 'main' && github.event_name == 'push'
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
+          persist-credentials: false
           fetch-depth: 0
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 18
 
-      - uses: actions/setup-python@v5
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.9"
 
