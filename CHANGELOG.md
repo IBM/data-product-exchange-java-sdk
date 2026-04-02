@@ -1,3 +1,10 @@
+## [1.1.8](https://github.com/IBM/data-product-exchange-java-sdk/compare/1.1.7...1.1.8) (2026-04-02)
+
+
+### Bug Fixes
+
+* add required metadata for examples module ([#45](https://github.com/IBM/data-product-exchange-java-sdk/issues/45)) ([9c26ba5](https://github.com/IBM/data-product-exchange-java-sdk/commit/9c26ba5dd021a4aaa9388e74c08059b62e53b082))
+
 ## [1.1.7](https://github.com/IBM/data-product-exchange-java-sdk/compare/1.1.6...1.1.7) (2026-04-02)
 
 
