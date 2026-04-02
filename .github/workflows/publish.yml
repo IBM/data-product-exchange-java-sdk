@@ -46,7 +46,7 @@ jobs:
           GH_TAG: ${{ github.ref_name }}
         run: |
           mvn -B clean javadoc:aggregate
-          build/publishJavadoc-gha.sh
+          build/publishJavadoc.sh
 
       - name: Deploy to Maven Central
         env:
