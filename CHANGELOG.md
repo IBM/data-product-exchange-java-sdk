@@ -1,3 +1,10 @@
+## [1.1.4](https://github.com/IBM/data-product-exchange-java-sdk/compare/1.1.3...1.1.4) (2026-04-02)
+
+
+### Bug Fixes
+
+* **ci:** make javadoc script executable ([#41](https://github.com/IBM/data-product-exchange-java-sdk/issues/41)) ([d50cfae](https://github.com/IBM/data-product-exchange-java-sdk/commit/d50cfae71f92dd5e9abae15451e02318e2496743))
+
 ## [1.1.3](https://github.com/IBM/data-product-exchange-java-sdk/compare/1.1.2...1.1.3) (2026-04-02)
 
 
