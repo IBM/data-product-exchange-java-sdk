@@ -1,3 +1,17 @@
+# [2.0.0](https://github.com/IBM/data-product-exchange-java-sdk/compare/1.1.8...2.0.0) (2026-04-07)
+
+
+### Features
+
+* drop dpx 1.1.8 support ([#47](https://github.com/IBM/data-product-exchange-java-sdk/issues/47)) ([60345e6](https://github.com/IBM/data-product-exchange-java-sdk/commit/60345e68db1042b6cecf1597874d07438f2aa74d))
+
+
+### BREAKING CHANGES
+
+* DPH Service updated
+
+Signed-off-by: Shashank-Jha <53325972+Shashank-Jha@users.noreply.github.com>
+
 ## [1.1.8](https://github.com/IBM/data-product-exchange-java-sdk/compare/1.1.7...1.1.8) (2026-04-02)
 
 
