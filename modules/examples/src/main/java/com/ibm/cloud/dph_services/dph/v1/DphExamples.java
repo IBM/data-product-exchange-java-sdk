@@ -146,7 +146,7 @@ public class DphExamples {
 
   /**
    * The main() function invokes operations of the DPH service.
-   * 
+   *
    * @param args command-line arguments
    * @throws Exception an error occurred
    */
