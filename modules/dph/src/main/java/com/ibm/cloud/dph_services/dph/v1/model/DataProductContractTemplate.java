@@ -23,6 +23,10 @@ public class DataProductContractTemplate extends GenericModel {
 
   protected ContainerReference container;
   protected String id;
+  @SerializedName("creator_id")
+  protected String creatorId;
+  @SerializedName("created_at")
+  protected String createdAt;
   protected String name;
   protected ErrorMessage error;
   @SerializedName("contract_terms")
@@ -34,6 +38,8 @@ public class DataProductContractTemplate extends GenericModel {
   public static class Builder {
     private ContainerReference container;
     private String id;
+    private String creatorId;
+    private String createdAt;
     private String name;
     private ErrorMessage error;
     private ContractTerms contractTerms;
@@ -46,6 +52,8 @@ public class DataProductContractTemplate extends GenericModel {
     private Builder(DataProductContractTemplate dataProductContractTemplate) {
       this.container = dataProductContractTemplate.container;
       this.id = dataProductContractTemplate.id;
+      this.creatorId = dataProductContractTemplate.creatorId;
+      this.createdAt = dataProductContractTemplate.createdAt;
       this.name = dataProductContractTemplate.name;
       this.error = dataProductContractTemplate.error;
       this.contractTerms = dataProductContractTemplate.contractTerms;
@@ -98,6 +106,28 @@ public class DataProductContractTemplate extends GenericModel {
     }
 
     /**
+     * Set the creatorId.
+     *
+     * @param creatorId the creatorId
+     * @return the DataProductContractTemplate builder
+     */
+    public Builder creatorId(String creatorId) {
+      this.creatorId = creatorId;
+      return this;
+    }
+
+    /**
+     * Set the createdAt.
+     *
+     * @param createdAt the createdAt
+     * @return the DataProductContractTemplate builder
+     */
+    public Builder createdAt(String createdAt) {
+      this.createdAt = createdAt;
+      return this;
+    }
+
+    /**
      * Set the name.
      *
      * @param name the name
@@ -138,6 +168,8 @@ public class DataProductContractTemplate extends GenericModel {
       "container cannot be null");
     container = builder.container;
     id = builder.id;
+    creatorId = builder.creatorId;
+    createdAt = builder.createdAt;
     name = builder.name;
     error = builder.error;
     contractTerms = builder.contractTerms;
@@ -172,6 +204,28 @@ public class DataProductContractTemplate extends GenericModel {
    */
   public String id() {
     return id;
+  }
+
+  /**
+   * Gets the creatorId.
+   *
+   * The identifier of the user who created the data product contract template.
+   *
+   * @return the creatorId
+   */
+  public String creatorId() {
+    return creatorId;
+  }
+
+  /**
+   * Gets the createdAt.
+   *
+   * The timestamp when the data product contract template was created.
+   *
+   * @return the createdAt
+   */
+  public String createdAt() {
+    return createdAt;
   }
 
   /**

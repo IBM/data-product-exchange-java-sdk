@@ -21,12 +21,14 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
 public class ListDataProductDomainsOptions extends GenericModel {
 
   protected String containerId;
+  protected Boolean includeSubdomains;
 
   /**
    * Builder.
    */
   public static class Builder {
     private String containerId;
+    private Boolean includeSubdomains;
 
     /**
      * Instantiates a new Builder from an existing ListDataProductDomainsOptions instance.
@@ -35,6 +37,7 @@ public class ListDataProductDomainsOptions extends GenericModel {
      */
     private Builder(ListDataProductDomainsOptions listDataProductDomainsOptions) {
       this.containerId = listDataProductDomainsOptions.containerId;
+      this.includeSubdomains = listDataProductDomainsOptions.includeSubdomains;
     }
 
     /**
@@ -62,12 +65,24 @@ public class ListDataProductDomainsOptions extends GenericModel {
       this.containerId = containerId;
       return this;
     }
+
+    /**
+     * Set the includeSubdomains.
+     *
+     * @param includeSubdomains the includeSubdomains
+     * @return the ListDataProductDomainsOptions builder
+     */
+    public Builder includeSubdomains(Boolean includeSubdomains) {
+      this.includeSubdomains = includeSubdomains;
+      return this;
+    }
   }
 
   protected ListDataProductDomainsOptions() { }
 
   protected ListDataProductDomainsOptions(Builder builder) {
     containerId = builder.containerId;
+    includeSubdomains = builder.includeSubdomains;
   }
 
   /**
@@ -89,6 +104,17 @@ public class ListDataProductDomainsOptions extends GenericModel {
    */
   public String containerId() {
     return containerId;
+  }
+
+  /**
+   * Gets the includeSubdomains.
+   *
+   * Include subdomains in the response.
+   *
+   * @return the includeSubdomains
+   */
+  public Boolean includeSubdomains() {
+    return includeSubdomains;
   }
 }
 

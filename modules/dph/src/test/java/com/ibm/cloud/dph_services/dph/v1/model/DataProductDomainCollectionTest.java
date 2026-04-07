@@ -13,6 +13,7 @@
 
 package com.ibm.cloud.dph_services.dph.v1.model;
 
+import com.ibm.cloud.dph_services.dph.v1.model.ContainerIdentity;
 import com.ibm.cloud.dph_services.dph.v1.model.ContainerReference;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductDomain;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductDomainCollection;

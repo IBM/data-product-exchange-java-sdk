@@ -66,6 +66,8 @@ public class DataProductReleaseSummary extends GenericModel {
   protected AssetListAccessControl accessControl;
   @SerializedName("last_updated_at")
   protected Date lastUpdatedAt;
+  @SerializedName("sub_container")
+  protected ContainerIdentity subContainer;
   @SerializedName("is_restricted")
   protected Boolean isRestricted;
   protected String id;
@@ -252,6 +254,17 @@ public class DataProductReleaseSummary extends GenericModel {
    */
   public Date getLastUpdatedAt() {
     return lastUpdatedAt;
+  }
+
+  /**
+   * Gets the subContainer.
+   *
+   * The identity schema for a IBM knowledge catalog container (catalog/project/space).
+   *
+   * @return the subContainer
+   */
+  public ContainerIdentity getSubContainer() {
+    return subContainer;
   }
 
   /**

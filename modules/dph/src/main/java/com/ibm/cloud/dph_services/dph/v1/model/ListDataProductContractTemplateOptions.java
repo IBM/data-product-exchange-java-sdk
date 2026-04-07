@@ -22,6 +22,7 @@ public class ListDataProductContractTemplateOptions extends GenericModel {
 
   protected String containerId;
   protected String contractTemplateName;
+  protected String domainIds;
 
   /**
    * Builder.
@@ -29,6 +30,7 @@ public class ListDataProductContractTemplateOptions extends GenericModel {
   public static class Builder {
     private String containerId;
     private String contractTemplateName;
+    private String domainIds;
 
     /**
      * Instantiates a new Builder from an existing ListDataProductContractTemplateOptions instance.
@@ -38,6 +40,7 @@ public class ListDataProductContractTemplateOptions extends GenericModel {
     private Builder(ListDataProductContractTemplateOptions listDataProductContractTemplateOptions) {
       this.containerId = listDataProductContractTemplateOptions.containerId;
       this.contractTemplateName = listDataProductContractTemplateOptions.contractTemplateName;
+      this.domainIds = listDataProductContractTemplateOptions.domainIds;
     }
 
     /**
@@ -76,6 +79,17 @@ public class ListDataProductContractTemplateOptions extends GenericModel {
       this.contractTemplateName = contractTemplateName;
       return this;
     }
+
+    /**
+     * Set the domainIds.
+     *
+     * @param domainIds the domainIds
+     * @return the ListDataProductContractTemplateOptions builder
+     */
+    public Builder domainIds(String domainIds) {
+      this.domainIds = domainIds;
+      return this;
+    }
   }
 
   protected ListDataProductContractTemplateOptions() { }
@@ -83,6 +97,7 @@ public class ListDataProductContractTemplateOptions extends GenericModel {
   protected ListDataProductContractTemplateOptions(Builder builder) {
     containerId = builder.containerId;
     contractTemplateName = builder.contractTemplateName;
+    domainIds = builder.domainIds;
   }
 
   /**
@@ -116,6 +131,18 @@ public class ListDataProductContractTemplateOptions extends GenericModel {
    */
   public String contractTemplateName() {
     return contractTemplateName;
+  }
+
+  /**
+   * Gets the domainIds.
+   *
+   * Comma-separated domain IDs to filter data product contract templates. If not supplied, the data product templates
+   * within the catalog will returned.
+   *
+   * @return the domainIds
+   */
+  public String domainIds() {
+    return domainIds;
   }
 }
 

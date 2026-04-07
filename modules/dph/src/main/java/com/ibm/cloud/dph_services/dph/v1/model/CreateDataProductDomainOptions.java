@@ -29,10 +29,12 @@ public class CreateDataProductDomainOptions extends GenericModel {
   protected String name;
   protected String description;
   protected String id;
+  protected String createdBy;
   protected MemberRolesSchema memberRoles;
   protected PropertiesSchema xProperties;
   protected List<InitializeSubDomain> subDomains;
-  protected String containerId;
+  protected ContainerIdentity subContainer;
+  protected Boolean linkToSubcontainers;
 
   /**
    * Builder.
@@ -44,10 +46,12 @@ public class CreateDataProductDomainOptions extends GenericModel {
     private String name;
     private String description;
     private String id;
+    private String createdBy;
     private MemberRolesSchema memberRoles;
     private PropertiesSchema xProperties;
     private List<InitializeSubDomain> subDomains;
-    private String containerId;
+    private ContainerIdentity subContainer;
+    private Boolean linkToSubcontainers;
 
     /**
      * Instantiates a new Builder from an existing CreateDataProductDomainOptions instance.
@@ -61,10 +65,12 @@ public class CreateDataProductDomainOptions extends GenericModel {
       this.name = createDataProductDomainOptions.name;
       this.description = createDataProductDomainOptions.description;
       this.id = createDataProductDomainOptions.id;
+      this.createdBy = createDataProductDomainOptions.createdBy;
       this.memberRoles = createDataProductDomainOptions.memberRoles;
       this.xProperties = createDataProductDomainOptions.xProperties;
       this.subDomains = createDataProductDomainOptions.subDomains;
-      this.containerId = createDataProductDomainOptions.containerId;
+      this.subContainer = createDataProductDomainOptions.subContainer;
+      this.linkToSubcontainers = createDataProductDomainOptions.linkToSubcontainers;
     }
 
     /**
@@ -191,6 +197,17 @@ public class CreateDataProductDomainOptions extends GenericModel {
     }
 
     /**
+     * Set the createdBy.
+     *
+     * @param createdBy the createdBy
+     * @return the CreateDataProductDomainOptions builder
+     */
+    public Builder createdBy(String createdBy) {
+      this.createdBy = createdBy;
+      return this;
+    }
+
+    /**
      * Set the memberRoles.
      *
      * @param memberRoles the memberRoles
@@ -225,13 +242,24 @@ public class CreateDataProductDomainOptions extends GenericModel {
     }
 
     /**
-     * Set the containerId.
+     * Set the subContainer.
      *
-     * @param containerId the containerId
+     * @param subContainer the subContainer
      * @return the CreateDataProductDomainOptions builder
      */
-    public Builder containerId(String containerId) {
-      this.containerId = containerId;
+    public Builder subContainer(ContainerIdentity subContainer) {
+      this.subContainer = subContainer;
+      return this;
+    }
+
+    /**
+     * Set the linkToSubcontainers.
+     *
+     * @param linkToSubcontainers the linkToSubcontainers
+     * @return the CreateDataProductDomainOptions builder
+     */
+    public Builder linkToSubcontainers(Boolean linkToSubcontainers) {
+      this.linkToSubcontainers = linkToSubcontainers;
       return this;
     }
 
@@ -248,9 +276,11 @@ public class CreateDataProductDomainOptions extends GenericModel {
       this.name = dataProductDomain.name();
       this.description = dataProductDomain.description();
       this.id = dataProductDomain.id();
+      this.createdBy = dataProductDomain.createdBy();
       this.memberRoles = dataProductDomain.memberRoles();
       this.xProperties = dataProductDomain.xProperties();
       this.subDomains = dataProductDomain.subDomains();
+      this.subContainer = dataProductDomain.subContainer();
       return this;
     }
   }
@@ -266,10 +296,12 @@ public class CreateDataProductDomainOptions extends GenericModel {
     name = builder.name;
     description = builder.description;
     id = builder.id;
+    createdBy = builder.createdBy;
     memberRoles = builder.memberRoles;
     xProperties = builder.xProperties;
     subDomains = builder.subDomains;
-    containerId = builder.containerId;
+    subContainer = builder.subContainer;
+    linkToSubcontainers = builder.linkToSubcontainers;
   }
 
   /**
@@ -348,6 +380,17 @@ public class CreateDataProductDomainOptions extends GenericModel {
   }
 
   /**
+   * Gets the createdBy.
+   *
+   * The identifier of the creator of the data product domain.
+   *
+   * @return the createdBy
+   */
+  public String createdBy() {
+    return createdBy;
+  }
+
+  /**
    * Gets the memberRoles.
    *
    * Member roles of a corresponding asset.
@@ -381,15 +424,25 @@ public class CreateDataProductDomainOptions extends GenericModel {
   }
 
   /**
-   * Gets the containerId.
+   * Gets the subContainer.
    *
-   * Container ID of the data product catalog. If not supplied, the data product catalog is looked up by using the uid
-   * of the default data product catalog.
+   * The identity schema for a IBM knowledge catalog container (catalog/project/space).
    *
-   * @return the containerId
+   * @return the subContainer
    */
-  public String containerId() {
-    return containerId;
+  public ContainerIdentity subContainer() {
+    return subContainer;
+  }
+
+  /**
+   * Gets the linkToSubcontainers.
+   *
+   * Link domains to subcontainers.
+   *
+   * @return the linkToSubcontainers
+   */
+  public Boolean linkToSubcontainers() {
+    return linkToSubcontainers;
   }
 }
 

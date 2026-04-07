@@ -38,18 +38,22 @@ public class DeliveryMethodPropertiesModelTest {
       .engineId("presto767")
       .enginePort("34567")
       .engineHost("a109e0f6-2dfc-4954-a0ff-343d70f7da7b.someId.lakehouse.appdomain.cloud")
+      .engineType("spark")
       .associatedCatalogs(java.util.Arrays.asList("testString"))
       .build();
     assertEquals(engineDetailsModelModel.displayName(), "Iceberg Engine");
     assertEquals(engineDetailsModelModel.engineId(), "presto767");
     assertEquals(engineDetailsModelModel.enginePort(), "34567");
     assertEquals(engineDetailsModelModel.engineHost(), "a109e0f6-2dfc-4954-a0ff-343d70f7da7b.someId.lakehouse.appdomain.cloud");
+    assertEquals(engineDetailsModelModel.engineType(), "spark");
     assertEquals(engineDetailsModelModel.associatedCatalogs(), java.util.Arrays.asList("testString"));
 
     ProducerInputModel producerInputModelModel = new ProducerInputModel.Builder()
       .engineDetails(engineDetailsModelModel)
+      .engines(java.util.Arrays.asList(engineDetailsModelModel))
       .build();
     assertEquals(producerInputModelModel.engineDetails(), engineDetailsModelModel);
+    assertEquals(producerInputModelModel.engines(), java.util.Arrays.asList(engineDetailsModelModel));
 
     DeliveryMethodPropertiesModel deliveryMethodPropertiesModelModel = new DeliveryMethodPropertiesModel.Builder()
       .producerInput(producerInputModelModel)

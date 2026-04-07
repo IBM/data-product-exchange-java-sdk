@@ -35,14 +35,18 @@ public class GetDataProductDraftContractTermsOptionsTest {
       .dataProductId("testString")
       .draftId("testString")
       .contractTermsId("testString")
-      .accept("application/odcs+yaml")
+      .accept("application/json")
       .includeContractDocuments(true)
+      .autopopulateServerInformation(false)
+      .serverAssetId("testString")
       .build();
     assertEquals(getDataProductDraftContractTermsOptionsModel.dataProductId(), "testString");
     assertEquals(getDataProductDraftContractTermsOptionsModel.draftId(), "testString");
     assertEquals(getDataProductDraftContractTermsOptionsModel.contractTermsId(), "testString");
-    assertEquals(getDataProductDraftContractTermsOptionsModel.accept(), "application/odcs+yaml");
+    assertEquals(getDataProductDraftContractTermsOptionsModel.accept(), "application/json");
     assertEquals(getDataProductDraftContractTermsOptionsModel.includeContractDocuments(), Boolean.valueOf(true));
+    assertEquals(getDataProductDraftContractTermsOptionsModel.autopopulateServerInformation(), Boolean.valueOf(false));
+    assertEquals(getDataProductDraftContractTermsOptionsModel.serverAssetId(), "testString");
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

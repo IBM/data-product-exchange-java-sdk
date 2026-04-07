@@ -13,6 +13,7 @@
 
 package com.ibm.cloud.dph_services.dph.v1.model;
 
+import com.ibm.cloud.dph_services.dph.v1.model.ContainerIdentity;
 import com.ibm.cloud.dph_services.dph.v1.model.ContainerReference;
 import com.ibm.cloud.dph_services.dph.v1.model.CreateDataProductDomainOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.ErrorExtraResource;
@@ -94,6 +95,11 @@ public class CreateDataProductDomainOptionsTest {
     assertEquals(initializeSubDomainModel.id(), "testString");
     assertEquals(initializeSubDomainModel.description(), "testString");
 
+    ContainerIdentity containerIdentityModel = new ContainerIdentity.Builder()
+      .id("d29c42eb-7100-4b7a-8257-c196dbcca1cd")
+      .build();
+    assertEquals(containerIdentityModel.id(), "d29c42eb-7100-4b7a-8257-c196dbcca1cd");
+
     CreateDataProductDomainOptions createDataProductDomainOptionsModel = new CreateDataProductDomainOptions.Builder()
       .container(containerReferenceModel)
       .trace("testString")
@@ -101,10 +107,12 @@ public class CreateDataProductDomainOptionsTest {
       .name("Operations")
       .description("This is a description of the data product domain.")
       .id("testString")
+      .createdBy("testString")
       .memberRoles(memberRolesSchemaModel)
       .xProperties(propertiesSchemaModel)
       .subDomains(java.util.Arrays.asList(initializeSubDomainModel))
-      .containerId("testString")
+      .subContainer(containerIdentityModel)
+      .linkToSubcontainers(false)
       .build();
     assertEquals(createDataProductDomainOptionsModel.container(), containerReferenceModel);
     assertEquals(createDataProductDomainOptionsModel.trace(), "testString");
@@ -112,10 +120,12 @@ public class CreateDataProductDomainOptionsTest {
     assertEquals(createDataProductDomainOptionsModel.name(), "Operations");
     assertEquals(createDataProductDomainOptionsModel.description(), "This is a description of the data product domain.");
     assertEquals(createDataProductDomainOptionsModel.id(), "testString");
+    assertEquals(createDataProductDomainOptionsModel.createdBy(), "testString");
     assertEquals(createDataProductDomainOptionsModel.memberRoles(), memberRolesSchemaModel);
     assertEquals(createDataProductDomainOptionsModel.xProperties(), propertiesSchemaModel);
     assertEquals(createDataProductDomainOptionsModel.subDomains(), java.util.Arrays.asList(initializeSubDomainModel));
-    assertEquals(createDataProductDomainOptionsModel.containerId(), "testString");
+    assertEquals(createDataProductDomainOptionsModel.subContainer(), containerIdentityModel);
+    assertEquals(createDataProductDomainOptionsModel.linkToSubcontainers(), Boolean.valueOf(false));
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

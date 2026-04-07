@@ -39,6 +39,7 @@ public class ReplaceDataProductDraftContractTermsOptions extends GenericModel {
   protected List<ContractTemplateSupportAndCommunication> supportAndCommunication;
   protected List<ContractTemplateCustomProperty> customProperties;
   protected ContractTest contractTest;
+  protected List<ContractServer> servers;
   protected List<ContractSchema> schema;
 
   /**
@@ -61,6 +62,7 @@ public class ReplaceDataProductDraftContractTermsOptions extends GenericModel {
     private List<ContractTemplateSupportAndCommunication> supportAndCommunication;
     private List<ContractTemplateCustomProperty> customProperties;
     private ContractTest contractTest;
+    private List<ContractServer> servers;
     private List<ContractSchema> schema;
 
     /**
@@ -85,6 +87,7 @@ public class ReplaceDataProductDraftContractTermsOptions extends GenericModel {
       this.supportAndCommunication = replaceDataProductDraftContractTermsOptions.supportAndCommunication;
       this.customProperties = replaceDataProductDraftContractTermsOptions.customProperties;
       this.contractTest = replaceDataProductDraftContractTermsOptions.contractTest;
+      this.servers = replaceDataProductDraftContractTermsOptions.servers;
       this.schema = replaceDataProductDraftContractTermsOptions.schema;
     }
 
@@ -209,6 +212,22 @@ public class ReplaceDataProductDraftContractTermsOptions extends GenericModel {
         this.customProperties = new ArrayList<ContractTemplateCustomProperty>();
       }
       this.customProperties.add(customProperties);
+      return this;
+    }
+
+    /**
+     * Adds a new element to servers.
+     *
+     * @param servers the new element to be added
+     * @return the ReplaceDataProductDraftContractTermsOptions builder
+     */
+    public Builder addServers(ContractServer servers) {
+      com.ibm.cloud.sdk.core.util.Validator.notNull(servers,
+        "servers cannot be null");
+      if (this.servers == null) {
+        this.servers = new ArrayList<ContractServer>();
+      }
+      this.servers.add(servers);
       return this;
     }
 
@@ -411,6 +430,18 @@ public class ReplaceDataProductDraftContractTermsOptions extends GenericModel {
     }
 
     /**
+     * Set the servers.
+     * Existing servers will be replaced.
+     *
+     * @param servers the servers
+     * @return the ReplaceDataProductDraftContractTermsOptions builder
+     */
+    public Builder servers(List<ContractServer> servers) {
+      this.servers = servers;
+      return this;
+    }
+
+    /**
      * Set the schema.
      * Existing schema will be replaced.
      *
@@ -442,6 +473,7 @@ public class ReplaceDataProductDraftContractTermsOptions extends GenericModel {
       this.supportAndCommunication = contractTerms.supportAndCommunication();
       this.customProperties = contractTerms.customProperties();
       this.contractTest = contractTerms.contractTest();
+      this.servers = contractTerms.servers();
       this.schema = contractTerms.schema();
       return this;
     }
@@ -472,6 +504,7 @@ public class ReplaceDataProductDraftContractTermsOptions extends GenericModel {
     supportAndCommunication = builder.supportAndCommunication;
     customProperties = builder.customProperties;
     contractTest = builder.contractTest;
+    servers = builder.servers;
     schema = builder.schema;
   }
 
@@ -658,6 +691,17 @@ public class ReplaceDataProductDraftContractTermsOptions extends GenericModel {
    */
   public ContractTest contractTest() {
     return contractTest;
+  }
+
+  /**
+   * Gets the servers.
+   *
+   * List of server definitions.
+   *
+   * @return the servers
+   */
+  public List<ContractServer> servers() {
+    return servers;
   }
 
   /**

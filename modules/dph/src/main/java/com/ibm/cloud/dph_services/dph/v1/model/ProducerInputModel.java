@@ -13,6 +13,9 @@
 
 package com.ibm.cloud.dph_services.dph.v1.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
@@ -23,12 +26,14 @@ public class ProducerInputModel extends GenericModel {
 
   @SerializedName("engine_details")
   protected EngineDetailsModel engineDetails;
+  protected List<EngineDetailsModel> engines;
 
   /**
    * Builder.
    */
   public static class Builder {
     private EngineDetailsModel engineDetails;
+    private List<EngineDetailsModel> engines;
 
     /**
      * Instantiates a new Builder from an existing ProducerInputModel instance.
@@ -37,6 +42,7 @@ public class ProducerInputModel extends GenericModel {
      */
     private Builder(ProducerInputModel producerInputModel) {
       this.engineDetails = producerInputModel.engineDetails;
+      this.engines = producerInputModel.engines;
     }
 
     /**
@@ -55,6 +61,22 @@ public class ProducerInputModel extends GenericModel {
     }
 
     /**
+     * Adds a new element to engines.
+     *
+     * @param engines the new element to be added
+     * @return the ProducerInputModel builder
+     */
+    public Builder addEngines(EngineDetailsModel engines) {
+      com.ibm.cloud.sdk.core.util.Validator.notNull(engines,
+        "engines cannot be null");
+      if (this.engines == null) {
+        this.engines = new ArrayList<EngineDetailsModel>();
+      }
+      this.engines.add(engines);
+      return this;
+    }
+
+    /**
      * Set the engineDetails.
      *
      * @param engineDetails the engineDetails
@@ -64,12 +86,25 @@ public class ProducerInputModel extends GenericModel {
       this.engineDetails = engineDetails;
       return this;
     }
+
+    /**
+     * Set the engines.
+     * Existing engines will be replaced.
+     *
+     * @param engines the engines
+     * @return the ProducerInputModel builder
+     */
+    public Builder engines(List<EngineDetailsModel> engines) {
+      this.engines = engines;
+      return this;
+    }
   }
 
   protected ProducerInputModel() { }
 
   protected ProducerInputModel(Builder builder) {
     engineDetails = builder.engineDetails;
+    engines = builder.engines;
   }
 
   /**
@@ -90,6 +125,17 @@ public class ProducerInputModel extends GenericModel {
    */
   public EngineDetailsModel engineDetails() {
     return engineDetails;
+  }
+
+  /**
+   * Gets the engines.
+   *
+   * List of engines defined by the data product producer.
+   *
+   * @return the engines
+   */
+  public List<EngineDetailsModel> engines() {
+    return engines;
   }
 }
 

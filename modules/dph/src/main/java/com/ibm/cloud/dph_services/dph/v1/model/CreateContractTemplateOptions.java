@@ -22,11 +22,14 @@ public class CreateContractTemplateOptions extends GenericModel {
 
   protected ContainerReference container;
   protected String id;
+  protected String creatorId;
+  protected String createdAt;
   protected String name;
   protected ErrorMessage error;
   protected ContractTerms contractTerms;
   protected String containerId;
   protected String contractTemplateName;
+  protected String domainIds;
 
   /**
    * Builder.
@@ -34,11 +37,14 @@ public class CreateContractTemplateOptions extends GenericModel {
   public static class Builder {
     private ContainerReference container;
     private String id;
+    private String creatorId;
+    private String createdAt;
     private String name;
     private ErrorMessage error;
     private ContractTerms contractTerms;
     private String containerId;
     private String contractTemplateName;
+    private String domainIds;
 
     /**
      * Instantiates a new Builder from an existing CreateContractTemplateOptions instance.
@@ -48,11 +54,14 @@ public class CreateContractTemplateOptions extends GenericModel {
     private Builder(CreateContractTemplateOptions createContractTemplateOptions) {
       this.container = createContractTemplateOptions.container;
       this.id = createContractTemplateOptions.id;
+      this.creatorId = createContractTemplateOptions.creatorId;
+      this.createdAt = createContractTemplateOptions.createdAt;
       this.name = createContractTemplateOptions.name;
       this.error = createContractTemplateOptions.error;
       this.contractTerms = createContractTemplateOptions.contractTerms;
       this.containerId = createContractTemplateOptions.containerId;
       this.contractTemplateName = createContractTemplateOptions.contractTemplateName;
+      this.domainIds = createContractTemplateOptions.domainIds;
     }
 
     /**
@@ -98,6 +107,28 @@ public class CreateContractTemplateOptions extends GenericModel {
      */
     public Builder id(String id) {
       this.id = id;
+      return this;
+    }
+
+    /**
+     * Set the creatorId.
+     *
+     * @param creatorId the creatorId
+     * @return the CreateContractTemplateOptions builder
+     */
+    public Builder creatorId(String creatorId) {
+      this.creatorId = creatorId;
+      return this;
+    }
+
+    /**
+     * Set the createdAt.
+     *
+     * @param createdAt the createdAt
+     * @return the CreateContractTemplateOptions builder
+     */
+    public Builder createdAt(String createdAt) {
+      this.createdAt = createdAt;
       return this;
     }
 
@@ -157,6 +188,17 @@ public class CreateContractTemplateOptions extends GenericModel {
     }
 
     /**
+     * Set the domainIds.
+     *
+     * @param domainIds the domainIds
+     * @return the CreateContractTemplateOptions builder
+     */
+    public Builder domainIds(String domainIds) {
+      this.domainIds = domainIds;
+      return this;
+    }
+
+    /**
      * Set the dataProductContractTemplate.
      *
      * @param dataProductContractTemplate the dataProductContractTemplate
@@ -165,6 +207,8 @@ public class CreateContractTemplateOptions extends GenericModel {
     public Builder dataProductContractTemplate(DataProductContractTemplate dataProductContractTemplate) {
       this.container = dataProductContractTemplate.container();
       this.id = dataProductContractTemplate.id();
+      this.creatorId = dataProductContractTemplate.creatorId();
+      this.createdAt = dataProductContractTemplate.createdAt();
       this.name = dataProductContractTemplate.name();
       this.error = dataProductContractTemplate.error();
       this.contractTerms = dataProductContractTemplate.contractTerms();
@@ -179,11 +223,14 @@ public class CreateContractTemplateOptions extends GenericModel {
       "container cannot be null");
     container = builder.container;
     id = builder.id;
+    creatorId = builder.creatorId;
+    createdAt = builder.createdAt;
     name = builder.name;
     error = builder.error;
     contractTerms = builder.contractTerms;
     containerId = builder.containerId;
     contractTemplateName = builder.contractTemplateName;
+    domainIds = builder.domainIds;
   }
 
   /**
@@ -215,6 +262,28 @@ public class CreateContractTemplateOptions extends GenericModel {
    */
   public String id() {
     return id;
+  }
+
+  /**
+   * Gets the creatorId.
+   *
+   * The identifier of the user who created the data product contract template.
+   *
+   * @return the creatorId
+   */
+  public String creatorId() {
+    return creatorId;
+  }
+
+  /**
+   * Gets the createdAt.
+   *
+   * The timestamp when the data product contract template was created.
+   *
+   * @return the createdAt
+   */
+  public String createdAt() {
+    return createdAt;
   }
 
   /**
@@ -272,6 +341,18 @@ public class CreateContractTemplateOptions extends GenericModel {
    */
   public String contractTemplateName() {
     return contractTemplateName;
+  }
+
+  /**
+   * Gets the domainIds.
+   *
+   * Comma-separated domain IDs to filter data product contract templates. If not supplied, the data product templates
+   * within the catalog will returned.
+   *
+   * @return the domainIds
+   */
+  public String domainIds() {
+    return domainIds;
   }
 }
 

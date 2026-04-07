@@ -23,6 +23,7 @@ public class RetireDataProductReleaseOptions extends GenericModel {
   protected String dataProductId;
   protected String releaseId;
   protected Boolean revokeAccess;
+  protected String startAt;
 
   /**
    * Builder.
@@ -31,6 +32,7 @@ public class RetireDataProductReleaseOptions extends GenericModel {
     private String dataProductId;
     private String releaseId;
     private Boolean revokeAccess;
+    private String startAt;
 
     /**
      * Instantiates a new Builder from an existing RetireDataProductReleaseOptions instance.
@@ -41,6 +43,7 @@ public class RetireDataProductReleaseOptions extends GenericModel {
       this.dataProductId = retireDataProductReleaseOptions.dataProductId;
       this.releaseId = retireDataProductReleaseOptions.releaseId;
       this.revokeAccess = retireDataProductReleaseOptions.revokeAccess;
+      this.startAt = retireDataProductReleaseOptions.startAt;
     }
 
     /**
@@ -101,6 +104,17 @@ public class RetireDataProductReleaseOptions extends GenericModel {
       this.revokeAccess = revokeAccess;
       return this;
     }
+
+    /**
+     * Set the startAt.
+     *
+     * @param startAt the startAt
+     * @return the RetireDataProductReleaseOptions builder
+     */
+    public Builder startAt(String startAt) {
+      this.startAt = startAt;
+      return this;
+    }
   }
 
   protected RetireDataProductReleaseOptions() { }
@@ -113,6 +127,7 @@ public class RetireDataProductReleaseOptions extends GenericModel {
     dataProductId = builder.dataProductId;
     releaseId = builder.releaseId;
     revokeAccess = builder.revokeAccess;
+    startAt = builder.startAt;
   }
 
   /**
@@ -156,6 +171,18 @@ public class RetireDataProductReleaseOptions extends GenericModel {
    */
   public Boolean revokeAccess() {
     return revokeAccess;
+  }
+
+  /**
+   * Gets the startAt.
+   *
+   * The date and time when the revoke access operation should start (ISO 8601 format, e.g., 2025-09-24T06:55:29Z). If
+   * not provided, the operation starts immediately.
+   *
+   * @return the startAt
+   */
+  public String startAt() {
+    return startAt;
   }
 }
 
