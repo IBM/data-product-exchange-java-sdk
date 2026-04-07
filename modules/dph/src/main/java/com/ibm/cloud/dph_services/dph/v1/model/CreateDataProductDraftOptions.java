@@ -61,6 +61,7 @@ public class CreateDataProductDraftOptions extends GenericModel {
   protected String comments;
   protected AssetListAccessControl accessControl;
   protected Date lastUpdatedAt;
+  protected ContainerIdentity subContainer;
   protected Boolean isRestricted;
 
   /**
@@ -85,6 +86,7 @@ public class CreateDataProductDraftOptions extends GenericModel {
     private String comments;
     private AssetListAccessControl accessControl;
     private Date lastUpdatedAt;
+    private ContainerIdentity subContainer;
     private Boolean isRestricted;
 
     /**
@@ -111,6 +113,7 @@ public class CreateDataProductDraftOptions extends GenericModel {
       this.comments = createDataProductDraftOptions.comments;
       this.accessControl = createDataProductDraftOptions.accessControl;
       this.lastUpdatedAt = createDataProductDraftOptions.lastUpdatedAt;
+      this.subContainer = createDataProductDraftOptions.subContainer;
       this.isRestricted = createDataProductDraftOptions.isRestricted;
     }
 
@@ -424,6 +427,17 @@ public class CreateDataProductDraftOptions extends GenericModel {
     }
 
     /**
+     * Set the subContainer.
+     *
+     * @param subContainer the subContainer
+     * @return the CreateDataProductDraftOptions builder
+     */
+    public Builder subContainer(ContainerIdentity subContainer) {
+      this.subContainer = subContainer;
+      return this;
+    }
+
+    /**
      * Set the isRestricted.
      *
      * @param isRestricted the isRestricted
@@ -460,6 +474,7 @@ public class CreateDataProductDraftOptions extends GenericModel {
     comments = builder.comments;
     accessControl = builder.accessControl;
     lastUpdatedAt = builder.lastUpdatedAt;
+    subContainer = builder.subContainer;
     isRestricted = builder.isRestricted;
   }
 
@@ -676,6 +691,17 @@ public class CreateDataProductDraftOptions extends GenericModel {
    */
   public Date lastUpdatedAt() {
     return lastUpdatedAt;
+  }
+
+  /**
+   * Gets the subContainer.
+   *
+   * The identity schema for a IBM knowledge catalog container (catalog/project/space).
+   *
+   * @return the subContainer
+   */
+  public ContainerIdentity subContainer() {
+    return subContainer;
   }
 
   /**

@@ -13,6 +13,9 @@
 
 package com.ibm.cloud.dph_services.dph.v1.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
@@ -22,6 +25,7 @@ public class ContractSchemaProperty extends GenericModel {
 
   protected String name;
   protected ContractSchemaPropertyType type;
+  protected List<ContractQualityRule> quality;
 
   /**
    * Builder.
@@ -29,6 +33,7 @@ public class ContractSchemaProperty extends GenericModel {
   public static class Builder {
     private String name;
     private ContractSchemaPropertyType type;
+    private List<ContractQualityRule> quality;
 
     /**
      * Instantiates a new Builder from an existing ContractSchemaProperty instance.
@@ -38,6 +43,7 @@ public class ContractSchemaProperty extends GenericModel {
     private Builder(ContractSchemaProperty contractSchemaProperty) {
       this.name = contractSchemaProperty.name;
       this.type = contractSchemaProperty.type;
+      this.quality = contractSchemaProperty.quality;
     }
 
     /**
@@ -65,6 +71,22 @@ public class ContractSchemaProperty extends GenericModel {
     }
 
     /**
+     * Adds a new element to quality.
+     *
+     * @param quality the new element to be added
+     * @return the ContractSchemaProperty builder
+     */
+    public Builder addQuality(ContractQualityRule quality) {
+      com.ibm.cloud.sdk.core.util.Validator.notNull(quality,
+        "quality cannot be null");
+      if (this.quality == null) {
+        this.quality = new ArrayList<ContractQualityRule>();
+      }
+      this.quality.add(quality);
+      return this;
+    }
+
+    /**
      * Set the name.
      *
      * @param name the name
@@ -85,6 +107,18 @@ public class ContractSchemaProperty extends GenericModel {
       this.type = type;
       return this;
     }
+
+    /**
+     * Set the quality.
+     * Existing quality will be replaced.
+     *
+     * @param quality the quality
+     * @return the ContractSchemaProperty builder
+     */
+    public Builder quality(List<ContractQualityRule> quality) {
+      this.quality = quality;
+      return this;
+    }
   }
 
   protected ContractSchemaProperty() { }
@@ -94,6 +128,7 @@ public class ContractSchemaProperty extends GenericModel {
       "name cannot be null");
     name = builder.name;
     type = builder.type;
+    quality = builder.quality;
   }
 
   /**
@@ -125,6 +160,17 @@ public class ContractSchemaProperty extends GenericModel {
    */
   public ContractSchemaPropertyType type() {
     return type;
+  }
+
+  /**
+   * Gets the quality.
+   *
+   * List of quality rules defined for the column.
+   *
+   * @return the quality
+   */
+  public List<ContractQualityRule> quality() {
+    return quality;
   }
 }
 

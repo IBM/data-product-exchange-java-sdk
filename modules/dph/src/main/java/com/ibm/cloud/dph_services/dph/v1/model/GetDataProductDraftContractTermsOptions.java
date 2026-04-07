@@ -25,6 +25,8 @@ public class GetDataProductDraftContractTermsOptions extends GenericModel {
   protected String contractTermsId;
   protected String accept;
   protected Boolean includeContractDocuments;
+  protected Boolean autopopulateServerInformation;
+  protected String serverAssetId;
 
   /**
    * Builder.
@@ -35,6 +37,8 @@ public class GetDataProductDraftContractTermsOptions extends GenericModel {
     private String contractTermsId;
     private String accept;
     private Boolean includeContractDocuments;
+    private Boolean autopopulateServerInformation;
+    private String serverAssetId;
 
     /**
      * Instantiates a new Builder from an existing GetDataProductDraftContractTermsOptions instance.
@@ -47,6 +51,8 @@ public class GetDataProductDraftContractTermsOptions extends GenericModel {
       this.contractTermsId = getDataProductDraftContractTermsOptions.contractTermsId;
       this.accept = getDataProductDraftContractTermsOptions.accept;
       this.includeContractDocuments = getDataProductDraftContractTermsOptions.includeContractDocuments;
+      this.autopopulateServerInformation = getDataProductDraftContractTermsOptions.autopopulateServerInformation;
+      this.serverAssetId = getDataProductDraftContractTermsOptions.serverAssetId;
     }
 
     /**
@@ -131,6 +137,28 @@ public class GetDataProductDraftContractTermsOptions extends GenericModel {
       this.includeContractDocuments = includeContractDocuments;
       return this;
     }
+
+    /**
+     * Set the autopopulateServerInformation.
+     *
+     * @param autopopulateServerInformation the autopopulateServerInformation
+     * @return the GetDataProductDraftContractTermsOptions builder
+     */
+    public Builder autopopulateServerInformation(Boolean autopopulateServerInformation) {
+      this.autopopulateServerInformation = autopopulateServerInformation;
+      return this;
+    }
+
+    /**
+     * Set the serverAssetId.
+     *
+     * @param serverAssetId the serverAssetId
+     * @return the GetDataProductDraftContractTermsOptions builder
+     */
+    public Builder serverAssetId(String serverAssetId) {
+      this.serverAssetId = serverAssetId;
+      return this;
+    }
   }
 
   protected GetDataProductDraftContractTermsOptions() { }
@@ -147,6 +175,8 @@ public class GetDataProductDraftContractTermsOptions extends GenericModel {
     contractTermsId = builder.contractTermsId;
     accept = builder.accept;
     includeContractDocuments = builder.includeContractDocuments;
+    autopopulateServerInformation = builder.autopopulateServerInformation;
+    serverAssetId = builder.serverAssetId;
   }
 
   /**
@@ -194,7 +224,7 @@ public class GetDataProductDraftContractTermsOptions extends GenericModel {
   /**
    * Gets the accept.
    *
-   * The type of the response: application/odcs+yaml or application/json.
+   * The type of the response: application/json or application/odcs+yaml.
    *
    * @return the accept
    */
@@ -212,6 +242,28 @@ public class GetDataProductDraftContractTermsOptions extends GenericModel {
    */
   public Boolean includeContractDocuments() {
     return includeContractDocuments;
+  }
+
+  /**
+   * Gets the autopopulateServerInformation.
+   *
+   * Set to true to autopopulate server information from connection details. Default is false.
+   *
+   * @return the autopopulateServerInformation
+   */
+  public Boolean autopopulateServerInformation() {
+    return autopopulateServerInformation;
+  }
+
+  /**
+   * Gets the serverAssetId.
+   *
+   * Asset ID of the server used for autopopulating connection details.
+   *
+   * @return the serverAssetId
+   */
+  public String serverAssetId() {
+    return serverAssetId;
   }
 }
 

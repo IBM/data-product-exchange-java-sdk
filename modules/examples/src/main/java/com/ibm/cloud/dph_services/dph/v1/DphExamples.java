@@ -20,6 +20,11 @@ import com.ibm.cloud.dph_services.dph.v1.model.BucketValidationResponse;
 import com.ibm.cloud.dph_services.dph.v1.model.CompleteDraftContractTermsDocumentOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.ContainerIdentity;
 import com.ibm.cloud.dph_services.dph.v1.model.ContainerReference;
+import com.ibm.cloud.dph_services.dph.v1.model.ContractAsset;
+import com.ibm.cloud.dph_services.dph.v1.model.ContractSchema;
+import com.ibm.cloud.dph_services.dph.v1.model.ContractSchemaProperty;
+import com.ibm.cloud.dph_services.dph.v1.model.ContractSchemaPropertyType;
+import com.ibm.cloud.dph_services.dph.v1.model.ContractServer;
 import com.ibm.cloud.dph_services.dph.v1.model.ContractTemplateCustomProperty;
 import com.ibm.cloud.dph_services.dph.v1.model.ContractTemplateOrganization;
 import com.ibm.cloud.dph_services.dph.v1.model.ContractTemplateSLA;
@@ -35,6 +40,7 @@ import com.ibm.cloud.dph_services.dph.v1.model.CreateDataProductDraftOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.CreateDataProductOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.CreateDataProductSubdomainOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.CreateDraftContractTermsDocumentOptions;
+import com.ibm.cloud.dph_services.dph.v1.model.CreateRevokeAccessProcessOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.CreateS3BucketOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.DataAssetRelationship;
 import com.ibm.cloud.dph_services.dph.v1.model.DataAssetVisualizationRes;
@@ -62,6 +68,7 @@ import com.ibm.cloud.dph_services.dph.v1.model.DeleteDraftContractTermsDocumentO
 import com.ibm.cloud.dph_services.dph.v1.model.Description;
 import com.ibm.cloud.dph_services.dph.v1.model.Domain;
 import com.ibm.cloud.dph_services.dph.v1.model.GetContractTemplateOptions;
+import com.ibm.cloud.dph_services.dph.v1.model.GetContractTermsInSpecifiedFormatOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.GetDataProductByDomainOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.GetDataProductDraftContractTermsOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.GetDataProductDraftOptions;
@@ -70,7 +77,9 @@ import com.ibm.cloud.dph_services.dph.v1.model.GetDataProductReleaseOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.GetDomainOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.GetDraftContractTermsDocumentOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.GetInitializeStatusOptions;
+import com.ibm.cloud.dph_services.dph.v1.model.GetPublishedDataProductDraftContractTermsOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.GetReleaseContractTermsDocumentOptions;
+import com.ibm.cloud.dph_services.dph.v1.model.GetRevokeAccessProcessStateOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.GetS3BucketValidationOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.GetServiceIdCredentialsOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.InitializeOptions;
@@ -89,6 +98,8 @@ import com.ibm.cloud.dph_services.dph.v1.model.PublishDataProductDraftOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.ReinitiateDataAssetVisualizationOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.ReplaceDataProductDraftContractTermsOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.RetireDataProductReleaseOptions;
+import com.ibm.cloud.dph_services.dph.v1.model.RevokeAccessResponse;
+import com.ibm.cloud.dph_services.dph.v1.model.RevokeAccessStateResponse;
 import com.ibm.cloud.dph_services.dph.v1.model.Roles;
 import com.ibm.cloud.dph_services.dph.v1.model.ServiceIdCredentials;
 import com.ibm.cloud.dph_services.dph.v1.model.UpdateDataProductContractTemplateOptions;
@@ -319,11 +330,11 @@ public class DphExamples {
       System.out.println(contractTermsDocument);
       // end-create_draft_contract_terms_document
 
-      getReleaseContractDocumentByDocumentIdLink = contractTermsDocument.id();
-      deleteContractTermsDocumentByDocumentIdLink = contractTermsDocument.id();
-      getContractTermsDocumentByIdDocumentIdLink = contractTermsDocument.id();
-      updateContractTermsDocumentByDocumentIdLink = contractTermsDocument.id();
-      completeContractTermsDocumentByDocumentIdLink = contractTermsDocument.id();
+      getReleaseContractDocumentByDocumentIdLink = contractTermsDocument.getId();
+      deleteContractTermsDocumentByDocumentIdLink = contractTermsDocument.getId();
+      getContractTermsDocumentByIdDocumentIdLink = contractTermsDocument.getId();
+      updateContractTermsDocumentByDocumentIdLink = contractTermsDocument.getId();
+      completeContractTermsDocumentByDocumentIdLink = contractTermsDocument.getId();
     } catch (ServiceResponseException e) {
         logger.error(String.format("Service returned status code %s: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
@@ -630,10 +641,10 @@ public class DphExamples {
         .contractTermsId("testString")
         .build();
 
-      Response<InputStream> response = dphService.getDataProductDraftContractTerms(getDataProductDraftContractTermsOptions).execute();
-      try (InputStream inputStream = response.getResult();) {
-          inputStream.transferTo(new java.io.FileOutputStream("result.out"));
-      }
+      Response<ContractTerms> response = dphService.getDataProductDraftContractTerms(getDataProductDraftContractTermsOptions).execute();
+      ContractTerms contractTerms = response.getResult();
+
+      System.out.println(contractTerms);
       // end-get_data_product_draft_contract_terms
     } catch (ServiceResponseException e) {
         logger.error(String.format("Service returned status code %s: %s%nError details: %s",
@@ -654,6 +665,8 @@ public class DphExamples {
         .name("domain_name")
         .build();
       Overview overviewModel = new Overview.Builder()
+        .apiVersion("v3.0.1")
+        .kind("DataContract")
         .name("Sample Data Contract")
         .version("v0.0")
         .domain(domainModel)
@@ -677,6 +690,11 @@ public class DphExamples {
       Roles rolesModel = new Roles.Builder()
         .role("IAM Role")
         .build();
+      Pricing pricingModel = new Pricing.Builder()
+        .amount("Amount")
+        .currency("Currency")
+        .unit("Unit")
+        .build();
       ContractTemplateSLAProperty contractTemplateSlaPropertyModel = new ContractTemplateSLAProperty.Builder()
         .property("slaproperty")
         .value("slavalue")
@@ -693,6 +711,57 @@ public class DphExamples {
         .key("The name of the key.")
         .value("The value of the key.")
         .build();
+      ContractAsset contractAssetModel = new ContractAsset.Builder()
+        .id("684d6aa0-9f93-4564-8a20-e354bc469857")
+        .name("PAYMENT_TRANSACTIONS1")
+        .build();
+      ContractServer contractServerModel = new ContractServer.Builder()
+        .server("snowflake-server-01")
+        .asset(contractAssetModel)
+        .connectionId("8d7701be-709a-49c0-ae4e-a7daeaae6def")
+        .type("snowflake")
+        .description("Snowflake analytics server")
+        .environment("dev")
+        .account("acc-456")
+        .catalog("analytics_cat")
+        .database("analytics_db")
+        .dataset("customer_data")
+        .delimiter(",")
+        .endpointUrl("https://xy12345.snowflakecomputing.com")
+        .format("parquet")
+        .host("xy12345.snowflakecomputing.com")
+        .location("Mumbai")
+        .path("/analytics/data")
+        .port("443")
+        .project("projectY")
+        .region("ap-south-1")
+        .regionName("Asia South 1")
+        .schema("PAYMENT_TRANSACTIONS1")
+        .serviceName("snowflake")
+        .stagingDir("/snowflake/staging")
+        .stream("stream_analytics")
+        .warehouse("wh_xlarge")
+        .customProperties(java.util.Arrays.asList(contractTemplateCustomPropertyModel))
+        .build();
+      ContractSchemaPropertyType contractSchemaPropertyTypeModel = new ContractSchemaPropertyType.Builder()
+        .type("varchar")
+        .length("1024")
+        .scale("0")
+        .nullable("true")
+        .signed("false")
+        .build();
+      ContractSchemaProperty contractSchemaPropertyModel = new ContractSchemaProperty.Builder()
+        .name("product_brand_code")
+        .type(contractSchemaPropertyTypeModel)
+        .build();
+      ContractSchema contractSchemaModel = new ContractSchema.Builder()
+        .assetId("09ca6b40-7c89-412a-8951-ad820da709d1")
+        .connectionId("6cc57d4d-2229-438f-91a0-2c455556422b")
+        .name("000000_0-2025-06-20-20-28-52.csv")
+        .connectionPath("/dpx-test-bucket/000000_0-2025-06-20-20-28-52.csv")
+        .physicalType("text/csv")
+        .xProperties(java.util.Arrays.asList(contractSchemaPropertyModel))
+        .build();
       ReplaceDataProductDraftContractTermsOptions replaceDataProductDraftContractTermsOptions = new ReplaceDataProductDraftContractTermsOptions.Builder()
         .dataProductId("testString")
         .draftId("testString")
@@ -702,9 +771,12 @@ public class DphExamples {
         .description(descriptionModel)
         .organization(java.util.Arrays.asList(contractTemplateOrganizationModel))
         .roles(java.util.Arrays.asList(rolesModel))
+        .price(pricingModel)
         .sla(java.util.Arrays.asList(contractTemplateSlaModel))
         .supportAndCommunication(java.util.Arrays.asList(contractTemplateSupportAndCommunicationModel))
         .customProperties(java.util.Arrays.asList(contractTemplateCustomPropertyModel))
+        .servers(java.util.Arrays.asList(contractServerModel))
+        .schema(java.util.Arrays.asList(contractSchemaModel))
         .build();
 
       Response<ContractTerms> response = dphService.replaceDataProductDraftContractTerms(replaceDataProductDraftContractTermsOptions).execute();
@@ -736,6 +808,27 @@ public class DphExamples {
 
       System.out.println(contractTerms);
       // end-update_data_product_draft_contract_terms
+    } catch (ServiceResponseException e) {
+        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
+          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
+    }
+
+    try {
+      System.out.println("getContractTermsInSpecifiedFormat() result:");
+      // begin-get_contract_terms_in_specified_format
+      GetContractTermsInSpecifiedFormatOptions getContractTermsInSpecifiedFormatOptions = new GetContractTermsInSpecifiedFormatOptions.Builder()
+        .dataProductId("testString")
+        .draftId("testString")
+        .contractTermsId("testString")
+        .format("testString")
+        .formatVersion("testString")
+        .build();
+
+      Response<InputStream> response = dphService.getContractTermsInSpecifiedFormat(getContractTermsInSpecifiedFormatOptions).execute();
+      try (InputStream inputStream = response.getResult();) {
+          inputStream.transferTo(new java.io.FileOutputStream("result.out"));
+      }
+      // end-get_contract_terms_in_specified_format
     } catch (ServiceResponseException e) {
         logger.error(String.format("Service returned status code %s: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
@@ -803,6 +896,25 @@ public class DphExamples {
     }
 
     try {
+      System.out.println("getPublishedDataProductDraftContractTerms() result:");
+      // begin-get_published_data_product_draft_contract_terms
+      GetPublishedDataProductDraftContractTermsOptions getPublishedDataProductDraftContractTermsOptions = new GetPublishedDataProductDraftContractTermsOptions.Builder()
+        .dataProductId("testString")
+        .releaseId("testString")
+        .contractTermsId("testString")
+        .build();
+
+      Response<InputStream> response = dphService.getPublishedDataProductDraftContractTerms(getPublishedDataProductDraftContractTermsOptions).execute();
+      try (InputStream inputStream = response.getResult();) {
+          inputStream.transferTo(new java.io.FileOutputStream("result.out"));
+      }
+      // end-get_published_data_product_draft_contract_terms
+    } catch (ServiceResponseException e) {
+        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
+          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
+    }
+
+    try {
       System.out.println("listDataProductReleases() result:");
       // begin-list_data_product_releases
       ListDataProductReleasesOptions listDataProductReleasesOptions = new ListDataProductReleasesOptions.Builder()
@@ -846,6 +958,24 @@ public class DphExamples {
     }
 
     try {
+      System.out.println("createRevokeAccessProcess() result:");
+      // begin-create_revoke_access_process
+      CreateRevokeAccessProcessOptions createRevokeAccessProcessOptions = new CreateRevokeAccessProcessOptions.Builder()
+        .dataProductId("testString")
+        .releaseId("testString")
+        .build();
+
+      Response<RevokeAccessResponse> response = dphService.createRevokeAccessProcess(createRevokeAccessProcessOptions).execute();
+      RevokeAccessResponse revokeAccessResponse = response.getResult();
+
+      System.out.println(revokeAccessResponse);
+      // end-create_revoke_access_process
+    } catch (ServiceResponseException e) {
+        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
+          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
+    }
+
+    try {
       System.out.println("listDataProductContractTemplate() result:");
       // begin-list_data_product_contract_template
       ListDataProductContractTemplateOptions listDataProductContractTemplateOptions = new ListDataProductContractTemplateOptions.Builder()
@@ -865,12 +995,12 @@ public class DphExamples {
       System.out.println("createContractTemplate() result:");
       // begin-create_contract_template
       ContainerReference containerReferenceModel = new ContainerReference.Builder()
-        .id("f531f74a-01c8-4e91-8e29-b018db683c86")
+        .id("531f74a-01c8-4e91-8e29-b018db683c86")
         .type("catalog")
         .build();
       Domain domainModel = new Domain.Builder()
-        .id("b38df608-d34b-4d58-8136-ed25e6c6684e")
-        .name("domain_name")
+        .id("0094ebe9-abc3-473b-80ea-c777ede095ea")
+        .name("Test Domain New")
         .build();
       Overview overviewModel = new Overview.Builder()
         .name("Sample Data Contract")
@@ -1135,6 +1265,23 @@ public class DphExamples {
 
       System.out.println(bucketValidationResponse);
       // end-get_s3_bucket_validation
+    } catch (ServiceResponseException e) {
+        logger.error(String.format("Service returned status code %s: %s%nError details: %s",
+          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);
+    }
+
+    try {
+      System.out.println("getRevokeAccessProcessState() result:");
+      // begin-get_revoke_access_process_state
+      GetRevokeAccessProcessStateOptions getRevokeAccessProcessStateOptions = new GetRevokeAccessProcessStateOptions.Builder()
+        .releaseId("testString")
+        .build();
+
+      Response<RevokeAccessStateResponse> response = dphService.getRevokeAccessProcessState(getRevokeAccessProcessStateOptions).execute();
+      RevokeAccessStateResponse revokeAccessStateResponse = response.getResult();
+
+      System.out.println(revokeAccessStateResponse);
+      // end-get_revoke_access_process_state
     } catch (ServiceResponseException e) {
         logger.error(String.format("Service returned status code %s: %s%nError details: %s",
           e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()), e);

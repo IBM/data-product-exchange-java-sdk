@@ -15,9 +15,12 @@ package com.ibm.cloud.dph_services.dph.v1.model;
 
 import com.ibm.cloud.dph_services.dph.v1.model.AssetReference;
 import com.ibm.cloud.dph_services.dph.v1.model.ContainerReference;
+import com.ibm.cloud.dph_services.dph.v1.model.ContractAsset;
+import com.ibm.cloud.dph_services.dph.v1.model.ContractQualityRule;
 import com.ibm.cloud.dph_services.dph.v1.model.ContractSchema;
 import com.ibm.cloud.dph_services.dph.v1.model.ContractSchemaProperty;
 import com.ibm.cloud.dph_services.dph.v1.model.ContractSchemaPropertyType;
+import com.ibm.cloud.dph_services.dph.v1.model.ContractServer;
 import com.ibm.cloud.dph_services.dph.v1.model.ContractTemplateCustomProperty;
 import com.ibm.cloud.dph_services.dph.v1.model.ContractTemplateOrganization;
 import com.ibm.cloud.dph_services.dph.v1.model.ContractTemplateSLA;

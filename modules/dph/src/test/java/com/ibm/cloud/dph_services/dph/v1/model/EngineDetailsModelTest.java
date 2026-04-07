@@ -36,12 +36,14 @@ public class EngineDetailsModelTest {
       .engineId("presto767")
       .enginePort("34567")
       .engineHost("a109e0f6-2dfc-4954-a0ff-343d70f7da7b.someId.lakehouse.appdomain.cloud")
+      .engineType("spark")
       .associatedCatalogs(java.util.Arrays.asList("testString"))
       .build();
     assertEquals(engineDetailsModelModel.displayName(), "Iceberg Engine");
     assertEquals(engineDetailsModelModel.engineId(), "presto767");
     assertEquals(engineDetailsModelModel.enginePort(), "34567");
     assertEquals(engineDetailsModelModel.engineHost(), "a109e0f6-2dfc-4954-a0ff-343d70f7da7b.someId.lakehouse.appdomain.cloud");
+    assertEquals(engineDetailsModelModel.engineType(), "spark");
     assertEquals(engineDetailsModelModel.associatedCatalogs(), java.util.Arrays.asList("testString"));
 
     String json = TestUtilities.serialize(engineDetailsModelModel);
@@ -52,5 +54,12 @@ public class EngineDetailsModelTest {
     assertEquals(engineDetailsModelModelNew.engineId(), "presto767");
     assertEquals(engineDetailsModelModelNew.enginePort(), "34567");
     assertEquals(engineDetailsModelModelNew.engineHost(), "a109e0f6-2dfc-4954-a0ff-343d70f7da7b.someId.lakehouse.appdomain.cloud");
+    assertEquals(engineDetailsModelModelNew.engineType(), "spark");
   }
+
+  @Test(expectedExceptions = IllegalArgumentException.class)
+  public void testEngineDetailsModelError() throws Throwable {
+    new EngineDetailsModel.Builder().build();
+  }
+
 }

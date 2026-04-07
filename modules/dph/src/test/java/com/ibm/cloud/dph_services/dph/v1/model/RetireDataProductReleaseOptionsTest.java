@@ -35,10 +35,12 @@ public class RetireDataProductReleaseOptionsTest {
       .dataProductId("testString")
       .releaseId("testString")
       .revokeAccess(false)
+      .startAt("testString")
       .build();
     assertEquals(retireDataProductReleaseOptionsModel.dataProductId(), "testString");
     assertEquals(retireDataProductReleaseOptionsModel.releaseId(), "testString");
     assertEquals(retireDataProductReleaseOptionsModel.revokeAccess(), Boolean.valueOf(false));
+    assertEquals(retireDataProductReleaseOptionsModel.startAt(), "testString");
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

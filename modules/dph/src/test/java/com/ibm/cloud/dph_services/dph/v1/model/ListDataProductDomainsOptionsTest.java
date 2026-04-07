@@ -33,7 +33,9 @@ public class ListDataProductDomainsOptionsTest {
   public void testListDataProductDomainsOptions() throws Throwable {
     ListDataProductDomainsOptions listDataProductDomainsOptionsModel = new ListDataProductDomainsOptions.Builder()
       .containerId("testString")
+      .includeSubdomains(true)
       .build();
     assertEquals(listDataProductDomainsOptionsModel.containerId(), "testString");
+    assertEquals(listDataProductDomainsOptionsModel.includeSubdomains(), Boolean.valueOf(true));
   }
 }

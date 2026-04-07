@@ -18,7 +18,6 @@
 package com.ibm.cloud.dph_services.dph.v1;
 
 import com.google.gson.JsonObject;
-import com.ibm.cloud.dph_services.common.CommonConstants;
 import com.ibm.cloud.dph_services.common.SdkCommon;
 import com.ibm.cloud.dph_services.dph.v1.model.BucketResponse;
 import com.ibm.cloud.dph_services.dph.v1.model.BucketValidationResponse;
@@ -32,6 +31,7 @@ import com.ibm.cloud.dph_services.dph.v1.model.CreateDataProductDraftOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.CreateDataProductOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.CreateDataProductSubdomainOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.CreateDraftContractTermsDocumentOptions;
+import com.ibm.cloud.dph_services.dph.v1.model.CreateRevokeAccessProcessOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.CreateS3BucketOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.DataAssetVisualizationRes;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProduct;
@@ -50,6 +50,7 @@ import com.ibm.cloud.dph_services.dph.v1.model.DeleteDataProductDraftOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.DeleteDomainOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.DeleteDraftContractTermsDocumentOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.GetContractTemplateOptions;
+import com.ibm.cloud.dph_services.dph.v1.model.GetContractTermsInSpecifiedFormatOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.GetDataProductByDomainOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.GetDataProductDraftContractTermsOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.GetDataProductDraftOptions;
@@ -58,7 +59,9 @@ import com.ibm.cloud.dph_services.dph.v1.model.GetDataProductReleaseOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.GetDomainOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.GetDraftContractTermsDocumentOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.GetInitializeStatusOptions;
+import com.ibm.cloud.dph_services.dph.v1.model.GetPublishedDataProductDraftContractTermsOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.GetReleaseContractTermsDocumentOptions;
+import com.ibm.cloud.dph_services.dph.v1.model.GetRevokeAccessProcessStateOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.GetS3BucketValidationOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.GetServiceIdCredentialsOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.InitializeOptions;
@@ -74,6 +77,8 @@ import com.ibm.cloud.dph_services.dph.v1.model.PublishDataProductDraftOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.ReinitiateDataAssetVisualizationOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.ReplaceDataProductDraftContractTermsOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.RetireDataProductReleaseOptions;
+import com.ibm.cloud.dph_services.dph.v1.model.RevokeAccessResponse;
+import com.ibm.cloud.dph_services.dph.v1.model.RevokeAccessStateResponse;
 import com.ibm.cloud.dph_services.dph.v1.model.ServiceIdCredentials;
 import com.ibm.cloud.dph_services.dph.v1.model.UpdateDataProductContractTemplateOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.UpdateDataProductDomainOptions;
@@ -81,7 +86,6 @@ import com.ibm.cloud.dph_services.dph.v1.model.UpdateDataProductDraftContractTer
 import com.ibm.cloud.dph_services.dph.v1.model.UpdateDataProductDraftOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.UpdateDataProductReleaseOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.UpdateDraftContractTermsDocumentOptions;
-import com.ibm.cloud.sdk.core.http.HttpHeaders;
 import com.ibm.cloud.sdk.core.http.RequestBuilder;
 import com.ibm.cloud.sdk.core.http.ResponseConverter;
 import com.ibm.cloud.sdk.core.http.ServiceCall;
@@ -105,7 +109,7 @@ public class Dph extends BaseService {
   /**
    * Default service name used when configuring the `Dph` client.
    */
-  public static final String DEFAULT_SERVICE_NAME = CommonConstants.SERVICE_NAME;
+  public static final String DEFAULT_SERVICE_NAME = "dph";
 
  /**
    * Class method which constructs an instance of the `Dph` client.
@@ -159,14 +163,14 @@ public class Dph extends BaseService {
     if (getInitializeStatusOptions == null) {
       getInitializeStatusOptions = new GetInitializeStatusOptions.Builder().build();
     }
-    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_GET_INITIALIZE_STATUS));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, CommonConstants.GET_INITIALIZE_STATUS);
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/configuration/initialize/status"));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "getInitializeStatus");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
-    builder.header(HttpHeaders.ACCEPT, CommonConstants.CONTENT_TYPE_JSON);
+    builder.header("Accept", "application/json");
     if (getInitializeStatusOptions.containerId() != null) {
-      builder.query(CommonConstants.CONTAINER_ID, String.valueOf(getInitializeStatusOptions.containerId()));
+      builder.query("container.id", String.valueOf(getInitializeStatusOptions.containerId()));
     }
     ResponseConverter<InitializeResource> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<InitializeResource>() { }.getType());
@@ -198,15 +202,15 @@ public class Dph extends BaseService {
    * @return a {@link ServiceCall} with a result of type {@link ServiceIdCredentials}
    */
   public ServiceCall<ServiceIdCredentials> getServiceIdCredentials(GetServiceIdCredentialsOptions getServiceIdCredentialsOptions) {
-      RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_GET_SERVICEID_CREDENTIALS));
-      Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, CommonConstants.GET_SERVICEID_CREDENTIALS);
-      for (Entry<String, String> header : sdkHeaders.entrySet()) {
-          builder.header(header.getKey(), header.getValue());
-      }
-      builder.header(HttpHeaders.ACCEPT, CommonConstants.CONTENT_TYPE_JSON);
-      ResponseConverter<ServiceIdCredentials> responseConverter =
-              ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ServiceIdCredentials>() { }.getType());
-      return createServiceCall(builder.build(), responseConverter);
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/configuration/credentials"));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "getServiceIdCredentials");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    ResponseConverter<ServiceIdCredentials> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ServiceIdCredentials>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
   }
 
   /**
@@ -246,18 +250,18 @@ public class Dph extends BaseService {
   public ServiceCall<InitializeResource> initialize(InitializeOptions initializeOptions) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(initializeOptions,
       "initializeOptions cannot be null");
-    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_INITIALIZE));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, CommonConstants.INITIALIZE);
+    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/configuration/initialize"));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "initialize");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
-    builder.header(HttpHeaders.ACCEPT, CommonConstants.CONTENT_TYPE_JSON);
+    builder.header("Accept", "application/json");
     final JsonObject contentJson = new JsonObject();
     if (initializeOptions.container() != null) {
-      contentJson.add(CommonConstants.CONTAINER, com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(initializeOptions.container()));
+      contentJson.add("container", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(initializeOptions.container()));
     }
     if (initializeOptions.include() != null) {
-      contentJson.add(CommonConstants.INCLUDE, com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(initializeOptions.include()));
+      contentJson.add("include", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(initializeOptions.include()));
     }
     builder.bodyJson(contentJson);
     ResponseConverter<InitializeResource> responseConverter =
@@ -300,8 +304,8 @@ public class Dph extends BaseService {
    * @return a {@link ServiceCall} with a void result
    */
   public ServiceCall<Void> manageApiKeys(ManageApiKeysOptions manageApiKeysOptions) {
-    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_MANAGE_APIKEYS));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, CommonConstants.MANAGE_APIKEYS);
+    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/configuration/rotate_credentials"));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "manageApiKeys");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
@@ -334,12 +338,12 @@ public class Dph extends BaseService {
   public ServiceCall<DataAssetVisualizationRes> createDataAssetVisualization(CreateDataAssetVisualizationOptions createDataAssetVisualizationOptions) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(createDataAssetVisualizationOptions,
       "createDataAssetVisualizationOptions cannot be null");
-    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_VISUALIZATION));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, CommonConstants.CREATE_DATA_ASSETS_VISUALIZATION);
+    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/data_asset/visualization"));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "createDataAssetVisualization");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
-    builder.header(HttpHeaders.ACCEPT, CommonConstants.CONTENT_TYPE_JSON);
+    builder.header("Accept", "application/json");
     final JsonObject contentJson = new JsonObject();
     if (createDataAssetVisualizationOptions.assets() != null) {
       contentJson.add("assets", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataAssetVisualizationOptions.assets()));
@@ -377,12 +381,12 @@ public class Dph extends BaseService {
   public ServiceCall<DataAssetVisualizationRes> reinitiateDataAssetVisualization(ReinitiateDataAssetVisualizationOptions reinitiateDataAssetVisualizationOptions) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(reinitiateDataAssetVisualizationOptions,
       "reinitiateDataAssetVisualizationOptions cannot be null");
-    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_VISUALIZATION_REINITIATE));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, CommonConstants.REINITIATE_VISUALIZATION);
+    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/data_asset/visualization/reinitiate"));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "reinitiateDataAssetVisualization");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
-    builder.header(HttpHeaders.ACCEPT, CommonConstants.CONTENT_TYPE_JSON);
+    builder.header("Accept", "application/json");
     final JsonObject contentJson = new JsonObject();
     if (reinitiateDataAssetVisualizationOptions.assets() != null) {
       contentJson.add("assets", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(reinitiateDataAssetVisualizationOptions.assets()));
@@ -418,17 +422,17 @@ public class Dph extends BaseService {
     if (listDataProductsOptions == null) {
       listDataProductsOptions = new ListDataProductsOptions.Builder().build();
     }
-    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_LIST_DATA_PRODUCTS));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, CommonConstants.LIST_DATA_PRODUCTS);
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/data_products"));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "listDataProducts");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
-    builder.header(HttpHeaders.ACCEPT, CommonConstants.CONTENT_TYPE_JSON);
+    builder.header("Accept", "application/json");
     if (listDataProductsOptions.limit() != null) {
-      builder.query(CommonConstants.LIMIT, String.valueOf(listDataProductsOptions.limit()));
+      builder.query("limit", String.valueOf(listDataProductsOptions.limit()));
     }
     if (listDataProductsOptions.start() != null) {
-      builder.query(CommonConstants.START, String.valueOf(listDataProductsOptions.start()));
+      builder.query("start", String.valueOf(listDataProductsOptions.start()));
     }
     ResponseConverter<DataProductCollection> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<DataProductCollection>() { }.getType());
@@ -460,20 +464,20 @@ public class Dph extends BaseService {
   public ServiceCall<DataProduct> createDataProduct(CreateDataProductOptions createDataProductOptions) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(createDataProductOptions,
       "createDataProductOptions cannot be null");
-    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_CREATE_DATA_PRODUCT));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, CommonConstants.CREATE_DATA_PRODUCT);
+    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/data_products"));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "createDataProduct");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
-    builder.header(HttpHeaders.ACCEPT, CommonConstants.CONTENT_TYPE_JSON);
+    builder.header("Accept", "application/json");
     if (createDataProductOptions.limit() != null) {
-      builder.query(CommonConstants.LIMIT, String.valueOf(createDataProductOptions.limit()));
+      builder.query("limit", String.valueOf(createDataProductOptions.limit()));
     }
     if (createDataProductOptions.start() != null) {
-      builder.query(CommonConstants.START, String.valueOf(createDataProductOptions.start()));
+      builder.query("start", String.valueOf(createDataProductOptions.start()));
     }
     final JsonObject contentJson = new JsonObject();
-    contentJson.add(CommonConstants.DRAFTS, com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductOptions.drafts()));
+    contentJson.add("drafts", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductOptions.drafts()));
     builder.bodyJson(contentJson);
     ResponseConverter<DataProduct> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<DataProduct>() { }.getType());
@@ -492,13 +496,13 @@ public class Dph extends BaseService {
     com.ibm.cloud.sdk.core.util.Validator.notNull(getDataProductOptions,
       "getDataProductOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put(CommonConstants.DATA_PRODUCT_ID, getDataProductOptions.dataProductId());
+    pathParamsMap.put("data_product_id", getDataProductOptions.dataProductId());
     RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/data_products/{data_product_id}", pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, "getDataProduct");
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "getDataProduct");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
-    builder.header(HttpHeaders.ACCEPT, CommonConstants.CONTENT_TYPE_JSON);
+    builder.header("Accept", "application/json");
     ResponseConverter<DataProduct> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<DataProduct>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
@@ -510,7 +514,7 @@ public class Dph extends BaseService {
    * After uploading a file to the provided signed URL, call this endpoint to mark the upload as complete. After the
    * upload operation is marked as complete, the file is available to download. Use '-' for the `data_product_id` to
    * skip specifying the data product ID explicitly.
-   * - After the upload is marked as complete, the returned URL is displayed in the CommonConstants.URL field. The signed URL is used
+   * - After the upload is marked as complete, the returned URL is displayed in the "url" field. The signed URL is used
    * to download the document.
    * - Calling complete on referential documents results in an error.
    * - Calling complete on attachment documents for which the file has not been uploaded will result in an error.
@@ -522,16 +526,16 @@ public class Dph extends BaseService {
     com.ibm.cloud.sdk.core.util.Validator.notNull(completeDraftContractTermsDocumentOptions,
       "completeDraftContractTermsDocumentOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put(CommonConstants.DATA_PRODUCT_ID, completeDraftContractTermsDocumentOptions.dataProductId());
-    pathParamsMap.put(CommonConstants.DRAFT_ID, completeDraftContractTermsDocumentOptions.draftId());
-    pathParamsMap.put(CommonConstants.CONTRACT_TERMS_ID, completeDraftContractTermsDocumentOptions.contractTermsId());
-    pathParamsMap.put(CommonConstants.DOCUMENT_ID, completeDraftContractTermsDocumentOptions.documentId());
-    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_COMPLETE_DRAFT_CONTRACT_TERMS_DOCUMENT, pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, CommonConstants.COMPLETE_DRAFT_CONTRACT_TERMS_DOCUMENT);
+    pathParamsMap.put("data_product_id", completeDraftContractTermsDocumentOptions.dataProductId());
+    pathParamsMap.put("draft_id", completeDraftContractTermsDocumentOptions.draftId());
+    pathParamsMap.put("contract_terms_id", completeDraftContractTermsDocumentOptions.contractTermsId());
+    pathParamsMap.put("document_id", completeDraftContractTermsDocumentOptions.documentId());
+    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/data_products/{data_product_id}/drafts/{draft_id}/contract_terms/{contract_terms_id}/documents/{document_id}/complete", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "completeDraftContractTermsDocument");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
-    builder.header(HttpHeaders.ACCEPT, CommonConstants.CONTENT_TYPE_JSON);
+    builder.header("Accept", "application/json");
     ResponseConverter<ContractTermsDocument> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ContractTermsDocument>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
@@ -550,24 +554,24 @@ public class Dph extends BaseService {
     com.ibm.cloud.sdk.core.util.Validator.notNull(listDataProductDraftsOptions,
       "listDataProductDraftsOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put(CommonConstants.DATA_PRODUCT_ID, listDataProductDraftsOptions.dataProductId());
-    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_LIST_DATA_PRODUCT_DRAFTS, pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, CommonConstants.LIST_DATA_PRODUCT_DRAFTS);
+    pathParamsMap.put("data_product_id", listDataProductDraftsOptions.dataProductId());
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/data_products/{data_product_id}/drafts", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "listDataProductDrafts");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
-    builder.header(HttpHeaders.ACCEPT, CommonConstants.CONTENT_TYPE_JSON);
+    builder.header("Accept", "application/json");
     if (listDataProductDraftsOptions.assetContainerId() != null) {
-      builder.query(CommonConstants.ASSET_CONTAINER_ID, String.valueOf(listDataProductDraftsOptions.assetContainerId()));
+      builder.query("asset.container.id", String.valueOf(listDataProductDraftsOptions.assetContainerId()));
     }
     if (listDataProductDraftsOptions.version() != null) {
-      builder.query(CommonConstants.VERSION, String.valueOf(listDataProductDraftsOptions.version()));
+      builder.query("version", String.valueOf(listDataProductDraftsOptions.version()));
     }
     if (listDataProductDraftsOptions.limit() != null) {
-      builder.query(CommonConstants.LIMIT, String.valueOf(listDataProductDraftsOptions.limit()));
+      builder.query("limit", String.valueOf(listDataProductDraftsOptions.limit()));
     }
     if (listDataProductDraftsOptions.start() != null) {
-      builder.query(CommonConstants.START, String.valueOf(listDataProductDraftsOptions.start()));
+      builder.query("start", String.valueOf(listDataProductDraftsOptions.start()));
     }
     ResponseConverter<DataProductDraftCollection> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<DataProductDraftCollection>() { }.getType());
@@ -586,65 +590,68 @@ public class Dph extends BaseService {
     com.ibm.cloud.sdk.core.util.Validator.notNull(createDataProductDraftOptions,
       "createDataProductDraftOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put(CommonConstants.DATA_PRODUCT_ID, createDataProductDraftOptions.dataProductId());
+    pathParamsMap.put("data_product_id", createDataProductDraftOptions.dataProductId());
     RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/data_products/{data_product_id}/drafts", pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, "createDataProductDraft");
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "createDataProductDraft");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
-    builder.header(HttpHeaders.ACCEPT, CommonConstants.CONTENT_TYPE_JSON);
+    builder.header("Accept", "application/json");
     final JsonObject contentJson = new JsonObject();
-    contentJson.add(CommonConstants.ASSET, com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductDraftOptions.asset()));
+    contentJson.add("asset", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductDraftOptions.asset()));
     if (createDataProductDraftOptions.version() != null) {
-      contentJson.addProperty(CommonConstants.VERSION, createDataProductDraftOptions.version());
+      contentJson.addProperty("version", createDataProductDraftOptions.version());
     }
     if (createDataProductDraftOptions.state() != null) {
-      contentJson.addProperty(CommonConstants.STATE, createDataProductDraftOptions.state());
+      contentJson.addProperty("state", createDataProductDraftOptions.state());
     }
     if (createDataProductDraftOptions.dataProduct() != null) {
-      contentJson.add(CommonConstants.DATA_PRODUCT, com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductDraftOptions.dataProduct()));
+      contentJson.add("data_product", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductDraftOptions.dataProduct()));
     }
     if (createDataProductDraftOptions.name() != null) {
-      contentJson.addProperty(CommonConstants.NAME, createDataProductDraftOptions.name());
+      contentJson.addProperty("name", createDataProductDraftOptions.name());
     }
     if (createDataProductDraftOptions.description() != null) {
-      contentJson.addProperty(CommonConstants.DESCRIPTION, createDataProductDraftOptions.description());
+      contentJson.addProperty("description", createDataProductDraftOptions.description());
     }
     if (createDataProductDraftOptions.tags() != null) {
-      contentJson.add(CommonConstants.TAGS, com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductDraftOptions.tags()));
+      contentJson.add("tags", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductDraftOptions.tags()));
     }
     if (createDataProductDraftOptions.useCases() != null) {
-      contentJson.add(CommonConstants.USE_CASES, com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductDraftOptions.useCases()));
+      contentJson.add("use_cases", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductDraftOptions.useCases()));
     }
     if (createDataProductDraftOptions.types() != null) {
-      contentJson.add(CommonConstants.TYPES, com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductDraftOptions.types()));
+      contentJson.add("types", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductDraftOptions.types()));
     }
     if (createDataProductDraftOptions.contractTerms() != null) {
-      contentJson.add(CommonConstants.CONTRACT_TERMS, com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductDraftOptions.contractTerms()));
+      contentJson.add("contract_terms", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductDraftOptions.contractTerms()));
     }
     if (createDataProductDraftOptions.domain() != null) {
-      contentJson.add(CommonConstants.DOMAIN, com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductDraftOptions.domain()));
+      contentJson.add("domain", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductDraftOptions.domain()));
     }
     if (createDataProductDraftOptions.partsOut() != null) {
-      contentJson.add(CommonConstants.PARTS_OUT, com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductDraftOptions.partsOut()));
+      contentJson.add("parts_out", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductDraftOptions.partsOut()));
     }
     if (createDataProductDraftOptions.workflows() != null) {
-      contentJson.add(CommonConstants.WORKFLOWS, com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductDraftOptions.workflows()));
+      contentJson.add("workflows", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductDraftOptions.workflows()));
     }
     if (createDataProductDraftOptions.dataviewEnabled() != null) {
-      contentJson.addProperty(CommonConstants.DATAVIEW_ENABLED, createDataProductDraftOptions.dataviewEnabled());
+      contentJson.addProperty("dataview_enabled", createDataProductDraftOptions.dataviewEnabled());
     }
     if (createDataProductDraftOptions.comments() != null) {
-      contentJson.addProperty(CommonConstants.COMMENTS, createDataProductDraftOptions.comments());
+      contentJson.addProperty("comments", createDataProductDraftOptions.comments());
     }
     if (createDataProductDraftOptions.accessControl() != null) {
-      contentJson.add(CommonConstants.ACCESS_CONTROL, com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductDraftOptions.accessControl()));
+      contentJson.add("access_control", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductDraftOptions.accessControl()));
     }
     if (createDataProductDraftOptions.lastUpdatedAt() != null) {
-      contentJson.add(CommonConstants.LAST_UPDATED_AT, com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductDraftOptions.lastUpdatedAt()));
+      contentJson.add("last_updated_at", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductDraftOptions.lastUpdatedAt()));
+    }
+    if (createDataProductDraftOptions.subContainer() != null) {
+      contentJson.add("sub_container", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductDraftOptions.subContainer()));
     }
     if (createDataProductDraftOptions.isRestricted() != null) {
-      contentJson.addProperty(CommonConstants.IS_RESTRICTED, createDataProductDraftOptions.isRestricted());
+      contentJson.addProperty("is_restricted", createDataProductDraftOptions.isRestricted());
     }
     builder.bodyJson(contentJson);
     ResponseConverter<DataProductDraft> responseConverter =
@@ -658,12 +665,12 @@ public class Dph extends BaseService {
    * Upload a contract document to the data product draft identified by draft_id. Use '-' for the `data_product_id` to
    * skip specifying the data product ID explicitly.
    *
-   * - If the request object contains a CommonConstants.URL parameter, a referential document is created to store the provided url.
-   * - If the request object does not contain a CommonConstants.URL parameter, an attachment document is created, and a signed url
+   * - If the request object contains a "url" parameter, a referential document is created to store the provided url.
+   * - If the request object does not contain a "url" parameter, an attachment document is created, and a signed url
    * will be returned in an "upload_url" parameter. The data product producer can upload the document using the provided
    * "upload_url". After the upload is completed, call "complete_contract_terms_document" for the given document needs
    * to be called to mark the upload as completed. After completion of the upload, "get_contract_terms_document" for the
-   * given document returns a signed CommonConstants.URL parameter that can be used to download the attachment document.
+   * given document returns a signed "url" parameter that can be used to download the attachment document.
    *
    * @param createDraftContractTermsDocumentOptions the {@link CreateDraftContractTermsDocumentOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link ContractTermsDocument}
@@ -672,20 +679,20 @@ public class Dph extends BaseService {
     com.ibm.cloud.sdk.core.util.Validator.notNull(createDraftContractTermsDocumentOptions,
       "createDraftContractTermsDocumentOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put(CommonConstants.DATA_PRODUCT_ID, createDraftContractTermsDocumentOptions.dataProductId());
-    pathParamsMap.put(CommonConstants.DRAFT_ID, createDraftContractTermsDocumentOptions.draftId());
-    pathParamsMap.put(CommonConstants.CONTRACT_TERMS_ID, createDraftContractTermsDocumentOptions.contractTermsId());
-    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_CREATE_DRAFT_CONTRACT_TERMS_DOCUMENT, pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, CommonConstants.CREATE_DRAFT_CONTRACT_TERMS_DOCUMENT);
+    pathParamsMap.put("data_product_id", createDraftContractTermsDocumentOptions.dataProductId());
+    pathParamsMap.put("draft_id", createDraftContractTermsDocumentOptions.draftId());
+    pathParamsMap.put("contract_terms_id", createDraftContractTermsDocumentOptions.contractTermsId());
+    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/data_products/{data_product_id}/drafts/{draft_id}/contract_terms/{contract_terms_id}/documents", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "createDraftContractTermsDocument");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
-    builder.header(HttpHeaders.ACCEPT, CommonConstants.CONTENT_TYPE_JSON);
+    builder.header("Accept", "application/json");
     final JsonObject contentJson = new JsonObject();
-    contentJson.addProperty(CommonConstants.TYPE, createDraftContractTermsDocumentOptions.type());
-    contentJson.addProperty(CommonConstants.NAME, createDraftContractTermsDocumentOptions.name());
+    contentJson.addProperty("type", createDraftContractTermsDocumentOptions.type());
+    contentJson.addProperty("name", createDraftContractTermsDocumentOptions.name());
     if (createDraftContractTermsDocumentOptions.url() != null) {
-      contentJson.addProperty(CommonConstants.URL, createDraftContractTermsDocumentOptions.url());
+      contentJson.addProperty("url", createDraftContractTermsDocumentOptions.url());
     }
     builder.bodyJson(contentJson);
     ResponseConverter<ContractTermsDocument> responseConverter =
@@ -706,14 +713,14 @@ public class Dph extends BaseService {
     com.ibm.cloud.sdk.core.util.Validator.notNull(getDataProductDraftOptions,
       "getDataProductDraftOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put(CommonConstants.DATA_PRODUCT_ID, getDataProductDraftOptions.dataProductId());
-    pathParamsMap.put(CommonConstants.DRAFT_ID, getDataProductDraftOptions.draftId());
-    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_GET_DATA_PRODUCT_DRAFT, pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, CommonConstants.GET_DATA_PRODUCT_DRAFT);
+    pathParamsMap.put("data_product_id", getDataProductDraftOptions.dataProductId());
+    pathParamsMap.put("draft_id", getDataProductDraftOptions.draftId());
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/data_products/{data_product_id}/drafts/{draft_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "getDataProductDraft");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
-    builder.header(HttpHeaders.ACCEPT, CommonConstants.CONTENT_TYPE_JSON);
+    builder.header("Accept", "application/json");
     ResponseConverter<DataProductDraft> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<DataProductDraft>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
@@ -732,10 +739,10 @@ public class Dph extends BaseService {
     com.ibm.cloud.sdk.core.util.Validator.notNull(deleteDataProductDraftOptions,
       "deleteDataProductDraftOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put(CommonConstants.DATA_PRODUCT_ID, deleteDataProductDraftOptions.dataProductId());
-    pathParamsMap.put(CommonConstants.DRAFT_ID, deleteDataProductDraftOptions.draftId());
-    RequestBuilder builder = RequestBuilder.delete(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_DELETE_DATA_PRODUCT_DRAFT, pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, CommonConstants.DELETE_DRAFT_CONTRACT_TERMS_DOCUMENT);
+    pathParamsMap.put("data_product_id", deleteDataProductDraftOptions.dataProductId());
+    pathParamsMap.put("draft_id", deleteDataProductDraftOptions.draftId());
+    RequestBuilder builder = RequestBuilder.delete(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/data_products/{data_product_id}/drafts/{draft_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "deleteDataProductDraft");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
@@ -760,15 +767,15 @@ public class Dph extends BaseService {
     com.ibm.cloud.sdk.core.util.Validator.notNull(updateDataProductDraftOptions,
       "updateDataProductDraftOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put(CommonConstants.DATA_PRODUCT_ID, updateDataProductDraftOptions.dataProductId());
-    pathParamsMap.put(CommonConstants.DRAFT_ID, updateDataProductDraftOptions.draftId());
-    RequestBuilder builder = RequestBuilder.patch(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_UPDATE_DATA_PRODUCT_DRAFT, pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, CommonConstants.UPDATE_DATA_PRODUCT_DRAFT);
+    pathParamsMap.put("data_product_id", updateDataProductDraftOptions.dataProductId());
+    pathParamsMap.put("draft_id", updateDataProductDraftOptions.draftId());
+    RequestBuilder builder = RequestBuilder.patch(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/data_products/{data_product_id}/drafts/{draft_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "updateDataProductDraft");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
-    builder.header(HttpHeaders.ACCEPT, CommonConstants.CONTENT_TYPE_JSON);
-    builder.bodyContent(com.ibm.cloud.sdk.core.util.GsonSingleton.getGsonWithoutPrettyPrinting().toJson(updateDataProductDraftOptions.jsonPatchInstructions()), CommonConstants.CONTENT_TYPE_PATCH_JSON);
+    builder.header("Accept", "application/json");
+    builder.bodyContent(com.ibm.cloud.sdk.core.util.GsonSingleton.getGsonWithoutPrettyPrinting().toJson(updateDataProductDraftOptions.jsonPatchInstructions()), "application/json-patch+json");
     ResponseConverter<DataProductDraft> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<DataProductDraft>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
@@ -790,16 +797,16 @@ public class Dph extends BaseService {
     com.ibm.cloud.sdk.core.util.Validator.notNull(getDraftContractTermsDocumentOptions,
       "getDraftContractTermsDocumentOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put(CommonConstants.DATA_PRODUCT_ID, getDraftContractTermsDocumentOptions.dataProductId());
-    pathParamsMap.put(CommonConstants.DRAFT_ID, getDraftContractTermsDocumentOptions.draftId());
-    pathParamsMap.put(CommonConstants.CONTRACT_TERMS_ID, getDraftContractTermsDocumentOptions.contractTermsId());
-    pathParamsMap.put(CommonConstants.DOCUMENT_ID, getDraftContractTermsDocumentOptions.documentId());
-    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_GET_DRAFT_CONTRACT_TERMS_DOCUMENT, pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, CommonConstants.GET_DRAFT_CONTRACT_TERMS_DOCUMENT);
+    pathParamsMap.put("data_product_id", getDraftContractTermsDocumentOptions.dataProductId());
+    pathParamsMap.put("draft_id", getDraftContractTermsDocumentOptions.draftId());
+    pathParamsMap.put("contract_terms_id", getDraftContractTermsDocumentOptions.contractTermsId());
+    pathParamsMap.put("document_id", getDraftContractTermsDocumentOptions.documentId());
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/data_products/{data_product_id}/drafts/{draft_id}/contract_terms/{contract_terms_id}/documents/{document_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "getDraftContractTermsDocument");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
-    builder.header(HttpHeaders.ACCEPT, CommonConstants.CONTENT_TYPE_JSON);
+    builder.header("Accept", "application/json");
     ResponseConverter<ContractTermsDocument> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ContractTermsDocument>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
@@ -820,12 +827,12 @@ public class Dph extends BaseService {
     com.ibm.cloud.sdk.core.util.Validator.notNull(deleteDraftContractTermsDocumentOptions,
       "deleteDraftContractTermsDocumentOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put(CommonConstants.DATA_PRODUCT_ID, deleteDraftContractTermsDocumentOptions.dataProductId());
-    pathParamsMap.put(CommonConstants.DRAFT_ID, deleteDraftContractTermsDocumentOptions.draftId());
-    pathParamsMap.put(CommonConstants.CONTRACT_TERMS_ID, deleteDraftContractTermsDocumentOptions.contractTermsId());
-    pathParamsMap.put(CommonConstants.DOCUMENT_ID, deleteDraftContractTermsDocumentOptions.documentId());
-    RequestBuilder builder = RequestBuilder.delete(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_DELETE_DRAFT_CONTRACT_TERMS_DOCUMENT, pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, CommonConstants.DELETE_DRAFT_CONTRACT_TERMS_DOCUMENT);
+    pathParamsMap.put("data_product_id", deleteDraftContractTermsDocumentOptions.dataProductId());
+    pathParamsMap.put("draft_id", deleteDraftContractTermsDocumentOptions.draftId());
+    pathParamsMap.put("contract_terms_id", deleteDraftContractTermsDocumentOptions.contractTermsId());
+    pathParamsMap.put("document_id", deleteDraftContractTermsDocumentOptions.documentId());
+    RequestBuilder builder = RequestBuilder.delete(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/data_products/{data_product_id}/drafts/{draft_id}/contract_terms/{contract_terms_id}/documents/{document_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "deleteDraftContractTermsDocument");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
@@ -853,17 +860,17 @@ public class Dph extends BaseService {
     com.ibm.cloud.sdk.core.util.Validator.notNull(updateDraftContractTermsDocumentOptions,
       "updateDraftContractTermsDocumentOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put(CommonConstants.DATA_PRODUCT_ID, updateDraftContractTermsDocumentOptions.dataProductId());
-    pathParamsMap.put(CommonConstants.DRAFT_ID, updateDraftContractTermsDocumentOptions.draftId());
-    pathParamsMap.put(CommonConstants.CONTRACT_TERMS_ID, updateDraftContractTermsDocumentOptions.contractTermsId());
-    pathParamsMap.put(CommonConstants.DOCUMENT_ID, updateDraftContractTermsDocumentOptions.documentId());
-    RequestBuilder builder = RequestBuilder.patch(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_UPDATE_DRAFT_CONTRACT_TERMS_DOCUMENT, pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, CommonConstants.UPDATE_DRAFT_CONTRACT_TERMS_DOCUMENT);
+    pathParamsMap.put("data_product_id", updateDraftContractTermsDocumentOptions.dataProductId());
+    pathParamsMap.put("draft_id", updateDraftContractTermsDocumentOptions.draftId());
+    pathParamsMap.put("contract_terms_id", updateDraftContractTermsDocumentOptions.contractTermsId());
+    pathParamsMap.put("document_id", updateDraftContractTermsDocumentOptions.documentId());
+    RequestBuilder builder = RequestBuilder.patch(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/data_products/{data_product_id}/drafts/{draft_id}/contract_terms/{contract_terms_id}/documents/{document_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "updateDraftContractTermsDocument");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
-    builder.header(HttpHeaders.ACCEPT, CommonConstants.CONTENT_TYPE_JSON);
-    builder.bodyContent(com.ibm.cloud.sdk.core.util.GsonSingleton.getGsonWithoutPrettyPrinting().toJson(updateDraftContractTermsDocumentOptions.jsonPatchInstructions()), CommonConstants.CONTENT_TYPE_PATCH_JSON);
+    builder.header("Accept", "application/json");
+    builder.bodyContent(com.ibm.cloud.sdk.core.util.GsonSingleton.getGsonWithoutPrettyPrinting().toJson(updateDraftContractTermsDocumentOptions.jsonPatchInstructions()), "application/json-patch+json");
     ResponseConverter<ContractTermsDocument> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ContractTermsDocument>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
@@ -875,27 +882,34 @@ public class Dph extends BaseService {
    * Retrieve a data product contract terms identified by id.
    *
    * @param getDataProductDraftContractTermsOptions the {@link GetDataProductDraftContractTermsOptions} containing the options for the call
-   * @return a {@link ServiceCall} with a result of type {@link InputStream}
+   * @return a {@link ServiceCall} with a result of type {@link ContractTerms}
    */
-  public ServiceCall<InputStream> getDataProductDraftContractTerms(GetDataProductDraftContractTermsOptions getDataProductDraftContractTermsOptions) {
+  public ServiceCall<ContractTerms> getDataProductDraftContractTerms(GetDataProductDraftContractTermsOptions getDataProductDraftContractTermsOptions) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(getDataProductDraftContractTermsOptions,
       "getDataProductDraftContractTermsOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put(CommonConstants.DATA_PRODUCT_ID, getDataProductDraftContractTermsOptions.dataProductId());
-    pathParamsMap.put(CommonConstants.DRAFT_ID, getDataProductDraftContractTermsOptions.draftId());
-    pathParamsMap.put(CommonConstants.CONTRACT_TERMS_ID, getDataProductDraftContractTermsOptions.contractTermsId());
-    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_GET_DRAFT_CONTRACT_TERMS, pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, CommonConstants.GET_DRAFT_CONTRACT_TERMS);
+    pathParamsMap.put("data_product_id", getDataProductDraftContractTermsOptions.dataProductId());
+    pathParamsMap.put("draft_id", getDataProductDraftContractTermsOptions.draftId());
+    pathParamsMap.put("contract_terms_id", getDataProductDraftContractTermsOptions.contractTermsId());
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/data_products/{data_product_id}/drafts/{draft_id}/contract_terms/{contract_terms_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "getDataProductDraftContractTerms");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
     if (getDataProductDraftContractTermsOptions.accept() != null) {
-      builder.header(HttpHeaders.ACCEPT, getDataProductDraftContractTermsOptions.accept());
+      builder.header("Accept", getDataProductDraftContractTermsOptions.accept());
     }
     if (getDataProductDraftContractTermsOptions.includeContractDocuments() != null) {
       builder.query("include_contract_documents", String.valueOf(getDataProductDraftContractTermsOptions.includeContractDocuments()));
     }
-    ResponseConverter<InputStream> responseConverter = ResponseConverterUtils.getInputStream();
+    if (getDataProductDraftContractTermsOptions.autopopulateServerInformation() != null) {
+      builder.query("autopopulate_server_information", String.valueOf(getDataProductDraftContractTermsOptions.autopopulateServerInformation()));
+    }
+    if (getDataProductDraftContractTermsOptions.serverAssetId() != null) {
+      builder.query("server_asset_id", String.valueOf(getDataProductDraftContractTermsOptions.serverAssetId()));
+    }
+    ResponseConverter<ContractTerms> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ContractTerms>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
 
@@ -911,57 +925,60 @@ public class Dph extends BaseService {
     com.ibm.cloud.sdk.core.util.Validator.notNull(replaceDataProductDraftContractTermsOptions,
       "replaceDataProductDraftContractTermsOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put(CommonConstants.DATA_PRODUCT_ID, replaceDataProductDraftContractTermsOptions.dataProductId());
-    pathParamsMap.put(CommonConstants.DRAFT_ID, replaceDataProductDraftContractTermsOptions.draftId());
-    pathParamsMap.put(CommonConstants.CONTRACT_TERMS_ID, replaceDataProductDraftContractTermsOptions.contractTermsId());
-    RequestBuilder builder = RequestBuilder.put(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_REPLACE_DRAFT_CONTRACT_TERMS, pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, CommonConstants.REPLACE_DRAFT_CONTRACT_TERMS);
+    pathParamsMap.put("data_product_id", replaceDataProductDraftContractTermsOptions.dataProductId());
+    pathParamsMap.put("draft_id", replaceDataProductDraftContractTermsOptions.draftId());
+    pathParamsMap.put("contract_terms_id", replaceDataProductDraftContractTermsOptions.contractTermsId());
+    RequestBuilder builder = RequestBuilder.put(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/data_products/{data_product_id}/drafts/{draft_id}/contract_terms/{contract_terms_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "replaceDataProductDraftContractTerms");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
-    builder.header(HttpHeaders.ACCEPT, CommonConstants.CONTENT_TYPE_JSON);
+    builder.header("Accept", "application/json");
     final JsonObject contentJson = new JsonObject();
     if (replaceDataProductDraftContractTermsOptions.asset() != null) {
-      contentJson.add(CommonConstants.ASSET, com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceDataProductDraftContractTermsOptions.asset()));
+      contentJson.add("asset", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceDataProductDraftContractTermsOptions.asset()));
     }
     if (replaceDataProductDraftContractTermsOptions.id() != null) {
-      contentJson.addProperty(CommonConstants.ID, replaceDataProductDraftContractTermsOptions.id());
+      contentJson.addProperty("id", replaceDataProductDraftContractTermsOptions.id());
     }
     if (replaceDataProductDraftContractTermsOptions.documents() != null) {
-      contentJson.add(CommonConstants.DOCUMENTS, com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceDataProductDraftContractTermsOptions.documents()));
+      contentJson.add("documents", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceDataProductDraftContractTermsOptions.documents()));
     }
     if (replaceDataProductDraftContractTermsOptions.errorMsg() != null) {
-      contentJson.addProperty(CommonConstants.ERROR_MSG, replaceDataProductDraftContractTermsOptions.errorMsg());
+      contentJson.addProperty("error_msg", replaceDataProductDraftContractTermsOptions.errorMsg());
     }
     if (replaceDataProductDraftContractTermsOptions.overview() != null) {
-      contentJson.add(CommonConstants.OVERVIEW, com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceDataProductDraftContractTermsOptions.overview()));
+      contentJson.add("overview", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceDataProductDraftContractTermsOptions.overview()));
     }
     if (replaceDataProductDraftContractTermsOptions.description() != null) {
-      contentJson.add(CommonConstants.DESCRIPTION, com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceDataProductDraftContractTermsOptions.description()));
+      contentJson.add("description", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceDataProductDraftContractTermsOptions.description()));
     }
     if (replaceDataProductDraftContractTermsOptions.organization() != null) {
-      contentJson.add(CommonConstants.ORGANIZATION, com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceDataProductDraftContractTermsOptions.organization()));
+      contentJson.add("organization", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceDataProductDraftContractTermsOptions.organization()));
     }
     if (replaceDataProductDraftContractTermsOptions.roles() != null) {
-      contentJson.add(CommonConstants.ROLES, com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceDataProductDraftContractTermsOptions.roles()));
+      contentJson.add("roles", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceDataProductDraftContractTermsOptions.roles()));
     }
     if (replaceDataProductDraftContractTermsOptions.price() != null) {
-      contentJson.add(CommonConstants.PRICE, com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceDataProductDraftContractTermsOptions.price()));
+      contentJson.add("price", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceDataProductDraftContractTermsOptions.price()));
     }
     if (replaceDataProductDraftContractTermsOptions.sla() != null) {
-      contentJson.add(CommonConstants.SLA, com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceDataProductDraftContractTermsOptions.sla()));
+      contentJson.add("sla", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceDataProductDraftContractTermsOptions.sla()));
     }
     if (replaceDataProductDraftContractTermsOptions.supportAndCommunication() != null) {
-      contentJson.add(CommonConstants.SUPPORT_AND_COMMUNICATION, com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceDataProductDraftContractTermsOptions.supportAndCommunication()));
+      contentJson.add("support_and_communication", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceDataProductDraftContractTermsOptions.supportAndCommunication()));
     }
     if (replaceDataProductDraftContractTermsOptions.customProperties() != null) {
-      contentJson.add(CommonConstants.CUSTOM_PROPERTIES, com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceDataProductDraftContractTermsOptions.customProperties()));
+      contentJson.add("custom_properties", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceDataProductDraftContractTermsOptions.customProperties()));
     }
     if (replaceDataProductDraftContractTermsOptions.contractTest() != null) {
-      contentJson.add(CommonConstants.CONTRACT_TEST, com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceDataProductDraftContractTermsOptions.contractTest()));
+      contentJson.add("contract_test", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceDataProductDraftContractTermsOptions.contractTest()));
+    }
+    if (replaceDataProductDraftContractTermsOptions.servers() != null) {
+      contentJson.add("servers", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceDataProductDraftContractTermsOptions.servers()));
     }
     if (replaceDataProductDraftContractTermsOptions.schema() != null) {
-      contentJson.add(CommonConstants.SCHEMA, com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceDataProductDraftContractTermsOptions.schema()));
+      contentJson.add("schema", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceDataProductDraftContractTermsOptions.schema()));
     }
     builder.bodyJson(contentJson);
     ResponseConverter<ContractTerms> responseConverter =
@@ -987,18 +1004,47 @@ public class Dph extends BaseService {
     com.ibm.cloud.sdk.core.util.Validator.notNull(updateDataProductDraftContractTermsOptions,
       "updateDataProductDraftContractTermsOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put(CommonConstants.DATA_PRODUCT_ID, updateDataProductDraftContractTermsOptions.dataProductId());
-    pathParamsMap.put(CommonConstants.DRAFT_ID, updateDataProductDraftContractTermsOptions.draftId());
-    pathParamsMap.put(CommonConstants.CONTRACT_TERMS_ID, updateDataProductDraftContractTermsOptions.contractTermsId());
-    RequestBuilder builder = RequestBuilder.patch(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_UPDATE_DRAFT_CONTRACT_TERMS, pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, CommonConstants.UPDATE_DRAFT_CONTRACT_TERMS);
+    pathParamsMap.put("data_product_id", updateDataProductDraftContractTermsOptions.dataProductId());
+    pathParamsMap.put("draft_id", updateDataProductDraftContractTermsOptions.draftId());
+    pathParamsMap.put("contract_terms_id", updateDataProductDraftContractTermsOptions.contractTermsId());
+    RequestBuilder builder = RequestBuilder.patch(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/data_products/{data_product_id}/drafts/{draft_id}/contract_terms/{contract_terms_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "updateDataProductDraftContractTerms");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
-    builder.header(HttpHeaders.ACCEPT, CommonConstants.CONTENT_TYPE_JSON);
-    builder.bodyContent(com.ibm.cloud.sdk.core.util.GsonSingleton.getGsonWithoutPrettyPrinting().toJson(updateDataProductDraftContractTermsOptions.jsonPatchInstructions()), CommonConstants.CONTENT_TYPE_PATCH_JSON);
+    builder.header("Accept", "application/json");
+    builder.bodyContent(com.ibm.cloud.sdk.core.util.GsonSingleton.getGsonWithoutPrettyPrinting().toJson(updateDataProductDraftContractTermsOptions.jsonPatchInstructions()), "application/json-patch+json");
     ResponseConverter<ContractTerms> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ContractTerms>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Retrieve a data product contract terms identified by id in specified format.
+   *
+   * Retrieve a data product contract terms identified by id in specified format.
+   *
+   * @param getContractTermsInSpecifiedFormatOptions the {@link GetContractTermsInSpecifiedFormatOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link InputStream}
+   */
+  public ServiceCall<InputStream> getContractTermsInSpecifiedFormat(GetContractTermsInSpecifiedFormatOptions getContractTermsInSpecifiedFormatOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(getContractTermsInSpecifiedFormatOptions,
+      "getContractTermsInSpecifiedFormatOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("data_product_id", getContractTermsInSpecifiedFormatOptions.dataProductId());
+    pathParamsMap.put("draft_id", getContractTermsInSpecifiedFormatOptions.draftId());
+    pathParamsMap.put("contract_terms_id", getContractTermsInSpecifiedFormatOptions.contractTermsId());
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/data_products/{data_product_id}/drafts/{draft_id}/contract_terms/{contract_terms_id}/format", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "getContractTermsInSpecifiedFormat");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    if (getContractTermsInSpecifiedFormatOptions.accept() != null) {
+      builder.header("Accept", getContractTermsInSpecifiedFormatOptions.accept());
+    }
+    builder.query("format", String.valueOf(getContractTermsInSpecifiedFormatOptions.format()));
+    builder.query("format_version", String.valueOf(getContractTermsInSpecifiedFormatOptions.formatVersion()));
+    ResponseConverter<InputStream> responseConverter = ResponseConverterUtils.getInputStream();
     return createServiceCall(builder.build(), responseConverter);
   }
 
@@ -1015,14 +1061,14 @@ public class Dph extends BaseService {
     com.ibm.cloud.sdk.core.util.Validator.notNull(publishDataProductDraftOptions,
       "publishDataProductDraftOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put(CommonConstants.DATA_PRODUCT_ID, publishDataProductDraftOptions.dataProductId());
-    pathParamsMap.put(CommonConstants.DRAFT_ID, publishDataProductDraftOptions.draftId());
-    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_PUBLISH_DATA_PRODUCT_DRAFT, pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, CommonConstants.PUBLISH_DATA_PRODUCT_DRAFT);
+    pathParamsMap.put("data_product_id", publishDataProductDraftOptions.dataProductId());
+    pathParamsMap.put("draft_id", publishDataProductDraftOptions.draftId());
+    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/data_products/{data_product_id}/drafts/{draft_id}/publish", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "publishDataProductDraft");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
-    builder.header(HttpHeaders.ACCEPT, CommonConstants.CONTENT_TYPE_JSON);
+    builder.header("Accept", "application/json");
     ResponseConverter<DataProductRelease> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<DataProductRelease>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
@@ -1041,14 +1087,14 @@ public class Dph extends BaseService {
     com.ibm.cloud.sdk.core.util.Validator.notNull(getDataProductReleaseOptions,
       "getDataProductReleaseOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put(CommonConstants.DATA_PRODUCT_ID, getDataProductReleaseOptions.dataProductId());
-    pathParamsMap.put(CommonConstants.RELEASE_ID, getDataProductReleaseOptions.releaseId());
-    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_GET_DATA_PRODUCT_RELEASE, pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, CommonConstants.GET_DATA_PRODUCT_RELEASE);
+    pathParamsMap.put("data_product_id", getDataProductReleaseOptions.dataProductId());
+    pathParamsMap.put("release_id", getDataProductReleaseOptions.releaseId());
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/data_products/{data_product_id}/releases/{release_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "getDataProductRelease");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
-    builder.header(HttpHeaders.ACCEPT, CommonConstants.CONTENT_TYPE_JSON);
+    builder.header("Accept", "application/json");
     if (getDataProductReleaseOptions.checkCallerApproval() != null) {
       builder.query("check_caller_approval", String.valueOf(getDataProductReleaseOptions.checkCallerApproval()));
     }
@@ -1073,15 +1119,15 @@ public class Dph extends BaseService {
     com.ibm.cloud.sdk.core.util.Validator.notNull(updateDataProductReleaseOptions,
       "updateDataProductReleaseOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put(CommonConstants.DATA_PRODUCT_ID, updateDataProductReleaseOptions.dataProductId());
-    pathParamsMap.put(CommonConstants.RELEASE_ID, updateDataProductReleaseOptions.releaseId());
-    RequestBuilder builder = RequestBuilder.patch(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_UPDATE_DATA_PRODUCT_RELEASE, pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, CommonConstants.UPDATE_DATA_PRODUCT_RELEASE);
+    pathParamsMap.put("data_product_id", updateDataProductReleaseOptions.dataProductId());
+    pathParamsMap.put("release_id", updateDataProductReleaseOptions.releaseId());
+    RequestBuilder builder = RequestBuilder.patch(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/data_products/{data_product_id}/releases/{release_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "updateDataProductRelease");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
-    builder.header(HttpHeaders.ACCEPT, CommonConstants.CONTENT_TYPE_JSON);
-    builder.bodyContent(com.ibm.cloud.sdk.core.util.GsonSingleton.getGsonWithoutPrettyPrinting().toJson(updateDataProductReleaseOptions.jsonPatchInstructions()), CommonConstants.CONTENT_TYPE_PATCH_JSON);
+    builder.header("Accept", "application/json");
+    builder.bodyContent(com.ibm.cloud.sdk.core.util.GsonSingleton.getGsonWithoutPrettyPrinting().toJson(updateDataProductReleaseOptions.jsonPatchInstructions()), "application/json-patch+json");
     ResponseConverter<DataProductRelease> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<DataProductRelease>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
@@ -1103,18 +1149,48 @@ public class Dph extends BaseService {
     com.ibm.cloud.sdk.core.util.Validator.notNull(getReleaseContractTermsDocumentOptions,
       "getReleaseContractTermsDocumentOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put(CommonConstants.DATA_PRODUCT_ID, getReleaseContractTermsDocumentOptions.dataProductId());
-    pathParamsMap.put(CommonConstants.RELEASE_ID, getReleaseContractTermsDocumentOptions.releaseId());
-    pathParamsMap.put(CommonConstants.CONTRACT_TERMS_ID, getReleaseContractTermsDocumentOptions.contractTermsId());
-    pathParamsMap.put(CommonConstants.DOCUMENT_ID, getReleaseContractTermsDocumentOptions.documentId());
-    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_GET_RELEASE_CONTRACT_TERMS_DOCUMENT, pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, CommonConstants.GET_RELEASE_CONTRACT_TERMS_DOCUMENT);
+    pathParamsMap.put("data_product_id", getReleaseContractTermsDocumentOptions.dataProductId());
+    pathParamsMap.put("release_id", getReleaseContractTermsDocumentOptions.releaseId());
+    pathParamsMap.put("contract_terms_id", getReleaseContractTermsDocumentOptions.contractTermsId());
+    pathParamsMap.put("document_id", getReleaseContractTermsDocumentOptions.documentId());
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/data_products/{data_product_id}/releases/{release_id}/contract_terms/{contract_terms_id}/documents/{document_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "getReleaseContractTermsDocument");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
-    builder.header(HttpHeaders.ACCEPT, CommonConstants.CONTENT_TYPE_JSON);
+    builder.header("Accept", "application/json");
     ResponseConverter<ContractTermsDocument> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ContractTermsDocument>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Retrieve a published data product contract terms identified by id.
+   *
+   * Retrieve a published data product contract terms identified by id.
+   *
+   * @param getPublishedDataProductDraftContractTermsOptions the {@link GetPublishedDataProductDraftContractTermsOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link InputStream}
+   */
+  public ServiceCall<InputStream> getPublishedDataProductDraftContractTerms(GetPublishedDataProductDraftContractTermsOptions getPublishedDataProductDraftContractTermsOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(getPublishedDataProductDraftContractTermsOptions,
+      "getPublishedDataProductDraftContractTermsOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("data_product_id", getPublishedDataProductDraftContractTermsOptions.dataProductId());
+    pathParamsMap.put("release_id", getPublishedDataProductDraftContractTermsOptions.releaseId());
+    pathParamsMap.put("contract_terms_id", getPublishedDataProductDraftContractTermsOptions.contractTermsId());
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/data_products/{data_product_id}/releases/{release_id}/contract_terms/{contract_terms_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "getPublishedDataProductDraftContractTerms");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    if (getPublishedDataProductDraftContractTermsOptions.accept() != null) {
+      builder.header("Accept", getPublishedDataProductDraftContractTermsOptions.accept());
+    }
+    if (getPublishedDataProductDraftContractTermsOptions.includeContractDocuments() != null) {
+      builder.query("include_contract_documents", String.valueOf(getPublishedDataProductDraftContractTermsOptions.includeContractDocuments()));
+    }
+    ResponseConverter<InputStream> responseConverter = ResponseConverterUtils.getInputStream();
     return createServiceCall(builder.build(), responseConverter);
   }
 
@@ -1131,27 +1207,27 @@ public class Dph extends BaseService {
     com.ibm.cloud.sdk.core.util.Validator.notNull(listDataProductReleasesOptions,
       "listDataProductReleasesOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put(CommonConstants.DATA_PRODUCT_ID, listDataProductReleasesOptions.dataProductId());
-    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_LIST_DATA_PRODUCT_RELEASES, pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, CommonConstants.LIST_DATA_PRODUCT_RELEASES);
+    pathParamsMap.put("data_product_id", listDataProductReleasesOptions.dataProductId());
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/data_products/{data_product_id}/releases", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "listDataProductReleases");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
-    builder.header(HttpHeaders.ACCEPT, CommonConstants.CONTENT_TYPE_JSON);
+    builder.header("Accept", "application/json");
     if (listDataProductReleasesOptions.assetContainerId() != null) {
-      builder.query(CommonConstants.ASSET_CONTAINER_ID, String.valueOf(listDataProductReleasesOptions.assetContainerId()));
+      builder.query("asset.container.id", String.valueOf(listDataProductReleasesOptions.assetContainerId()));
     }
     if (listDataProductReleasesOptions.state() != null) {
-      builder.query(CommonConstants.STATE, RequestUtils.join(listDataProductReleasesOptions.state(), ","));
+      builder.query("state", RequestUtils.join(listDataProductReleasesOptions.state(), ","));
     }
     if (listDataProductReleasesOptions.version() != null) {
-      builder.query(CommonConstants.VERSION, String.valueOf(listDataProductReleasesOptions.version()));
+      builder.query("version", String.valueOf(listDataProductReleasesOptions.version()));
     }
     if (listDataProductReleasesOptions.limit() != null) {
-      builder.query(CommonConstants.LIMIT, String.valueOf(listDataProductReleasesOptions.limit()));
+      builder.query("limit", String.valueOf(listDataProductReleasesOptions.limit()));
     }
     if (listDataProductReleasesOptions.start() != null) {
-      builder.query(CommonConstants.START, String.valueOf(listDataProductReleasesOptions.start()));
+      builder.query("start", String.valueOf(listDataProductReleasesOptions.start()));
     }
     ResponseConverter<DataProductReleaseCollection> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<DataProductReleaseCollection>() { }.getType());
@@ -1171,19 +1247,54 @@ public class Dph extends BaseService {
     com.ibm.cloud.sdk.core.util.Validator.notNull(retireDataProductReleaseOptions,
       "retireDataProductReleaseOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
-    pathParamsMap.put(CommonConstants.DATA_PRODUCT_ID, retireDataProductReleaseOptions.dataProductId());
-    pathParamsMap.put(CommonConstants.RELEASE_ID, retireDataProductReleaseOptions.releaseId());
-    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_RETIRE_DATA_PRODUCT_RELEASE, pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, CommonConstants.RETIRE_DATA_PRODUCT_RELEASE);
+    pathParamsMap.put("data_product_id", retireDataProductReleaseOptions.dataProductId());
+    pathParamsMap.put("release_id", retireDataProductReleaseOptions.releaseId());
+    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/data_products/{data_product_id}/releases/{release_id}/retire", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "retireDataProductRelease");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
-    builder.header(HttpHeaders.ACCEPT, CommonConstants.CONTENT_TYPE_JSON);
+    builder.header("Accept", "application/json");
     if (retireDataProductReleaseOptions.revokeAccess() != null) {
       builder.query("revoke_access", String.valueOf(retireDataProductReleaseOptions.revokeAccess()));
     }
+    if (retireDataProductReleaseOptions.startAt() != null) {
+      builder.query("start_at", String.valueOf(retireDataProductReleaseOptions.startAt()));
+    }
     ResponseConverter<DataProductRelease> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<DataProductRelease>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Revoke access from Data Product subscriptions.
+   *
+   * Revoke's access from Subscriptions of the data product id passed in the path parameter. Optionally specify a future
+   * date-time when the revoke access operation should start using the start_at field in ISO 8601 format (e.g.,
+   * 2025-09-24T06:55:29Z). If start_at is not provided, the revoke access operation starts immediately.
+   *
+   * @param createRevokeAccessProcessOptions the {@link CreateRevokeAccessProcessOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link RevokeAccessResponse}
+   */
+  public ServiceCall<RevokeAccessResponse> createRevokeAccessProcess(CreateRevokeAccessProcessOptions createRevokeAccessProcessOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(createRevokeAccessProcessOptions,
+      "createRevokeAccessProcessOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("data_product_id", createRevokeAccessProcessOptions.dataProductId());
+    pathParamsMap.put("release_id", createRevokeAccessProcessOptions.releaseId());
+    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/data_products/{data_product_id}/releases/{release_id}/revoke_access", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "createRevokeAccessProcess");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    if (createRevokeAccessProcessOptions.contentType() != null) {
+      builder.header("Content-Type", createRevokeAccessProcessOptions.contentType());
+    }
+    builder.bodyContent(createRevokeAccessProcessOptions.contentType(), null,
+      null, createRevokeAccessProcessOptions.body());
+    ResponseConverter<RevokeAccessResponse> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<RevokeAccessResponse>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
 
@@ -1199,17 +1310,20 @@ public class Dph extends BaseService {
     if (listDataProductContractTemplateOptions == null) {
       listDataProductContractTemplateOptions = new ListDataProductContractTemplateOptions.Builder().build();
     }
-    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_LIST_CONTRACT_TEMPLATE));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, "listDataProductContractTemplate");
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/contract_templates"));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "listDataProductContractTemplate");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
-    builder.header(HttpHeaders.ACCEPT, CommonConstants.CONTENT_TYPE_JSON);
+    builder.header("Accept", "application/json");
     if (listDataProductContractTemplateOptions.containerId() != null) {
-      builder.query(CommonConstants.CONTAINER_ID, String.valueOf(listDataProductContractTemplateOptions.containerId()));
+      builder.query("container.id", String.valueOf(listDataProductContractTemplateOptions.containerId()));
     }
     if (listDataProductContractTemplateOptions.contractTemplateName() != null) {
       builder.query("contract_template.name", String.valueOf(listDataProductContractTemplateOptions.contractTemplateName()));
+    }
+    if (listDataProductContractTemplateOptions.domainIds() != null) {
+      builder.query("domain.ids", String.valueOf(listDataProductContractTemplateOptions.domainIds()));
     }
     ResponseConverter<DataProductContractTemplateCollection> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<DataProductContractTemplateCollection>() { }.getType());
@@ -1238,31 +1352,40 @@ public class Dph extends BaseService {
   public ServiceCall<DataProductContractTemplate> createContractTemplate(CreateContractTemplateOptions createContractTemplateOptions) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(createContractTemplateOptions,
       "createContractTemplateOptions cannot be null");
-    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_CREATE_CONTRACT_TEMPLATE));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, "createContractTemplate");
+    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/contract_templates"));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "createContractTemplate");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
-    builder.header(HttpHeaders.ACCEPT, CommonConstants.CONTENT_TYPE_JSON);
+    builder.header("Accept", "application/json");
     if (createContractTemplateOptions.containerId() != null) {
-      builder.query(CommonConstants.CONTAINER_ID, String.valueOf(createContractTemplateOptions.containerId()));
+      builder.query("container.id", String.valueOf(createContractTemplateOptions.containerId()));
     }
     if (createContractTemplateOptions.contractTemplateName() != null) {
       builder.query("contract_template.name", String.valueOf(createContractTemplateOptions.contractTemplateName()));
     }
+    if (createContractTemplateOptions.domainIds() != null) {
+      builder.query("domain.ids", String.valueOf(createContractTemplateOptions.domainIds()));
+    }
     final JsonObject contentJson = new JsonObject();
-    contentJson.add(CommonConstants.CONTAINER, com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createContractTemplateOptions.container()));
+    contentJson.add("container", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createContractTemplateOptions.container()));
     if (createContractTemplateOptions.id() != null) {
-      contentJson.addProperty(CommonConstants.ID, createContractTemplateOptions.id());
+      contentJson.addProperty("id", createContractTemplateOptions.id());
+    }
+    if (createContractTemplateOptions.creatorId() != null) {
+      contentJson.addProperty("creator_id", createContractTemplateOptions.creatorId());
+    }
+    if (createContractTemplateOptions.createdAt() != null) {
+      contentJson.addProperty("created_at", createContractTemplateOptions.createdAt());
     }
     if (createContractTemplateOptions.name() != null) {
-      contentJson.addProperty(CommonConstants.NAME, createContractTemplateOptions.name());
+      contentJson.addProperty("name", createContractTemplateOptions.name());
     }
     if (createContractTemplateOptions.error() != null) {
       contentJson.add("error", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createContractTemplateOptions.error()));
     }
     if (createContractTemplateOptions.contractTerms() != null) {
-      contentJson.add(CommonConstants.CONTRACT_TERMS, com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createContractTemplateOptions.contractTerms()));
+      contentJson.add("contract_terms", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createContractTemplateOptions.contractTerms()));
     }
     builder.bodyJson(contentJson);
     ResponseConverter<DataProductContractTemplate> responseConverter =
@@ -1283,13 +1406,13 @@ public class Dph extends BaseService {
       "getContractTemplateOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
     pathParamsMap.put("contract_template_id", getContractTemplateOptions.contractTemplateId());
-    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_GET_CONTRACT_TEMPLATE, pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, "getContractTemplate");
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/contract_templates/{contract_template_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "getContractTemplate");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
-    builder.header(HttpHeaders.ACCEPT, CommonConstants.CONTENT_TYPE_JSON);
-    builder.query(CommonConstants.CONTAINER_ID, String.valueOf(getContractTemplateOptions.containerId()));
+    builder.header("Accept", "application/json");
+    builder.query("container.id", String.valueOf(getContractTemplateOptions.containerId()));
     ResponseConverter<DataProductContractTemplate> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<DataProductContractTemplate>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
@@ -1308,12 +1431,12 @@ public class Dph extends BaseService {
       "deleteDataProductContractTemplateOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
     pathParamsMap.put("contract_template_id", deleteDataProductContractTemplateOptions.contractTemplateId());
-    RequestBuilder builder = RequestBuilder.delete(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_DELETE_CONTRACT_TEMPLATE, pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, "deleteDataProductContractTemplate");
+    RequestBuilder builder = RequestBuilder.delete(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/contract_templates/{contract_template_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "deleteDataProductContractTemplate");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
-    builder.query(CommonConstants.CONTAINER_ID, String.valueOf(deleteDataProductContractTemplateOptions.containerId()));
+    builder.query("container.id", String.valueOf(deleteDataProductContractTemplateOptions.containerId()));
     ResponseConverter<Void> responseConverter = ResponseConverterUtils.getVoid();
     return createServiceCall(builder.build(), responseConverter);
   }
@@ -1335,14 +1458,14 @@ public class Dph extends BaseService {
       "updateDataProductContractTemplateOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
     pathParamsMap.put("contract_template_id", updateDataProductContractTemplateOptions.contractTemplateId());
-    RequestBuilder builder = RequestBuilder.patch(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_UPDATE_CONTRACT_TEMPLATE, pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, "updateDataProductContractTemplate");
+    RequestBuilder builder = RequestBuilder.patch(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/contract_templates/{contract_template_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "updateDataProductContractTemplate");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
-    builder.header(HttpHeaders.ACCEPT, CommonConstants.CONTENT_TYPE_JSON);
-    builder.query(CommonConstants.CONTAINER_ID, String.valueOf(updateDataProductContractTemplateOptions.containerId()));
-    builder.bodyContent(com.ibm.cloud.sdk.core.util.GsonSingleton.getGsonWithoutPrettyPrinting().toJson(updateDataProductContractTemplateOptions.jsonPatchInstructions()), CommonConstants.CONTENT_TYPE_PATCH_JSON);
+    builder.header("Accept", "application/json");
+    builder.query("container.id", String.valueOf(updateDataProductContractTemplateOptions.containerId()));
+    builder.bodyContent(com.ibm.cloud.sdk.core.util.GsonSingleton.getGsonWithoutPrettyPrinting().toJson(updateDataProductContractTemplateOptions.jsonPatchInstructions()), "application/json-patch+json");
     ResponseConverter<DataProductContractTemplate> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<DataProductContractTemplate>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
@@ -1360,14 +1483,17 @@ public class Dph extends BaseService {
     if (listDataProductDomainsOptions == null) {
       listDataProductDomainsOptions = new ListDataProductDomainsOptions.Builder().build();
     }
-    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_LIST_DOMAINS));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, "listDataProductDomains");
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/domains"));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "listDataProductDomains");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
-    builder.header(HttpHeaders.ACCEPT, CommonConstants.CONTENT_TYPE_JSON);
+    builder.header("Accept", "application/json");
     if (listDataProductDomainsOptions.containerId() != null) {
-      builder.query(CommonConstants.CONTAINER_ID, String.valueOf(listDataProductDomainsOptions.containerId()));
+      builder.query("container.id", String.valueOf(listDataProductDomainsOptions.containerId()));
+    }
+    if (listDataProductDomainsOptions.includeSubdomains() != null) {
+      builder.query("include_subdomains", String.valueOf(listDataProductDomainsOptions.includeSubdomains()));
     }
     ResponseConverter<DataProductDomainCollection> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<DataProductDomainCollection>() { }.getType());
@@ -1396,17 +1522,17 @@ public class Dph extends BaseService {
   public ServiceCall<DataProductDomain> createDataProductDomain(CreateDataProductDomainOptions createDataProductDomainOptions) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(createDataProductDomainOptions,
       "createDataProductDomainOptions cannot be null");
-    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_CREATE_DOMAINS));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, "createDataProductDomain");
+    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/domains"));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "createDataProductDomain");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
-    builder.header(HttpHeaders.ACCEPT, CommonConstants.CONTENT_TYPE_JSON);
-    if (createDataProductDomainOptions.containerId() != null) {
-      builder.query(CommonConstants.CONTAINER_ID, String.valueOf(createDataProductDomainOptions.containerId()));
+    builder.header("Accept", "application/json");
+    if (createDataProductDomainOptions.linkToSubcontainers() != null) {
+      builder.query("link_to_subcontainers", String.valueOf(createDataProductDomainOptions.linkToSubcontainers()));
     }
     final JsonObject contentJson = new JsonObject();
-    contentJson.add(CommonConstants.CONTAINER, com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductDomainOptions.container()));
+    contentJson.add("container", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductDomainOptions.container()));
     if (createDataProductDomainOptions.trace() != null) {
       contentJson.addProperty("trace", createDataProductDomainOptions.trace());
     }
@@ -1414,13 +1540,16 @@ public class Dph extends BaseService {
       contentJson.add("errors", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductDomainOptions.errors()));
     }
     if (createDataProductDomainOptions.name() != null) {
-      contentJson.addProperty(CommonConstants.NAME, createDataProductDomainOptions.name());
+      contentJson.addProperty("name", createDataProductDomainOptions.name());
     }
     if (createDataProductDomainOptions.description() != null) {
-      contentJson.addProperty(CommonConstants.DESCRIPTION, createDataProductDomainOptions.description());
+      contentJson.addProperty("description", createDataProductDomainOptions.description());
     }
     if (createDataProductDomainOptions.id() != null) {
-      contentJson.addProperty(CommonConstants.ID, createDataProductDomainOptions.id());
+      contentJson.addProperty("id", createDataProductDomainOptions.id());
+    }
+    if (createDataProductDomainOptions.createdBy() != null) {
+      contentJson.addProperty("created_by", createDataProductDomainOptions.createdBy());
     }
     if (createDataProductDomainOptions.memberRoles() != null) {
       contentJson.add("member_roles", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductDomainOptions.memberRoles()));
@@ -1430,6 +1559,9 @@ public class Dph extends BaseService {
     }
     if (createDataProductDomainOptions.subDomains() != null) {
       contentJson.add("sub_domains", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductDomainOptions.subDomains()));
+    }
+    if (createDataProductDomainOptions.subContainer() != null) {
+      contentJson.add("sub_container", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductDomainOptions.subContainer()));
     }
     builder.bodyJson(contentJson);
     ResponseConverter<DataProductDomain> responseConverter =
@@ -1450,22 +1582,22 @@ public class Dph extends BaseService {
       "createDataProductSubdomainOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
     pathParamsMap.put("domain_id", createDataProductSubdomainOptions.domainId());
-    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_CREATE_SUBDOMAINS, pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, "createDataProductSubdomain");
+    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/domains/{domain_id}/subdomains", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "createDataProductSubdomain");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
-    builder.header(HttpHeaders.ACCEPT, CommonConstants.CONTENT_TYPE_JSON);
-    builder.query(CommonConstants.CONTAINER_ID, String.valueOf(createDataProductSubdomainOptions.containerId()));
+    builder.header("Accept", "application/json");
+    builder.query("container.id", String.valueOf(createDataProductSubdomainOptions.containerId()));
     final JsonObject contentJson = new JsonObject();
     if (createDataProductSubdomainOptions.name() != null) {
-      contentJson.addProperty(CommonConstants.NAME, createDataProductSubdomainOptions.name());
+      contentJson.addProperty("name", createDataProductSubdomainOptions.name());
     }
     if (createDataProductSubdomainOptions.id() != null) {
-      contentJson.addProperty(CommonConstants.ID, createDataProductSubdomainOptions.id());
+      contentJson.addProperty("id", createDataProductSubdomainOptions.id());
     }
     if (createDataProductSubdomainOptions.description() != null) {
-      contentJson.addProperty(CommonConstants.DESCRIPTION, createDataProductSubdomainOptions.description());
+      contentJson.addProperty("description", createDataProductSubdomainOptions.description());
     }
     builder.bodyJson(contentJson);
     ResponseConverter<InitializeSubDomain> responseConverter =
@@ -1486,12 +1618,12 @@ public class Dph extends BaseService {
       "getDomainOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
     pathParamsMap.put("domain_id", getDomainOptions.domainId());
-    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_GET_DOMAINS, pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, "getDomain");
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/domains/{domain_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "getDomain");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
-    builder.header(HttpHeaders.ACCEPT, CommonConstants.CONTENT_TYPE_JSON);
+    builder.header("Accept", "application/json");
     ResponseConverter<DataProductDomain> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<DataProductDomain>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
@@ -1510,8 +1642,8 @@ public class Dph extends BaseService {
       "deleteDomainOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
     pathParamsMap.put("domain_id", deleteDomainOptions.domainId());
-    RequestBuilder builder = RequestBuilder.delete(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_DELETE_DOMAINS, pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, "deleteDomain");
+    RequestBuilder builder = RequestBuilder.delete(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/domains/{domain_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "deleteDomain");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
@@ -1536,14 +1668,14 @@ public class Dph extends BaseService {
       "updateDataProductDomainOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
     pathParamsMap.put("domain_id", updateDataProductDomainOptions.domainId());
-    RequestBuilder builder = RequestBuilder.patch(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_UPDATE_DOMAINS, pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, "updateDataProductDomain");
+    RequestBuilder builder = RequestBuilder.patch(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/domains/{domain_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "updateDataProductDomain");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
-    builder.header(HttpHeaders.ACCEPT, CommonConstants.CONTENT_TYPE_JSON);
-    builder.query(CommonConstants.CONTAINER_ID, String.valueOf(updateDataProductDomainOptions.containerId()));
-    builder.bodyContent(com.ibm.cloud.sdk.core.util.GsonSingleton.getGsonWithoutPrettyPrinting().toJson(updateDataProductDomainOptions.jsonPatchInstructions()), CommonConstants.CONTENT_TYPE_PATCH_JSON);
+    builder.header("Accept", "application/json");
+    builder.query("container.id", String.valueOf(updateDataProductDomainOptions.containerId()));
+    builder.bodyContent(com.ibm.cloud.sdk.core.util.GsonSingleton.getGsonWithoutPrettyPrinting().toJson(updateDataProductDomainOptions.jsonPatchInstructions()), "application/json-patch+json");
     ResponseConverter<DataProductDomain> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<DataProductDomain>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
@@ -1562,13 +1694,13 @@ public class Dph extends BaseService {
       "getDataProductByDomainOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
     pathParamsMap.put("domain_id", getDataProductByDomainOptions.domainId());
-    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_GET_DATA_PRODUCT_BY_DOMAIN, pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, "getDataProductByDomain");
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/domains/{domain_id}/data_products", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "getDataProductByDomain");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
-    builder.header(HttpHeaders.ACCEPT, CommonConstants.CONTENT_TYPE_JSON);
-    builder.query(CommonConstants.CONTAINER_ID, String.valueOf(getDataProductByDomainOptions.containerId()));
+    builder.header("Accept", "application/json");
+    builder.query("container.id", String.valueOf(getDataProductByDomainOptions.containerId()));
     ResponseConverter<DataProductVersionCollection> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<DataProductVersionCollection>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
@@ -1585,12 +1717,12 @@ public class Dph extends BaseService {
   public ServiceCall<BucketResponse> createS3Bucket(CreateS3BucketOptions createS3BucketOptions) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(createS3BucketOptions,
       "createS3BucketOptions cannot be null");
-    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_CREATE_S3_BUCKET));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, "createS3Bucket");
+    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/bucket"));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "createS3Bucket");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
-    builder.header(HttpHeaders.ACCEPT, CommonConstants.CONTENT_TYPE_JSON);
+    builder.header("Accept", "application/json");
     builder.query("is_shared", String.valueOf(createS3BucketOptions.isShared()));
     ResponseConverter<BucketResponse> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<BucketResponse>() { }.getType());
@@ -1610,14 +1742,43 @@ public class Dph extends BaseService {
       "getS3BucketValidationOptions cannot be null");
     Map<String, String> pathParamsMap = new HashMap<String, String>();
     pathParamsMap.put("bucket_name", getS3BucketValidationOptions.bucketName());
-    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), CommonConstants.URL_VALIDATE_BUCKET, pathParamsMap));
-    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders(CommonConstants.SERVICE_NAME, CommonConstants.SERVICE_VERSION, "getS3BucketValidation");
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/bucket/validate/{bucket_name}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "getS3BucketValidation");
     for (Entry<String, String> header : sdkHeaders.entrySet()) {
       builder.header(header.getKey(), header.getValue());
     }
-    builder.header(HttpHeaders.ACCEPT, CommonConstants.CONTENT_TYPE_JSON);
+    builder.header("Accept", "application/json");
     ResponseConverter<BucketValidationResponse> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<BucketValidationResponse>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Access revoke status of the subscriptions against the data product release id.
+   *
+   * Retrieves the status of revoke access requests.
+   *
+   * @param getRevokeAccessProcessStateOptions the {@link GetRevokeAccessProcessStateOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link RevokeAccessStateResponse}
+   */
+  public ServiceCall<RevokeAccessStateResponse> getRevokeAccessProcessState(GetRevokeAccessProcessStateOptions getRevokeAccessProcessStateOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(getRevokeAccessProcessStateOptions,
+      "getRevokeAccessProcessStateOptions cannot be null");
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/data_product_revoke_access/job_runs"));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "getRevokeAccessProcessState");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    builder.query("release_id", String.valueOf(getRevokeAccessProcessStateOptions.releaseId()));
+    if (getRevokeAccessProcessStateOptions.limit() != null) {
+      builder.query("limit", String.valueOf(getRevokeAccessProcessStateOptions.limit()));
+    }
+    if (getRevokeAccessProcessStateOptions.start() != null) {
+      builder.query("start", String.valueOf(getRevokeAccessProcessStateOptions.start()));
+    }
+    ResponseConverter<RevokeAccessStateResponse> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<RevokeAccessStateResponse>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
 

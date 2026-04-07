@@ -15,9 +15,12 @@ package com.ibm.cloud.dph_services.dph.v1.model;
 
 import com.ibm.cloud.dph_services.dph.v1.model.AssetReference;
 import com.ibm.cloud.dph_services.dph.v1.model.ContainerReference;
+import com.ibm.cloud.dph_services.dph.v1.model.ContractAsset;
+import com.ibm.cloud.dph_services.dph.v1.model.ContractQualityRule;
 import com.ibm.cloud.dph_services.dph.v1.model.ContractSchema;
 import com.ibm.cloud.dph_services.dph.v1.model.ContractSchemaProperty;
 import com.ibm.cloud.dph_services.dph.v1.model.ContractSchemaPropertyType;
+import com.ibm.cloud.dph_services.dph.v1.model.ContractServer;
 import com.ibm.cloud.dph_services.dph.v1.model.ContractTemplateCustomProperty;
 import com.ibm.cloud.dph_services.dph.v1.model.ContractTemplateOrganization;
 import com.ibm.cloud.dph_services.dph.v1.model.ContractTemplateSLA;
@@ -188,6 +191,70 @@ public class ReplaceDataProductDraftContractTermsOptionsTest {
     assertEquals(contractTestModel.lastTestedTime(), "testString");
     assertEquals(contractTestModel.message(), "testString");
 
+    ContractAsset contractAssetModel = new ContractAsset.Builder()
+      .id("testString")
+      .name("testString")
+      .build();
+    assertEquals(contractAssetModel.id(), "testString");
+    assertEquals(contractAssetModel.name(), "testString");
+
+    ContractServer contractServerModel = new ContractServer.Builder()
+      .server("testString")
+      .asset(contractAssetModel)
+      .connectionId("testString")
+      .type("testString")
+      .description("testString")
+      .environment("testString")
+      .account("testString")
+      .catalog("testString")
+      .database("testString")
+      .dataset("testString")
+      .delimiter("testString")
+      .endpointUrl("testString")
+      .format("testString")
+      .host("testString")
+      .location("testString")
+      .path("testString")
+      .port("testString")
+      .project("testString")
+      .region("testString")
+      .regionName("testString")
+      .schema("testString")
+      .serviceName("testString")
+      .stagingDir("testString")
+      .stream("testString")
+      .warehouse("testString")
+      .roles(java.util.Arrays.asList("testString"))
+      .customProperties(java.util.Arrays.asList(contractTemplateCustomPropertyModel))
+      .build();
+    assertEquals(contractServerModel.server(), "testString");
+    assertEquals(contractServerModel.asset(), contractAssetModel);
+    assertEquals(contractServerModel.connectionId(), "testString");
+    assertEquals(contractServerModel.type(), "testString");
+    assertEquals(contractServerModel.description(), "testString");
+    assertEquals(contractServerModel.environment(), "testString");
+    assertEquals(contractServerModel.account(), "testString");
+    assertEquals(contractServerModel.catalog(), "testString");
+    assertEquals(contractServerModel.database(), "testString");
+    assertEquals(contractServerModel.dataset(), "testString");
+    assertEquals(contractServerModel.delimiter(), "testString");
+    assertEquals(contractServerModel.endpointUrl(), "testString");
+    assertEquals(contractServerModel.format(), "testString");
+    assertEquals(contractServerModel.host(), "testString");
+    assertEquals(contractServerModel.location(), "testString");
+    assertEquals(contractServerModel.path(), "testString");
+    assertEquals(contractServerModel.port(), "testString");
+    assertEquals(contractServerModel.project(), "testString");
+    assertEquals(contractServerModel.region(), "testString");
+    assertEquals(contractServerModel.regionName(), "testString");
+    assertEquals(contractServerModel.schema(), "testString");
+    assertEquals(contractServerModel.serviceName(), "testString");
+    assertEquals(contractServerModel.stagingDir(), "testString");
+    assertEquals(contractServerModel.stream(), "testString");
+    assertEquals(contractServerModel.warehouse(), "testString");
+    assertEquals(contractServerModel.roles(), java.util.Arrays.asList("testString"));
+    assertEquals(contractServerModel.customProperties(), java.util.Arrays.asList(contractTemplateCustomPropertyModel));
+
     ContractSchemaPropertyType contractSchemaPropertyTypeModel = new ContractSchemaPropertyType.Builder()
       .type("testString")
       .length("testString")
@@ -203,23 +270,68 @@ public class ReplaceDataProductDraftContractTermsOptionsTest {
     assertEquals(contractSchemaPropertyTypeModel.signed(), "testString");
     assertEquals(contractSchemaPropertyTypeModel.nativeType(), "testString");
 
+    ContractQualityRule contractQualityRuleModel = new ContractQualityRule.Builder()
+      .type("sql")
+      .description("testString")
+      .rule("testString")
+      .implementation("testString")
+      .engine("testString")
+      .mustBeLessThan("testString")
+      .mustBeLessOrEqualTo("testString")
+      .mustBeGreaterThan("testString")
+      .mustBeGreaterOrEqualTo("testString")
+      .mustBeBetween(java.util.Arrays.asList("testString"))
+      .mustNotBeBetween(java.util.Arrays.asList("testString"))
+      .mustBe("testString")
+      .mustNotBe("testString")
+      .name("testString")
+      .unit("testString")
+      .query("testString")
+      .build();
+    assertEquals(contractQualityRuleModel.type(), "sql");
+    assertEquals(contractQualityRuleModel.description(), "testString");
+    assertEquals(contractQualityRuleModel.rule(), "testString");
+    assertEquals(contractQualityRuleModel.implementation(), "testString");
+    assertEquals(contractQualityRuleModel.engine(), "testString");
+    assertEquals(contractQualityRuleModel.mustBeLessThan(), "testString");
+    assertEquals(contractQualityRuleModel.mustBeLessOrEqualTo(), "testString");
+    assertEquals(contractQualityRuleModel.mustBeGreaterThan(), "testString");
+    assertEquals(contractQualityRuleModel.mustBeGreaterOrEqualTo(), "testString");
+    assertEquals(contractQualityRuleModel.mustBeBetween(), java.util.Arrays.asList("testString"));
+    assertEquals(contractQualityRuleModel.mustNotBeBetween(), java.util.Arrays.asList("testString"));
+    assertEquals(contractQualityRuleModel.mustBe(), "testString");
+    assertEquals(contractQualityRuleModel.mustNotBe(), "testString");
+    assertEquals(contractQualityRuleModel.name(), "testString");
+    assertEquals(contractQualityRuleModel.unit(), "testString");
+    assertEquals(contractQualityRuleModel.query(), "testString");
+
     ContractSchemaProperty contractSchemaPropertyModel = new ContractSchemaProperty.Builder()
       .name("testString")
       .type(contractSchemaPropertyTypeModel)
+      .quality(java.util.Arrays.asList(contractQualityRuleModel))
       .build();
     assertEquals(contractSchemaPropertyModel.name(), "testString");
     assertEquals(contractSchemaPropertyModel.type(), contractSchemaPropertyTypeModel);
+    assertEquals(contractSchemaPropertyModel.quality(), java.util.Arrays.asList(contractQualityRuleModel));
 
     ContractSchema contractSchemaModel = new ContractSchema.Builder()
+      .assetId("2b0bf220-079c-11ee-be56-0242ac120002")
+      .connectionId("2b0bf220-079c-11ee-be56-0242ac120002")
       .name("testString")
       .description("testString")
+      .connectionPath("testString")
       .physicalType("testString")
       .xProperties(java.util.Arrays.asList(contractSchemaPropertyModel))
+      .quality(java.util.Arrays.asList(contractQualityRuleModel))
       .build();
+    assertEquals(contractSchemaModel.assetId(), "2b0bf220-079c-11ee-be56-0242ac120002");
+    assertEquals(contractSchemaModel.connectionId(), "2b0bf220-079c-11ee-be56-0242ac120002");
     assertEquals(contractSchemaModel.name(), "testString");
     assertEquals(contractSchemaModel.description(), "testString");
+    assertEquals(contractSchemaModel.connectionPath(), "testString");
     assertEquals(contractSchemaModel.physicalType(), "testString");
     assertEquals(contractSchemaModel.xProperties(), java.util.Arrays.asList(contractSchemaPropertyModel));
+    assertEquals(contractSchemaModel.quality(), java.util.Arrays.asList(contractQualityRuleModel));
 
     ReplaceDataProductDraftContractTermsOptions replaceDataProductDraftContractTermsOptionsModel = new ReplaceDataProductDraftContractTermsOptions.Builder()
       .dataProductId("testString")
@@ -238,6 +350,7 @@ public class ReplaceDataProductDraftContractTermsOptionsTest {
       .supportAndCommunication(java.util.Arrays.asList(contractTemplateSupportAndCommunicationModel))
       .customProperties(java.util.Arrays.asList(contractTemplateCustomPropertyModel))
       .contractTest(contractTestModel)
+      .servers(java.util.Arrays.asList(contractServerModel))
       .schema(java.util.Arrays.asList(contractSchemaModel))
       .build();
     assertEquals(replaceDataProductDraftContractTermsOptionsModel.dataProductId(), "testString");
@@ -256,6 +369,7 @@ public class ReplaceDataProductDraftContractTermsOptionsTest {
     assertEquals(replaceDataProductDraftContractTermsOptionsModel.supportAndCommunication(), java.util.Arrays.asList(contractTemplateSupportAndCommunicationModel));
     assertEquals(replaceDataProductDraftContractTermsOptionsModel.customProperties(), java.util.Arrays.asList(contractTemplateCustomPropertyModel));
     assertEquals(replaceDataProductDraftContractTermsOptionsModel.contractTest(), contractTestModel);
+    assertEquals(replaceDataProductDraftContractTermsOptionsModel.servers(), java.util.Arrays.asList(contractServerModel));
     assertEquals(replaceDataProductDraftContractTermsOptionsModel.schema(), java.util.Arrays.asList(contractSchemaModel));
   }
 

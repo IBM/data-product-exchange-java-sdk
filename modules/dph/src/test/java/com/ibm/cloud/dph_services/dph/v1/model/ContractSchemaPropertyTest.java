@@ -13,6 +13,7 @@
 
 package com.ibm.cloud.dph_services.dph.v1.model;
 
+import com.ibm.cloud.dph_services.dph.v1.model.ContractQualityRule;
 import com.ibm.cloud.dph_services.dph.v1.model.ContractSchemaProperty;
 import com.ibm.cloud.dph_services.dph.v1.model.ContractSchemaPropertyType;
 import com.ibm.cloud.dph_services.dph.v1.utils.TestUtilities;
@@ -47,12 +48,49 @@ public class ContractSchemaPropertyTest {
     assertEquals(contractSchemaPropertyTypeModel.signed(), "testString");
     assertEquals(contractSchemaPropertyTypeModel.nativeType(), "testString");
 
+    ContractQualityRule contractQualityRuleModel = new ContractQualityRule.Builder()
+      .type("sql")
+      .description("testString")
+      .rule("testString")
+      .implementation("testString")
+      .engine("testString")
+      .mustBeLessThan("testString")
+      .mustBeLessOrEqualTo("testString")
+      .mustBeGreaterThan("testString")
+      .mustBeGreaterOrEqualTo("testString")
+      .mustBeBetween(java.util.Arrays.asList("testString"))
+      .mustNotBeBetween(java.util.Arrays.asList("testString"))
+      .mustBe("testString")
+      .mustNotBe("testString")
+      .name("testString")
+      .unit("testString")
+      .query("testString")
+      .build();
+    assertEquals(contractQualityRuleModel.type(), "sql");
+    assertEquals(contractQualityRuleModel.description(), "testString");
+    assertEquals(contractQualityRuleModel.rule(), "testString");
+    assertEquals(contractQualityRuleModel.implementation(), "testString");
+    assertEquals(contractQualityRuleModel.engine(), "testString");
+    assertEquals(contractQualityRuleModel.mustBeLessThan(), "testString");
+    assertEquals(contractQualityRuleModel.mustBeLessOrEqualTo(), "testString");
+    assertEquals(contractQualityRuleModel.mustBeGreaterThan(), "testString");
+    assertEquals(contractQualityRuleModel.mustBeGreaterOrEqualTo(), "testString");
+    assertEquals(contractQualityRuleModel.mustBeBetween(), java.util.Arrays.asList("testString"));
+    assertEquals(contractQualityRuleModel.mustNotBeBetween(), java.util.Arrays.asList("testString"));
+    assertEquals(contractQualityRuleModel.mustBe(), "testString");
+    assertEquals(contractQualityRuleModel.mustNotBe(), "testString");
+    assertEquals(contractQualityRuleModel.name(), "testString");
+    assertEquals(contractQualityRuleModel.unit(), "testString");
+    assertEquals(contractQualityRuleModel.query(), "testString");
+
     ContractSchemaProperty contractSchemaPropertyModel = new ContractSchemaProperty.Builder()
       .name("testString")
       .type(contractSchemaPropertyTypeModel)
+      .quality(java.util.Arrays.asList(contractQualityRuleModel))
       .build();
     assertEquals(contractSchemaPropertyModel.name(), "testString");
     assertEquals(contractSchemaPropertyModel.type(), contractSchemaPropertyTypeModel);
+    assertEquals(contractSchemaPropertyModel.quality(), java.util.Arrays.asList(contractQualityRuleModel));
 
     String json = TestUtilities.serialize(contractSchemaPropertyModel);
 

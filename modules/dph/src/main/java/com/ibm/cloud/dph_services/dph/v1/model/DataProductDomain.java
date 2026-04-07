@@ -30,12 +30,16 @@ public class DataProductDomain extends GenericModel {
   protected String name;
   protected String description;
   protected String id;
+  @SerializedName("created_by")
+  protected String createdBy;
   @SerializedName("member_roles")
   protected MemberRolesSchema memberRoles;
   @SerializedName("properties")
   protected PropertiesSchema xProperties;
   @SerializedName("sub_domains")
   protected List<InitializeSubDomain> subDomains;
+  @SerializedName("sub_container")
+  protected ContainerIdentity subContainer;
 
   /**
    * Builder.
@@ -47,9 +51,11 @@ public class DataProductDomain extends GenericModel {
     private String name;
     private String description;
     private String id;
+    private String createdBy;
     private MemberRolesSchema memberRoles;
     private PropertiesSchema xProperties;
     private List<InitializeSubDomain> subDomains;
+    private ContainerIdentity subContainer;
 
     /**
      * Instantiates a new Builder from an existing DataProductDomain instance.
@@ -63,9 +69,11 @@ public class DataProductDomain extends GenericModel {
       this.name = dataProductDomain.name;
       this.description = dataProductDomain.description;
       this.id = dataProductDomain.id;
+      this.createdBy = dataProductDomain.createdBy;
       this.memberRoles = dataProductDomain.memberRoles;
       this.xProperties = dataProductDomain.xProperties;
       this.subDomains = dataProductDomain.subDomains;
+      this.subContainer = dataProductDomain.subContainer;
     }
 
     /**
@@ -192,6 +200,17 @@ public class DataProductDomain extends GenericModel {
     }
 
     /**
+     * Set the createdBy.
+     *
+     * @param createdBy the createdBy
+     * @return the DataProductDomain builder
+     */
+    public Builder createdBy(String createdBy) {
+      this.createdBy = createdBy;
+      return this;
+    }
+
+    /**
      * Set the memberRoles.
      *
      * @param memberRoles the memberRoles
@@ -224,6 +243,17 @@ public class DataProductDomain extends GenericModel {
       this.subDomains = subDomains;
       return this;
     }
+
+    /**
+     * Set the subContainer.
+     *
+     * @param subContainer the subContainer
+     * @return the DataProductDomain builder
+     */
+    public Builder subContainer(ContainerIdentity subContainer) {
+      this.subContainer = subContainer;
+      return this;
+    }
   }
 
   protected DataProductDomain() { }
@@ -237,9 +267,11 @@ public class DataProductDomain extends GenericModel {
     name = builder.name;
     description = builder.description;
     id = builder.id;
+    createdBy = builder.createdBy;
     memberRoles = builder.memberRoles;
     xProperties = builder.xProperties;
     subDomains = builder.subDomains;
+    subContainer = builder.subContainer;
   }
 
   /**
@@ -318,6 +350,17 @@ public class DataProductDomain extends GenericModel {
   }
 
   /**
+   * Gets the createdBy.
+   *
+   * The identifier of the creator of the data product domain.
+   *
+   * @return the createdBy
+   */
+  public String createdBy() {
+    return createdBy;
+  }
+
+  /**
    * Gets the memberRoles.
    *
    * Member roles of a corresponding asset.
@@ -348,6 +391,17 @@ public class DataProductDomain extends GenericModel {
    */
   public List<InitializeSubDomain> subDomains() {
     return subDomains;
+  }
+
+  /**
+   * Gets the subContainer.
+   *
+   * The identity schema for a IBM knowledge catalog container (catalog/project/space).
+   *
+   * @return the subContainer
+   */
+  public ContainerIdentity subContainer() {
+    return subContainer;
   }
 }
 

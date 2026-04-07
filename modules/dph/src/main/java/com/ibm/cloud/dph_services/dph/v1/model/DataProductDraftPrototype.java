@@ -67,6 +67,8 @@ public class DataProductDraftPrototype extends GenericModel {
   protected AssetListAccessControl accessControl;
   @SerializedName("last_updated_at")
   protected Date lastUpdatedAt;
+  @SerializedName("sub_container")
+  protected ContainerIdentity subContainer;
   @SerializedName("is_restricted")
   protected Boolean isRestricted;
   protected AssetPrototype asset;
@@ -91,6 +93,7 @@ public class DataProductDraftPrototype extends GenericModel {
     private String comments;
     private AssetListAccessControl accessControl;
     private Date lastUpdatedAt;
+    private ContainerIdentity subContainer;
     private Boolean isRestricted;
     private AssetPrototype asset;
 
@@ -116,6 +119,7 @@ public class DataProductDraftPrototype extends GenericModel {
       this.comments = dataProductDraftPrototype.comments;
       this.accessControl = dataProductDraftPrototype.accessControl;
       this.lastUpdatedAt = dataProductDraftPrototype.lastUpdatedAt;
+      this.subContainer = dataProductDraftPrototype.subContainer;
       this.isRestricted = dataProductDraftPrototype.isRestricted;
       this.asset = dataProductDraftPrototype.asset;
     }
@@ -406,6 +410,17 @@ public class DataProductDraftPrototype extends GenericModel {
     }
 
     /**
+     * Set the subContainer.
+     *
+     * @param subContainer the subContainer
+     * @return the DataProductDraftPrototype builder
+     */
+    public Builder subContainer(ContainerIdentity subContainer) {
+      this.subContainer = subContainer;
+      return this;
+    }
+
+    /**
      * Set the isRestricted.
      *
      * @param isRestricted the isRestricted
@@ -449,6 +464,7 @@ public class DataProductDraftPrototype extends GenericModel {
     comments = builder.comments;
     accessControl = builder.accessControl;
     lastUpdatedAt = builder.lastUpdatedAt;
+    subContainer = builder.subContainer;
     isRestricted = builder.isRestricted;
     asset = builder.asset;
   }
@@ -644,6 +660,17 @@ public class DataProductDraftPrototype extends GenericModel {
    */
   public Date lastUpdatedAt() {
     return lastUpdatedAt;
+  }
+
+  /**
+   * Gets the subContainer.
+   *
+   * The identity schema for a IBM knowledge catalog container (catalog/project/space).
+   *
+   * @return the subContainer
+   */
+  public ContainerIdentity subContainer() {
+    return subContainer;
   }
 
   /**

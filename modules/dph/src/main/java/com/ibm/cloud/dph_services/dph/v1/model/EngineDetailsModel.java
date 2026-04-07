@@ -24,6 +24,16 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class EngineDetailsModel extends GenericModel {
 
+  /**
+   * The type of the engine (eg: Presto/Spark).
+   */
+  public interface EngineType {
+    /** spark. */
+    String SPARK = "spark";
+    /** presto. */
+    String PRESTO = "presto";
+  }
+
   @SerializedName("display_name")
   protected String displayName;
   @SerializedName("engine_id")
@@ -32,6 +42,8 @@ public class EngineDetailsModel extends GenericModel {
   protected String enginePort;
   @SerializedName("engine_host")
   protected String engineHost;
+  @SerializedName("engine_type")
+  protected String engineType;
   @SerializedName("associated_catalogs")
   protected List<String> associatedCatalogs;
 
@@ -43,6 +55,7 @@ public class EngineDetailsModel extends GenericModel {
     private String engineId;
     private String enginePort;
     private String engineHost;
+    private String engineType;
     private List<String> associatedCatalogs;
 
     /**
@@ -55,6 +68,7 @@ public class EngineDetailsModel extends GenericModel {
       this.engineId = engineDetailsModel.engineId;
       this.enginePort = engineDetailsModel.enginePort;
       this.engineHost = engineDetailsModel.engineHost;
+      this.engineType = engineDetailsModel.engineType;
       this.associatedCatalogs = engineDetailsModel.associatedCatalogs;
     }
 
@@ -62,6 +76,15 @@ public class EngineDetailsModel extends GenericModel {
      * Instantiates a new builder.
      */
     public Builder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param engineType the engineType
+     */
+    public Builder(String engineType) {
+      this.engineType = engineType;
     }
 
     /**
@@ -134,6 +157,17 @@ public class EngineDetailsModel extends GenericModel {
     }
 
     /**
+     * Set the engineType.
+     *
+     * @param engineType the engineType
+     * @return the EngineDetailsModel builder
+     */
+    public Builder engineType(String engineType) {
+      this.engineType = engineType;
+      return this;
+    }
+
+    /**
      * Set the associatedCatalogs.
      * Existing associatedCatalogs will be replaced.
      *
@@ -149,10 +183,13 @@ public class EngineDetailsModel extends GenericModel {
   protected EngineDetailsModel() { }
 
   protected EngineDetailsModel(Builder builder) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.engineType,
+      "engineType cannot be null");
     displayName = builder.displayName;
     engineId = builder.engineId;
     enginePort = builder.enginePort;
     engineHost = builder.engineHost;
+    engineType = builder.engineType;
     associatedCatalogs = builder.associatedCatalogs;
   }
 
@@ -207,6 +244,17 @@ public class EngineDetailsModel extends GenericModel {
    */
   public String engineHost() {
     return engineHost;
+  }
+
+  /**
+   * Gets the engineType.
+   *
+   * The type of the engine (eg: Presto/Spark).
+   *
+   * @return the engineType
+   */
+  public String engineType() {
+    return engineType;
   }
 
   /**

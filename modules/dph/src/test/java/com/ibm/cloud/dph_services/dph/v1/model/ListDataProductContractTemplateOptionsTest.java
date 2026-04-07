@@ -34,8 +34,10 @@ public class ListDataProductContractTemplateOptionsTest {
     ListDataProductContractTemplateOptions listDataProductContractTemplateOptionsModel = new ListDataProductContractTemplateOptions.Builder()
       .containerId("testString")
       .contractTemplateName("testString")
+      .domainIds("testString")
       .build();
     assertEquals(listDataProductContractTemplateOptionsModel.containerId(), "testString");
     assertEquals(listDataProductContractTemplateOptionsModel.contractTemplateName(), "testString");
+    assertEquals(listDataProductContractTemplateOptionsModel.domainIds(), "testString");
   }
 }
