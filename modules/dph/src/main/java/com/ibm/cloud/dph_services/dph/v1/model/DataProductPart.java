@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -55,9 +55,11 @@ public class DataProductPart extends GenericModel {
      * Instantiates a new builder with required properties.
      *
      * @param asset the asset
+     * @param deliveryMethods the deliveryMethods
      */
-    public Builder(AssetPartReference asset) {
+    public Builder(AssetPartReference asset, List<DeliveryMethod> deliveryMethods) {
       this.asset = asset;
+      this.deliveryMethods = deliveryMethods;
     }
 
     /**
@@ -114,6 +116,8 @@ public class DataProductPart extends GenericModel {
   protected DataProductPart(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.asset,
       "asset cannot be null");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.deliveryMethods,
+      "deliveryMethods cannot be null");
     asset = builder.asset;
     deliveryMethods = builder.deliveryMethods;
   }

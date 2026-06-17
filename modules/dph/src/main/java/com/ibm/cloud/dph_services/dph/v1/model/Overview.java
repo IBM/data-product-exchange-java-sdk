@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -13,6 +13,10 @@
 
 package com.ibm.cloud.dph_services.dph.v1.model;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
@@ -24,11 +28,19 @@ public class Overview extends GenericModel {
   @SerializedName("api_version")
   protected String apiVersion;
   protected String kind;
+  protected String status;
   protected String name;
   protected String version;
   protected Domain domain;
-  @SerializedName("more_info")
-  protected String moreInfo;
+  @SerializedName("authoritative_definitions")
+  protected List<ContractAuthoritativeDefinition> authoritativeDefinitions;
+  protected String id;
+  protected String tenant;
+  @SerializedName("data_product")
+  protected String dataProduct;
+  @SerializedName("contract_created_ts")
+  protected Date contractCreatedTs;
+  protected List<String> tags;
 
   /**
    * Builder.
@@ -36,10 +48,16 @@ public class Overview extends GenericModel {
   public static class Builder {
     private String apiVersion;
     private String kind;
+    private String status;
     private String name;
     private String version;
     private Domain domain;
-    private String moreInfo;
+    private List<ContractAuthoritativeDefinition> authoritativeDefinitions;
+    private String id;
+    private String tenant;
+    private String dataProduct;
+    private Date contractCreatedTs;
+    private List<String> tags;
 
     /**
      * Instantiates a new Builder from an existing Overview instance.
@@ -49,10 +67,16 @@ public class Overview extends GenericModel {
     private Builder(Overview overview) {
       this.apiVersion = overview.apiVersion;
       this.kind = overview.kind;
+      this.status = overview.status;
       this.name = overview.name;
       this.version = overview.version;
       this.domain = overview.domain;
-      this.moreInfo = overview.moreInfo;
+      this.authoritativeDefinitions = overview.authoritativeDefinitions;
+      this.id = overview.id;
+      this.tenant = overview.tenant;
+      this.dataProduct = overview.dataProduct;
+      this.contractCreatedTs = overview.contractCreatedTs;
+      this.tags = overview.tags;
     }
 
     /**
@@ -65,11 +89,11 @@ public class Overview extends GenericModel {
      * Instantiates a new builder with required properties.
      *
      * @param version the version
-     * @param domain the domain
+     * @param id the id
      */
-    public Builder(String version, Domain domain) {
+    public Builder(String version, String id) {
       this.version = version;
-      this.domain = domain;
+      this.id = id;
     }
 
     /**
@@ -79,6 +103,38 @@ public class Overview extends GenericModel {
      */
     public Overview build() {
       return new Overview(this);
+    }
+
+    /**
+     * Adds a new element to authoritativeDefinitions.
+     *
+     * @param authoritativeDefinitions the new element to be added
+     * @return the Overview builder
+     */
+    public Builder addAuthoritativeDefinitions(ContractAuthoritativeDefinition authoritativeDefinitions) {
+      com.ibm.cloud.sdk.core.util.Validator.notNull(authoritativeDefinitions,
+        "authoritativeDefinitions cannot be null");
+      if (this.authoritativeDefinitions == null) {
+        this.authoritativeDefinitions = new ArrayList<ContractAuthoritativeDefinition>();
+      }
+      this.authoritativeDefinitions.add(authoritativeDefinitions);
+      return this;
+    }
+
+    /**
+     * Adds a new element to tags.
+     *
+     * @param tags the new element to be added
+     * @return the Overview builder
+     */
+    public Builder addTags(String tags) {
+      com.ibm.cloud.sdk.core.util.Validator.notNull(tags,
+        "tags cannot be null");
+      if (this.tags == null) {
+        this.tags = new ArrayList<String>();
+      }
+      this.tags.add(tags);
+      return this;
     }
 
     /**
@@ -100,6 +156,17 @@ public class Overview extends GenericModel {
      */
     public Builder kind(String kind) {
       this.kind = kind;
+      return this;
+    }
+
+    /**
+     * Set the status.
+     *
+     * @param status the status
+     * @return the Overview builder
+     */
+    public Builder status(String status) {
+      this.status = status;
       return this;
     }
 
@@ -137,13 +204,70 @@ public class Overview extends GenericModel {
     }
 
     /**
-     * Set the moreInfo.
+     * Set the authoritativeDefinitions.
+     * Existing authoritativeDefinitions will be replaced.
      *
-     * @param moreInfo the moreInfo
+     * @param authoritativeDefinitions the authoritativeDefinitions
      * @return the Overview builder
      */
-    public Builder moreInfo(String moreInfo) {
-      this.moreInfo = moreInfo;
+    public Builder authoritativeDefinitions(List<ContractAuthoritativeDefinition> authoritativeDefinitions) {
+      this.authoritativeDefinitions = authoritativeDefinitions;
+      return this;
+    }
+
+    /**
+     * Set the id.
+     *
+     * @param id the id
+     * @return the Overview builder
+     */
+    public Builder id(String id) {
+      this.id = id;
+      return this;
+    }
+
+    /**
+     * Set the tenant.
+     *
+     * @param tenant the tenant
+     * @return the Overview builder
+     */
+    public Builder tenant(String tenant) {
+      this.tenant = tenant;
+      return this;
+    }
+
+    /**
+     * Set the dataProduct.
+     *
+     * @param dataProduct the dataProduct
+     * @return the Overview builder
+     */
+    public Builder dataProduct(String dataProduct) {
+      this.dataProduct = dataProduct;
+      return this;
+    }
+
+    /**
+     * Set the contractCreatedTs.
+     *
+     * @param contractCreatedTs the contractCreatedTs
+     * @return the Overview builder
+     */
+    public Builder contractCreatedTs(Date contractCreatedTs) {
+      this.contractCreatedTs = contractCreatedTs;
+      return this;
+    }
+
+    /**
+     * Set the tags.
+     * Existing tags will be replaced.
+     *
+     * @param tags the tags
+     * @return the Overview builder
+     */
+    public Builder tags(List<String> tags) {
+      this.tags = tags;
       return this;
     }
   }
@@ -153,14 +277,20 @@ public class Overview extends GenericModel {
   protected Overview(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.version,
       "version cannot be null");
-    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.domain,
-      "domain cannot be null");
+    com.ibm.cloud.sdk.core.util.Validator.notNull(builder.id,
+      "id cannot be null");
     apiVersion = builder.apiVersion;
     kind = builder.kind;
+    status = builder.status;
     name = builder.name;
     version = builder.version;
     domain = builder.domain;
-    moreInfo = builder.moreInfo;
+    authoritativeDefinitions = builder.authoritativeDefinitions;
+    id = builder.id;
+    tenant = builder.tenant;
+    dataProduct = builder.dataProduct;
+    contractCreatedTs = builder.contractCreatedTs;
+    tags = builder.tags;
   }
 
   /**
@@ -192,6 +322,17 @@ public class Overview extends GenericModel {
    */
   public String kind() {
     return kind;
+  }
+
+  /**
+   * Gets the status.
+   *
+   * Status of the contract test (pass or fail).
+   *
+   * @return the status
+   */
+  public String status() {
+    return status;
   }
 
   /**
@@ -230,14 +371,69 @@ public class Overview extends GenericModel {
   }
 
   /**
-   * Gets the moreInfo.
+   * Gets the authoritativeDefinitions.
    *
-   * Additional information links about the contract.
+   * List of links to sources that provide more details on the data contract.
    *
-   * @return the moreInfo
+   * @return the authoritativeDefinitions
    */
-  public String moreInfo() {
-    return moreInfo;
+  public List<ContractAuthoritativeDefinition> authoritativeDefinitions() {
+    return authoritativeDefinitions;
+  }
+
+  /**
+   * Gets the id.
+   *
+   * A unique identifier used to reduce the risk of dataset name collisions, such as a UUID.
+   *
+   * @return the id
+   */
+  public String id() {
+    return id;
+  }
+
+  /**
+   * Gets the tenant.
+   *
+   * Indicates the property the data is primarily associated with. Value is case insensitive.
+   *
+   * @return the tenant
+   */
+  public String tenant() {
+    return tenant;
+  }
+
+  /**
+   * Gets the dataProduct.
+   *
+   * Name of the data product.
+   *
+   * @return the dataProduct
+   */
+  public String dataProduct() {
+    return dataProduct;
+  }
+
+  /**
+   * Gets the contractCreatedTs.
+   *
+   * Timestamp in UTC of when the data contract was created (ISO 8601 format).
+   *
+   * @return the contractCreatedTs
+   */
+  public Date contractCreatedTs() {
+    return contractCreatedTs;
+  }
+
+  /**
+   * Gets the tags.
+   *
+   * Tags associated with the data contract.
+   *
+   * @return the tags
+   */
+  public List<String> tags() {
+    return tags;
   }
 }
 

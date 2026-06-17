@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -30,6 +30,8 @@ public class Asset extends GenericModel {
   /**
    * Gets the metadata.
    *
+   * Metadata information about the asset.
+   *
    * @return the metadata
    */
   public Map<String, Object> getMetadata() {
@@ -38,6 +40,8 @@ public class Asset extends GenericModel {
 
   /**
    * Gets the entity.
+   *
+   * Entity information containing the asset details.
    *
    * @return the entity
    */

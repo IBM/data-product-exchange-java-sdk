@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -12,6 +12,8 @@
  */
 
 package com.ibm.cloud.dph_services.dph.v1.model;
+
+import java.util.Date;
 
 import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
@@ -26,7 +28,7 @@ public class DataProductContractTemplate extends GenericModel {
   @SerializedName("creator_id")
   protected String creatorId;
   @SerializedName("created_at")
-  protected String createdAt;
+  protected Date createdAt;
   protected String name;
   protected ErrorMessage error;
   @SerializedName("contract_terms")
@@ -39,7 +41,7 @@ public class DataProductContractTemplate extends GenericModel {
     private ContainerReference container;
     private String id;
     private String creatorId;
-    private String createdAt;
+    private Date createdAt;
     private String name;
     private ErrorMessage error;
     private ContractTerms contractTerms;
@@ -122,7 +124,7 @@ public class DataProductContractTemplate extends GenericModel {
      * @param createdAt the createdAt
      * @return the DataProductContractTemplate builder
      */
-    public Builder createdAt(String createdAt) {
+    public Builder createdAt(Date createdAt) {
       this.createdAt = createdAt;
       return this;
     }
@@ -224,7 +226,7 @@ public class DataProductContractTemplate extends GenericModel {
    *
    * @return the createdAt
    */
-  public String createdAt() {
+  public Date createdAt() {
     return createdAt;
   }
 

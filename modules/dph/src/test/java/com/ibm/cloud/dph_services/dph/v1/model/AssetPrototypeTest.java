@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -38,17 +38,17 @@ public class AssetPrototypeTest {
     assertEquals(containerIdentityModel.id(), "d29c42eb-7100-4b7a-8257-c196dbcca1cd");
 
     AssetPrototype assetPrototypeModel = new AssetPrototype.Builder()
-      .id("2b0bf220-079c-11ee-be56-0242ac120002")
+      .id("2b0bf220-079c-41ee-be56-0242ac120002")
       .container(containerIdentityModel)
       .build();
-    assertEquals(assetPrototypeModel.id(), "2b0bf220-079c-11ee-be56-0242ac120002");
+    assertEquals(assetPrototypeModel.id(), "2b0bf220-079c-41ee-be56-0242ac120002");
     assertEquals(assetPrototypeModel.container(), containerIdentityModel);
 
     String json = TestUtilities.serialize(assetPrototypeModel);
 
     AssetPrototype assetPrototypeModelNew = TestUtilities.deserialize(json, AssetPrototype.class);
     assertTrue(assetPrototypeModelNew instanceof AssetPrototype);
-    assertEquals(assetPrototypeModelNew.id(), "2b0bf220-079c-11ee-be56-0242ac120002");
+    assertEquals(assetPrototypeModelNew.id(), "2b0bf220-079c-41ee-be56-0242ac120002");
     assertEquals(assetPrototypeModelNew.container().toString(), containerIdentityModel.toString());
   }
 

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -66,6 +66,8 @@ public class DataProductDraftSummary extends GenericModel {
   protected AssetListAccessControl accessControl;
   @SerializedName("last_updated_at")
   protected Date lastUpdatedAt;
+  @SerializedName("created_date")
+  protected Date createdDate;
   @SerializedName("sub_container")
   protected ContainerIdentity subContainer;
   @SerializedName("is_restricted")
@@ -254,6 +256,17 @@ public class DataProductDraftSummary extends GenericModel {
    */
   public Date getLastUpdatedAt() {
     return lastUpdatedAt;
+  }
+
+  /**
+   * Gets the createdDate.
+   *
+   * Timestamp of createddate.
+   *
+   * @return the createdDate
+   */
+  public Date getCreatedDate() {
+    return createdDate;
   }
 
   /**

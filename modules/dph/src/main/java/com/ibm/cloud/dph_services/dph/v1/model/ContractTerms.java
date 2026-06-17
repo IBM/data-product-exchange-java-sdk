@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -31,12 +31,11 @@ public class ContractTerms extends GenericModel {
   protected String errorMsg;
   protected Overview overview;
   protected Description description;
-  protected List<ContractTemplateOrganization> organization;
+  protected ContractTermsTeam team;
   protected List<Roles> roles;
   protected Pricing price;
-  protected List<ContractTemplateSLA> sla;
-  @SerializedName("support_and_communication")
-  protected List<ContractTemplateSupportAndCommunication> supportAndCommunication;
+  protected ContractTemplateSLA sla;
+  protected List<ContractTemplateSupportAndCommunication> support;
   @SerializedName("custom_properties")
   protected List<ContractTemplateCustomProperty> customProperties;
   @SerializedName("contract_test")
@@ -54,11 +53,11 @@ public class ContractTerms extends GenericModel {
     private String errorMsg;
     private Overview overview;
     private Description description;
-    private List<ContractTemplateOrganization> organization;
+    private ContractTermsTeam team;
     private List<Roles> roles;
     private Pricing price;
-    private List<ContractTemplateSLA> sla;
-    private List<ContractTemplateSupportAndCommunication> supportAndCommunication;
+    private ContractTemplateSLA sla;
+    private List<ContractTemplateSupportAndCommunication> support;
     private List<ContractTemplateCustomProperty> customProperties;
     private ContractTest contractTest;
     private List<ContractServer> servers;
@@ -76,11 +75,11 @@ public class ContractTerms extends GenericModel {
       this.errorMsg = contractTerms.errorMsg;
       this.overview = contractTerms.overview;
       this.description = contractTerms.description;
-      this.organization = contractTerms.organization;
+      this.team = contractTerms.team;
       this.roles = contractTerms.roles;
       this.price = contractTerms.price;
       this.sla = contractTerms.sla;
-      this.supportAndCommunication = contractTerms.supportAndCommunication;
+      this.support = contractTerms.support;
       this.customProperties = contractTerms.customProperties;
       this.contractTest = contractTerms.contractTest;
       this.servers = contractTerms.servers;
@@ -119,22 +118,6 @@ public class ContractTerms extends GenericModel {
     }
 
     /**
-     * Adds a new element to organization.
-     *
-     * @param organization the new element to be added
-     * @return the ContractTerms builder
-     */
-    public Builder addOrganization(ContractTemplateOrganization organization) {
-      com.ibm.cloud.sdk.core.util.Validator.notNull(organization,
-        "organization cannot be null");
-      if (this.organization == null) {
-        this.organization = new ArrayList<ContractTemplateOrganization>();
-      }
-      this.organization.add(organization);
-      return this;
-    }
-
-    /**
      * Adds a new element to roles.
      *
      * @param roles the new element to be added
@@ -151,34 +134,18 @@ public class ContractTerms extends GenericModel {
     }
 
     /**
-     * Adds a new element to sla.
+     * Adds a new element to support.
      *
-     * @param sla the new element to be added
+     * @param support the new element to be added
      * @return the ContractTerms builder
      */
-    public Builder addSla(ContractTemplateSLA sla) {
-      com.ibm.cloud.sdk.core.util.Validator.notNull(sla,
-        "sla cannot be null");
-      if (this.sla == null) {
-        this.sla = new ArrayList<ContractTemplateSLA>();
+    public Builder addSupport(ContractTemplateSupportAndCommunication support) {
+      com.ibm.cloud.sdk.core.util.Validator.notNull(support,
+        "support cannot be null");
+      if (this.support == null) {
+        this.support = new ArrayList<ContractTemplateSupportAndCommunication>();
       }
-      this.sla.add(sla);
-      return this;
-    }
-
-    /**
-     * Adds a new element to supportAndCommunication.
-     *
-     * @param supportAndCommunication the new element to be added
-     * @return the ContractTerms builder
-     */
-    public Builder addSupportAndCommunication(ContractTemplateSupportAndCommunication supportAndCommunication) {
-      com.ibm.cloud.sdk.core.util.Validator.notNull(supportAndCommunication,
-        "supportAndCommunication cannot be null");
-      if (this.supportAndCommunication == null) {
-        this.supportAndCommunication = new ArrayList<ContractTemplateSupportAndCommunication>();
-      }
-      this.supportAndCommunication.add(supportAndCommunication);
+      this.support.add(support);
       return this;
     }
 
@@ -298,14 +265,13 @@ public class ContractTerms extends GenericModel {
     }
 
     /**
-     * Set the organization.
-     * Existing organization will be replaced.
+     * Set the team.
      *
-     * @param organization the organization
+     * @param team the team
      * @return the ContractTerms builder
      */
-    public Builder organization(List<ContractTemplateOrganization> organization) {
-      this.organization = organization;
+    public Builder team(ContractTermsTeam team) {
+      this.team = team;
       return this;
     }
 
@@ -334,25 +300,24 @@ public class ContractTerms extends GenericModel {
 
     /**
      * Set the sla.
-     * Existing sla will be replaced.
      *
      * @param sla the sla
      * @return the ContractTerms builder
      */
-    public Builder sla(List<ContractTemplateSLA> sla) {
+    public Builder sla(ContractTemplateSLA sla) {
       this.sla = sla;
       return this;
     }
 
     /**
-     * Set the supportAndCommunication.
-     * Existing supportAndCommunication will be replaced.
+     * Set the support.
+     * Existing support will be replaced.
      *
-     * @param supportAndCommunication the supportAndCommunication
+     * @param support the support
      * @return the ContractTerms builder
      */
-    public Builder supportAndCommunication(List<ContractTemplateSupportAndCommunication> supportAndCommunication) {
-      this.supportAndCommunication = supportAndCommunication;
+    public Builder support(List<ContractTemplateSupportAndCommunication> support) {
+      this.support = support;
       return this;
     }
 
@@ -413,11 +378,11 @@ public class ContractTerms extends GenericModel {
     errorMsg = builder.errorMsg;
     overview = builder.overview;
     description = builder.description;
-    organization = builder.organization;
+    team = builder.team;
     roles = builder.roles;
     price = builder.price;
     sla = builder.sla;
-    supportAndCommunication = builder.supportAndCommunication;
+    support = builder.support;
     customProperties = builder.customProperties;
     contractTest = builder.contractTest;
     servers = builder.servers;
@@ -500,14 +465,14 @@ public class ContractTerms extends GenericModel {
   }
 
   /**
-   * Gets the organization.
+   * Gets the team.
    *
-   * List of sub domains to be added within a domain.
+   * Represents a team with members and their roles in the contract.
    *
-   * @return the organization
+   * @return the team
    */
-  public List<ContractTemplateOrganization> organization() {
-    return organization;
+  public ContractTermsTeam team() {
+    return team;
   }
 
   /**
@@ -535,23 +500,23 @@ public class ContractTerms extends GenericModel {
   /**
    * Gets the sla.
    *
-   * Service Level Agreement details.
+   * Represents the SLA details of the contract.
    *
    * @return the sla
    */
-  public List<ContractTemplateSLA> sla() {
+  public ContractTemplateSLA sla() {
     return sla;
   }
 
   /**
-   * Gets the supportAndCommunication.
+   * Gets the support.
    *
    * Support and communication details for the contract.
    *
-   * @return the supportAndCommunication
+   * @return the support
    */
-  public List<ContractTemplateSupportAndCommunication> supportAndCommunication() {
-    return supportAndCommunication;
+  public List<ContractTemplateSupportAndCommunication> support() {
+    return support;
   }
 
   /**

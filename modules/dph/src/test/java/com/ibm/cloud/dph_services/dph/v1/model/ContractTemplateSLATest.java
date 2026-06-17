@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -33,11 +33,27 @@ public class ContractTemplateSLATest {
   @Test
   public void testContractTemplateSLA() throws Throwable {
     ContractTemplateSLAProperty contractTemplateSlaPropertyModel = new ContractTemplateSLAProperty.Builder()
+      .id("sla-prop-001")
       .property("Uptime Guarantee")
       .value("99.9")
+      .valueExt("extended_value")
+      .unit("d")
+      .element("column1,column2")
+      .driver("regulatory")
+      .description("Guaranteed uptime for the service")
+      .scheduler("cron")
+      .schedule("0 20 * * *")
       .build();
+    assertEquals(contractTemplateSlaPropertyModel.id(), "sla-prop-001");
     assertEquals(contractTemplateSlaPropertyModel.property(), "Uptime Guarantee");
     assertEquals(contractTemplateSlaPropertyModel.value(), "99.9");
+    assertEquals(contractTemplateSlaPropertyModel.valueExt(), "extended_value");
+    assertEquals(contractTemplateSlaPropertyModel.unit(), "d");
+    assertEquals(contractTemplateSlaPropertyModel.element(), "column1,column2");
+    assertEquals(contractTemplateSlaPropertyModel.driver(), "regulatory");
+    assertEquals(contractTemplateSlaPropertyModel.description(), "Guaranteed uptime for the service");
+    assertEquals(contractTemplateSlaPropertyModel.scheduler(), "cron");
+    assertEquals(contractTemplateSlaPropertyModel.schedule(), "0 20 * * *");
 
     ContractTemplateSLA contractTemplateSlaModel = new ContractTemplateSLA.Builder()
       .defaultElement("Standard SLA Policy")

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -38,7 +38,7 @@ public class GetDataProductDraftContractTermsOptionsTest {
       .accept("application/json")
       .includeContractDocuments(true)
       .autopopulateServerInformation(false)
-      .serverAssetId("testString")
+      .serverId("testString")
       .build();
     assertEquals(getDataProductDraftContractTermsOptionsModel.dataProductId(), "testString");
     assertEquals(getDataProductDraftContractTermsOptionsModel.draftId(), "testString");
@@ -46,7 +46,7 @@ public class GetDataProductDraftContractTermsOptionsTest {
     assertEquals(getDataProductDraftContractTermsOptionsModel.accept(), "application/json");
     assertEquals(getDataProductDraftContractTermsOptionsModel.includeContractDocuments(), Boolean.valueOf(true));
     assertEquals(getDataProductDraftContractTermsOptionsModel.autopopulateServerInformation(), Boolean.valueOf(false));
-    assertEquals(getDataProductDraftContractTermsOptionsModel.serverAssetId(), "testString");
+    assertEquals(getDataProductDraftContractTermsOptionsModel.serverId(), "testString");
   }
 
   @Test(expectedExceptions = IllegalArgumentException.class)

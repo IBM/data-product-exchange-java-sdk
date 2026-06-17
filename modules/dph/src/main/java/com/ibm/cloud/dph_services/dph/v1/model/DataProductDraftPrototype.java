@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -67,6 +67,8 @@ public class DataProductDraftPrototype extends GenericModel {
   protected AssetListAccessControl accessControl;
   @SerializedName("last_updated_at")
   protected Date lastUpdatedAt;
+  @SerializedName("created_date")
+  protected Date createdDate;
   @SerializedName("sub_container")
   protected ContainerIdentity subContainer;
   @SerializedName("is_restricted")
@@ -93,6 +95,7 @@ public class DataProductDraftPrototype extends GenericModel {
     private String comments;
     private AssetListAccessControl accessControl;
     private Date lastUpdatedAt;
+    private Date createdDate;
     private ContainerIdentity subContainer;
     private Boolean isRestricted;
     private AssetPrototype asset;
@@ -119,6 +122,7 @@ public class DataProductDraftPrototype extends GenericModel {
       this.comments = dataProductDraftPrototype.comments;
       this.accessControl = dataProductDraftPrototype.accessControl;
       this.lastUpdatedAt = dataProductDraftPrototype.lastUpdatedAt;
+      this.createdDate = dataProductDraftPrototype.createdDate;
       this.subContainer = dataProductDraftPrototype.subContainer;
       this.isRestricted = dataProductDraftPrototype.isRestricted;
       this.asset = dataProductDraftPrototype.asset;
@@ -410,6 +414,17 @@ public class DataProductDraftPrototype extends GenericModel {
     }
 
     /**
+     * Set the createdDate.
+     *
+     * @param createdDate the createdDate
+     * @return the DataProductDraftPrototype builder
+     */
+    public Builder createdDate(Date createdDate) {
+      this.createdDate = createdDate;
+      return this;
+    }
+
+    /**
      * Set the subContainer.
      *
      * @param subContainer the subContainer
@@ -464,6 +479,7 @@ public class DataProductDraftPrototype extends GenericModel {
     comments = builder.comments;
     accessControl = builder.accessControl;
     lastUpdatedAt = builder.lastUpdatedAt;
+    createdDate = builder.createdDate;
     subContainer = builder.subContainer;
     isRestricted = builder.isRestricted;
     asset = builder.asset;
@@ -660,6 +676,17 @@ public class DataProductDraftPrototype extends GenericModel {
    */
   public Date lastUpdatedAt() {
     return lastUpdatedAt;
+  }
+
+  /**
+   * Gets the createdDate.
+   *
+   * Timestamp of createddate.
+   *
+   * @return the createdDate
+   */
+  public Date createdDate() {
+    return createdDate;
   }
 
   /**

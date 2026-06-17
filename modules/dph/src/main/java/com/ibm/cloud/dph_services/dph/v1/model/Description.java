@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -27,10 +27,10 @@ public class Description extends GenericModel {
   protected String purpose;
   protected String limitations;
   protected String usage;
-  @SerializedName("more_info")
-  protected List<ContractTermsMoreInfo> moreInfo;
+  @SerializedName("authoritative_definitions")
+  protected List<ContractAuthoritativeDefinition> authoritativeDefinitions;
   @SerializedName("custom_properties")
-  protected String customProperties;
+  protected List<ContractTemplateCustomProperty> customProperties;
 
   /**
    * Builder.
@@ -39,8 +39,8 @@ public class Description extends GenericModel {
     private String purpose;
     private String limitations;
     private String usage;
-    private List<ContractTermsMoreInfo> moreInfo;
-    private String customProperties;
+    private List<ContractAuthoritativeDefinition> authoritativeDefinitions;
+    private List<ContractTemplateCustomProperty> customProperties;
 
     /**
      * Instantiates a new Builder from an existing Description instance.
@@ -51,7 +51,7 @@ public class Description extends GenericModel {
       this.purpose = description.purpose;
       this.limitations = description.limitations;
       this.usage = description.usage;
-      this.moreInfo = description.moreInfo;
+      this.authoritativeDefinitions = description.authoritativeDefinitions;
       this.customProperties = description.customProperties;
     }
 
@@ -71,18 +71,34 @@ public class Description extends GenericModel {
     }
 
     /**
-     * Adds a new element to moreInfo.
+     * Adds a new element to authoritativeDefinitions.
      *
-     * @param moreInfo the new element to be added
+     * @param authoritativeDefinitions the new element to be added
      * @return the Description builder
      */
-    public Builder addMoreInfo(ContractTermsMoreInfo moreInfo) {
-      com.ibm.cloud.sdk.core.util.Validator.notNull(moreInfo,
-        "moreInfo cannot be null");
-      if (this.moreInfo == null) {
-        this.moreInfo = new ArrayList<ContractTermsMoreInfo>();
+    public Builder addAuthoritativeDefinitions(ContractAuthoritativeDefinition authoritativeDefinitions) {
+      com.ibm.cloud.sdk.core.util.Validator.notNull(authoritativeDefinitions,
+        "authoritativeDefinitions cannot be null");
+      if (this.authoritativeDefinitions == null) {
+        this.authoritativeDefinitions = new ArrayList<ContractAuthoritativeDefinition>();
       }
-      this.moreInfo.add(moreInfo);
+      this.authoritativeDefinitions.add(authoritativeDefinitions);
+      return this;
+    }
+
+    /**
+     * Adds a new element to customProperties.
+     *
+     * @param customProperties the new element to be added
+     * @return the Description builder
+     */
+    public Builder addCustomProperties(ContractTemplateCustomProperty customProperties) {
+      com.ibm.cloud.sdk.core.util.Validator.notNull(customProperties,
+        "customProperties cannot be null");
+      if (this.customProperties == null) {
+        this.customProperties = new ArrayList<ContractTemplateCustomProperty>();
+      }
+      this.customProperties.add(customProperties);
       return this;
     }
 
@@ -120,24 +136,25 @@ public class Description extends GenericModel {
     }
 
     /**
-     * Set the moreInfo.
-     * Existing moreInfo will be replaced.
+     * Set the authoritativeDefinitions.
+     * Existing authoritativeDefinitions will be replaced.
      *
-     * @param moreInfo the moreInfo
+     * @param authoritativeDefinitions the authoritativeDefinitions
      * @return the Description builder
      */
-    public Builder moreInfo(List<ContractTermsMoreInfo> moreInfo) {
-      this.moreInfo = moreInfo;
+    public Builder authoritativeDefinitions(List<ContractAuthoritativeDefinition> authoritativeDefinitions) {
+      this.authoritativeDefinitions = authoritativeDefinitions;
       return this;
     }
 
     /**
      * Set the customProperties.
+     * Existing customProperties will be replaced.
      *
      * @param customProperties the customProperties
      * @return the Description builder
      */
-    public Builder customProperties(String customProperties) {
+    public Builder customProperties(List<ContractTemplateCustomProperty> customProperties) {
       this.customProperties = customProperties;
       return this;
     }
@@ -149,7 +166,7 @@ public class Description extends GenericModel {
     purpose = builder.purpose;
     limitations = builder.limitations;
     usage = builder.usage;
-    moreInfo = builder.moreInfo;
+    authoritativeDefinitions = builder.authoritativeDefinitions;
     customProperties = builder.customProperties;
   }
 
@@ -196,14 +213,15 @@ public class Description extends GenericModel {
   }
 
   /**
-   * Gets the moreInfo.
+   * Gets the authoritativeDefinitions.
    *
-   * List of links to sources that provide more details on the dataset.
+   * List of links to sources that provide more details on the dataset; examples would be a link to privacy statement,
+   * terms and conditions, license agreements, data catalog, or another tool.
    *
-   * @return the moreInfo
+   * @return the authoritativeDefinitions
    */
-  public List<ContractTermsMoreInfo> moreInfo() {
-    return moreInfo;
+  public List<ContractAuthoritativeDefinition> authoritativeDefinitions() {
+    return authoritativeDefinitions;
   }
 
   /**
@@ -213,7 +231,7 @@ public class Description extends GenericModel {
    *
    * @return the customProperties
    */
-  public String customProperties() {
+  public List<ContractTemplateCustomProperty> customProperties() {
     return customProperties;
   }
 }

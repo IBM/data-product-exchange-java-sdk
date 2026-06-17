@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -13,7 +13,8 @@
 
 package com.ibm.cloud.dph_services.dph.v1.model;
 
-import com.ibm.cloud.dph_services.dph.v1.model.ContractTermsMoreInfo;
+import com.ibm.cloud.dph_services.dph.v1.model.ContractAuthoritativeDefinition;
+import com.ibm.cloud.dph_services.dph.v1.model.ContractTemplateCustomProperty;
 import com.ibm.cloud.dph_services.dph.v1.model.Description;
 import com.ibm.cloud.dph_services.dph.v1.utils.TestUtilities;
 import com.ibm.cloud.sdk.core.service.model.FileWithMetadata;
@@ -32,25 +33,40 @@ public class DescriptionTest {
 
   @Test
   public void testDescription() throws Throwable {
-    ContractTermsMoreInfo contractTermsMoreInfoModel = new ContractTermsMoreInfo.Builder()
-      .type("privacy-statement")
-      .url("https://moreinfo.example.com")
+    ContractAuthoritativeDefinition contractAuthoritativeDefinitionModel = new ContractAuthoritativeDefinition.Builder()
+      .id("auth-def-001")
+      .url("https://data.example.com/authoritative-source")
+      .type("database")
+      .description("This is the primary authoritative source for customer data")
       .build();
-    assertEquals(contractTermsMoreInfoModel.type(), "privacy-statement");
-    assertEquals(contractTermsMoreInfoModel.url(), "https://moreinfo.example.com");
+    assertEquals(contractAuthoritativeDefinitionModel.id(), "auth-def-001");
+    assertEquals(contractAuthoritativeDefinitionModel.url(), "https://data.example.com/authoritative-source");
+    assertEquals(contractAuthoritativeDefinitionModel.type(), "database");
+    assertEquals(contractAuthoritativeDefinitionModel.description(), "This is the primary authoritative source for customer data");
+
+    ContractTemplateCustomProperty contractTemplateCustomPropertyModel = new ContractTemplateCustomProperty.Builder()
+      .id("custom-prop-001")
+      .property("customPropertyKey")
+      .value("customPropertyValue")
+      .description("This is a custom property for tracking purposes")
+      .build();
+    assertEquals(contractTemplateCustomPropertyModel.id(), "custom-prop-001");
+    assertEquals(contractTemplateCustomPropertyModel.property(), "customPropertyKey");
+    assertEquals(contractTemplateCustomPropertyModel.value(), "customPropertyValue");
+    assertEquals(contractTemplateCustomPropertyModel.description(), "This is a custom property for tracking purposes");
 
     Description descriptionModel = new Description.Builder()
       .purpose("Used for customer behavior analysis.")
       .limitations("Data cannot be used for marketing.")
       .usage("Data should be used only for analytics.")
-      .moreInfo(java.util.Arrays.asList(contractTermsMoreInfoModel))
-      .customProperties("{\"property1\":\"value1\"}")
+      .authoritativeDefinitions(java.util.Arrays.asList(contractAuthoritativeDefinitionModel))
+      .customProperties(java.util.Arrays.asList(contractTemplateCustomPropertyModel))
       .build();
     assertEquals(descriptionModel.purpose(), "Used for customer behavior analysis.");
     assertEquals(descriptionModel.limitations(), "Data cannot be used for marketing.");
     assertEquals(descriptionModel.usage(), "Data should be used only for analytics.");
-    assertEquals(descriptionModel.moreInfo(), java.util.Arrays.asList(contractTermsMoreInfoModel));
-    assertEquals(descriptionModel.customProperties(), "{\"property1\":\"value1\"}");
+    assertEquals(descriptionModel.authoritativeDefinitions(), java.util.Arrays.asList(contractAuthoritativeDefinitionModel));
+    assertEquals(descriptionModel.customProperties(), java.util.Arrays.asList(contractTemplateCustomPropertyModel));
 
     String json = TestUtilities.serialize(descriptionModel);
 
@@ -59,6 +75,5 @@ public class DescriptionTest {
     assertEquals(descriptionModelNew.purpose(), "Used for customer behavior analysis.");
     assertEquals(descriptionModelNew.limitations(), "Data cannot be used for marketing.");
     assertEquals(descriptionModelNew.usage(), "Data should be used only for analytics.");
-    assertEquals(descriptionModelNew.customProperties(), "{\"property1\":\"value1\"}");
   }
 }
