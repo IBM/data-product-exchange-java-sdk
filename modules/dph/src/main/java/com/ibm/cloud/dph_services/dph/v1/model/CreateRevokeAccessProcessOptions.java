@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -182,8 +182,7 @@ public class CreateRevokeAccessProcessOptions extends GenericModel {
   /**
    * Gets the body.
    *
-   * Request parameters to handle revoke access from subscriptions. The start_at field can be used to schedule the
-   * revoke access operation for a future date-time.
+   * Request parameters to handle revoke access from subscriptions.
    *
    * @return the body
    */

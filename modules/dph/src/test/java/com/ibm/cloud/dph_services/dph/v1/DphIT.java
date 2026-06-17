@@ -13,138 +13,9 @@
 
 package com.ibm.cloud.dph_services.dph.v1;
 
-import com.ibm.cloud.dph_services.dph.v1.model.Asset;
-import com.ibm.cloud.dph_services.dph.v1.model.AssetListAccessControl;
-import com.ibm.cloud.dph_services.dph.v1.model.AssetPartReference;
-import com.ibm.cloud.dph_services.dph.v1.model.AssetPrototype;
-import com.ibm.cloud.dph_services.dph.v1.model.AssetReference;
-import com.ibm.cloud.dph_services.dph.v1.model.BucketResponse;
-import com.ibm.cloud.dph_services.dph.v1.model.BucketValidationResponse;
-import com.ibm.cloud.dph_services.dph.v1.model.CompleteDraftContractTermsDocumentOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.ContainerIdentity;
-import com.ibm.cloud.dph_services.dph.v1.model.ContainerReference;
-import com.ibm.cloud.dph_services.dph.v1.model.ContractAsset;
-import com.ibm.cloud.dph_services.dph.v1.model.ContractQualityRule;
-import com.ibm.cloud.dph_services.dph.v1.model.ContractSchema;
-import com.ibm.cloud.dph_services.dph.v1.model.ContractSchemaProperty;
-import com.ibm.cloud.dph_services.dph.v1.model.ContractSchemaPropertyType;
-import com.ibm.cloud.dph_services.dph.v1.model.ContractServer;
-import com.ibm.cloud.dph_services.dph.v1.model.ContractTemplateCustomProperty;
-import com.ibm.cloud.dph_services.dph.v1.model.ContractTemplateOrganization;
-import com.ibm.cloud.dph_services.dph.v1.model.ContractTemplateSLA;
-import com.ibm.cloud.dph_services.dph.v1.model.ContractTemplateSLAProperty;
-import com.ibm.cloud.dph_services.dph.v1.model.ContractTemplateSupportAndCommunication;
-import com.ibm.cloud.dph_services.dph.v1.model.ContractTerms;
-import com.ibm.cloud.dph_services.dph.v1.model.ContractTermsDocument;
-import com.ibm.cloud.dph_services.dph.v1.model.ContractTermsDocumentAttachment;
-import com.ibm.cloud.dph_services.dph.v1.model.ContractTermsMoreInfo;
-import com.ibm.cloud.dph_services.dph.v1.model.ContractTest;
-import com.ibm.cloud.dph_services.dph.v1.model.CreateContractTemplateOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.CreateDataAssetVisualizationOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.CreateDataProductDomainOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.CreateDataProductDraftOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.CreateDataProductOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.CreateDataProductSubdomainOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.CreateDraftContractTermsDocumentOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.CreateRevokeAccessProcessOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.CreateS3BucketOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.DataAssetRelationship;
-import com.ibm.cloud.dph_services.dph.v1.model.DataAssetVisualizationRes;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProduct;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductCollection;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductContractTemplate;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductContractTemplateCollection;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductCustomWorkflowDefinition;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductDomain;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductDomainCollection;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductDraft;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductDraftCollection;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductDraftDataProduct;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductDraftPrototype;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductDraftSummary;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductDraftSummaryDataProduct;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductDraftVersionRelease;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductDraftsPager;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductIdentity;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductOrderAccessRequest;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductPart;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductRelease;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductReleaseCollection;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductReleaseDataProduct;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductReleaseSummary;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductReleaseSummaryDataProduct;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductReleasesPager;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductSummary;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductVersionCollection;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductVersionSummary;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductVersionSummaryDataProduct;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductWorkflows;
-import com.ibm.cloud.dph_services.dph.v1.model.DataProductsPager;
-import com.ibm.cloud.dph_services.dph.v1.model.DeleteDataProductContractTemplateOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.DeleteDataProductDraftOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.DeleteDomainOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.DeleteDraftContractTermsDocumentOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.DeliveryMethod;
-import com.ibm.cloud.dph_services.dph.v1.model.DeliveryMethodPropertiesModel;
-import com.ibm.cloud.dph_services.dph.v1.model.Description;
-import com.ibm.cloud.dph_services.dph.v1.model.Domain;
-import com.ibm.cloud.dph_services.dph.v1.model.EngineDetailsModel;
-import com.ibm.cloud.dph_services.dph.v1.model.ErrorExtraResource;
-import com.ibm.cloud.dph_services.dph.v1.model.ErrorMessage;
-import com.ibm.cloud.dph_services.dph.v1.model.ErrorModelResource;
-import com.ibm.cloud.dph_services.dph.v1.model.FirstPage;
-import com.ibm.cloud.dph_services.dph.v1.model.GetContractTemplateOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.GetContractTermsInSpecifiedFormatOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.GetDataProductByDomainOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.GetDataProductDraftContractTermsOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.GetDataProductDraftOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.GetDataProductOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.GetDataProductReleaseOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.GetDomainOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.GetDraftContractTermsDocumentOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.GetInitializeStatusOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.GetPublishedDataProductDraftContractTermsOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.GetReleaseContractTermsDocumentOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.GetRevokeAccessProcessStateOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.GetS3BucketValidationOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.GetServiceIdCredentialsOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.InitializeOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.InitializeResource;
-import com.ibm.cloud.dph_services.dph.v1.model.InitializeSubDomain;
-import com.ibm.cloud.dph_services.dph.v1.model.InitializedOption;
-import com.ibm.cloud.dph_services.dph.v1.model.JsonPatchOperation;
-import com.ibm.cloud.dph_services.dph.v1.model.ListDataProductContractTemplateOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.ListDataProductDomainsOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.ListDataProductDraftsOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.ListDataProductReleasesOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.ListDataProductsOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.ManageApiKeysOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.MemberRolesSchema;
-import com.ibm.cloud.dph_services.dph.v1.model.NextPage;
-import com.ibm.cloud.dph_services.dph.v1.model.Overview;
-import com.ibm.cloud.dph_services.dph.v1.model.Pricing;
-import com.ibm.cloud.dph_services.dph.v1.model.ProducerInputModel;
-import com.ibm.cloud.dph_services.dph.v1.model.PropertiesSchema;
-import com.ibm.cloud.dph_services.dph.v1.model.ProvidedCatalogWorkflows;
-import com.ibm.cloud.dph_services.dph.v1.model.ProvidedWorkflowResource;
-import com.ibm.cloud.dph_services.dph.v1.model.PublishDataProductDraftOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.ReinitiateDataAssetVisualizationOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.ReplaceDataProductDraftContractTermsOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.RetireDataProductReleaseOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.RevokeAccessResponse;
-import com.ibm.cloud.dph_services.dph.v1.model.RevokeAccessStateResponse;
-import com.ibm.cloud.dph_services.dph.v1.model.Roles;
-import com.ibm.cloud.dph_services.dph.v1.model.SearchAssetPaginationInfo;
-import com.ibm.cloud.dph_services.dph.v1.model.ServiceIdCredentials;
-import com.ibm.cloud.dph_services.dph.v1.model.UpdateDataProductContractTemplateOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.UpdateDataProductDomainOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.UpdateDataProductDraftContractTermsOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.UpdateDataProductDraftOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.UpdateDataProductReleaseOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.UpdateDraftContractTermsDocumentOptions;
-import com.ibm.cloud.dph_services.dph.v1.model.UseCase;
-import com.ibm.cloud.dph_services.dph.v1.model.Visualization;
-import com.ibm.cloud.dph_services.dph.v1.model.WorkflowDefinitionReference;
+import java.util.Date;
+
+import com.ibm.cloud.dph_services.dph.v1.model.*;
 import com.ibm.cloud.dph_services.dph.v1.utils.TestUtilities;
 import com.ibm.cloud.dph_services.test.SdkIntegrationTestBase;
 import com.ibm.cloud.sdk.core.http.Response;
@@ -281,7 +152,7 @@ public class DphIT extends SdkIntegrationTestBase {
     }
   }
 
-    @Test(dependsOnMethods = { "testInitialize" })
+  @Test(dependsOnMethods = { "testInitialize" })
   public void testGetInitializeStatus() throws Exception {
     try {
       GetInitializeStatusOptions getInitializeStatusOptions = new GetInitializeStatusOptions.Builder()
@@ -433,7 +304,7 @@ public class DphIT extends SdkIntegrationTestBase {
   public void testGetDataProduct() throws Exception {
     try {
       GetDataProductOptions getDataProductOptions = new GetDataProductOptions.Builder()
-        .dataProductId(getDataProductByDataProductIdLink)
+        .dataProductId("f384fcbe-cb21-490a-aadd-a9a021851781")
         .build();
 
       // Invoke operation
@@ -829,15 +700,15 @@ public class DphIT extends SdkIntegrationTestBase {
               .build();
 
       Overview overviewModel = new Overview.Builder()
+              .id("sample-contract-id-12345")
               .apiVersion("v3.0.1")
               .kind("DataContract")
               .name("Sample Data Contract")
               .version("v0.0")
               .domain(domainModel)
-              .moreInfo("List of links to sources that provide more details on the data contract.")
               .build();
 
-      ContractTermsMoreInfo contractTermsMoreInfoModel = new ContractTermsMoreInfo.Builder()
+      ContractAuthoritativeDefinition authoritativeDefinitionModel = new ContractAuthoritativeDefinition.Builder()
               .type("privacy-statement")
               .url("https://www.moreinfo.example.coms")
               .build();
@@ -846,13 +717,7 @@ public class DphIT extends SdkIntegrationTestBase {
               .purpose("Intended purpose for the provided data.")
               .limitations("Technical, compliance, and legal limitations for data use.")
               .usage("Recommended usage of the data.")
-              .moreInfo(java.util.Arrays.asList(contractTermsMoreInfoModel))
-              .customProperties("Custom properties that are not part of the standard.")
-              .build();
-
-      ContractTemplateOrganization contractTemplateOrganizationModel = new ContractTemplateOrganization.Builder()
-              .userId("IBMid-691000IN4G")
-              .role("owner")
+              .authoritativeDefinitions(java.util.Arrays.asList(authoritativeDefinitionModel))
               .build();
 
       Roles rolesModel = new Roles.Builder()
@@ -881,8 +746,8 @@ public class DphIT extends SdkIntegrationTestBase {
               .build();
 
       ContractTemplateCustomProperty contractTemplateCustomPropertyModel = new ContractTemplateCustomProperty.Builder()
-              .key("The name of the key.")
-              .value("The value of the key.")
+              .property("The name of the property.")
+              .value("The value of the property.")
               .build();
 
       ReplaceDataProductDraftContractTermsOptions replaceDataProductDraftContractTermsOptions = new ReplaceDataProductDraftContractTermsOptions.Builder()
@@ -893,11 +758,10 @@ public class DphIT extends SdkIntegrationTestBase {
               .errorMsg("testString")
               .overview(overviewModel)
               .description(descriptionModel)
-              .organization(java.util.Arrays.asList(contractTemplateOrganizationModel))
               .roles(java.util.Arrays.asList(rolesModel))
               .price(pricingModel)
-              .sla(java.util.Arrays.asList(contractTemplateSlaModel))
-              .supportAndCommunication(java.util.Arrays.asList(contractTemplateSupportAndCommunicationModel))
+              .sla(contractTemplateSlaModel)
+              .support(java.util.Arrays.asList(contractTemplateSupportAndCommunicationModel))
               .customProperties(java.util.Arrays.asList(contractTemplateCustomPropertyModel))
               .build();
 
@@ -926,10 +790,10 @@ public class DphIT extends SdkIntegrationTestBase {
               .build();
 
       Overview overviewModel = new Overview.Builder()
+              .id("sample-contract-id-12345")
               .name("Sample Data Contract")
               .version("v0.0")
               .domain(domainModel)
-              .moreInfo("List of links to sources that provide more details on the data contract.")
               .build();
 
       JsonPatchOperation jsonPatchOperationModel = new JsonPatchOperation.Builder()
@@ -1044,6 +908,65 @@ public class DphIT extends SdkIntegrationTestBase {
   }
 
   @Test(dependsOnMethods = { "testRetireDataProductRelease" })
+  public void testListRetiredDataProductReleasesLatest() throws Exception {
+    try {
+      ListRetiredDataProductReleasesLatestOptions listRetiredDataProductReleasesLatestOptions = new ListRetiredDataProductReleasesLatestOptions.Builder()
+        .dataProductId(getListOfReleasesOfDataProductByDataProductIdLink)
+        .assetContainerId(createDataProductByCatalogIdLink)
+        .limit(Long.valueOf("10"))
+        .page(Long.valueOf("1"))
+        .build();
+
+      // Invoke operation
+      Response<DataProductReleaseCollection> response = service.listRetiredDataProductReleasesLatest(listRetiredDataProductReleasesLatestOptions).execute();
+      // Validate response
+      assertNotNull(response);
+      assertEquals(response.getStatusCode(), 200);
+
+      DataProductReleaseCollection dataProductReleaseCollectionResult = response.getResult();
+      assertNotNull(dataProductReleaseCollectionResult);
+
+    } catch (ServiceResponseException e) {
+        fail(String.format("Service returned status code %d: %s%nError details: %s",
+          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+    }
+  }
+
+  @Test(dependsOnMethods = { "testListRetiredDataProductReleasesLatest" })
+  public void testListRetiredDataProductReleasesLatestWithPager() throws Exception {
+    try {
+      ListRetiredDataProductReleasesLatestOptions options = new ListRetiredDataProductReleasesLatestOptions.Builder()
+        .dataProductId(getListOfReleasesOfDataProductByDataProductIdLink)
+        .assetContainerId(createDataProductByCatalogIdLink)
+        .limit(Long.valueOf("10"))
+        .page(Long.valueOf("1"))
+        .build();
+
+      // Test getNext().
+      List<DataProductReleaseSummary> allResults = new ArrayList<>();
+      RetiredDataProductReleasesLatestPager pager = new RetiredDataProductReleasesLatestPager(service, options);
+      while (pager.hasNext()) {
+        List<DataProductReleaseSummary> nextPage = pager.getNext();
+        assertNotNull(nextPage);
+        allResults.addAll(nextPage);
+      }
+      assertFalse(allResults.isEmpty());
+
+      // Test getAll();
+      pager = new RetiredDataProductReleasesLatestPager(service, options);
+      List<DataProductReleaseSummary> allItems = pager.getAll();
+      assertNotNull(allItems);
+      assertFalse(allItems.isEmpty());
+
+      assertEquals(allItems.size(), allResults.size());
+      System.out.println(String.format("Retrieved a total of %d item(s) with pagination.", allResults.size()));
+    } catch (ServiceResponseException e) {
+        fail(String.format("Service returned status code %d: %s%nError details: %s",
+          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+    }
+  }
+
+  @Test(dependsOnMethods = { "testListRetiredDataProductReleasesLatestWithPager" })
   public void testCreateDataAssetVisualization() throws Exception {
     try {
       Visualization visualizationModel = new Visualization.Builder()
@@ -1158,15 +1081,15 @@ public class DphIT extends SdkIntegrationTestBase {
               .build();
 
       Overview overviewModel = new Overview.Builder()
+              .id("sample-contract-id-12345")
               .apiVersion("v3.0.1")
               .kind("DataContract")
               .name("Sample Data Contract")
               .version("0.0.0")
               .domain(domainModel)
-              .moreInfo("List of links to sources that provide more details on the data contract.")
               .build();
 
-      ContractTermsMoreInfo contractTermsMoreInfoModel = new ContractTermsMoreInfo.Builder()
+      ContractAuthoritativeDefinition authoritativeDefinitionModel = new ContractAuthoritativeDefinition.Builder()
               .type("privacy-statement")
               .url("https://www.moreinfo.example.coms")
               .build();
@@ -1175,13 +1098,7 @@ public class DphIT extends SdkIntegrationTestBase {
               .purpose("Intended purpose for the provided data.")
               .limitations("Technical, compliance, and legal limitations for data use.")
               .usage("Recommended usage of the data.")
-              .moreInfo(java.util.Arrays.asList(contractTermsMoreInfoModel))
-              .customProperties("Custom properties that are not part of the standard.")
-              .build();
-
-      ContractTemplateOrganization contractTemplateOrganizationModel = new ContractTemplateOrganization.Builder()
-              .userId("IBMid-691000IN4G")
-              .role("owner")
+              .authoritativeDefinitions(java.util.Arrays.asList(authoritativeDefinitionModel))
               .build();
 
       Roles rolesModel = new Roles.Builder()
@@ -1210,38 +1127,29 @@ public class DphIT extends SdkIntegrationTestBase {
               .build();
 
       ContractTemplateCustomProperty contractTemplateCustomPropertyModel = new ContractTemplateCustomProperty.Builder()
-              .key("propertykey")
+              .property("propertykey")
               .value("propertyvalue")
               .build();
 
       ContractTest contractTestModel = new ContractTest.Builder()
               .status("pass")
-              .lastTestedTime("testString")
+              .lastTestedTime(new Date())
               .message("testString")
-              .build();
-
-      ContractSchemaPropertyType contractSchemaPropertyTypeModel = new ContractSchemaPropertyType.Builder()
-              .type("testString")
-              .length("testString")
-              .scale("testString")
-              .nullable("testString")
-              .signed("testString")
-              .nativeType("testString")
               .build();
 
       ContractSchemaProperty contractSchemaPropertyModel = new ContractSchemaProperty.Builder()
               .name("testString")
-              .type(contractSchemaPropertyTypeModel)
+              .logicalType("testString")
+              .physicalType("testString")
               .build();
 
       ContractTerms contractTermsModel = new ContractTerms.Builder()
               .overview(overviewModel)
               .description(descriptionModel)
-              .organization(java.util.Arrays.asList(contractTemplateOrganizationModel))
               .roles(java.util.Arrays.asList(rolesModel))
               .price(pricingModel)
-              .sla(java.util.Arrays.asList(contractTemplateSlaModel))
-              .supportAndCommunication(java.util.Arrays.asList(contractTemplateSupportAndCommunicationModel))
+              .sla(contractTemplateSlaModel)
+              .support(java.util.Arrays.asList(contractTemplateSupportAndCommunicationModel))
               .customProperties(java.util.Arrays.asList(contractTemplateCustomPropertyModel))
               .contractTest(contractTestModel)
               .build();
@@ -1296,10 +1204,14 @@ public class DphIT extends SdkIntegrationTestBase {
   @Test(dependsOnMethods = { "testGetContractTemplate" })
   public void testUpdateDataProductContractTemplate() throws Exception {
     try {
+      Description descriptionModel = new Description.Builder()
+              .purpose("Updated purpose for the contract template")
+              .build();
+
       JsonPatchOperation jsonPatchOperationModel = new JsonPatchOperation.Builder()
               .op("replace")
-              .path("/name")
-              .value("contract template name")
+              .path("/description")
+              .value(descriptionModel)
               .build();
 
       UpdateDataProductContractTemplateOptions updateDataProductContractTemplateOptions = new UpdateDataProductContractTemplateOptions.Builder()
@@ -1320,6 +1232,28 @@ public class DphIT extends SdkIntegrationTestBase {
     } catch (ServiceResponseException e) {
       fail(String.format("Service returned status code %d: %s%nError details: %s",
               e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+    }
+  }
+
+  @Test(dependsOnMethods = { "testUpdateDataProductContractTemplate" })
+  public void testValidateContractTemplateYaml() throws Exception {
+    try {
+      ValidateContractTemplateYamlOptions validateContractTemplateYamlOptions = new ValidateContractTemplateYamlOptions.Builder()
+        .text("version: \"1.0.0\"\napiVersion: \"v3.1.0\"\nkind: \"DataContract\"\nid: \"sample-data-contract-001\"\nstatus: \"active\"\nname: \"Sample Data Contract\"\ntenant: \"production\"\ndataProduct: \"Customer Analytics\"\ndescription:\n  purpose: \"Provide sample customer data for analytics and reporting\"\n  usage: \"This data can be used for analytics, trend analysis, and business intelligence\"\n  limitations: \"PII must be masked. Data is aggregated at daily level. Maximum retention is 2 years.\"\ndomain: \"customer-analytics\"\nservers:\n  - server: \"prod-s3-server\"\n    type: \"s3\"\n    environment: \"prod\"\n    description: \"Production S3 bucket for customer data\"\nschema:\n  - name: \"customer_table\"\n    physicalName: \"customer_table\"\n    type: \"table\"\n    description: \"Main customer information table\"\n    properties:\n      - name: \"customer_id\"\n        type: \"integer\"\n        required: true\n        description: \"Unique customer identifier\"\n      - name: \"customer_name\"\n        type: \"string\"\n        required: true\n        description: \"Customer full name\"\n      - name: \"email\"\n        type: \"string\"\n        required: false\n        description: \"Customer email address\"\nteam:\n  - username: \"data-team-lead\"\n    name: \"Data Team Lead\"\n    role: \"owner\"\nroles:\n  - role: \"DataAnalyst\"\n    access: \"read\"\n  - role: \"DataEngineer\"\n    access: \"write\"\n")
+        .build();
+
+      // Invoke operation
+      Response<ContractValidationResponse> response = service.validateContractTemplateYaml(validateContractTemplateYamlOptions).execute();
+      // Validate response
+      assertNotNull(response);
+      assertEquals(response.getStatusCode(), 200);
+
+      ContractValidationResponse contractValidationResponseResult = response.getResult();
+      assertNotNull(contractValidationResponseResult);
+
+    } catch (ServiceResponseException e) {
+        fail(String.format("Service returned status code %d: %s%nError details: %s",
+          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
     }
   }
 
@@ -1430,6 +1364,37 @@ public class DphIT extends SdkIntegrationTestBase {
     } catch (ServiceResponseException e) {
       fail(String.format("Service returned status code %d: %s%nError details: %s",
               e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+    }
+  }
+  
+  @Test(dependsOnMethods = { "testListDataProductDrafts" })
+  public void testListDataProductDraftsWithPager() throws Exception {
+    try {
+      ListDataProductDraftsOptions options = new ListDataProductDraftsOptions.Builder()
+        .dataProductId(getListOfDataProductDraftsByDataProductIdLink)
+        .assetContainerId(createDataProductByCatalogIdLink)
+        .limit(Long.valueOf("10"))
+        .build();
+
+      // Test getNext().
+      List<DataProductDraftSummary> allResults = new ArrayList<>();
+      DataProductDraftsPager pager = new DataProductDraftsPager(service, options);
+      while (pager.hasNext()) {
+        List<DataProductDraftSummary> nextPage = pager.getNext();
+        assertNotNull(nextPage);
+        allResults.addAll(nextPage);
+      }
+
+      // Test getAll();
+      pager = new DataProductDraftsPager(service, options);
+      List<DataProductDraftSummary> allItems = pager.getAll();
+      assertNotNull(allItems);
+
+      assertEquals(allItems.size(), allResults.size());
+      System.out.println(String.format("Retrieved a total of %d item(s) with pagination.", allResults.size()));
+    } catch (ServiceResponseException e) {
+        fail(String.format("Service returned status code %d: %s%nError details: %s",
+          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
     }
   }
 
@@ -1662,6 +1627,29 @@ public class DphIT extends SdkIntegrationTestBase {
   }
 
   @Test(dependsOnMethods = { "testGetDataProductByDomain" })
+  public void testGetContractTemplatesByDomain() throws Exception {
+    try {
+      GetContractTemplatesByDomainOptions getContractTemplatesByDomainOptions = new GetContractTemplatesByDomainOptions.Builder()
+        .domainId(createDataProductDomainId)
+        .containerId(getStatusByCatalogIdLink)
+        .build();
+
+      // Invoke operation
+      Response<DataProductVersionCollection> response = service.getContractTemplatesByDomain(getContractTemplatesByDomainOptions).execute();
+      // Validate response
+      assertNotNull(response);
+      assertEquals(response.getStatusCode(), 200);
+
+      DataProductVersionCollection dataProductVersionCollectionResult = response.getResult();
+      assertNotNull(dataProductVersionCollectionResult);
+
+    } catch (ServiceResponseException e) {
+        fail(String.format("Service returned status code %d: %s%nError details: %s",
+          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+    }
+  }
+
+  @Test(dependsOnMethods = { "testGetContractTemplatesByDomain" })
   public void testDeleteDomain() throws Exception {
     try {
       DeleteDomainOptions deleteDomainOptions = new DeleteDomainOptions.Builder()
@@ -1747,6 +1735,187 @@ public class DphIT extends SdkIntegrationTestBase {
     } catch (ServiceResponseException e) {
       fail(String.format("Service returned status code %d: %s%nError details: %s",
               e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+    }
+  }
+
+  @Test(dependsOnMethods = { "testDeleteDomain" })
+  public void testGetDeliveryConfiguration() throws Exception {
+    try {
+      GetDeliveryConfigurationOptions getDeliveryConfigurationOptions = new GetDeliveryConfigurationOptions.Builder()
+        .containerId(getStatusByCatalogIdLink)
+        .build();
+
+      // Invoke operation
+      Response<DeliveryMethodConfig> response = service.getDeliveryConfiguration(getDeliveryConfigurationOptions).execute();
+      // Validate response
+      assertNotNull(response);
+      assertEquals(response.getStatusCode(), 200);
+
+      DeliveryMethodConfig deliveryMethodConfigResult = response.getResult();
+      assertNotNull(deliveryMethodConfigResult);
+
+    } catch (ServiceResponseException e) {
+        fail(String.format("Service returned status code %d: %s%nError details: %s",
+          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+    }
+  }
+
+  @org.testng.annotations.Ignore
+  @Test(dependsOnMethods = { "testGetDeliveryConfiguration" })
+  public void testUpdateDeliveryConfiguration() throws Exception {
+    try {
+      JsonPatchOperation jsonPatchOperationModel = new JsonPatchOperation.Builder()
+        .op("add")
+        .path("testString")
+        .from("testString")
+        .value("testString")
+        .build();
+
+      UpdateDeliveryConfigurationOptions updateDeliveryConfigurationOptions = new UpdateDeliveryConfigurationOptions.Builder()
+        .containerId("testString")
+        .jsonPatchOperation(java.util.Arrays.asList(jsonPatchOperationModel))
+        .build();
+
+      // Invoke operation
+      Response<DeliveryMethodConfig> response = service.updateDeliveryConfiguration(updateDeliveryConfigurationOptions).execute();
+      // Validate response
+      assertNotNull(response);
+      assertEquals(response.getStatusCode(), 200);
+
+      DeliveryMethodConfig deliveryMethodConfigResult = response.getResult();
+      assertNotNull(deliveryMethodConfigResult);
+
+    } catch (ServiceResponseException e) {
+        fail(String.format("Service returned status code %d: %s%nError details: %s",
+          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+    }
+  }
+
+  @Test(dependsOnMethods = { "testGetDeliveryConfiguration" })
+  public void testListDeliveryMethods() throws Exception {
+    try {
+      ListDeliveryMethodsOptions listDeliveryMethodsOptions = new ListDeliveryMethodsOptions.Builder()
+        .catalogId(getStatusByCatalogIdLink)
+        .build();
+
+      // Invoke operation
+      Response<DeliveryMethodResCollection> response = service.listDeliveryMethods(listDeliveryMethodsOptions).execute();
+      // Validate response
+      assertNotNull(response);
+      assertEquals(response.getStatusCode(), 200);
+
+      DeliveryMethodResCollection deliveryMethodResCollectionResult = response.getResult();
+      assertNotNull(deliveryMethodResCollectionResult);
+
+    } catch (ServiceResponseException e) {
+        fail(String.format("Service returned status code %d: %s%nError details: %s",
+          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+    }
+  }
+
+  @org.testng.annotations.Ignore
+  @Test(dependsOnMethods = { "testListDeliveryMethods" })
+  public void testCreateDeliveryMethod() throws Exception {
+    try {
+      ContainerReference containerReferenceModel = new ContainerReference.Builder()
+        .id("d29c42eb-7100-4b7a-8257-c196dbcca1cd")
+        .type("catalog")
+        .build();
+
+      CreateDeliveryMethodOptions createDeliveryMethodOptions = new CreateDeliveryMethodOptions.Builder()
+        .catalogId("testString")
+        .name("New delivery method")
+        .resourceKey("new-delivery-method")
+        .description("Description of the new delivery method")
+        .status("true")
+        .container(containerReferenceModel)
+        .supportedAssetTypes(java.util.Arrays.asList("data_asset"))
+        .supportedAuthMethods(java.util.Arrays.asList("testString"))
+        .supportedAuthMethodsCpd(java.util.Arrays.asList("testString"))
+        .supportedDataSources(java.util.Arrays.asList("DATA_SOURCE_ID_1", "DATA_SOURCE_ID_2"))
+        .supportsRedelivery(false)
+        .isRestricted(true)
+        .supportsRetryOnFailure(true)
+        .supportsRevokeAccess(true)
+        .supportsColumnSelection(true)
+        .supportsAddToProject(false)
+        .producerInput(java.util.Arrays.asList(java.util.Collections.singletonMap("anyKey", "anyValue")))
+        .consumerInput(java.util.Arrays.asList(java.util.Collections.singletonMap("anyKey", "anyValue")))
+        .outputFormat(java.util.Arrays.asList(java.util.Collections.singletonMap("anyKey", "anyValue")))
+        .autoMarkDelivered(true)
+        .deliveryUsesFunctionalCredentials(true)
+        .dataSourceProperties(java.util.Collections.singletonMap("anyKey", "anyValue"))
+        .deliveryOutput(java.util.Collections.singletonMap("anyKey", "anyValue"))
+        .build();
+
+      // Invoke operation
+      Response<DeliveryMethodRes> response = service.createDeliveryMethod(createDeliveryMethodOptions).execute();
+      // Validate response
+      assertNotNull(response);
+      assertEquals(response.getStatusCode(), 201);
+
+      DeliveryMethodRes deliveryMethodResResult = response.getResult();
+      assertNotNull(deliveryMethodResResult);
+
+    } catch (ServiceResponseException e) {
+        fail(String.format("Service returned status code %d: %s%nError details: %s",
+          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+    }
+  }
+
+  @org.testng.annotations.Ignore
+  @Test(dependsOnMethods = { "testCreateDeliveryMethod" })
+  public void testGetDeliveryMethod() throws Exception {
+    try {
+      GetDeliveryMethodOptions getDeliveryMethodOptions = new GetDeliveryMethodOptions.Builder()
+        .catalogId("testString")
+        .deliveryMethodId("testString")
+        .build();
+
+      // Invoke operation
+      Response<DeliveryMethodRes> response = service.getDeliveryMethod(getDeliveryMethodOptions).execute();
+      // Validate response
+      assertNotNull(response);
+      assertEquals(response.getStatusCode(), 200);
+
+      DeliveryMethodRes deliveryMethodResResult = response.getResult();
+      assertNotNull(deliveryMethodResResult);
+
+    } catch (ServiceResponseException e) {
+        fail(String.format("Service returned status code %d: %s%nError details: %s",
+          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
+    }
+  }
+    
+  @org.testng.annotations.Ignore
+  @Test(dependsOnMethods = { "testGetDeliveryMethod" })
+  public void testUpdateDeliveryMethod() throws Exception {
+    try {
+      JsonPatchOperation jsonPatchOperationModel = new JsonPatchOperation.Builder()
+        .op("add")
+        .path("testString")
+        .from("testString")
+        .value("testString")
+        .build();
+
+      UpdateDeliveryMethodOptions updateDeliveryMethodOptions = new UpdateDeliveryMethodOptions.Builder()
+        .catalogId("testString")
+        .deliveryMethodId("testString")
+        .jsonPatchOperation(java.util.Arrays.asList(jsonPatchOperationModel))
+        .build();
+
+      // Invoke operation
+      Response<DeliveryMethodRes> response = service.updateDeliveryMethod(updateDeliveryMethodOptions).execute();
+      // Validate response
+      assertNotNull(response);
+      assertEquals(response.getStatusCode(), 200);
+
+      DeliveryMethodRes deliveryMethodResResult = response.getResult();
+      assertNotNull(deliveryMethodResResult);
+
+    } catch (ServiceResponseException e) {
+        fail(String.format("Service returned status code %d: %s%nError details: %s",
+          e.getStatusCode(), e.getMessage(), e.getDebuggingInfo()));
     }
   }
 

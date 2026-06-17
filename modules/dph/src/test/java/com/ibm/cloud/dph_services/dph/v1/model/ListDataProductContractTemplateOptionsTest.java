@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -34,10 +34,12 @@ public class ListDataProductContractTemplateOptionsTest {
     ListDataProductContractTemplateOptions listDataProductContractTemplateOptionsModel = new ListDataProductContractTemplateOptions.Builder()
       .containerId("testString")
       .contractTemplateName("testString")
+      .contractTemplateStatus("testString")
       .domainIds("testString")
       .build();
     assertEquals(listDataProductContractTemplateOptionsModel.containerId(), "testString");
     assertEquals(listDataProductContractTemplateOptionsModel.contractTemplateName(), "testString");
+    assertEquals(listDataProductContractTemplateOptionsModel.contractTemplateStatus(), "testString");
     assertEquals(listDataProductContractTemplateOptionsModel.domainIds(), "testString");
   }
 }

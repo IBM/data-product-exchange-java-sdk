@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -22,6 +22,7 @@ public class ListDataProductContractTemplateOptions extends GenericModel {
 
   protected String containerId;
   protected String contractTemplateName;
+  protected String contractTemplateStatus;
   protected String domainIds;
 
   /**
@@ -30,6 +31,7 @@ public class ListDataProductContractTemplateOptions extends GenericModel {
   public static class Builder {
     private String containerId;
     private String contractTemplateName;
+    private String contractTemplateStatus;
     private String domainIds;
 
     /**
@@ -40,6 +42,7 @@ public class ListDataProductContractTemplateOptions extends GenericModel {
     private Builder(ListDataProductContractTemplateOptions listDataProductContractTemplateOptions) {
       this.containerId = listDataProductContractTemplateOptions.containerId;
       this.contractTemplateName = listDataProductContractTemplateOptions.contractTemplateName;
+      this.contractTemplateStatus = listDataProductContractTemplateOptions.contractTemplateStatus;
       this.domainIds = listDataProductContractTemplateOptions.domainIds;
     }
 
@@ -81,6 +84,17 @@ public class ListDataProductContractTemplateOptions extends GenericModel {
     }
 
     /**
+     * Set the contractTemplateStatus.
+     *
+     * @param contractTemplateStatus the contractTemplateStatus
+     * @return the ListDataProductContractTemplateOptions builder
+     */
+    public Builder contractTemplateStatus(String contractTemplateStatus) {
+      this.contractTemplateStatus = contractTemplateStatus;
+      return this;
+    }
+
+    /**
      * Set the domainIds.
      *
      * @param domainIds the domainIds
@@ -97,6 +111,7 @@ public class ListDataProductContractTemplateOptions extends GenericModel {
   protected ListDataProductContractTemplateOptions(Builder builder) {
     containerId = builder.containerId;
     contractTemplateName = builder.contractTemplateName;
+    contractTemplateStatus = builder.contractTemplateStatus;
     domainIds = builder.domainIds;
   }
 
@@ -131,6 +146,18 @@ public class ListDataProductContractTemplateOptions extends GenericModel {
    */
   public String contractTemplateName() {
     return contractTemplateName;
+  }
+
+  /**
+   * Gets the contractTemplateStatus.
+   *
+   * Status of the data product contract template. If not supplied, the data product templates within the catalog will
+   * returned.
+   *
+   * @return the contractTemplateStatus
+   */
+  public String contractTemplateStatus() {
+    return contractTemplateStatus;
   }
 
   /**

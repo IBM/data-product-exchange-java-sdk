@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -20,6 +20,7 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class Pricing extends GenericModel {
 
+  protected String id;
   protected String amount;
   protected String currency;
   protected String unit;
@@ -28,6 +29,7 @@ public class Pricing extends GenericModel {
    * Builder.
    */
   public static class Builder {
+    private String id;
     private String amount;
     private String currency;
     private String unit;
@@ -38,6 +40,7 @@ public class Pricing extends GenericModel {
      * @param pricing the instance to initialize the Builder with
      */
     private Builder(Pricing pricing) {
+      this.id = pricing.id;
       this.amount = pricing.amount;
       this.currency = pricing.currency;
       this.unit = pricing.unit;
@@ -56,6 +59,17 @@ public class Pricing extends GenericModel {
      */
     public Pricing build() {
       return new Pricing(this);
+    }
+
+    /**
+     * Set the id.
+     *
+     * @param id the id
+     * @return the Pricing builder
+     */
+    public Builder id(String id) {
+      this.id = id;
+      return this;
     }
 
     /**
@@ -95,6 +109,7 @@ public class Pricing extends GenericModel {
   protected Pricing() { }
 
   protected Pricing(Builder builder) {
+    id = builder.id;
     amount = builder.amount;
     currency = builder.currency;
     unit = builder.unit;
@@ -107,6 +122,17 @@ public class Pricing extends GenericModel {
    */
   public Builder newBuilder() {
     return new Builder(this);
+  }
+
+  /**
+   * Gets the id.
+   *
+   * Unique identifier for pricing.
+   *
+   * @return the id
+   */
+  public String id() {
+    return id;
   }
 
   /**

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -15,6 +15,7 @@ package com.ibm.cloud.dph_services.dph.v1.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
@@ -24,8 +25,21 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class ContractQualityRule extends GenericModel {
 
+  protected String id;
   protected String type;
   protected String description;
+  protected List<String> tags;
+  protected String metric;
+  protected String threshold;
+  @SerializedName("valid_values")
+  protected List<String> validValues;
+  protected String dimension;
+  protected String method;
+  protected String severity;
+  @SerializedName("business_impact")
+  protected String businessImpact;
+  protected String scheduler;
+  protected String schedule;
   protected String rule;
   protected String implementation;
   protected String engine;
@@ -35,6 +49,8 @@ public class ContractQualityRule extends GenericModel {
   protected String mustBeLessOrEqualTo;
   @SerializedName("must_be_greater_than")
   protected String mustBeGreaterThan;
+  @SerializedName("custom_properties")
+  protected List<ContractTemplateCustomProperty> customProperties;
   @SerializedName("must_be_greater_or_equal_to")
   protected String mustBeGreaterOrEqualTo;
   @SerializedName("must_be_between")
@@ -48,19 +64,34 @@ public class ContractQualityRule extends GenericModel {
   protected String name;
   protected String unit;
   protected String query;
+  protected Map<String, Object> arguments;
+  @SerializedName("authoritative_definitions")
+  protected List<ContractAuthoritativeDefinition> authoritativeDefinitions;
 
   /**
    * Builder.
    */
   public static class Builder {
+    private String id;
     private String type;
     private String description;
+    private List<String> tags;
+    private String metric;
+    private String threshold;
+    private List<String> validValues;
+    private String dimension;
+    private String method;
+    private String severity;
+    private String businessImpact;
+    private String scheduler;
+    private String schedule;
     private String rule;
     private String implementation;
     private String engine;
     private String mustBeLessThan;
     private String mustBeLessOrEqualTo;
     private String mustBeGreaterThan;
+    private List<ContractTemplateCustomProperty> customProperties;
     private String mustBeGreaterOrEqualTo;
     private List<String> mustBeBetween;
     private List<String> mustNotBeBetween;
@@ -69,6 +100,8 @@ public class ContractQualityRule extends GenericModel {
     private String name;
     private String unit;
     private String query;
+    private Map<String, Object> arguments;
+    private List<ContractAuthoritativeDefinition> authoritativeDefinitions;
 
     /**
      * Instantiates a new Builder from an existing ContractQualityRule instance.
@@ -76,14 +109,26 @@ public class ContractQualityRule extends GenericModel {
      * @param contractQualityRule the instance to initialize the Builder with
      */
     private Builder(ContractQualityRule contractQualityRule) {
+      this.id = contractQualityRule.id;
       this.type = contractQualityRule.type;
       this.description = contractQualityRule.description;
+      this.tags = contractQualityRule.tags;
+      this.metric = contractQualityRule.metric;
+      this.threshold = contractQualityRule.threshold;
+      this.validValues = contractQualityRule.validValues;
+      this.dimension = contractQualityRule.dimension;
+      this.method = contractQualityRule.method;
+      this.severity = contractQualityRule.severity;
+      this.businessImpact = contractQualityRule.businessImpact;
+      this.scheduler = contractQualityRule.scheduler;
+      this.schedule = contractQualityRule.schedule;
       this.rule = contractQualityRule.rule;
       this.implementation = contractQualityRule.implementation;
       this.engine = contractQualityRule.engine;
       this.mustBeLessThan = contractQualityRule.mustBeLessThan;
       this.mustBeLessOrEqualTo = contractQualityRule.mustBeLessOrEqualTo;
       this.mustBeGreaterThan = contractQualityRule.mustBeGreaterThan;
+      this.customProperties = contractQualityRule.customProperties;
       this.mustBeGreaterOrEqualTo = contractQualityRule.mustBeGreaterOrEqualTo;
       this.mustBeBetween = contractQualityRule.mustBeBetween;
       this.mustNotBeBetween = contractQualityRule.mustNotBeBetween;
@@ -92,6 +137,8 @@ public class ContractQualityRule extends GenericModel {
       this.name = contractQualityRule.name;
       this.unit = contractQualityRule.unit;
       this.query = contractQualityRule.query;
+      this.arguments = contractQualityRule.arguments;
+      this.authoritativeDefinitions = contractQualityRule.authoritativeDefinitions;
     }
 
     /**
@@ -116,6 +163,54 @@ public class ContractQualityRule extends GenericModel {
      */
     public ContractQualityRule build() {
       return new ContractQualityRule(this);
+    }
+
+    /**
+     * Adds a new element to tags.
+     *
+     * @param tags the new element to be added
+     * @return the ContractQualityRule builder
+     */
+    public Builder addTags(String tags) {
+      com.ibm.cloud.sdk.core.util.Validator.notNull(tags,
+        "tags cannot be null");
+      if (this.tags == null) {
+        this.tags = new ArrayList<String>();
+      }
+      this.tags.add(tags);
+      return this;
+    }
+
+    /**
+     * Adds a new element to validValues.
+     *
+     * @param validValues the new element to be added
+     * @return the ContractQualityRule builder
+     */
+    public Builder addValidValues(String validValues) {
+      com.ibm.cloud.sdk.core.util.Validator.notNull(validValues,
+        "validValues cannot be null");
+      if (this.validValues == null) {
+        this.validValues = new ArrayList<String>();
+      }
+      this.validValues.add(validValues);
+      return this;
+    }
+
+    /**
+     * Adds a new element to customProperties.
+     *
+     * @param customProperties the new element to be added
+     * @return the ContractQualityRule builder
+     */
+    public Builder addCustomProperties(ContractTemplateCustomProperty customProperties) {
+      com.ibm.cloud.sdk.core.util.Validator.notNull(customProperties,
+        "customProperties cannot be null");
+      if (this.customProperties == null) {
+        this.customProperties = new ArrayList<ContractTemplateCustomProperty>();
+      }
+      this.customProperties.add(customProperties);
+      return this;
     }
 
     /**
@@ -151,6 +246,33 @@ public class ContractQualityRule extends GenericModel {
     }
 
     /**
+     * Adds a new element to authoritativeDefinitions.
+     *
+     * @param authoritativeDefinitions the new element to be added
+     * @return the ContractQualityRule builder
+     */
+    public Builder addAuthoritativeDefinitions(ContractAuthoritativeDefinition authoritativeDefinitions) {
+      com.ibm.cloud.sdk.core.util.Validator.notNull(authoritativeDefinitions,
+        "authoritativeDefinitions cannot be null");
+      if (this.authoritativeDefinitions == null) {
+        this.authoritativeDefinitions = new ArrayList<ContractAuthoritativeDefinition>();
+      }
+      this.authoritativeDefinitions.add(authoritativeDefinitions);
+      return this;
+    }
+
+    /**
+     * Set the id.
+     *
+     * @param id the id
+     * @return the ContractQualityRule builder
+     */
+    public Builder id(String id) {
+      this.id = id;
+      return this;
+    }
+
+    /**
      * Set the type.
      *
      * @param type the type
@@ -169,6 +291,118 @@ public class ContractQualityRule extends GenericModel {
      */
     public Builder description(String description) {
       this.description = description;
+      return this;
+    }
+
+    /**
+     * Set the tags.
+     * Existing tags will be replaced.
+     *
+     * @param tags the tags
+     * @return the ContractQualityRule builder
+     */
+    public Builder tags(List<String> tags) {
+      this.tags = tags;
+      return this;
+    }
+
+    /**
+     * Set the metric.
+     *
+     * @param metric the metric
+     * @return the ContractQualityRule builder
+     */
+    public Builder metric(String metric) {
+      this.metric = metric;
+      return this;
+    }
+
+    /**
+     * Set the threshold.
+     *
+     * @param threshold the threshold
+     * @return the ContractQualityRule builder
+     */
+    public Builder threshold(String threshold) {
+      this.threshold = threshold;
+      return this;
+    }
+
+    /**
+     * Set the validValues.
+     * Existing validValues will be replaced.
+     *
+     * @param validValues the validValues
+     * @return the ContractQualityRule builder
+     */
+    public Builder validValues(List<String> validValues) {
+      this.validValues = validValues;
+      return this;
+    }
+
+    /**
+     * Set the dimension.
+     *
+     * @param dimension the dimension
+     * @return the ContractQualityRule builder
+     */
+    public Builder dimension(String dimension) {
+      this.dimension = dimension;
+      return this;
+    }
+
+    /**
+     * Set the method.
+     *
+     * @param method the method
+     * @return the ContractQualityRule builder
+     */
+    public Builder method(String method) {
+      this.method = method;
+      return this;
+    }
+
+    /**
+     * Set the severity.
+     *
+     * @param severity the severity
+     * @return the ContractQualityRule builder
+     */
+    public Builder severity(String severity) {
+      this.severity = severity;
+      return this;
+    }
+
+    /**
+     * Set the businessImpact.
+     *
+     * @param businessImpact the businessImpact
+     * @return the ContractQualityRule builder
+     */
+    public Builder businessImpact(String businessImpact) {
+      this.businessImpact = businessImpact;
+      return this;
+    }
+
+    /**
+     * Set the scheduler.
+     *
+     * @param scheduler the scheduler
+     * @return the ContractQualityRule builder
+     */
+    public Builder scheduler(String scheduler) {
+      this.scheduler = scheduler;
+      return this;
+    }
+
+    /**
+     * Set the schedule.
+     *
+     * @param schedule the schedule
+     * @return the ContractQualityRule builder
+     */
+    public Builder schedule(String schedule) {
+      this.schedule = schedule;
       return this;
     }
 
@@ -235,6 +469,18 @@ public class ContractQualityRule extends GenericModel {
      */
     public Builder mustBeGreaterThan(String mustBeGreaterThan) {
       this.mustBeGreaterThan = mustBeGreaterThan;
+      return this;
+    }
+
+    /**
+     * Set the customProperties.
+     * Existing customProperties will be replaced.
+     *
+     * @param customProperties the customProperties
+     * @return the ContractQualityRule builder
+     */
+    public Builder customProperties(List<ContractTemplateCustomProperty> customProperties) {
+      this.customProperties = customProperties;
       return this;
     }
 
@@ -327,6 +573,29 @@ public class ContractQualityRule extends GenericModel {
       this.query = query;
       return this;
     }
+
+    /**
+     * Set the arguments.
+     *
+     * @param arguments the arguments
+     * @return the ContractQualityRule builder
+     */
+    public Builder arguments(Map<String, Object> arguments) {
+      this.arguments = arguments;
+      return this;
+    }
+
+    /**
+     * Set the authoritativeDefinitions.
+     * Existing authoritativeDefinitions will be replaced.
+     *
+     * @param authoritativeDefinitions the authoritativeDefinitions
+     * @return the ContractQualityRule builder
+     */
+    public Builder authoritativeDefinitions(List<ContractAuthoritativeDefinition> authoritativeDefinitions) {
+      this.authoritativeDefinitions = authoritativeDefinitions;
+      return this;
+    }
   }
 
   protected ContractQualityRule() { }
@@ -334,14 +603,26 @@ public class ContractQualityRule extends GenericModel {
   protected ContractQualityRule(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.type,
       "type cannot be null");
+    id = builder.id;
     type = builder.type;
     description = builder.description;
+    tags = builder.tags;
+    metric = builder.metric;
+    threshold = builder.threshold;
+    validValues = builder.validValues;
+    dimension = builder.dimension;
+    method = builder.method;
+    severity = builder.severity;
+    businessImpact = builder.businessImpact;
+    scheduler = builder.scheduler;
+    schedule = builder.schedule;
     rule = builder.rule;
     implementation = builder.implementation;
     engine = builder.engine;
     mustBeLessThan = builder.mustBeLessThan;
     mustBeLessOrEqualTo = builder.mustBeLessOrEqualTo;
     mustBeGreaterThan = builder.mustBeGreaterThan;
+    customProperties = builder.customProperties;
     mustBeGreaterOrEqualTo = builder.mustBeGreaterOrEqualTo;
     mustBeBetween = builder.mustBeBetween;
     mustNotBeBetween = builder.mustNotBeBetween;
@@ -350,6 +631,8 @@ public class ContractQualityRule extends GenericModel {
     name = builder.name;
     unit = builder.unit;
     query = builder.query;
+    arguments = builder.arguments;
+    authoritativeDefinitions = builder.authoritativeDefinitions;
   }
 
   /**
@@ -359,6 +642,17 @@ public class ContractQualityRule extends GenericModel {
    */
   public Builder newBuilder() {
     return new Builder(this);
+  }
+
+  /**
+   * Gets the id.
+   *
+   * Unique identifier for the quality rule.
+   *
+   * @return the id
+   */
+  public String id() {
+    return id;
   }
 
   /**
@@ -381,6 +675,116 @@ public class ContractQualityRule extends GenericModel {
    */
   public String description() {
     return description;
+  }
+
+  /**
+   * Gets the tags.
+   *
+   * Tags associated with the quality rule.
+   *
+   * @return the tags
+   */
+  public List<String> tags() {
+    return tags;
+  }
+
+  /**
+   * Gets the metric.
+   *
+   * Metric name used by the quality rule (if applicable).
+   *
+   * @return the metric
+   */
+  public String metric() {
+    return metric;
+  }
+
+  /**
+   * Gets the threshold.
+   *
+   * Threshold value used by the quality rule.
+   *
+   * @return the threshold
+   */
+  public String threshold() {
+    return threshold;
+  }
+
+  /**
+   * Gets the validValues.
+   *
+   * Allowed/valid values for the quality rule.
+   *
+   * @return the validValues
+   */
+  public List<String> validValues() {
+    return validValues;
+  }
+
+  /**
+   * Gets the dimension.
+   *
+   * Dimension used by the quality rule.
+   *
+   * @return the dimension
+   */
+  public String dimension() {
+    return dimension;
+  }
+
+  /**
+   * Gets the method.
+   *
+   * Method used to evaluate the quality rule.
+   *
+   * @return the method
+   */
+  public String method() {
+    return method;
+  }
+
+  /**
+   * Gets the severity.
+   *
+   * Severity level for the quality rule (e.g., low, medium, high).
+   *
+   * @return the severity
+   */
+  public String severity() {
+    return severity;
+  }
+
+  /**
+   * Gets the businessImpact.
+   *
+   * Business impact description for rule violations.
+   *
+   * @return the businessImpact
+   */
+  public String businessImpact() {
+    return businessImpact;
+  }
+
+  /**
+   * Gets the scheduler.
+   *
+   * Scheduler identifier for periodic rule execution.
+   *
+   * @return the scheduler
+   */
+  public String scheduler() {
+    return scheduler;
+  }
+
+  /**
+   * Gets the schedule.
+   *
+   * Schedule expression (cron or human-readable) for running the rule.
+   *
+   * @return the schedule
+   */
+  public String schedule() {
+    return schedule;
   }
 
   /**
@@ -448,6 +852,17 @@ public class ContractQualityRule extends GenericModel {
    */
   public String mustBeGreaterThan() {
     return mustBeGreaterThan;
+  }
+
+  /**
+   * Gets the customProperties.
+   *
+   * Custom Properties for Quality Rule.
+   *
+   * @return the customProperties
+   */
+  public List<ContractTemplateCustomProperty> customProperties() {
+    return customProperties;
   }
 
   /**
@@ -536,6 +951,28 @@ public class ContractQualityRule extends GenericModel {
    */
   public String query() {
     return query;
+  }
+
+  /**
+   * Gets the arguments.
+   *
+   * Additional arguments for the metric (when type='library'). A dictionary/map of key-value pairs.
+   *
+   * @return the arguments
+   */
+  public Map<String, Object> arguments() {
+    return arguments;
+  }
+
+  /**
+   * Gets the authoritativeDefinitions.
+   *
+   * List of links to sources that provide more details on the data contract.
+   *
+   * @return the authoritativeDefinitions
+   */
+  public List<ContractAuthoritativeDefinition> authoritativeDefinitions() {
+    return authoritativeDefinitions;
   }
 }
 

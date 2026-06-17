@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -24,32 +24,63 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class ContractSchema extends GenericModel {
 
+  protected String id;
   @SerializedName("asset_id")
   protected String assetId;
   @SerializedName("connection_id")
   protected String connectionId;
   protected String name;
+  protected String type;
   protected String description;
   @SerializedName("connection_path")
   protected String connectionPath;
   @SerializedName("physical_type")
   protected String physicalType;
+  @SerializedName("business_name")
+  protected String businessName;
+  @SerializedName("logical_type")
+  protected String logicalType;
+  @SerializedName("physical_name")
+  protected String physicalName;
+  @SerializedName("data_granularity_description")
+  protected String dataGranularityDescription;
+  @SerializedName("physical_schema")
+  protected String physicalSchema;
+  protected String server;
+  @SerializedName("authoritative_definitions")
+  protected List<ContractAuthoritativeDefinition> authoritativeDefinitions;
+  protected List<String> tags;
+  @SerializedName("custom_properties")
+  protected List<ContractTemplateCustomProperty> customProperties;
   @SerializedName("properties")
   protected List<ContractSchemaProperty> xProperties;
   protected List<ContractQualityRule> quality;
+  protected List<ContractSchemaRelationship> relationships;
 
   /**
    * Builder.
    */
   public static class Builder {
+    private String id;
     private String assetId;
     private String connectionId;
     private String name;
+    private String type;
     private String description;
     private String connectionPath;
     private String physicalType;
+    private String businessName;
+    private String logicalType;
+    private String physicalName;
+    private String dataGranularityDescription;
+    private String physicalSchema;
+    private String server;
+    private List<ContractAuthoritativeDefinition> authoritativeDefinitions;
+    private List<String> tags;
+    private List<ContractTemplateCustomProperty> customProperties;
     private List<ContractSchemaProperty> xProperties;
     private List<ContractQualityRule> quality;
+    private List<ContractSchemaRelationship> relationships;
 
     /**
      * Instantiates a new Builder from an existing ContractSchema instance.
@@ -57,14 +88,26 @@ public class ContractSchema extends GenericModel {
      * @param contractSchema the instance to initialize the Builder with
      */
     private Builder(ContractSchema contractSchema) {
+      this.id = contractSchema.id;
       this.assetId = contractSchema.assetId;
       this.connectionId = contractSchema.connectionId;
       this.name = contractSchema.name;
+      this.type = contractSchema.type;
       this.description = contractSchema.description;
       this.connectionPath = contractSchema.connectionPath;
       this.physicalType = contractSchema.physicalType;
+      this.businessName = contractSchema.businessName;
+      this.logicalType = contractSchema.logicalType;
+      this.physicalName = contractSchema.physicalName;
+      this.dataGranularityDescription = contractSchema.dataGranularityDescription;
+      this.physicalSchema = contractSchema.physicalSchema;
+      this.server = contractSchema.server;
+      this.authoritativeDefinitions = contractSchema.authoritativeDefinitions;
+      this.tags = contractSchema.tags;
+      this.customProperties = contractSchema.customProperties;
       this.xProperties = contractSchema.xProperties;
       this.quality = contractSchema.quality;
+      this.relationships = contractSchema.relationships;
     }
 
     /**
@@ -91,6 +134,54 @@ public class ContractSchema extends GenericModel {
      */
     public ContractSchema build() {
       return new ContractSchema(this);
+    }
+
+    /**
+     * Adds a new element to authoritativeDefinitions.
+     *
+     * @param authoritativeDefinitions the new element to be added
+     * @return the ContractSchema builder
+     */
+    public Builder addAuthoritativeDefinitions(ContractAuthoritativeDefinition authoritativeDefinitions) {
+      com.ibm.cloud.sdk.core.util.Validator.notNull(authoritativeDefinitions,
+        "authoritativeDefinitions cannot be null");
+      if (this.authoritativeDefinitions == null) {
+        this.authoritativeDefinitions = new ArrayList<ContractAuthoritativeDefinition>();
+      }
+      this.authoritativeDefinitions.add(authoritativeDefinitions);
+      return this;
+    }
+
+    /**
+     * Adds a new element to tags.
+     *
+     * @param tags the new element to be added
+     * @return the ContractSchema builder
+     */
+    public Builder addTags(String tags) {
+      com.ibm.cloud.sdk.core.util.Validator.notNull(tags,
+        "tags cannot be null");
+      if (this.tags == null) {
+        this.tags = new ArrayList<String>();
+      }
+      this.tags.add(tags);
+      return this;
+    }
+
+    /**
+     * Adds a new element to customProperties.
+     *
+     * @param customProperties the new element to be added
+     * @return the ContractSchema builder
+     */
+    public Builder addCustomProperties(ContractTemplateCustomProperty customProperties) {
+      com.ibm.cloud.sdk.core.util.Validator.notNull(customProperties,
+        "customProperties cannot be null");
+      if (this.customProperties == null) {
+        this.customProperties = new ArrayList<ContractTemplateCustomProperty>();
+      }
+      this.customProperties.add(customProperties);
+      return this;
     }
 
     /**
@@ -122,6 +213,33 @@ public class ContractSchema extends GenericModel {
         this.quality = new ArrayList<ContractQualityRule>();
       }
       this.quality.add(quality);
+      return this;
+    }
+
+    /**
+     * Adds a new element to relationships.
+     *
+     * @param relationships the new element to be added
+     * @return the ContractSchema builder
+     */
+    public Builder addRelationships(ContractSchemaRelationship relationships) {
+      com.ibm.cloud.sdk.core.util.Validator.notNull(relationships,
+        "relationships cannot be null");
+      if (this.relationships == null) {
+        this.relationships = new ArrayList<ContractSchemaRelationship>();
+      }
+      this.relationships.add(relationships);
+      return this;
+    }
+
+    /**
+     * Set the id.
+     *
+     * @param id the id
+     * @return the ContractSchema builder
+     */
+    public Builder id(String id) {
+      this.id = id;
       return this;
     }
 
@@ -159,6 +277,17 @@ public class ContractSchema extends GenericModel {
     }
 
     /**
+     * Set the type.
+     *
+     * @param type the type
+     * @return the ContractSchema builder
+     */
+    public Builder type(String type) {
+      this.type = type;
+      return this;
+    }
+
+    /**
      * Set the description.
      *
      * @param description the description
@@ -192,6 +321,108 @@ public class ContractSchema extends GenericModel {
     }
 
     /**
+     * Set the businessName.
+     *
+     * @param businessName the businessName
+     * @return the ContractSchema builder
+     */
+    public Builder businessName(String businessName) {
+      this.businessName = businessName;
+      return this;
+    }
+
+    /**
+     * Set the logicalType.
+     *
+     * @param logicalType the logicalType
+     * @return the ContractSchema builder
+     */
+    public Builder logicalType(String logicalType) {
+      this.logicalType = logicalType;
+      return this;
+    }
+
+    /**
+     * Set the physicalName.
+     *
+     * @param physicalName the physicalName
+     * @return the ContractSchema builder
+     */
+    public Builder physicalName(String physicalName) {
+      this.physicalName = physicalName;
+      return this;
+    }
+
+    /**
+     * Set the dataGranularityDescription.
+     *
+     * @param dataGranularityDescription the dataGranularityDescription
+     * @return the ContractSchema builder
+     */
+    public Builder dataGranularityDescription(String dataGranularityDescription) {
+      this.dataGranularityDescription = dataGranularityDescription;
+      return this;
+    }
+
+    /**
+     * Set the physicalSchema.
+     *
+     * @param physicalSchema the physicalSchema
+     * @return the ContractSchema builder
+     */
+    public Builder physicalSchema(String physicalSchema) {
+      this.physicalSchema = physicalSchema;
+      return this;
+    }
+
+    /**
+     * Set the server.
+     *
+     * @param server the server
+     * @return the ContractSchema builder
+     */
+    public Builder server(String server) {
+      this.server = server;
+      return this;
+    }
+
+    /**
+     * Set the authoritativeDefinitions.
+     * Existing authoritativeDefinitions will be replaced.
+     *
+     * @param authoritativeDefinitions the authoritativeDefinitions
+     * @return the ContractSchema builder
+     */
+    public Builder authoritativeDefinitions(List<ContractAuthoritativeDefinition> authoritativeDefinitions) {
+      this.authoritativeDefinitions = authoritativeDefinitions;
+      return this;
+    }
+
+    /**
+     * Set the tags.
+     * Existing tags will be replaced.
+     *
+     * @param tags the tags
+     * @return the ContractSchema builder
+     */
+    public Builder tags(List<String> tags) {
+      this.tags = tags;
+      return this;
+    }
+
+    /**
+     * Set the customProperties.
+     * Existing customProperties will be replaced.
+     *
+     * @param customProperties the customProperties
+     * @return the ContractSchema builder
+     */
+    public Builder customProperties(List<ContractTemplateCustomProperty> customProperties) {
+      this.customProperties = customProperties;
+      return this;
+    }
+
+    /**
      * Set the xProperties.
      * Existing xProperties will be replaced.
      *
@@ -214,6 +445,18 @@ public class ContractSchema extends GenericModel {
       this.quality = quality;
       return this;
     }
+
+    /**
+     * Set the relationships.
+     * Existing relationships will be replaced.
+     *
+     * @param relationships the relationships
+     * @return the ContractSchema builder
+     */
+    public Builder relationships(List<ContractSchemaRelationship> relationships) {
+      this.relationships = relationships;
+      return this;
+    }
   }
 
   protected ContractSchema() { }
@@ -223,14 +466,26 @@ public class ContractSchema extends GenericModel {
       "assetId cannot be null");
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.connectionId,
       "connectionId cannot be null");
+    id = builder.id;
     assetId = builder.assetId;
     connectionId = builder.connectionId;
     name = builder.name;
+    type = builder.type;
     description = builder.description;
     connectionPath = builder.connectionPath;
     physicalType = builder.physicalType;
+    businessName = builder.businessName;
+    logicalType = builder.logicalType;
+    physicalName = builder.physicalName;
+    dataGranularityDescription = builder.dataGranularityDescription;
+    physicalSchema = builder.physicalSchema;
+    server = builder.server;
+    authoritativeDefinitions = builder.authoritativeDefinitions;
+    tags = builder.tags;
+    customProperties = builder.customProperties;
     xProperties = builder.xProperties;
     quality = builder.quality;
+    relationships = builder.relationships;
   }
 
   /**
@@ -240,6 +495,17 @@ public class ContractSchema extends GenericModel {
    */
   public Builder newBuilder() {
     return new Builder(this);
+  }
+
+  /**
+   * Gets the id.
+   *
+   * Unique identifier for the schema object.
+   *
+   * @return the id
+   */
+  public String id() {
+    return id;
   }
 
   /**
@@ -276,6 +542,17 @@ public class ContractSchema extends GenericModel {
   }
 
   /**
+   * Gets the type.
+   *
+   * Type of schema (e.g., table, view).
+   *
+   * @return the type
+   */
+  public String type() {
+    return type;
+  }
+
+  /**
    * Gets the description.
    *
    * Description of the schema.
@@ -309,6 +586,105 @@ public class ContractSchema extends GenericModel {
   }
 
   /**
+   * Gets the businessName.
+   *
+   * The business name of the element.
+   *
+   * @return the businessName
+   */
+  public String businessName() {
+    return businessName;
+  }
+
+  /**
+   * Gets the logicalType.
+   *
+   * The logical element data type.
+   *
+   * @return the logicalType
+   */
+  public String logicalType() {
+    return logicalType;
+  }
+
+  /**
+   * Gets the physicalName.
+   *
+   * Physical name of the element.
+   *
+   * @return the physicalName
+   */
+  public String physicalName() {
+    return physicalName;
+  }
+
+  /**
+   * Gets the dataGranularityDescription.
+   *
+   * Granular level of the data in the object.
+   *
+   * @return the dataGranularityDescription
+   */
+  public String dataGranularityDescription() {
+    return dataGranularityDescription;
+  }
+
+  /**
+   * Gets the physicalSchema.
+   *
+   * Physical schema name.
+   *
+   * @return the physicalSchema
+   */
+  public String physicalSchema() {
+    return physicalSchema;
+  }
+
+  /**
+   * Gets the server.
+   *
+   * Reference to server.
+   *
+   * @return the server
+   */
+  public String server() {
+    return server;
+  }
+
+  /**
+   * Gets the authoritativeDefinitions.
+   *
+   * Links to sources that provide more details on the schema.
+   *
+   * @return the authoritativeDefinitions
+   */
+  public List<ContractAuthoritativeDefinition> authoritativeDefinitions() {
+    return authoritativeDefinitions;
+  }
+
+  /**
+   * Gets the tags.
+   *
+   * Tags for categorizing the schema element.
+   *
+   * @return the tags
+   */
+  public List<String> tags() {
+    return tags;
+  }
+
+  /**
+   * Gets the customProperties.
+   *
+   * Custom properties for the schema element.
+   *
+   * @return the customProperties
+   */
+  public List<ContractTemplateCustomProperty> customProperties() {
+    return customProperties;
+  }
+
+  /**
    * Gets the xProperties.
    *
    * List of properties.
@@ -328,6 +704,17 @@ public class ContractSchema extends GenericModel {
    */
   public List<ContractQualityRule> quality() {
     return quality;
+  }
+
+  /**
+   * Gets the relationships.
+   *
+   * Relationships between schema objects.
+   *
+   * @return the relationships
+   */
+  public List<ContractSchemaRelationship> relationships() {
+    return relationships;
   }
 }
 

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -12,6 +12,10 @@
  */
 
 package com.ibm.cloud.dph_services.dph.v1.model;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
@@ -33,16 +37,28 @@ public class ContractTest extends GenericModel {
 
   protected String status;
   @SerializedName("last_tested_time")
-  protected String lastTestedTime;
+  protected Date lastTestedTime;
+  @SerializedName("data_contract_id")
+  protected String dataContractId;
+  @SerializedName("project_id")
+  protected String projectId;
   protected String message;
+  @SerializedName("test_run_id")
+  protected String testRunId;
+  @SerializedName("test_summary")
+  protected List<ContractTestSummary> testSummary;
 
   /**
    * Builder.
    */
   public static class Builder {
     private String status;
-    private String lastTestedTime;
+    private Date lastTestedTime;
+    private String dataContractId;
+    private String projectId;
     private String message;
+    private String testRunId;
+    private List<ContractTestSummary> testSummary;
 
     /**
      * Instantiates a new Builder from an existing ContractTest instance.
@@ -52,7 +68,11 @@ public class ContractTest extends GenericModel {
     private Builder(ContractTest contractTest) {
       this.status = contractTest.status;
       this.lastTestedTime = contractTest.lastTestedTime;
+      this.dataContractId = contractTest.dataContractId;
+      this.projectId = contractTest.projectId;
       this.message = contractTest.message;
+      this.testRunId = contractTest.testRunId;
+      this.testSummary = contractTest.testSummary;
     }
 
     /**
@@ -67,7 +87,7 @@ public class ContractTest extends GenericModel {
      * @param status the status
      * @param lastTestedTime the lastTestedTime
      */
-    public Builder(String status, String lastTestedTime) {
+    public Builder(String status, Date lastTestedTime) {
       this.status = status;
       this.lastTestedTime = lastTestedTime;
     }
@@ -79,6 +99,22 @@ public class ContractTest extends GenericModel {
      */
     public ContractTest build() {
       return new ContractTest(this);
+    }
+
+    /**
+     * Adds a new element to testSummary.
+     *
+     * @param testSummary the new element to be added
+     * @return the ContractTest builder
+     */
+    public Builder addTestSummary(ContractTestSummary testSummary) {
+      com.ibm.cloud.sdk.core.util.Validator.notNull(testSummary,
+        "testSummary cannot be null");
+      if (this.testSummary == null) {
+        this.testSummary = new ArrayList<ContractTestSummary>();
+      }
+      this.testSummary.add(testSummary);
+      return this;
     }
 
     /**
@@ -98,8 +134,30 @@ public class ContractTest extends GenericModel {
      * @param lastTestedTime the lastTestedTime
      * @return the ContractTest builder
      */
-    public Builder lastTestedTime(String lastTestedTime) {
+    public Builder lastTestedTime(Date lastTestedTime) {
       this.lastTestedTime = lastTestedTime;
+      return this;
+    }
+
+    /**
+     * Set the dataContractId.
+     *
+     * @param dataContractId the dataContractId
+     * @return the ContractTest builder
+     */
+    public Builder dataContractId(String dataContractId) {
+      this.dataContractId = dataContractId;
+      return this;
+    }
+
+    /**
+     * Set the projectId.
+     *
+     * @param projectId the projectId
+     * @return the ContractTest builder
+     */
+    public Builder projectId(String projectId) {
+      this.projectId = projectId;
       return this;
     }
 
@@ -113,6 +171,29 @@ public class ContractTest extends GenericModel {
       this.message = message;
       return this;
     }
+
+    /**
+     * Set the testRunId.
+     *
+     * @param testRunId the testRunId
+     * @return the ContractTest builder
+     */
+    public Builder testRunId(String testRunId) {
+      this.testRunId = testRunId;
+      return this;
+    }
+
+    /**
+     * Set the testSummary.
+     * Existing testSummary will be replaced.
+     *
+     * @param testSummary the testSummary
+     * @return the ContractTest builder
+     */
+    public Builder testSummary(List<ContractTestSummary> testSummary) {
+      this.testSummary = testSummary;
+      return this;
+    }
   }
 
   protected ContractTest() { }
@@ -124,7 +205,11 @@ public class ContractTest extends GenericModel {
       "lastTestedTime cannot be null");
     status = builder.status;
     lastTestedTime = builder.lastTestedTime;
+    dataContractId = builder.dataContractId;
+    projectId = builder.projectId;
     message = builder.message;
+    testRunId = builder.testRunId;
+    testSummary = builder.testSummary;
   }
 
   /**
@@ -154,8 +239,30 @@ public class ContractTest extends GenericModel {
    *
    * @return the lastTestedTime
    */
-  public String lastTestedTime() {
+  public Date lastTestedTime() {
     return lastTestedTime;
+  }
+
+  /**
+   * Gets the dataContractId.
+   *
+   * The unique identifier of the data contract associated with this test.
+   *
+   * @return the dataContractId
+   */
+  public String dataContractId() {
+    return dataContractId;
+  }
+
+  /**
+   * Gets the projectId.
+   *
+   * The unique identifier of the project associated with this test.
+   *
+   * @return the projectId
+   */
+  public String projectId() {
+    return projectId;
   }
 
   /**
@@ -167,6 +274,28 @@ public class ContractTest extends GenericModel {
    */
   public String message() {
     return message;
+  }
+
+  /**
+   * Gets the testRunId.
+   *
+   * The unique identifier of the test run.
+   *
+   * @return the testRunId
+   */
+  public String testRunId() {
+    return testRunId;
+  }
+
+  /**
+   * Gets the testSummary.
+   *
+   * Array of test summary results.
+   *
+   * @return the testSummary
+   */
+  public List<ContractTestSummary> testSummary() {
+    return testSummary;
   }
 }
 

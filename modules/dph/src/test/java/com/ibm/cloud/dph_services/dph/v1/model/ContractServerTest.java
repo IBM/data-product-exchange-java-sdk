@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -41,13 +41,18 @@ public class ContractServerTest {
     assertEquals(contractAssetModel.name(), "testString");
 
     ContractTemplateCustomProperty contractTemplateCustomPropertyModel = new ContractTemplateCustomProperty.Builder()
-      .key("customPropertyKey")
+      .id("custom-prop-001")
+      .property("customPropertyKey")
       .value("customPropertyValue")
+      .description("This is a custom property for tracking purposes")
       .build();
-    assertEquals(contractTemplateCustomPropertyModel.key(), "customPropertyKey");
+    assertEquals(contractTemplateCustomPropertyModel.id(), "custom-prop-001");
+    assertEquals(contractTemplateCustomPropertyModel.property(), "customPropertyKey");
     assertEquals(contractTemplateCustomPropertyModel.value(), "customPropertyValue");
+    assertEquals(contractTemplateCustomPropertyModel.description(), "This is a custom property for tracking purposes");
 
     ContractServer contractServerModel = new ContractServer.Builder()
+      .id("testString")
       .server("testString")
       .asset(contractAssetModel)
       .connectionId("testString")
@@ -76,6 +81,7 @@ public class ContractServerTest {
       .roles(java.util.Arrays.asList("testString"))
       .customProperties(java.util.Arrays.asList(contractTemplateCustomPropertyModel))
       .build();
+    assertEquals(contractServerModel.id(), "testString");
     assertEquals(contractServerModel.server(), "testString");
     assertEquals(contractServerModel.asset(), contractAssetModel);
     assertEquals(contractServerModel.connectionId(), "testString");
@@ -108,6 +114,7 @@ public class ContractServerTest {
 
     ContractServer contractServerModelNew = TestUtilities.deserialize(json, ContractServer.class);
     assertTrue(contractServerModelNew instanceof ContractServer);
+    assertEquals(contractServerModelNew.id(), "testString");
     assertEquals(contractServerModelNew.server(), "testString");
     assertEquals(contractServerModelNew.asset().toString(), contractAssetModel.toString());
     assertEquals(contractServerModelNew.connectionId(), "testString");

@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -24,6 +24,7 @@ import com.ibm.cloud.sdk.core.service.model.GenericModel;
  */
 public class ContractServer extends GenericModel {
 
+  protected String id;
   protected String server;
   protected ContractAsset asset;
   @SerializedName("connection_id")
@@ -62,6 +63,7 @@ public class ContractServer extends GenericModel {
    * Builder.
    */
   public static class Builder {
+    private String id;
     private String server;
     private ContractAsset asset;
     private String connectionId;
@@ -96,6 +98,7 @@ public class ContractServer extends GenericModel {
      * @param contractServer the instance to initialize the Builder with
      */
     private Builder(ContractServer contractServer) {
+      this.id = contractServer.id;
       this.server = contractServer.server;
       this.asset = contractServer.asset;
       this.connectionId = contractServer.connectionId;
@@ -178,6 +181,17 @@ public class ContractServer extends GenericModel {
         this.customProperties = new ArrayList<ContractTemplateCustomProperty>();
       }
       this.customProperties.add(customProperties);
+      return this;
+    }
+
+    /**
+     * Set the id.
+     *
+     * @param id the id
+     * @return the ContractServer builder
+     */
+    public Builder id(String id) {
+      this.id = id;
       return this;
     }
 
@@ -486,6 +500,7 @@ public class ContractServer extends GenericModel {
   protected ContractServer(Builder builder) {
     com.ibm.cloud.sdk.core.util.Validator.notNull(builder.server,
       "server cannot be null");
+    id = builder.id;
     server = builder.server;
     asset = builder.asset;
     connectionId = builder.connectionId;
@@ -522,6 +537,18 @@ public class ContractServer extends GenericModel {
    */
   public Builder newBuilder() {
     return new Builder(this);
+  }
+
+  /**
+   * Gets the id.
+   *
+   * Fully qualified notation using id fields (section/id/properties/id), optionally prefixed with external file
+   * reference.
+   *
+   * @return the id
+   */
+  public String id() {
+    return id;
   }
 
   /**

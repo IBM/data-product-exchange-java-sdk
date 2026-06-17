@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -24,16 +24,20 @@ import com.ibm.cloud.dph_services.dph.v1.model.BucketValidationResponse;
 import com.ibm.cloud.dph_services.dph.v1.model.CompleteDraftContractTermsDocumentOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.ContractTerms;
 import com.ibm.cloud.dph_services.dph.v1.model.ContractTermsDocument;
+import com.ibm.cloud.dph_services.dph.v1.model.ContractValidationResponse;
 import com.ibm.cloud.dph_services.dph.v1.model.CreateContractTemplateOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.CreateDataAssetVisualizationOptions;
+import com.ibm.cloud.dph_services.dph.v1.model.CreateDataContractTestRunOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.CreateDataProductDomainOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.CreateDataProductDraftOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.CreateDataProductOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.CreateDataProductSubdomainOptions;
+import com.ibm.cloud.dph_services.dph.v1.model.CreateDeliveryMethodOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.CreateDraftContractTermsDocumentOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.CreateRevokeAccessProcessOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.CreateS3BucketOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.DataAssetVisualizationRes;
+import com.ibm.cloud.dph_services.dph.v1.model.DataContractDQTestResult;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProduct;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductCollection;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductContractTemplate;
@@ -47,15 +51,23 @@ import com.ibm.cloud.dph_services.dph.v1.model.DataProductReleaseCollection;
 import com.ibm.cloud.dph_services.dph.v1.model.DataProductVersionCollection;
 import com.ibm.cloud.dph_services.dph.v1.model.DeleteDataProductContractTemplateOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.DeleteDataProductDraftOptions;
+import com.ibm.cloud.dph_services.dph.v1.model.DeleteDeliveryMethodOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.DeleteDomainOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.DeleteDraftContractTermsDocumentOptions;
+import com.ibm.cloud.dph_services.dph.v1.model.DeliveryMethodConfig;
+import com.ibm.cloud.dph_services.dph.v1.model.DeliveryMethodRes;
+import com.ibm.cloud.dph_services.dph.v1.model.DeliveryMethodResCollection;
 import com.ibm.cloud.dph_services.dph.v1.model.GetContractTemplateOptions;
+import com.ibm.cloud.dph_services.dph.v1.model.GetContractTemplatesByDomainOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.GetContractTermsInSpecifiedFormatOptions;
+import com.ibm.cloud.dph_services.dph.v1.model.GetDataContractTestResultsOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.GetDataProductByDomainOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.GetDataProductDraftContractTermsOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.GetDataProductDraftOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.GetDataProductOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.GetDataProductReleaseOptions;
+import com.ibm.cloud.dph_services.dph.v1.model.GetDeliveryConfigurationOptions;
+import com.ibm.cloud.dph_services.dph.v1.model.GetDeliveryMethodOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.GetDomainOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.GetDraftContractTermsDocumentOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.GetInitializeStatusOptions;
@@ -72,6 +84,8 @@ import com.ibm.cloud.dph_services.dph.v1.model.ListDataProductDomainsOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.ListDataProductDraftsOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.ListDataProductReleasesOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.ListDataProductsOptions;
+import com.ibm.cloud.dph_services.dph.v1.model.ListDeliveryMethodsOptions;
+import com.ibm.cloud.dph_services.dph.v1.model.ListRetiredDataProductReleasesLatestOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.ManageApiKeysOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.PublishDataProductDraftOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.ReinitiateDataAssetVisualizationOptions;
@@ -85,7 +99,10 @@ import com.ibm.cloud.dph_services.dph.v1.model.UpdateDataProductDomainOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.UpdateDataProductDraftContractTermsOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.UpdateDataProductDraftOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.UpdateDataProductReleaseOptions;
+import com.ibm.cloud.dph_services.dph.v1.model.UpdateDeliveryConfigurationOptions;
+import com.ibm.cloud.dph_services.dph.v1.model.UpdateDeliveryMethodOptions;
 import com.ibm.cloud.dph_services.dph.v1.model.UpdateDraftContractTermsDocumentOptions;
+import com.ibm.cloud.dph_services.dph.v1.model.ValidateContractTemplateYamlOptions;
 import com.ibm.cloud.sdk.core.http.RequestBuilder;
 import com.ibm.cloud.sdk.core.http.ResponseConverter;
 import com.ibm.cloud.sdk.core.http.ServiceCall;
@@ -234,15 +251,16 @@ public class Dph extends BaseService {
    * illustrate capabilities of the data product hub&lt;/li&gt;&lt;li&gt;`workflows` - Workflows to enable restricted
    * data products&lt;/li&gt;&lt;li&gt;`project` - A default project for exporting data assets to
    * files&lt;/li&gt;&lt;li&gt;`catalog_configurations` - Catalog configurations for the default data product
-   * catalog&lt;/li&gt;&lt;/ul&gt;&lt;br/&gt;&lt;br/&gt;If a resource depends on resources that are not specified in the
-   * request, these dependent resources will be automatically initialized. E.g., initializing `data_product_samples`
-   * will also initialize `domains_multi_industry` and `delivery_methods` even if they are not specified in the request
-   * because it depends on them.&lt;br/&gt;&lt;br/&gt;If initializing the data product hub for the first time, do not
-   * specify a container. The default data product catalog will be created.&lt;br/&gt;For first time initialization, it
-   * is recommended that at least `delivery_methods` and `domains_multi_industry` is included in the initialize
-   * operation.&lt;br/&gt;&lt;br/&gt;If the data product hub has already been initialized, you may call this API again
-   * to initialize new resources, such as new delivery methods. In this case, specify the default data product catalog
-   * container information.
+   * catalog&lt;/li&gt;&lt;li&gt;`gen_ai_onboarding` - Enable GenAI capabilities for the data product catalog and
+   * onboard the associated project&lt;/li&gt;&lt;/ul&gt;&lt;br/&gt;&lt;br/&gt;If a resource depends on resources that
+   * are not specified in the request, these dependent resources will be automatically initialized. E.g., initializing
+   * `data_product_samples` will also initialize `domains_multi_industry` and `delivery_methods` even if they are not
+   * specified in the request because it depends on them.&lt;br/&gt;&lt;br/&gt;If initializing the data product hub for
+   * the first time, do not specify a container. The default data product catalog will be created.&lt;br/&gt;For first
+   * time initialization, it is recommended that at least `delivery_methods` and `domains_multi_industry` is included in
+   * the initialize operation.&lt;br/&gt;&lt;br/&gt;If the data product hub has already been initialized, you may call
+   * this API again to initialize new resources, such as new delivery methods. In this case, specify the default data
+   * product catalog container information.
    *
    * @param initializeOptions the {@link InitializeOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link InitializeResource}
@@ -279,20 +297,83 @@ public class Dph extends BaseService {
    * illustrate capabilities of the data product hub&lt;/li&gt;&lt;li&gt;`workflows` - Workflows to enable restricted
    * data products&lt;/li&gt;&lt;li&gt;`project` - A default project for exporting data assets to
    * files&lt;/li&gt;&lt;li&gt;`catalog_configurations` - Catalog configurations for the default data product
-   * catalog&lt;/li&gt;&lt;/ul&gt;&lt;br/&gt;&lt;br/&gt;If a resource depends on resources that are not specified in the
-   * request, these dependent resources will be automatically initialized. E.g., initializing `data_product_samples`
-   * will also initialize `domains_multi_industry` and `delivery_methods` even if they are not specified in the request
-   * because it depends on them.&lt;br/&gt;&lt;br/&gt;If initializing the data product hub for the first time, do not
-   * specify a container. The default data product catalog will be created.&lt;br/&gt;For first time initialization, it
-   * is recommended that at least `delivery_methods` and `domains_multi_industry` is included in the initialize
-   * operation.&lt;br/&gt;&lt;br/&gt;If the data product hub has already been initialized, you may call this API again
-   * to initialize new resources, such as new delivery methods. In this case, specify the default data product catalog
-   * container information.
+   * catalog&lt;/li&gt;&lt;li&gt;`gen_ai_onboarding` - Enable GenAI capabilities for the data product catalog and
+   * onboard the associated project&lt;/li&gt;&lt;/ul&gt;&lt;br/&gt;&lt;br/&gt;If a resource depends on resources that
+   * are not specified in the request, these dependent resources will be automatically initialized. E.g., initializing
+   * `data_product_samples` will also initialize `domains_multi_industry` and `delivery_methods` even if they are not
+   * specified in the request because it depends on them.&lt;br/&gt;&lt;br/&gt;If initializing the data product hub for
+   * the first time, do not specify a container. The default data product catalog will be created.&lt;br/&gt;For first
+   * time initialization, it is recommended that at least `delivery_methods` and `domains_multi_industry` is included in
+   * the initialize operation.&lt;br/&gt;&lt;br/&gt;If the data product hub has already been initialized, you may call
+   * this API again to initialize new resources, such as new delivery methods. In this case, specify the default data
+   * product catalog container information.
    *
    * @return a {@link ServiceCall} with a result of type {@link InitializeResource}
    */
   public ServiceCall<InitializeResource> initialize() {
     return initialize(null);
+  }
+
+  /**
+   * list delivery configuration.
+   *
+   * Use this API to list delivery method information in the global configuration.
+   *
+   * @param getDeliveryConfigurationOptions the {@link GetDeliveryConfigurationOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link DeliveryMethodConfig}
+   */
+  public ServiceCall<DeliveryMethodConfig> getDeliveryConfiguration(GetDeliveryConfigurationOptions getDeliveryConfigurationOptions) {
+    if (getDeliveryConfigurationOptions == null) {
+      getDeliveryConfigurationOptions = new GetDeliveryConfigurationOptions.Builder().build();
+    }
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/configuration/delivery"));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "getDeliveryConfiguration");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    if (getDeliveryConfigurationOptions.containerId() != null) {
+      builder.query("container.id", String.valueOf(getDeliveryConfigurationOptions.containerId()));
+    }
+    ResponseConverter<DeliveryMethodConfig> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<DeliveryMethodConfig>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * list delivery configuration.
+   *
+   * Use this API to list delivery method information in the global configuration.
+   *
+   * @return a {@link ServiceCall} with a result of type {@link DeliveryMethodConfig}
+   */
+  public ServiceCall<DeliveryMethodConfig> getDeliveryConfiguration() {
+    return getDeliveryConfiguration(null);
+  }
+
+  /**
+   * Update delivery configuration.
+   *
+   * Use this API to update delivery method information in the global configuration. This allows patching delivery
+   * configuration such as delivery_methods status.
+   *
+   * @param updateDeliveryConfigurationOptions the {@link UpdateDeliveryConfigurationOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link DeliveryMethodConfig}
+   */
+  public ServiceCall<DeliveryMethodConfig> updateDeliveryConfiguration(UpdateDeliveryConfigurationOptions updateDeliveryConfigurationOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(updateDeliveryConfigurationOptions,
+      "updateDeliveryConfigurationOptions cannot be null");
+    RequestBuilder builder = RequestBuilder.patch(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/configuration/delivery"));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "updateDeliveryConfiguration");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    builder.query("container.id", String.valueOf(updateDeliveryConfigurationOptions.containerId()));
+    builder.bodyContent(com.ibm.cloud.sdk.core.util.GsonSingleton.getGsonWithoutPrettyPrinting().toJson(updateDeliveryConfigurationOptions.jsonPatchOperation()), "application/json-patch+json");
+    ResponseConverter<DeliveryMethodConfig> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<DeliveryMethodConfig>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
   }
 
   /**
@@ -647,6 +728,9 @@ public class Dph extends BaseService {
     if (createDataProductDraftOptions.lastUpdatedAt() != null) {
       contentJson.add("last_updated_at", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductDraftOptions.lastUpdatedAt()));
     }
+    if (createDataProductDraftOptions.createdDate() != null) {
+      contentJson.add("created_date", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductDraftOptions.createdDate()));
+    }
     if (createDataProductDraftOptions.subContainer() != null) {
       contentJson.add("sub_container", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataProductDraftOptions.subContainer()));
     }
@@ -697,6 +781,46 @@ public class Dph extends BaseService {
     builder.bodyJson(contentJson);
     ResponseConverter<ContractTermsDocument> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ContractTermsDocument>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Test data contract with DQ.
+   *
+   * Tests data contract by cloning assets from catalog to project and validating with DQ rules.Use '-' for the
+   * `data_product_id` to skip specifying the data product ID explicitly.
+   *
+   * @param createDataContractTestRunOptions the {@link CreateDataContractTestRunOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link DataContractDQTestResult}
+   */
+  public ServiceCall<DataContractDQTestResult> createDataContractTestRun(CreateDataContractTestRunOptions createDataContractTestRunOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(createDataContractTestRunOptions,
+      "createDataContractTestRunOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("data_product_id", createDataContractTestRunOptions.dataProductId());
+    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/data_products/{data_product_id}/drafts/data_quality/test_data_contract", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "createDataContractTestRun");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    final JsonObject contentJson = new JsonObject();
+    contentJson.addProperty("project_id", createDataContractTestRunOptions.projectId());
+    contentJson.addProperty("catalog_id", createDataContractTestRunOptions.catalogId());
+    contentJson.addProperty("contract_name", createDataContractTestRunOptions.contractName());
+    contentJson.addProperty("contract_yaml", createDataContractTestRunOptions.contractYaml());
+    if (createDataContractTestRunOptions.assetIds() != null) {
+      contentJson.add("asset_ids", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataContractTestRunOptions.assetIds()));
+    }
+    if (createDataContractTestRunOptions.serverMapping() != null) {
+      contentJson.add("server_mapping", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDataContractTestRunOptions.serverMapping()));
+    }
+    if (createDataContractTestRunOptions.dataContractId() != null) {
+      contentJson.addProperty("data_contract_id", createDataContractTestRunOptions.dataContractId());
+    }
+    builder.bodyJson(contentJson);
+    ResponseConverter<DataContractDQTestResult> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<DataContractDQTestResult>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
 
@@ -905,8 +1029,8 @@ public class Dph extends BaseService {
     if (getDataProductDraftContractTermsOptions.autopopulateServerInformation() != null) {
       builder.query("autopopulate_server_information", String.valueOf(getDataProductDraftContractTermsOptions.autopopulateServerInformation()));
     }
-    if (getDataProductDraftContractTermsOptions.serverAssetId() != null) {
-      builder.query("server_asset_id", String.valueOf(getDataProductDraftContractTermsOptions.serverAssetId()));
+    if (getDataProductDraftContractTermsOptions.serverId() != null) {
+      builder.query("server_id", String.valueOf(getDataProductDraftContractTermsOptions.serverId()));
     }
     ResponseConverter<ContractTerms> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ContractTerms>() { }.getType());
@@ -914,9 +1038,10 @@ public class Dph extends BaseService {
   }
 
   /**
-   * Update a data product contract terms identified by id.
+   * Update contract terms by id.
    *
-   * Update a data product contract terms identified by id.
+   * Update a data product contract terms identified by id - primarily used for clearing contents of contract terms.
+   * This endpoint does not support addition of servers and schema information except empty arrays.
    *
    * @param replaceDataProductDraftContractTermsOptions the {@link ReplaceDataProductDraftContractTermsOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link ContractTerms}
@@ -953,8 +1078,8 @@ public class Dph extends BaseService {
     if (replaceDataProductDraftContractTermsOptions.description() != null) {
       contentJson.add("description", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceDataProductDraftContractTermsOptions.description()));
     }
-    if (replaceDataProductDraftContractTermsOptions.organization() != null) {
-      contentJson.add("organization", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceDataProductDraftContractTermsOptions.organization()));
+    if (replaceDataProductDraftContractTermsOptions.team() != null) {
+      contentJson.add("team", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceDataProductDraftContractTermsOptions.team()));
     }
     if (replaceDataProductDraftContractTermsOptions.roles() != null) {
       contentJson.add("roles", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceDataProductDraftContractTermsOptions.roles()));
@@ -965,8 +1090,8 @@ public class Dph extends BaseService {
     if (replaceDataProductDraftContractTermsOptions.sla() != null) {
       contentJson.add("sla", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceDataProductDraftContractTermsOptions.sla()));
     }
-    if (replaceDataProductDraftContractTermsOptions.supportAndCommunication() != null) {
-      contentJson.add("support_and_communication", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceDataProductDraftContractTermsOptions.supportAndCommunication()));
+    if (replaceDataProductDraftContractTermsOptions.support() != null) {
+      contentJson.add("support", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceDataProductDraftContractTermsOptions.support()));
     }
     if (replaceDataProductDraftContractTermsOptions.customProperties() != null) {
       contentJson.add("custom_properties", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(replaceDataProductDraftContractTermsOptions.customProperties()));
@@ -1045,6 +1170,34 @@ public class Dph extends BaseService {
     builder.query("format", String.valueOf(getContractTermsInSpecifiedFormatOptions.format()));
     builder.query("format_version", String.valueOf(getContractTermsInSpecifiedFormatOptions.formatVersion()));
     ResponseConverter<InputStream> responseConverter = ResponseConverterUtils.getInputStream();
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Get data contract test results.
+   *
+   * Retrieves the test results from DQ service for a data contract test run. Use '-' for the `data_product_id` to skip
+   * specifying the data product ID explicitly.
+   *
+   * @param getDataContractTestResultsOptions the {@link GetDataContractTestResultsOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link DataContractDQTestResult}
+   */
+  public ServiceCall<DataContractDQTestResult> getDataContractTestResults(GetDataContractTestResultsOptions getDataContractTestResultsOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(getDataContractTestResultsOptions,
+      "getDataContractTestResultsOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("data_product_id", getDataContractTestResultsOptions.dataProductId());
+    pathParamsMap.put("data_contract_id", getDataContractTestResultsOptions.dataContractId());
+    pathParamsMap.put("test_run_id", getDataContractTestResultsOptions.testRunId());
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/data_products/{data_product_id}/drafts/data_quality/test_data_contract/{data_contract_id}/test_results/{test_run_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "getDataContractTestResults");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    builder.query("project_id", String.valueOf(getDataContractTestResultsOptions.projectId()));
+    ResponseConverter<DataContractDQTestResult> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<DataContractDQTestResult>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
 
@@ -1235,6 +1388,44 @@ public class Dph extends BaseService {
   }
 
   /**
+   * Retrieve a list of retired data product releases (latest version only).
+   *
+   * Retrieve a list of retired data product releases, showing only the latest version per product ID. This endpoint
+   * filters retired versions to show one entry per product. Use '-' for the `data_product_id` to skip specifying the
+   * data product ID explicitly.
+   *
+   * @param listRetiredDataProductReleasesLatestOptions the {@link ListRetiredDataProductReleasesLatestOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link DataProductReleaseCollection}
+   */
+  public ServiceCall<DataProductReleaseCollection> listRetiredDataProductReleasesLatest(ListRetiredDataProductReleasesLatestOptions listRetiredDataProductReleasesLatestOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(listRetiredDataProductReleasesLatestOptions,
+      "listRetiredDataProductReleasesLatestOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("data_product_id", listRetiredDataProductReleasesLatestOptions.dataProductId());
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/data_products/{data_product_id}/releases/state/retired", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "listRetiredDataProductReleasesLatest");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    if (listRetiredDataProductReleasesLatestOptions.assetContainerId() != null) {
+      builder.query("asset.container.id", String.valueOf(listRetiredDataProductReleasesLatestOptions.assetContainerId()));
+    }
+    if (listRetiredDataProductReleasesLatestOptions.limit() != null) {
+      builder.query("limit", String.valueOf(listRetiredDataProductReleasesLatestOptions.limit()));
+    }
+    if (listRetiredDataProductReleasesLatestOptions.start() != null) {
+      builder.query("start", String.valueOf(listRetiredDataProductReleasesLatestOptions.start()));
+    }
+    if (listRetiredDataProductReleasesLatestOptions.page() != null) {
+      builder.query("page", String.valueOf(listRetiredDataProductReleasesLatestOptions.page()));
+    }
+    ResponseConverter<DataProductReleaseCollection> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<DataProductReleaseCollection>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
    * Retire a release of an existing data product.
    *
    * Retire a release of an existing data product. Use '-' for the `data_product_id` to skip specifying the data product
@@ -1258,9 +1449,6 @@ public class Dph extends BaseService {
     if (retireDataProductReleaseOptions.revokeAccess() != null) {
       builder.query("revoke_access", String.valueOf(retireDataProductReleaseOptions.revokeAccess()));
     }
-    if (retireDataProductReleaseOptions.startAt() != null) {
-      builder.query("start_at", String.valueOf(retireDataProductReleaseOptions.startAt()));
-    }
     ResponseConverter<DataProductRelease> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<DataProductRelease>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
@@ -1269,9 +1457,7 @@ public class Dph extends BaseService {
   /**
    * Revoke access from Data Product subscriptions.
    *
-   * Revoke's access from Subscriptions of the data product id passed in the path parameter. Optionally specify a future
-   * date-time when the revoke access operation should start using the start_at field in ISO 8601 format (e.g.,
-   * 2025-09-24T06:55:29Z). If start_at is not provided, the revoke access operation starts immediately.
+   * Revoke's access from Subscriptions of the data product id passed in the path parameter.
    *
    * @param createRevokeAccessProcessOptions the {@link CreateRevokeAccessProcessOptions} containing the options for the call
    * @return a {@link ServiceCall} with a result of type {@link RevokeAccessResponse}
@@ -1322,6 +1508,9 @@ public class Dph extends BaseService {
     if (listDataProductContractTemplateOptions.contractTemplateName() != null) {
       builder.query("contract_template.name", String.valueOf(listDataProductContractTemplateOptions.contractTemplateName()));
     }
+    if (listDataProductContractTemplateOptions.contractTemplateStatus() != null) {
+      builder.query("contract_template.status", String.valueOf(listDataProductContractTemplateOptions.contractTemplateStatus()));
+    }
     if (listDataProductContractTemplateOptions.domainIds() != null) {
       builder.query("domain.ids", String.valueOf(listDataProductContractTemplateOptions.domainIds()));
     }
@@ -1364,6 +1553,9 @@ public class Dph extends BaseService {
     if (createContractTemplateOptions.contractTemplateName() != null) {
       builder.query("contract_template.name", String.valueOf(createContractTemplateOptions.contractTemplateName()));
     }
+    if (createContractTemplateOptions.contractTemplateStatus() != null) {
+      builder.query("contract_template.status", String.valueOf(createContractTemplateOptions.contractTemplateStatus()));
+    }
     if (createContractTemplateOptions.domainIds() != null) {
       builder.query("domain.ids", String.valueOf(createContractTemplateOptions.domainIds()));
     }
@@ -1376,7 +1568,7 @@ public class Dph extends BaseService {
       contentJson.addProperty("creator_id", createContractTemplateOptions.creatorId());
     }
     if (createContractTemplateOptions.createdAt() != null) {
-      contentJson.addProperty("created_at", createContractTemplateOptions.createdAt());
+      contentJson.add("created_at", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createContractTemplateOptions.createdAt()));
     }
     if (createContractTemplateOptions.name() != null) {
       contentJson.addProperty("name", createContractTemplateOptions.name());
@@ -1468,6 +1660,32 @@ public class Dph extends BaseService {
     builder.bodyContent(com.ibm.cloud.sdk.core.util.GsonSingleton.getGsonWithoutPrettyPrinting().toJson(updateDataProductContractTemplateOptions.jsonPatchInstructions()), "application/json-patch+json");
     ResponseConverter<DataProductContractTemplate> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<DataProductContractTemplate>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Validate YAML against ODCS v3.1.0 standard.
+   *
+   * Validates a YAML file against the Open Data Contract Standard (ODCS) v3.1.0 JSON schema. This endpoint checks for
+   * mandatory fields, data types, and mappings as required by the ODCS v3.1.0 standard. The endpoint always returns
+   * HTTP 200 with validation results in the response body. Check the 'valid' field in the response to determine if
+   * validation passed or failed.
+   *
+   * @param validateContractTemplateYamlOptions the {@link ValidateContractTemplateYamlOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link ContractValidationResponse}
+   */
+  public ServiceCall<ContractValidationResponse> validateContractTemplateYaml(ValidateContractTemplateYamlOptions validateContractTemplateYamlOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(validateContractTemplateYamlOptions,
+      "validateContractTemplateYamlOptions cannot be null");
+    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/contract_templates/actions/validate"));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "validateContractTemplateYaml");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    builder.bodyContent(validateContractTemplateYamlOptions.body(), "text/plain");
+    ResponseConverter<ContractValidationResponse> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<ContractValidationResponse>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
 
@@ -1682,6 +1900,31 @@ public class Dph extends BaseService {
   }
 
   /**
+   * Retrieve all contract templates in a domain by id.
+   *
+   * Retrieve all the contract templates tagged to the domain identified by id or any of it's subdomains.
+   *
+   * @param getContractTemplatesByDomainOptions the {@link GetContractTemplatesByDomainOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link DataProductVersionCollection}
+   */
+  public ServiceCall<DataProductVersionCollection> getContractTemplatesByDomain(GetContractTemplatesByDomainOptions getContractTemplatesByDomainOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(getContractTemplatesByDomainOptions,
+      "getContractTemplatesByDomainOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("domain_id", getContractTemplatesByDomainOptions.domainId());
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/domains/{domain_id}/contract_templates", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "getContractTemplatesByDomain");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    builder.query("container.id", String.valueOf(getContractTemplatesByDomainOptions.containerId()));
+    ResponseConverter<DataProductVersionCollection> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<DataProductVersionCollection>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
    * Retrieve all data products in a domain specified by id or any of it's subdomains.
    *
    * Retrieve all the data products tagged to the domain identified by id or any of it's subdomains.
@@ -1779,6 +2022,185 @@ public class Dph extends BaseService {
     }
     ResponseConverter<RevokeAccessStateResponse> responseConverter =
       ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<RevokeAccessStateResponse>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * List delivery methods.
+   *
+   * Returns all available delivery methods with enablement status.
+   *
+   * @param listDeliveryMethodsOptions the {@link ListDeliveryMethodsOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link DeliveryMethodResCollection}
+   */
+  public ServiceCall<DeliveryMethodResCollection> listDeliveryMethods(ListDeliveryMethodsOptions listDeliveryMethodsOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(listDeliveryMethodsOptions,
+      "listDeliveryMethodsOptions cannot be null");
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/delivery_method"));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "listDeliveryMethods");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    builder.query("catalog_id", String.valueOf(listDeliveryMethodsOptions.catalogId()));
+    ResponseConverter<DeliveryMethodResCollection> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<DeliveryMethodResCollection>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Create a new delivery method.
+   *
+   * Creates a new delivery method with provided configurations.
+   *
+   * @param createDeliveryMethodOptions the {@link CreateDeliveryMethodOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link DeliveryMethodRes}
+   */
+  public ServiceCall<DeliveryMethodRes> createDeliveryMethod(CreateDeliveryMethodOptions createDeliveryMethodOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(createDeliveryMethodOptions,
+      "createDeliveryMethodOptions cannot be null");
+    RequestBuilder builder = RequestBuilder.post(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/delivery_method"));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "createDeliveryMethod");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    builder.query("catalog_id", String.valueOf(createDeliveryMethodOptions.catalogId()));
+    final JsonObject contentJson = new JsonObject();
+    contentJson.addProperty("name", createDeliveryMethodOptions.name());
+    contentJson.addProperty("resource_key", createDeliveryMethodOptions.resourceKey());
+    contentJson.addProperty("description", createDeliveryMethodOptions.description());
+    contentJson.addProperty("status", createDeliveryMethodOptions.status());
+    contentJson.add("container", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDeliveryMethodOptions.container()));
+    if (createDeliveryMethodOptions.supportedAssetTypes() != null) {
+      contentJson.add("supported_asset_types", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDeliveryMethodOptions.supportedAssetTypes()));
+    }
+    if (createDeliveryMethodOptions.supportedAuthMethods() != null) {
+      contentJson.add("supported_auth_methods", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDeliveryMethodOptions.supportedAuthMethods()));
+    }
+    if (createDeliveryMethodOptions.supportedAuthMethodsCpd() != null) {
+      contentJson.add("supported_auth_methods_cpd", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDeliveryMethodOptions.supportedAuthMethodsCpd()));
+    }
+    if (createDeliveryMethodOptions.supportedDataSources() != null) {
+      contentJson.add("supported_data_sources", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDeliveryMethodOptions.supportedDataSources()));
+    }
+    if (createDeliveryMethodOptions.supportsRedelivery() != null) {
+      contentJson.addProperty("supports_redelivery", createDeliveryMethodOptions.supportsRedelivery());
+    }
+    if (createDeliveryMethodOptions.isRestricted() != null) {
+      contentJson.addProperty("is_restricted", createDeliveryMethodOptions.isRestricted());
+    }
+    if (createDeliveryMethodOptions.supportsRetryOnFailure() != null) {
+      contentJson.addProperty("supports_retry_on_failure", createDeliveryMethodOptions.supportsRetryOnFailure());
+    }
+    if (createDeliveryMethodOptions.supportsRevokeAccess() != null) {
+      contentJson.addProperty("supports_revoke_access", createDeliveryMethodOptions.supportsRevokeAccess());
+    }
+    if (createDeliveryMethodOptions.supportsColumnSelection() != null) {
+      contentJson.addProperty("supports_column_selection", createDeliveryMethodOptions.supportsColumnSelection());
+    }
+    if (createDeliveryMethodOptions.supportsAddToProject() != null) {
+      contentJson.addProperty("supports_add_to_project", createDeliveryMethodOptions.supportsAddToProject());
+    }
+    if (createDeliveryMethodOptions.producerInput() != null) {
+      contentJson.add("producer_input", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDeliveryMethodOptions.producerInput()));
+    }
+    if (createDeliveryMethodOptions.consumerInput() != null) {
+      contentJson.add("consumer_input", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDeliveryMethodOptions.consumerInput()));
+    }
+    if (createDeliveryMethodOptions.outputFormat() != null) {
+      contentJson.add("output_format", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDeliveryMethodOptions.outputFormat()));
+    }
+    if (createDeliveryMethodOptions.autoMarkDelivered() != null) {
+      contentJson.addProperty("auto_mark_delivered", createDeliveryMethodOptions.autoMarkDelivered());
+    }
+    if (createDeliveryMethodOptions.deliveryUsesFunctionalCredentials() != null) {
+      contentJson.addProperty("delivery_uses_functional_credentials", createDeliveryMethodOptions.deliveryUsesFunctionalCredentials());
+    }
+    if (createDeliveryMethodOptions.dataSourceProperties() != null) {
+      contentJson.add("data_source_properties", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDeliveryMethodOptions.dataSourceProperties()));
+    }
+    if (createDeliveryMethodOptions.deliveryOutput() != null) {
+      contentJson.add("delivery_output", com.ibm.cloud.sdk.core.util.GsonSingleton.getGson().toJsonTree(createDeliveryMethodOptions.deliveryOutput()));
+    }
+    builder.bodyJson(contentJson);
+    ResponseConverter<DeliveryMethodRes> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<DeliveryMethodRes>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Retrieve delivery method.
+   *
+   * Retrieve a specific delivery method by its ID.
+   *
+   * @param getDeliveryMethodOptions the {@link GetDeliveryMethodOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link DeliveryMethodRes}
+   */
+  public ServiceCall<DeliveryMethodRes> getDeliveryMethod(GetDeliveryMethodOptions getDeliveryMethodOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(getDeliveryMethodOptions,
+      "getDeliveryMethodOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("delivery_method_id", getDeliveryMethodOptions.deliveryMethodId());
+    RequestBuilder builder = RequestBuilder.get(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/delivery_method/{delivery_method_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "getDeliveryMethod");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    builder.query("catalog_id", String.valueOf(getDeliveryMethodOptions.catalogId()));
+    ResponseConverter<DeliveryMethodRes> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<DeliveryMethodRes>() { }.getType());
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Delete delivery method.
+   *
+   * Delete external delivery method by its ID.
+   *
+   * @param deleteDeliveryMethodOptions the {@link DeleteDeliveryMethodOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a void result
+   */
+  public ServiceCall<Void> deleteDeliveryMethod(DeleteDeliveryMethodOptions deleteDeliveryMethodOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(deleteDeliveryMethodOptions,
+      "deleteDeliveryMethodOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("delivery_method_id", deleteDeliveryMethodOptions.deliveryMethodId());
+    RequestBuilder builder = RequestBuilder.delete(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/delivery_method/{delivery_method_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "deleteDeliveryMethod");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.query("catalog_id", String.valueOf(deleteDeliveryMethodOptions.catalogId()));
+    ResponseConverter<Void> responseConverter = ResponseConverterUtils.getVoid();
+    return createServiceCall(builder.build(), responseConverter);
+  }
+
+  /**
+   * Update a delivery method.
+   *
+   * Update the delivery method identified by ID. Allows partial updates to delivery method configuration including
+   * status (enable/disable), configuration settings, and localization.
+   *
+   * @param updateDeliveryMethodOptions the {@link UpdateDeliveryMethodOptions} containing the options for the call
+   * @return a {@link ServiceCall} with a result of type {@link DeliveryMethodRes}
+   */
+  public ServiceCall<DeliveryMethodRes> updateDeliveryMethod(UpdateDeliveryMethodOptions updateDeliveryMethodOptions) {
+    com.ibm.cloud.sdk.core.util.Validator.notNull(updateDeliveryMethodOptions,
+      "updateDeliveryMethodOptions cannot be null");
+    Map<String, String> pathParamsMap = new HashMap<String, String>();
+    pathParamsMap.put("delivery_method_id", updateDeliveryMethodOptions.deliveryMethodId());
+    RequestBuilder builder = RequestBuilder.patch(RequestBuilder.resolveRequestUrl(getServiceUrl(), "/data_product_exchange/v1/delivery_method/{delivery_method_id}", pathParamsMap));
+    Map<String, String> sdkHeaders = SdkCommon.getSdkHeaders("dph", "v1", "updateDeliveryMethod");
+    for (Entry<String, String> header : sdkHeaders.entrySet()) {
+      builder.header(header.getKey(), header.getValue());
+    }
+    builder.header("Accept", "application/json");
+    builder.query("catalog_id", String.valueOf(updateDeliveryMethodOptions.catalogId()));
+    builder.bodyContent(com.ibm.cloud.sdk.core.util.GsonSingleton.getGsonWithoutPrettyPrinting().toJson(updateDeliveryMethodOptions.jsonPatchOperation()), "application/json-patch+json");
+    ResponseConverter<DeliveryMethodRes> responseConverter =
+      ResponseConverterUtils.getValue(new com.google.gson.reflect.TypeToken<DeliveryMethodRes>() { }.getType());
     return createServiceCall(builder.build(), responseConverter);
   }
 

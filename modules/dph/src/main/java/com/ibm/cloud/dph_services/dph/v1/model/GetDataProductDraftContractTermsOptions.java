@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -26,7 +26,7 @@ public class GetDataProductDraftContractTermsOptions extends GenericModel {
   protected String accept;
   protected Boolean includeContractDocuments;
   protected Boolean autopopulateServerInformation;
-  protected String serverAssetId;
+  protected String serverId;
 
   /**
    * Builder.
@@ -38,7 +38,7 @@ public class GetDataProductDraftContractTermsOptions extends GenericModel {
     private String accept;
     private Boolean includeContractDocuments;
     private Boolean autopopulateServerInformation;
-    private String serverAssetId;
+    private String serverId;
 
     /**
      * Instantiates a new Builder from an existing GetDataProductDraftContractTermsOptions instance.
@@ -52,7 +52,7 @@ public class GetDataProductDraftContractTermsOptions extends GenericModel {
       this.accept = getDataProductDraftContractTermsOptions.accept;
       this.includeContractDocuments = getDataProductDraftContractTermsOptions.includeContractDocuments;
       this.autopopulateServerInformation = getDataProductDraftContractTermsOptions.autopopulateServerInformation;
-      this.serverAssetId = getDataProductDraftContractTermsOptions.serverAssetId;
+      this.serverId = getDataProductDraftContractTermsOptions.serverId;
     }
 
     /**
@@ -150,13 +150,13 @@ public class GetDataProductDraftContractTermsOptions extends GenericModel {
     }
 
     /**
-     * Set the serverAssetId.
+     * Set the serverId.
      *
-     * @param serverAssetId the serverAssetId
+     * @param serverId the serverId
      * @return the GetDataProductDraftContractTermsOptions builder
      */
-    public Builder serverAssetId(String serverAssetId) {
-      this.serverAssetId = serverAssetId;
+    public Builder serverId(String serverId) {
+      this.serverId = serverId;
       return this;
     }
   }
@@ -176,7 +176,7 @@ public class GetDataProductDraftContractTermsOptions extends GenericModel {
     accept = builder.accept;
     includeContractDocuments = builder.includeContractDocuments;
     autopopulateServerInformation = builder.autopopulateServerInformation;
-    serverAssetId = builder.serverAssetId;
+    serverId = builder.serverId;
   }
 
   /**
@@ -256,14 +256,14 @@ public class GetDataProductDraftContractTermsOptions extends GenericModel {
   }
 
   /**
-   * Gets the serverAssetId.
+   * Gets the serverId.
    *
    * Asset ID of the server used for autopopulating connection details.
    *
-   * @return the serverAssetId
+   * @return the serverId
    */
-  public String serverAssetId() {
-    return serverAssetId;
+  public String serverId() {
+    return serverId;
   }
 }
 

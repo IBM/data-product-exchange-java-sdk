@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -32,10 +32,12 @@ public class PricingTest {
   @Test
   public void testPricing() throws Throwable {
     Pricing pricingModel = new Pricing.Builder()
+      .id("price-001")
       .amount("100.0")
       .currency("USD")
       .unit("megabyte")
       .build();
+    assertEquals(pricingModel.id(), "price-001");
     assertEquals(pricingModel.amount(), "100.0");
     assertEquals(pricingModel.currency(), "USD");
     assertEquals(pricingModel.unit(), "megabyte");
@@ -44,6 +46,7 @@ public class PricingTest {
 
     Pricing pricingModelNew = TestUtilities.deserialize(json, Pricing.class);
     assertTrue(pricingModelNew instanceof Pricing);
+    assertEquals(pricingModelNew.id(), "price-001");
     assertEquals(pricingModelNew.amount(), "100.0");
     assertEquals(pricingModelNew.currency(), "USD");
     assertEquals(pricingModelNew.unit(), "megabyte");

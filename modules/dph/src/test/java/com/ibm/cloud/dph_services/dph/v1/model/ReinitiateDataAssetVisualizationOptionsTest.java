@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -51,11 +51,11 @@ public class ReinitiateDataAssetVisualizationOptionsTest {
     assertEquals(containerReferenceModel.type(), "catalog");
 
     AssetReference assetReferenceModel = new AssetReference.Builder()
-      .id("2b0bf220-079c-11ee-be56-0242ac120002")
+      .id("2b0bf220-079c-41ee-be56-0242ac120002")
       .name("testString")
       .container(containerReferenceModel)
       .build();
-    assertEquals(assetReferenceModel.id(), "2b0bf220-079c-11ee-be56-0242ac120002");
+    assertEquals(assetReferenceModel.id(), "2b0bf220-079c-41ee-be56-0242ac120002");
     assertEquals(assetReferenceModel.name(), "testString");
     assertEquals(assetReferenceModel.container(), containerReferenceModel);
 

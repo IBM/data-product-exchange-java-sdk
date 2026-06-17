@@ -1,5 +1,5 @@
 /*
- * (C) Copyright IBM Corp. 2025.
+ * (C) Copyright IBM Corp. 2026.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
@@ -13,6 +13,8 @@
 
 package com.ibm.cloud.dph_services.dph.v1.model;
 
+import java.util.Date;
+
 import com.ibm.cloud.sdk.core.service.model.GenericModel;
 
 /**
@@ -23,12 +25,13 @@ public class CreateContractTemplateOptions extends GenericModel {
   protected ContainerReference container;
   protected String id;
   protected String creatorId;
-  protected String createdAt;
+  protected Date createdAt;
   protected String name;
   protected ErrorMessage error;
   protected ContractTerms contractTerms;
   protected String containerId;
   protected String contractTemplateName;
+  protected String contractTemplateStatus;
   protected String domainIds;
 
   /**
@@ -38,12 +41,13 @@ public class CreateContractTemplateOptions extends GenericModel {
     private ContainerReference container;
     private String id;
     private String creatorId;
-    private String createdAt;
+    private Date createdAt;
     private String name;
     private ErrorMessage error;
     private ContractTerms contractTerms;
     private String containerId;
     private String contractTemplateName;
+    private String contractTemplateStatus;
     private String domainIds;
 
     /**
@@ -61,6 +65,7 @@ public class CreateContractTemplateOptions extends GenericModel {
       this.contractTerms = createContractTemplateOptions.contractTerms;
       this.containerId = createContractTemplateOptions.containerId;
       this.contractTemplateName = createContractTemplateOptions.contractTemplateName;
+      this.contractTemplateStatus = createContractTemplateOptions.contractTemplateStatus;
       this.domainIds = createContractTemplateOptions.domainIds;
     }
 
@@ -127,7 +132,7 @@ public class CreateContractTemplateOptions extends GenericModel {
      * @param createdAt the createdAt
      * @return the CreateContractTemplateOptions builder
      */
-    public Builder createdAt(String createdAt) {
+    public Builder createdAt(Date createdAt) {
       this.createdAt = createdAt;
       return this;
     }
@@ -188,6 +193,17 @@ public class CreateContractTemplateOptions extends GenericModel {
     }
 
     /**
+     * Set the contractTemplateStatus.
+     *
+     * @param contractTemplateStatus the contractTemplateStatus
+     * @return the CreateContractTemplateOptions builder
+     */
+    public Builder contractTemplateStatus(String contractTemplateStatus) {
+      this.contractTemplateStatus = contractTemplateStatus;
+      return this;
+    }
+
+    /**
      * Set the domainIds.
      *
      * @param domainIds the domainIds
@@ -230,6 +246,7 @@ public class CreateContractTemplateOptions extends GenericModel {
     contractTerms = builder.contractTerms;
     containerId = builder.containerId;
     contractTemplateName = builder.contractTemplateName;
+    contractTemplateStatus = builder.contractTemplateStatus;
     domainIds = builder.domainIds;
   }
 
@@ -282,7 +299,7 @@ public class CreateContractTemplateOptions extends GenericModel {
    *
    * @return the createdAt
    */
-  public String createdAt() {
+  public Date createdAt() {
     return createdAt;
   }
 
@@ -341,6 +358,18 @@ public class CreateContractTemplateOptions extends GenericModel {
    */
   public String contractTemplateName() {
     return contractTemplateName;
+  }
+
+  /**
+   * Gets the contractTemplateStatus.
+   *
+   * Status of the data product contract template. If not supplied, the data product templates within the catalog will
+   * returned.
+   *
+   * @return the contractTemplateStatus
+   */
+  public String contractTemplateStatus() {
+    return contractTemplateStatus;
   }
 
   /**
