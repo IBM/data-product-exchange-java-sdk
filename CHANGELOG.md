@@ -1,3 +1,15 @@
+# [3.0.0](https://github.com/IBM/data-product-exchange-java-sdk/compare/2.0.0...3.0.0) (2026-06-17)
+
+
+* feat!: DPH SDK 5.4 release (#49) ([2291495](https://github.com/IBM/data-product-exchange-java-sdk/commit/22914955a0838774019c91fbb312f6d41c19ba58)), closes [#49](https://github.com/IBM/data-product-exchange-java-sdk/issues/49)
+
+
+### BREAKING CHANGES
+
+* DPH SDK updated to version 5.4 with breaking API changes
+
+Signed-off-by: Shashank-Jha <53325972+Shashank-Jha@users.noreply.github.com>
+
 # [2.0.0](https://github.com/IBM/data-product-exchange-java-sdk/compare/1.1.8...2.0.0) (2026-04-07)
 
 
