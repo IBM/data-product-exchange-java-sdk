@@ -1,22 +1,19 @@
 {
   "debug": true,
-  "branches": [
-    "main"
-  ],
+  "branches": ["main"],
   "tagFormat": "${version}",
   "plugins": [
     [
       "@semantic-release/commit-analyzer",
       {
-        "preset": "conventionalcommits"
+        "releaseRules": [
+          { "type": "feat", "release": "minor" },
+          { "type": "fix", "release": "patch" },
+          { "breaking": true, "release": "major" }
+        ]
       }
     ],
-    [
-      "@semantic-release/release-notes-generator",
-      {
-        "preset": "conventionalcommits"
-      }
-    ],
+    "@semantic-release/release-notes-generator",
     "@semantic-release/changelog",
     [
       "@semantic-release/exec",
@@ -27,9 +24,7 @@
     [
       "@semantic-release/git",
       {
-        "assets": [
-          "CHANGELOG.md"
-        ],
+        "assets": ["CHANGELOG.md"],
         "message": "chore(release): ${nextRelease.version} release notes\n\n${nextRelease.notes}"
       }
     ],
